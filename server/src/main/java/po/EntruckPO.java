@@ -33,9 +33,19 @@ public class EntruckPO {
 	private String destination;
 	
 	/**
-	 * 车辆的信息的PO 通过根据输入的truck的编号查询List<TruckPO>获得
+	 * 车辆代号
 	 */
-	TruckPO  truckPO;
+	private String truckID;
+
+	/**
+	 * 	检装员
+	 */
+	private String checkName;
+	
+	/**
+	 * 押运员
+	 */
+	private String deliverMan;
 	
     /**
      * 本次装车的所有ID  所有货物的订单条形码号
@@ -48,25 +58,17 @@ public class EntruckPO {
 	 */
 	double fare;
 
-	/**
-	 * 构造方法
-	 * @param d
-	 * @param institutionID
-	 * @param qyID
-	 * @param destination
-	 * @param truckPO
-	 * @param iDlist
-	 * @param fare
-	 */
 	public EntruckPO(Date d, String institutionID, String qyID,
-			String destination, TruckPO truckPO, List<String> iDlist,
-			double fare) {
+			String destination, String truckID, String checkName,
+			String deliverMan, List<String> iDlist, double fare) {
 		super();
 		this.d = d;
 		this.institutionID = institutionID;
 		this.qyID = qyID;
 		this.destination = destination;
-		this.truckPO = truckPO;
+		this.truckID = truckID;
+		this.checkName = checkName;
+		this.deliverMan = deliverMan;
 		IDlist = iDlist;
 		this.fare = fare;
 	}
@@ -103,12 +105,28 @@ public class EntruckPO {
 		this.destination = destination;
 	}
 
-	public TruckPO getTruckPO() {
-		return truckPO;
+	public String getTruckID() {
+		return truckID;
 	}
 
-	public void setTruckPO(TruckPO truckPO) {
-		this.truckPO = truckPO;
+	public void setTruckID(String truckID) {
+		this.truckID = truckID;
+	}
+
+	public String getCheckName() {
+		return checkName;
+	}
+
+	public void setCheckName(String checkName) {
+		this.checkName = checkName;
+	}
+
+	public String getDeliverMan() {
+		return deliverMan;
+	}
+
+	public void setDeliverMan(String deliverMan) {
+		this.deliverMan = deliverMan;
 	}
 
 	public List<String> getIDlist() {
@@ -128,7 +146,5 @@ public class EntruckPO {
 	}
 
 	
-
-
-
+	
 }

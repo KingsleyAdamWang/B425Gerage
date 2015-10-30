@@ -49,6 +49,8 @@ public class DriverPO implements Serializable {
 	 */
 	private String truckID;
 	
+	
+	
 	/**
 	 * 工作年限 若不填则为零
 	 */

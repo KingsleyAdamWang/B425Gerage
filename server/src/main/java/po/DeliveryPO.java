@@ -3,7 +3,7 @@ package po;
 import java.util.Date;
 
 /**
- * 派件单
+ * 派件单PO==到达单PO
  * @author 王栋
  *
  */
@@ -11,45 +11,44 @@ public class DeliveryPO {
 	/**
 	 *时间对象
 	 */
-	Date d;
+	private Date d;
 	/**
 	 * 派件单所派送的货物的快递单号
 	 */
-	String id;
+	private String id;
 	/**
-	 * 派送员PO
+	 * 派送员姓名
 	 */
-	UserPO user;
+	private String name;
 	
-
-	public DeliveryPO(Date d, String id, UserPO user) {
+	
+	public DeliveryPO(Date d, String id, String name) {
 		super();
 		this.d = d;
 		this.id = id;
-		this.user = user;
+		this.name = name;
 	}
-
+	
+	
 	public Date getD() {
 		return d;
 	}
-
 	public void setD(Date d) {
 		this.d = d;
 	}
-
 	public String getId() {
 		return id;
 	}
-
 	public void setId(String id) {
 		this.id = id;
 	}
-
-	public UserPO getUser() {
-		return user;
+	public String getName() {
+		return name;
 	}
-
-	public void setUser(UserPO user) {
-		this.user = user;
+	public void setName(String name) {
+		this.name = name;
 	}
+	
+
+	
 }

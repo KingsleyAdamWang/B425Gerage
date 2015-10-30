@@ -2,6 +2,8 @@ package po;
 
 import java.util.Date;
 
+import enumSet.ArrivalState;
+
 /**
  * 到达单PO
  * @author 王栋
@@ -15,19 +17,19 @@ public class ArrivalPO {
 	/**
 	 * 到达日期
 	 */
-	Date date;
+	private Date date;
 	/**
 	 * 中转单单号
 	 */
-	String transferId;
+	private String transferId;
 	/**
 	 * 出发地
 	 */
-	String departure;
+	private String departure;
 	/**
 	 * 到达状态
 	 */
-	ArrivalState condition;
+	private ArrivalState condition;
 
 	public ArrivalPO() {
 

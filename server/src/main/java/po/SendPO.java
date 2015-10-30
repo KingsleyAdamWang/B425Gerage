@@ -1,83 +1,171 @@
 package po;
 
-import vo.CustomerVO;
-import vo.GoodsVO;
+import java.util.Date;
+
+import enumSet.Express;
+import enumSet.PackType;
+
 
 public class SendPO {
-	CustomerVO sender, receiver;
-	GoodsVO goods;
-	String type, id;
-	double packageFare, totalFare;
-
-	public SendPO() {
-
-	}
-
-	public SendPO(CustomerVO sender, CustomerVO receiver, GoodsVO goods,
-			String type, String id, double packageFare, double totalFare) {
+	
+	//寄件时间
+	private Date d;
+	//寄件人的基本信息
+	private CustomerPO sender;
+	//收件人的基本信息
+	private CustomerPO receiver;
+	//寄件的个数
+	private int goodsNum;
+	//快递物品的名称
+	private String name;
+	//快递的重量
+	private double weight;
+	//快递的体积
+	private double volume;
+	//快递的种类
+	private Express expressType;
+	//快递的包装的种类
+	private PackType packType;
+	//预计到达时间 在没有历史数据的情况下是显示0
+	
+	private Date arriveDate;
+	
+	
+	
+	
+	
+	public SendPO(Date d, CustomerPO sender, CustomerPO receiver, int goodsNum,
+			String name, double weight, double volume, Express expressType,
+			PackType packType, Date arriveDate) {
 		super();
+		this.d = d;
 		this.sender = sender;
 		this.receiver = receiver;
-		this.goods = goods;
-		this.type = type;
-		this.id = id;
-		this.packageFare = packageFare;
-		this.totalFare = totalFare;
+		this.goodsNum = goodsNum;
+		this.name = name;
+		this.weight = weight;
+		this.volume = volume;
+		this.expressType = expressType;
+		this.packType = packType;
+		this.arriveDate = arriveDate;
 	}
 
-	public CustomerVO getSender() {
+	
+	
+
+	public Date getD() {
+		return d;
+	}
+
+
+
+
+	public void setD(Date d) {
+		this.d = d;
+	}
+
+
+
+
+	public String getName() {
+		return name;
+	}
+
+
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
+
+
+	public Date getArriveDate() {
+		return arriveDate;
+	}
+
+
+
+
+	public void setArriveDate(Date arriveDate) {
+		this.arriveDate = arriveDate;
+	}
+
+
+
+
+	public CustomerPO getSender() {
 		return sender;
 	}
 
-	public void setSender(CustomerVO sender) {
+
+	public void setSender(CustomerPO sender) {
 		this.sender = sender;
 	}
 
-	public CustomerVO getReceiver() {
+
+	public CustomerPO getReceiver() {
 		return receiver;
 	}
 
-	public void setReceiver(CustomerVO receiver) {
+
+	public void setReceiver(CustomerPO receiver) {
 		this.receiver = receiver;
 	}
 
-	public GoodsVO getGoods() {
-		return goods;
+
+	public int getGoodsNum() {
+		return goodsNum;
 	}
 
-	public void setGoods(GoodsVO goods) {
-		this.goods = goods;
+
+	public void setGoodsNum(int goodsNum) {
+		this.goodsNum = goodsNum;
 	}
 
-	public String getType() {
-		return type;
+
+	public double getWeight() {
+		return weight;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+
+	public void setWeight(double weight) {
+		this.weight = weight;
 	}
 
-	public String getId() {
-		return id;
+
+	public double getVolume() {
+		return volume;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+
+	public void setVolume(double volume) {
+		this.volume = volume;
 	}
 
-	public double getPackageFare() {
-		return packageFare;
+
+	public Express getExpressType() {
+		return expressType;
 	}
 
-	public void setPackageFare(double packageFare) {
-		this.packageFare = packageFare;
+
+	public void setExpressType(Express expressType) {
+		this.expressType = expressType;
 	}
 
-	public double getTotalFare() {
-		return totalFare;
+
+	public PackType getPackType() {
+		return packType;
 	}
 
-	public void setTotalFare(double totalFare) {
-		this.totalFare = totalFare;
+
+	public void setPackType(PackType packType) {
+		this.packType = packType;
 	}
+	
+	
+	
+	
+	
 }
