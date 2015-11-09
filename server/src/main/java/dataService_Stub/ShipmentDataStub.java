@@ -20,10 +20,17 @@ public class ShipmentDataStub implements ShipmentDataService {
 	}
 
 
+	@Override
 	public ShipmentPO find(String id) throws RemoteException {
 		// TODO Auto-generated method stub
-		ShipmentPO po = new ShipmentPO();
-		return po;
+		return null;
 	}
+
+
+//	public ShipmentPO find(String id) throws RemoteException {
+//		// TODO Auto-generated method stub
+//		ShipmentPO po = new ShipmentPO();
+//		return po;
+//	}
 
 }

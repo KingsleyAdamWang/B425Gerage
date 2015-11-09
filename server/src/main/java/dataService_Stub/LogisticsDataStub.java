@@ -7,12 +7,12 @@ import dataService.LogisticsDataService;
 
 public class LogisticsDataStub implements LogisticsDataService {
 
-
-	public LogisticsPO find(String id) throws RemoteException {
-		LogisticsPO po = new LogisticsPO();
-		return po;
-	}
-
+//
+//	public LogisticsPO find(String id) throws RemoteException {
+//		LogisticsPO po = new LogisticsPO();
+//		return po;
+//	}
+//
 
 	public void update(String logistics) throws RemoteException {
 		// TODO Auto-generated method stub
@@ -29,6 +29,13 @@ public class LogisticsDataStub implements LogisticsDataService {
 	public void init() throws RemoteException {
 		// TODO Auto-generated method stub
 
+	}
+
+
+	@Override
+	public LogisticsPO find(String id) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

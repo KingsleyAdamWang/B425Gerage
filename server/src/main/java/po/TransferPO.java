@@ -3,9 +3,10 @@ package po;
 import java.util.Date;
 import java.util.List;
 
+import enumSet.ReceiptsState;
 import enumSet.TransportType;
 
-public class TransferPO {
+public class TransferPO extends ReceiptsPO{
 	//时间
 	private Date d;
 	//机构编号
@@ -29,10 +30,28 @@ public class TransferPO {
 	
 	
 	
-	public TransferPO(Date d, String institutionID, String transferID,
-			String departure, String destination, List<String> list,
-			double fare, TransportType type, String name, String temp) {
-		super();
+	
+	
+	/**
+	 * 中转单的构造函数
+	 * @param state
+	 * @param user
+	 * @param d
+	 * @param institutionID
+	 * @param transferID
+	 * @param departure
+	 * @param destination
+	 * @param list
+	 * @param fare
+	 * @param type
+	 * @param name
+	 * @param temp
+	 */
+	public TransferPO(ReceiptsState state, UserPO user, Date d,
+			String institutionID, String transferID, String departure,
+			String destination, List<String> list, double fare,
+			TransportType type, String name, String temp) {
+		super(state, user);
 		this.d = d;
 		this.institutionID = institutionID;
 		this.transferID = transferID;
@@ -44,8 +63,6 @@ public class TransferPO {
 		this.name = name;
 		this.temp = temp;
 	}
-	
-	
 	public Date getD() {
 		return d;
 	}

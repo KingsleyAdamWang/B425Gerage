@@ -5,7 +5,7 @@ public class StaffPO {
 	//工作人员的名字
 	private String name;
 	
-	//该工作人员的编号 用来登陆系统的
+	//该工作人员的编号
 	
 	private String ID;
 	
@@ -14,6 +14,13 @@ public class StaffPO {
 	
 	//工作人员的职位
 	private String work;
+	
+	//工作人员的登录客户端的账号
+	private String account;
+	
+	//密码
+	private String password;
+	
 
 	public StaffPO(String name, String iD, String institutionID, String work) {
 		super();

@@ -27,8 +27,10 @@ public class MainFrame extends JFrame {
 		this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 	}
 
+	
 	public void setView(JPanel panel) {
 		this.setVisible(true);
+//		清空所有mainFrame上面的组件 这样真的好咩 万一要返回还要再新建一个面板加进去？
 		this.getContentPane().removeAll();
 		this.getContentPane().add(panel);
 		this.getContentPane().validate();
@@ -39,4 +41,16 @@ public class MainFrame extends JFrame {
 		this.setTitle(s);
 		this.setView(panel);
 	}
+
+
+	public int getFrameWidth() {
+		return frameWidth;
+	}
+
+
+	public int getFrameHeight() {
+		return frameHeight;
+	}
+	
+	
 }

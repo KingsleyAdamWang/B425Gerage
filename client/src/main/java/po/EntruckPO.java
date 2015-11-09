@@ -3,33 +3,73 @@ package po;
 import java.util.Date;
 import java.util.List;
 
-import vo.DriverVO;
-import vo.UserVO;
-
+/**
+ * 装车单po
+ * 
+ * @author 王栋
+ *
+ */
 public class EntruckPO {
-	Date d;
-	String institutionID, qyID, destination, truckID;
-	UserVO user;
-	DriverVO driver;
-	List<String> list;
+	
+	/**
+	 * 装车时间
+	 */
+	private Date d;
+	
+	
+	/**
+	 * 本机构的编号
+	 */
+	private String institutionID;
+	
+	/**
+	 * 汽运编号
+	 */
+	private String qyID;
+	
+	/**
+	 * 到达地
+	 */
+	private String destination;
+	
+	/**
+	 * 车辆代号
+	 */
+	private String truckID;
+
+	/**
+	 * 	检装员
+	 */
+	private String checkName;
+	
+	/**
+	 * 押运员
+	 */
+	private String deliverMan;
+	
+    /**
+     * 本次装车的所有ID  所有货物的订单条形码号
+     */
+	
+	List<String>  IDlist;
+	
+	/**
+	 * 本次运费
+	 */
 	double fare;
 
-	public EntruckPO() {
-
-	}
-
 	public EntruckPO(Date d, String institutionID, String qyID,
-			String destination, String truckID, UserVO user, DriverVO driver,
-			List<String> list, double fare) {
+			String destination, String truckID, String checkName,
+			String deliverMan, List<String> iDlist, double fare) {
 		super();
 		this.d = d;
 		this.institutionID = institutionID;
 		this.qyID = qyID;
 		this.destination = destination;
 		this.truckID = truckID;
-		this.user = user;
-		this.driver = driver;
-		this.list = list;
+		this.checkName = checkName;
+		this.deliverMan = deliverMan;
+		IDlist = iDlist;
 		this.fare = fare;
 	}
 
@@ -73,28 +113,28 @@ public class EntruckPO {
 		this.truckID = truckID;
 	}
 
-	public UserVO getUser() {
-		return user;
+	public String getCheckName() {
+		return checkName;
 	}
 
-	public void setUser(UserVO user) {
-		this.user = user;
+	public void setCheckName(String checkName) {
+		this.checkName = checkName;
 	}
 
-	public DriverVO getDriver() {
-		return driver;
+	public String getDeliverMan() {
+		return deliverMan;
 	}
 
-	public void setDriver(DriverVO driver) {
-		this.driver = driver;
+	public void setDeliverMan(String deliverMan) {
+		this.deliverMan = deliverMan;
 	}
 
-	public List<String> getList() {
-		return list;
+	public List<String> getIDlist() {
+		return IDlist;
 	}
 
-	public void setList(List<String> list) {
-		this.list = list;
+	public void setIDlist(List<String> iDlist) {
+		IDlist = iDlist;
 	}
 
 	public double getFare() {
@@ -105,4 +145,6 @@ public class EntruckPO {
 		this.fare = fare;
 	}
 
+	
+	
 }

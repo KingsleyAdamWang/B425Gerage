@@ -6,6 +6,8 @@ package po;
  *
  */
 public class InventoryPO {
+	
+	
 	/**
 	 * 中转中心机构编号
 	 */

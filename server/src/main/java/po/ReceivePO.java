@@ -2,7 +2,9 @@ package po;
 
 import java.util.Date;
 
-public class ReceivePO {
+import enumSet.ReceiptsState;
+
+public class ReceivePO extends ReceiptsPO{
 	
 	//快递单号
 	private String id;
@@ -11,17 +13,26 @@ public class ReceivePO {
 	//日期
 	private Date d;
 
-	public ReceivePO(){
-		
-	}
+
 	
-	public ReceivePO(String id, String name, Date d) {
-		super();
+	/**
+	 * 构造函数
+	 * @param state
+	 * @param user
+	 * @param id
+	 * @param name
+	 * @param d
+	 */
+	public ReceivePO(ReceiptsState state, UserPO user, String id, String name,
+			Date d) {
+		super(state, user);
 		this.id = id;
 		this.name = name;
 		this.d = d;
 	}
 
+	
+	
 	public String getId() {
 		return id;
 	}

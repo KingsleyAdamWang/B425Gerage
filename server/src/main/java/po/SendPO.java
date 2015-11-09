@@ -4,9 +4,10 @@ import java.util.Date;
 
 import enumSet.Express;
 import enumSet.PackType;
+import enumSet.ReceiptsState;
 
 
-public class SendPO {
+public class SendPO extends ReceiptsPO{
 	
 	//寄件时间
 	private Date d;
@@ -33,11 +34,28 @@ public class SendPO {
 	
 	
 	
-	
-	public SendPO(Date d, CustomerPO sender, CustomerPO receiver, int goodsNum,
-			String name, double weight, double volume, Express expressType,
-			PackType packType, Date arriveDate) {
-		super();
+
+	/**
+	 * 寄件单的PO构造函数
+	 * @param state
+	 * @param user
+	 * @param d
+	 * @param sender
+	 * @param receiver
+	 * @param goodsNum
+	 * @param name
+	 * @param weight
+	 * @param volume
+	 * @param expressType
+	 * @param packType
+	 * @param arriveDate
+	 */
+
+	public SendPO(ReceiptsState state, UserPO user, Date d, CustomerPO sender,
+			CustomerPO receiver, int goodsNum, String name, double weight,
+			double volume, Express expressType, PackType packType,
+			Date arriveDate) {
+		super(state, user);
 		this.d = d;
 		this.sender = sender;
 		this.receiver = receiver;
@@ -50,8 +68,8 @@ public class SendPO {
 		this.arriveDate = arriveDate;
 	}
 
-	
-	
+
+
 
 	public Date getD() {
 		return d;

@@ -8,22 +8,25 @@ import dataService.ArrivalDataService;
 public class ArrivalDataStub implements ArrivalDataService {
 
 
-	public void add(ArrivalPO po) throws RemoteException {
-		// TODO Auto-generated method stub
 
+	@Override
+	public boolean add(ArrivalPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 
-	public void delete(ArrivalPO po) throws RemoteException {
+	@Override
+	public boolean delete(ArrivalPO po) throws RemoteException {
 		// TODO Auto-generated method stub
-
+		return false;
 	}
 
 
-	public ArrivalPO find(String id) throws RemoteException {
+	@Override
+	public ArrivalPO search(String id) throws RemoteException {
 		// TODO Auto-generated method stub
-		ArrivalPO po = new ArrivalPO();
-		return po;
+		return null;
 	}
 
 }

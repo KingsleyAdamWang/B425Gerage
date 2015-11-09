@@ -3,67 +3,76 @@ package po;
 import java.util.Date;
 import java.util.List;
 
+import enumSet.ReceiptsState;
+
 /**
  * 装车单po
  * 
  * @author 王栋
  *
  */
-public class EntruckPO {
-	
+public class EntruckPO extends ReceiptsPO {
+
 	/**
 	 * 装车时间
 	 */
 	private Date d;
-	
-	
-	/**
-	 * 本机构的编号
-	 */
-	private String institutionID;
-	
+
 	/**
 	 * 汽运编号
 	 */
 	private String qyID;
-	
+
 	/**
 	 * 到达地
 	 */
 	private String destination;
-	
+
 	/**
 	 * 车辆代号
 	 */
 	private String truckID;
 
 	/**
-	 * 	检装员
+	 * 检装员
 	 */
 	private String checkName;
-	
+
 	/**
 	 * 押运员
 	 */
 	private String deliverMan;
-	
-    /**
-     * 本次装车的所有ID  所有货物的订单条形码号
-     */
-	
-	List<String>  IDlist;
-	
+
+	/**
+	 * 本次装车的所有ID 所有货物的订单条形码号
+	 */
+
+	List<String> IDlist;
+
 	/**
 	 * 本次运费
 	 */
 	double fare;
 
-	public EntruckPO(Date d, String institutionID, String qyID,
+	/**
+	 * 构造函数
+	 * 
+	 * @param state
+	 * @param user
+	 * @param d
+	 * @param qyID
+	 * @param destination
+	 * @param truckID
+	 * @param checkName
+	 * @param deliverMan
+	 * @param iDlist
+	 * @param fare
+	 */
+	public EntruckPO(ReceiptsState state, UserPO user, Date d, String qyID,
 			String destination, String truckID, String checkName,
 			String deliverMan, List<String> iDlist, double fare) {
-		super();
+		super(state, user);
 		this.d = d;
-		this.institutionID = institutionID;
 		this.qyID = qyID;
 		this.destination = destination;
 		this.truckID = truckID;
@@ -79,14 +88,6 @@ public class EntruckPO {
 
 	public void setD(Date d) {
 		this.d = d;
-	}
-
-	public String getInstitutionID() {
-		return institutionID;
-	}
-
-	public void setInstitutionID(String institutionID) {
-		this.institutionID = institutionID;
 	}
 
 	public String getQyID() {
@@ -145,6 +146,4 @@ public class EntruckPO {
 		this.fare = fare;
 	}
 
-	
-	
 }

@@ -2,14 +2,17 @@ package po;
 
 import java.util.Date;
 
+import enumSet.ReceiptsState;
+
 /**
  * 派件单PO==到达单PO
  * @author 王栋
  *
  */
-public class DeliveryPO {
+public class DeliveryPO extends ReceiptsPO{
+	
 	/**
-	 *时间对象
+	 *时间对象到达日期
 	 */
 	private Date d;
 	/**
@@ -22,8 +25,19 @@ public class DeliveryPO {
 	private String name;
 	
 	
-	public DeliveryPO(Date d, String id, String name) {
-		super();
+	
+	
+	/**
+	 * 构造函数
+	 * @param state
+	 * @param user
+	 * @param d
+	 * @param id
+	 * @param name
+	 */
+	public DeliveryPO(ReceiptsState state, UserPO user, Date d, String id,
+			String name) {
+		super(state, user);
 		this.d = d;
 		this.id = id;
 		this.name = name;

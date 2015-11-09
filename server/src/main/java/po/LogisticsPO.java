@@ -17,6 +17,12 @@ public class LogisticsPO {
     //快递的物流信息
     private List<String> messages;
     
+    
+    /**
+     * 构造函数
+     * @param id
+     * @param name
+     */
     public LogisticsPO(String id , String name){
     	
     	this.id = id;

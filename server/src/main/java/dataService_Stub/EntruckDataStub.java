@@ -20,10 +20,17 @@ public class EntruckDataStub implements EntruckDataService {
 	}
 
 
+	@Override
 	public EntruckPO find(String id) throws RemoteException {
 		// TODO Auto-generated method stub
-		EntruckPO po = new EntruckPO();
-		return po;
+		return null;
 	}
+
+
+//	public EntruckPO find(String id) throws RemoteException {
+//		// TODO Auto-generated method stub
+//		EntruckPO po = new EntruckPO();
+//		return po;
+//	}
 
 }

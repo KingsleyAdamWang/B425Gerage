@@ -4,18 +4,16 @@ import java.rmi.RemoteException;
 
 import javax.swing.JOptionPane;
 
-import BL.OrderBL;
-
 public class Client {
 	
     public static void main(String[] args) {
-    	OrderBL order;
+  //  	OrderBL order;
         try {
             RMIHelper.init();
 //            new ClientFrame();
-         order = RMIHelper.getOrderBL();
-     System.out.println(     order.test());
-        } catch (ClientInitException | RemoteException e) {
+       //  order = RMIHelper.getOrderBL();
+     //System.out.println(     order.test());
+        } catch (ClientInitException e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(
                     null,

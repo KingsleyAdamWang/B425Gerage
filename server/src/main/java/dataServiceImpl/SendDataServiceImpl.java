@@ -9,7 +9,7 @@ import dataService.SendDataService;
 public class SendDataServiceImpl extends UnicastRemoteObject implements SendDataService {
 
 
-	protected SendDataServiceImpl() throws RemoteException {
+	public SendDataServiceImpl() throws RemoteException {
 		super();
 		// TODO Auto-generated constructor stub
 	}

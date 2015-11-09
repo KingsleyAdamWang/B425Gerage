@@ -2,23 +2,53 @@ package po;
 
 import java.util.Date;
 
+import enumSet.ArrivalState;
+
+/**
+ * 到达单PO
+ * @author 王栋
+ *
+ */
 public class ArrivalPO {
-	String institutionID;
-	Date date;
-	String id;
-	String departure;
-	String condition;
+	/**
+	 * 到达机构的编号
+	 */
+	private String institutionID;
+	/**
+	 * 到达日期
+	 */
+	private Date date;
+	/**
+	 * 中转单单号
+	 */
+	private String transferId;
+	/**
+	 * 出发地
+	 */
+	private String departure;
+	/**
+	 * 到达状态
+	 */
+	private ArrivalState condition;
 
 	public ArrivalPO() {
 
 	}
 
-	public ArrivalPO(String institutionID, Date date, String id,
-			String departure, String condition) {
+	/**
+	 * 构造方法
+	 * @param institutionID
+	 * @param date
+	 * @param transferId
+	 * @param departure
+	 * @param condition
+	 */
+	public ArrivalPO(String institutionID, Date date, String transferId,
+			String departure, ArrivalState condition) {
 		super();
 		this.institutionID = institutionID;
 		this.date = date;
-		this.id = id;
+		this.transferId = transferId;
 		this.departure = departure;
 		this.condition = condition;
 	}
@@ -40,11 +70,11 @@ public class ArrivalPO {
 	}
 
 	public String getId() {
-		return id;
+		return institutionID;
 	}
 
 	public void setId(String id) {
-		this.id = id;
+		this.institutionID = id;
 	}
 
 	public String getDeparture() {
@@ -55,11 +85,11 @@ public class ArrivalPO {
 		this.departure = departure;
 	}
 
-	public String getCondition() {
+	public ArrivalState getCondition() {
 		return condition;
 	}
 
-	public void setCondition(String condition) {
+	public void setCondition(ArrivalState condition) {
 		this.condition = condition;
 	}
 

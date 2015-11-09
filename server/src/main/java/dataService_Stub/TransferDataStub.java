@@ -20,10 +20,17 @@ public class TransferDataStub implements TransferDataService {
 	}
 
 
+	@Override
 	public TransferPO find(String id) throws RemoteException {
 		// TODO Auto-generated method stub
-		TransferPO po = new TransferPO();
-		return po;
+		return null;
 	}
+
+
+//	public TransferPO find(String id) throws RemoteException {
+//		// TODO Auto-generated method stub
+//		TransferPO po = new TransferPO();
+//		return po;
+//	}
 
 }

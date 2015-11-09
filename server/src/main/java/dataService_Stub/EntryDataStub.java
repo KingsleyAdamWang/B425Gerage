@@ -20,9 +20,16 @@ public class EntryDataStub implements EntryDataService {
 	}
 
 
+	@Override
 	public EntryPO find(String id) throws RemoteException {
-		EntryPO po = new EntryPO();
-		return po;
+		// TODO Auto-generated method stub
+		return null;
 	}
+
+
+//	public EntryPO find(String id) throws RemoteException {
+//		EntryPO po = new EntryPO();
+//		return po;
+//	}
 
 }

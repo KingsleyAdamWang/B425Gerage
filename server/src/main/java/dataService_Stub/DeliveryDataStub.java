@@ -20,10 +20,17 @@ public class DeliveryDataStub implements DeliveryDataService {
 	}
 
 
+	@Override
 	public DeliveryPO find(String id) throws RemoteException {
 		// TODO Auto-generated method stub
-		DeliveryPO po = new DeliveryPO();
-		return po;
+		return null;
 	}
+
+
+//	public DeliveryPO find(String id) throws RemoteException {
+//		// TODO Auto-generated method stub
+//		DeliveryPO po = new DeliveryPO();
+//		return po;
+//	}
 
 }

@@ -1,6 +1,7 @@
 package po;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -10,20 +11,41 @@ import java.util.List;
  */
 public class LogPO {
 	
-	//操作日志每个信息列表
-	private  List<String> records;
+	private Date d;
 	
-	public LogPO(){
-		records = new ArrayList<String>();
+	private String message;
+
+	
+	/**
+	 * 构造函数
+	 * @param d
+	 * @param message
+	 */
+	public LogPO(Date d, String message) {
+		super();
+		this.d = d;
+		this.message = message;
 	}
 
-	public List<String> getRecords() {
-		return records;
+	
+	
+	public Date getD() {
+		return d;
 	}
 
-	public void setRecords(List<String> records) {
-		this.records = records;
+	public void setD(Date d) {
+		this.d = d;
 	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	
+	
 	
 	
 	

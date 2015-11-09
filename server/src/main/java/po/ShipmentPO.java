@@ -2,9 +2,10 @@ package po;
 
 import java.util.Date;
 
+import enumSet.ReceiptsState;
 import enumSet.TransportType;
 
-public class ShipmentPO {
+public class ShipmentPO extends ReceiptsPO{
 	
 	//填写该出库单的中转中心的编号
 	private String institutionID;
@@ -18,9 +19,25 @@ public class ShipmentPO {
 	private String transferID;
 	//中转的运输类型
 	private  TransportType type;
-	public ShipmentPO(String institutionID, String id, Date date,
-			String destination, String transferID, TransportType type) {
-		super();
+
+	
+	/**
+	 * 出库单填写po
+	 * @param state
+	 * @param user
+	 * @param institutionID
+	 * @param id
+	 * @param date
+	 * @param destination
+	 * @param transferID
+	 * @param type
+	 */
+	
+	
+	public ShipmentPO(ReceiptsState state, UserPO user, String institutionID,
+			String id, Date date, String destination, String transferID,
+			TransportType type) {
+		super(state, user);
 		this.institutionID = institutionID;
 		this.id = id;
 		this.date = date;

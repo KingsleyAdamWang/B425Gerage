@@ -3,17 +3,16 @@ package po;
 import java.util.Date;
 
 import enumSet.ArrivalState;
+import enumSet.ReceiptsState;
 
 /**
  * 到达单PO
+ * 
  * @author 王栋
  *
  */
-public class ArrivalPO {
-	/**
-	 * 到达机构的编号
-	 */
-	private String institutionID;
+public class ArrivalPO extends ReceiptsPO {
+
 	/**
 	 * 到达日期
 	 */
@@ -31,35 +30,44 @@ public class ArrivalPO {
 	 */
 	private ArrivalState condition;
 
-	public ArrivalPO() {
+	
 
-	}
+	
+/**
+ * 
+ * @param state 状态 ： 审批未审批
+ * @param user 操作的用户
+ * @param date 时间
+ * @param transferId 中转单单号
+ * @param departure 出发地址
+ * @param condition 到达状态
+ */
 
-	/**
-	 * 构造方法
-	 * @param institutionID
-	 * @param date
-	 * @param transferId
-	 * @param departure
-	 * @param condition
-	 */
-	public ArrivalPO(String institutionID, Date date, String transferId,
-			String departure, ArrivalState condition) {
-		super();
-		this.institutionID = institutionID;
+	public ArrivalPO(ReceiptsState state, UserPO user, Date date,
+			String transferId, String departure, ArrivalState condition) {
+		super(state, user);
 		this.date = date;
 		this.transferId = transferId;
 		this.departure = departure;
 		this.condition = condition;
 	}
 
-	public String getInstitutionID() {
-		return institutionID;
+	public String getTransferId() {
+		return transferId;
 	}
 
-	public void setInstitutionID(String institutionID) {
-		this.institutionID = institutionID;
+	public void setTransferId(String transferId) {
+		this.transferId = transferId;
 	}
+
+	public ReceiptsState getState() {
+		return state;
+	}
+
+	public void setState(ReceiptsState state) {
+		this.state = state;
+	}
+
 
 	public Date getDate() {
 		return date;
@@ -69,13 +77,7 @@ public class ArrivalPO {
 		this.date = date;
 	}
 
-	public String getId() {
-		return institutionID;
-	}
 
-	public void setId(String id) {
-		this.institutionID = id;
-	}
 
 	public String getDeparture() {
 		return departure;

@@ -2,45 +2,53 @@ package po;
 
 import java.util.Date;
 
-import vo.UserVO;
-
+/**
+ * 派件单PO==到达单PO
+ * @author 王栋
+ *
+ */
 public class DeliveryPO {
-	Date d;
-	String id;
-	UserVO user;
+	/**
+	 *时间对象
+	 */
+	private Date d;
+	/**
+	 * 派件单所派送的货物的快递单号
+	 */
+	private String id;
+	/**
+	 * 派送员姓名
+	 */
+	private String name;
 	
-	public DeliveryPO(){
-		
-	}
-
-	public DeliveryPO(Date d, String id, UserVO user) {
+	
+	public DeliveryPO(Date d, String id, String name) {
 		super();
 		this.d = d;
 		this.id = id;
-		this.user = user;
+		this.name = name;
 	}
-
+	
+	
 	public Date getD() {
 		return d;
 	}
-
 	public void setD(Date d) {
 		this.d = d;
 	}
-
 	public String getId() {
 		return id;
 	}
-
 	public void setId(String id) {
 		this.id = id;
 	}
-
-	public UserVO getUser() {
-		return user;
+	public String getName() {
+		return name;
 	}
-
-	public void setUser(UserVO user) {
-		this.user = user;
+	public void setName(String name) {
+		this.name = name;
 	}
+	
+
+	
 }

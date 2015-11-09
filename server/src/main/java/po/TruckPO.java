@@ -7,6 +7,9 @@ public class TruckPO {
 	private String truckNumber;
 	//服役时间
 	private int years;
+	
+	
+	
 	public String getTruckID() {
 		return truckID;
 	}

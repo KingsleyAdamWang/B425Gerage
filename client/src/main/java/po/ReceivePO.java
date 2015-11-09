@@ -3,8 +3,13 @@ package po;
 import java.util.Date;
 
 public class ReceivePO {
-	String id, name;
-	Date d;
+	
+	//快递单号
+	private String id;
+	//收件人的姓名
+	private String name;
+	//日期
+	private Date d;
 
 	public ReceivePO(){
 		

@@ -2,27 +2,30 @@ package po;
 
 import java.util.Date;
 
+import enumSet.InventoryArea;
+
+/**
+ * 入库单的po
+ * @author 王栋
+ *
+ */
 public class EntryPO {
-	String id;
-	Date date;
-	String destination;
-	int area, row, shelf, place;
-
-	public EntryPO() {
-
-	}
-
-	public EntryPO(String id, Date date, String destination, int area, int row,
-			int shelf, int place) {
-		super();
-		this.id = id;
-		this.date = date;
-		this.destination = destination;
-		this.area = area;
-		this.row = row;
-		this.shelf = shelf;
-		this.place = place;
-	}
+	
+	//填写该入库单的机构的编号
+	private String institutionID;
+	//入库单的编号
+	private String id;
+	
+	//时间
+	private Date date;
+	
+	//目的地（本快递的）
+	private String destination;
+	
+	//  排 架 位
+	private int row, shelf, place;
+	// 区
+	private InventoryArea area;
 
 	public String getId() {
 		return id;
@@ -48,14 +51,6 @@ public class EntryPO {
 		this.destination = destination;
 	}
 
-	public int getArea() {
-		return area;
-	}
-
-	public void setArea(int area) {
-		this.area = area;
-	}
-
 	public int getRow() {
 		return row;
 	}
@@ -79,4 +74,27 @@ public class EntryPO {
 	public void setPlace(int place) {
 		this.place = place;
 	}
+
+	public InventoryArea getArea() {
+		return area;
+	}
+
+	public void setArea(InventoryArea area) {
+		this.area = area;
+	}
+
+	public EntryPO(String id, Date date, String destination, int row,
+			int shelf, int place, InventoryArea area) {
+		super();
+		this.id = id;
+		this.date = date;
+		this.destination = destination;
+		this.row = row;
+		this.shelf = shelf;
+		this.place = place;
+		this.area = area;
+	}
+
+
+	
 }

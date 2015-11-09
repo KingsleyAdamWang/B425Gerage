@@ -15,7 +15,7 @@ public class RMIHelper {
 
     private static boolean inited = false;
 
-    private static OrderBL orderBL;
+  //  private static OrderBL orderBL;
 
     public synchronized static void init() throws ClientInitException {
         if (inited) {
@@ -33,11 +33,11 @@ public class RMIHelper {
     private static void initObjects() throws MalformedURLException, RemoteException, NotBoundException {
         System.out.println(IP);
     	String urlPrefix = "rmi://" + IP +":1099"+ "/";
-//        "//localhost:8808/SAMPLE-SERVER";
-        orderBL = (OrderBL) Naming.lookup(urlPrefix + "order-businesslogic");
+
+  //      orderBL = (OrderBL) Naming.lookup(urlPrefix + "order-businesslogic");
     }
 
-    public static OrderBL getOrderBL() {
+ /*   public static OrderBL getOrderBL() {
         return orderBL;
-    }
+    }*/
 }

@@ -6,9 +6,14 @@ import java.rmi.RemoteException;
 import po.ArrivalPO;
 
 public interface ArrivalDataService extends Remote{
-	public void add(ArrivalPO po)throws RemoteException;
 	
-	public void delete(ArrivalPO po)throws RemoteException;
+	public boolean add(ArrivalPO po)throws RemoteException;
 	
-	public ArrivalPO find(String id)throws RemoteException;
+	
+	public boolean delete(ArrivalPO po)throws RemoteException;
+	
+	
+	public ArrivalPO search(String id)throws RemoteException;
+	
+	
 }
