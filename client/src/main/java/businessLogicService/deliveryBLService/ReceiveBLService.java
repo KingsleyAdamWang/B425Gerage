@@ -3,9 +3,12 @@ package businessLogicService.deliveryBLService;
 import vo.ReceiveVO;
 
 public interface ReceiveBLService {
-	public void add(String id);
+	public String add(ReceiveVO rVO);
 
-	public void end();
+	public String delete(ReceiveVO rVO);
 
-	public boolean submit(ReceiveVO vo);
+	/*
+	 * 根据单号查找收件单
+	 * */
+	public ReceiveVO search(String id);
 }

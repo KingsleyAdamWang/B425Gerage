@@ -8,14 +8,16 @@ import vo.EntruckVO;
  *
  */
 public interface EntruckBLService {
-	public void add(String id);
+	public String add(EntruckVO eVO);
 
-	public void end();
+	public  EntruckVO search(String id);
 
 	/**
 	 * 装车单提交
 	 * @param vo
 	 * @return
 	 */
-	public boolean submit(EntruckVO vo);
+	public String submit(EntruckVO eVO);
+	
+	public String delete(EntruckVO eVO);
 }

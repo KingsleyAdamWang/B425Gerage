@@ -14,5 +14,5 @@ public interface EntryBLService {
 	 * @param vo
 	 * @return
 	 */
-	public boolean submit(EntryVO vo);
+	public boolean submitEntry(EntryVO eVO);
 }

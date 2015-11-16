@@ -10,18 +10,18 @@ import vo.CashRegisterVO;
  *
  */
 public interface CashRegisterBLService {
-	public void add(String id);
+	public String add(CashRegisterVO crVO);
 
-	public void update();
+	public String search(String id);
 
-	public void end();
+	public String delete(CashRegisterVO crVO); 
 
 	/**
 	 * 提交收款单
 	 * @param vo 收款的一个vo对象
 	 * @return 新建收款的成功与否状态
 	 */
-	public boolean submit(CashRegisterVO vo);
+	public String submit(CashRegisterVO vo);
 	
 	/**
 	 * 根据传入的一个收款单的Vo表单 进行收款的总和计算

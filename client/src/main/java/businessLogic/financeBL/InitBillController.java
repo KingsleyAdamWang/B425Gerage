@@ -11,10 +11,10 @@ public class InitBillController implements AccountBLService {
 		
 	}
 
-	public String addAccount(String name, String accountID)
+	public boolean addAccount(String name, String accountID)
 			throws RemoteException {
 		// TODO Auto-generated method stub
-		return null;
+		return false;
 	}
 
 	public boolean deleteAccount(AccountVO vo) throws RemoteException {
@@ -27,10 +27,10 @@ public class InitBillController implements AccountBLService {
 		return null;
 	}
 
-	public String modifyAccount(AccountVO vo, String newName)
+	public boolean modifyAccount(AccountVO vo, String newName)
 			throws RemoteException {
 		// TODO Auto-generated method stub
-		return null;
+		return false;
 	}
 
 	public List<AccountVO> getAccounts() {

@@ -1,10 +1,14 @@
 package businessLogicService.adminBLService;
 
+import java.rmi.RemoteException;
+
+import javax.swing.text.Position;
+
 public interface AdminBLService {
 
-	public void add(String message);
+	public boolean add(String id,String name,String password,String identityID,String institutionID,Position work) throws RemoteException;
 
-	public void delete(String message);
+	public boolean delete(String id,String name,String password,String identityID,String institutionID,Position work) throws RemoteException;
 
 	public void update(String message);
 }

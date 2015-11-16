@@ -6,21 +6,21 @@ import businessLogicService.deliveryBLService.ReceiveBLService;
 public class ReceiveController implements ReceiveBLService {
 
 
-	public void add(String id) {
+	public String add(ReceiveVO rVO) {
 		// TODO Auto-generated method stub
-
+		return null;
 	}
 
 
-	public void end() {
+	public String delete(ReceiveVO rVO) {
 		// TODO Auto-generated method stub
-
+		return null;
 	}
 
 
-	public boolean submit(ReceiveVO vo) {
+	public ReceiveVO search(String id) {
 		// TODO Auto-generated method stub
-		return false;
+		return null;
 	}
 
 }

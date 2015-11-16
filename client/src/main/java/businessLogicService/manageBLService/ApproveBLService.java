@@ -1,5 +1,6 @@
 package businessLogicService.manageBLService;
 
+import java.util.List;
 import vo.DocumentVO;
 
 /**
@@ -8,7 +9,11 @@ import vo.DocumentVO;
  *
  */
 public interface ApproveBLService {
-	public void approve();
+	public List<DocumentVO> getApproveList();
+	
+	public boolean passDocument(String id);
+	
+	public boolean updateDoccument(DocumentVO vo);
 	
 	public boolean pass(DocumentVO vo);
 	

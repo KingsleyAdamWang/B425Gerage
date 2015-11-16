@@ -2,25 +2,26 @@ package businessLogic.intermediateBL;
 
 import vo.ArrivalVO;
 import businessLogicService.businessHallBLService.ArrivalBLService;
+import java.rmi.RemoteException;
 
 public class ArrivalController implements ArrivalBLService {
 
 
-	public void add(String id) {
+	public String add(ArrivalVO arrivalVO) {
 		// TODO Auto-generated method stub
-
+		return null;
 	}
 
 
-	public void end() {
+	public ArrivalVO search(String id) {//根据单号查找到达单
 		// TODO Auto-generated method stub
-
+		return null;
 	}
 
 
-	public boolean submit(ArrivalVO vo) {
+	public String delete(ArrivalVO arrivalVO) {
 		// TODO Auto-generated method stub
-		return false;
+		return null;
 	}
 
 }

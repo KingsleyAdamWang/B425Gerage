@@ -4,11 +4,9 @@ import vo.EntryVO;
 import businessLogicService.inventoryBLService.EntryBLService;
 
 public class EntryController implements EntryBLService {
-
-
-	public boolean submit(EntryVO vo) {
-		// TODO Auto-generated method stub
+	public boolean submitEntry(EntryVO eVO){
 		return false;
 	}
+	
 
 }

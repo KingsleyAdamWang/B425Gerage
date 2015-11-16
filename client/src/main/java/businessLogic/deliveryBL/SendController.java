@@ -5,26 +5,26 @@ import businessLogicService.deliveryBLService.SendBLService;
 
 public class SendController implements SendBLService {
 
-	public void add() {
+	public String add(SendVO sVO) {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
 
-	public double getFare(String departure, String destination,double packFare) {
+	public double getFare(String departure, String destination, String packType, String TransferType) {
 		return 0;
 	}
 
 
-	public boolean end() {
+	public String delete() {
 		// TODO Auto-generated method stub
-		return false;
+		return null;
 	}
 
 
-	public boolean submit(SendVO send) {
+	public SendVO search(SendVO sVO) {
 		// TODO Auto-generated method stub
-		return false;
+		return null;
 	}
 	
 }

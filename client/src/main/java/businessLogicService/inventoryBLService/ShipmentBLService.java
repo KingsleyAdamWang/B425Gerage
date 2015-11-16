@@ -3,9 +3,7 @@ package businessLogicService.inventoryBLService;
 import vo.ShipmentVO;
 
 public interface ShipmentBLService {
-	public void add(String id);
+	public boolean submitShipment(ShipmentVO vo);
 
-	public void end();
 
-	public boolean submit(ShipmentVO vo);
 }

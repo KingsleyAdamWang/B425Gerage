@@ -9,15 +9,10 @@ import vo.ArrivalVO;
  */
 public interface ArrivalBLService {
 	
-	public void add(String id);
+	public String add(ArrivalVO arrivalVO);
 
-	public void end();
+	public ArrivalVO search(String id);
 
-	/**
-	 * 提交到达单
-	 * @param vo 一个到达单vo对象 
-	 * @return 该到达单是否成功建立
-	 */
-	public boolean submit(ArrivalVO vo);
+	public String delete(ArrivalVO arrivalVO) ;
 	
 }

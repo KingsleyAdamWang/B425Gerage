@@ -1,5 +1,4 @@
-ackage businessLogic.financeBL;
-
+package businessLogic.financeBL;
 import java.rmi.RemoteException;
 import java.util.List;
 
@@ -8,36 +7,40 @@ import businessLogicService.financeBLService.AccountBLService;
 
 public class AccountController implements AccountBLService {
 
-	AccountBL accountBL;
-
-	public AccountController() throws RemoteException {
-		accountBL = new AccountBL();
+	AccountBL accountBL ;
+	
+	
+	public AccountController () throws RemoteException{
+		accountBL  = new AccountBL();
 	}
-
-	public String addAccount(String name, String accountID)
-			throws RemoteException {
-
+	
+	
+	public boolean addAccount(String name, String accountID)throws RemoteException{
+		
 		return accountBL.addAccount(name, accountID);
 	}
-
-	public boolean deleteAccount(AccountVO vo) throws RemoteException {
-
+	
+	
+	public boolean deleteAccount(AccountVO vo) throws RemoteException{
+		
 		return accountBL.deleteAccount(vo.transToPO());
 	}
-
-	public String modifyAccount(AccountVO vo, String newName)
-			throws RemoteException {
-
+	
+	
+	public boolean modifyAccount(AccountVO vo, String newName) throws RemoteException {
+		
 		return accountBL.modifyAccount(vo, newName);
 	}
+	
+
 
 	public List<AccountVO> searchAccount(String key) {
-
-		return accountBL.searchAccount(key);
-	}
+		
+		return  accountBL.searchAccount(key);
+	}   
 
 	public List<AccountVO> getAccounts() {
-
+	
 		return accountBL.getAccounts();
 	}
 }

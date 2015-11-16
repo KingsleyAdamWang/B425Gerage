@@ -14,7 +14,7 @@ public class AccountBL {
 	AccountDataService accountDS;
 	List<AccountPO> accounts;
 
-	// 构造方法
+	// 构造方法 
 	public AccountBL() throws RemoteException {
 		try {
 			RMIHelper.initAccountDataService();
@@ -26,28 +26,28 @@ public class AccountBL {
 		}
 	}
 
-	public String addAccount(String name, String accountID)
+	public boolean addAccount(String name, String accountID)
 			throws RemoteException {
 
 		AccountPO po = new AccountPO(name, accountID, 0);
 
 		if (accounts.contains(po))
-			return "账户名已存在！添加失败！";
+			return false;
 
 		for (AccountPO temp : accounts) {
 			if (temp.getAccountID().equals(accountID))
-				return "卡号已被绑定！添加失败！";
+				return false;
 		}
 		accounts.add(po);
 		accountDS.add(po);
 
-		return null;
+		return true;
 	}
 
 	public boolean deleteAccount(AccountPO po) throws RemoteException {
 		accounts.remove(po);
 		accountDS.delete(po);
-		return true;
+		return false;
 	}
 
 	// 返回符合关键字key的账户
@@ -56,27 +56,24 @@ public class AccountBL {
 
 		for (AccountPO temp : accounts) {
 			if (temp.getName().contains(key))
-				result.add(new AccountVO(temp));
+				result.add(temp.transferToVO());
 		}
 		return result;
 	}
 
-	public String modifyAccount(AccountVO vo, String newName) throws RemoteException {
-         for(AccountPO po: accounts){
-        	 if(po.getName().equals(newName))
-        		 return "账户名重复！修改失败！";
-         }
-		
+	public boolean modifyAccount(AccountVO vo, String newName) throws RemoteException {
+//		if(vo.getName().equals(newName))
+//			return false ;
 		accounts.get(accounts.indexOf(vo.transToPO())).setName(newName);
 		accountDS.modify(vo.transToPO(), newName);
-		return null;
+		return true;
 	}
 
 	public List<AccountVO> getAccounts() {
 		List<AccountVO> result = new ArrayList<AccountVO>();
 
 		for (AccountPO temp : accounts) {
-			result.add(new AccountVO(temp));
+			result.add(temp.transferToVO());
 		}
 		return result;
 	}
