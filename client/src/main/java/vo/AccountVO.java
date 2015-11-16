@@ -1,23 +1,27 @@
 package vo;
 
 import java.io.Serializable;
+import java.util.Vector;
 
 import po.AccountPO;
 
-public class AccountVO implements Serializable{
-
+public class AccountVO extends Vector<String> implements Serializable {
 	private static final long serialVersionUID = 1L;
-	/**
-	 * 
-	 */
-	// private static final long serialVersionUID = 1L;
 
-	private String name;
-	private String accountID;
-	private double balance;
+	// private String name;
+	// private String accountID;
+	// private double balance;
 
 	// 想来想去还是不要加空的构造方法比较好 因为账户添加必须要这两条信息好不好
 
+	
+	
+	
+	//po转vo的构造方法
+	public AccountVO(AccountPO po){
+	this(po.getName(),po.getAccountID(),po.getBalance());	
+	}
+	
 	/**
 	 * 构造方法
 	 * 
@@ -26,39 +30,27 @@ public class AccountVO implements Serializable{
 	 * @param balance
 	 */
 	public AccountVO(String name, String accountID, double balance) {
-		super();
-		this.name = name;
-		this.accountID = accountID;
-		this.balance = balance;
+		this.add(name);
+		this.add(accountID);
+		this.add(balance + "");
 	}
 
 	// 将AccountVO转化为AccountPO
 	public AccountPO transToPO() {
-		return new AccountPO(this.name, this.accountID, this.balance);
+		return new AccountPO(this.get(0), this.get(1), Double.parseDouble(this
+				.get(2)));
 	}
 
 	public String getAccountID() {
-		return accountID;
-	}
-
-	public void setAccountID(String accountID) {
-		this.accountID = accountID;
+		return this.get(1);
 	}
 
 	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
+		return this.get(0);
 	}
 
 	public double getBalance() {
-		return balance;
-	}
-
-	public void setBalance(double balance) {
-		this.balance = balance;
+		return Double.parseDouble(this.get(2));
 	}
 
 	// 重写equal方法 由于余额不可修改 所以因此只需要通过name来进行比较
@@ -71,10 +63,10 @@ public class AccountVO implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		AccountVO other = (AccountVO) obj;
-		if (name == null) {
-			if (other.name != null)
+		if (this.get(0) == null) {
+			if (other.get(0) != null)
 				return false;
-		} else if (!name.equals(other.name))
+		} else if (this.get(0).equals(other.get(0)))
 			return false;
 		return true;
 	}

@@ -1,7 +1,6 @@
 package po;
 
 import java.io.Serializable;
-import java.rmi.RemoteException;
 import java.util.Date;
 
 import util.DateUtil;
@@ -58,10 +57,10 @@ public class SendPO extends ReceiptsPO implements Serializable {
 	// undefined
 	
 	//构造方法
-	public SendPO(Date d, CustomerPO sender, CustomerPO receiver, int goodsNum,
+	public SendPO(ReceiptsState state,String userID,Date d, CustomerPO sender, CustomerPO receiver, int goodsNum,
 			String name, double weight, double volume, Express expressType,
 			PackType packType, double fare, int arriveDate) {
-		super();
+		super(state,userID);
 		this.d = d;
 		this.sender = sender;
 		this.receiver = receiver;
@@ -104,6 +103,9 @@ public class SendPO extends ReceiptsPO implements Serializable {
 	}
 	
 	
+
+
+
 
 	public String toString() {
 		return this.userID+ ";" + sender.toString() + ";"
@@ -200,4 +202,11 @@ public class SendPO extends ReceiptsPO implements Serializable {
 		this.packType = packType;
 	}
 
+
+
+	public int getArriveDate() {
+		return arriveDate;
+	}
+
+	
 }

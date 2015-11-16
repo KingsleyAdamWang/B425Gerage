@@ -74,6 +74,7 @@ public class SendDataServiceImpl extends UnicastRemoteObject implements
 				fw.append(po.toString());
 				fw.append('\n');
 			}
+			fw.flush();
 			fw.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

@@ -92,7 +92,7 @@ public class UserDataServiceImpl extends UnicastRemoteObject implements
 						+ po.getInstitutionID() + po.getWork() + "\n");
 
 			}
-
+            fw.flush();
 			fw.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

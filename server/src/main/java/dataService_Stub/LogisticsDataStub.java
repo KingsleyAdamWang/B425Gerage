@@ -1,18 +1,14 @@
 package dataService_Stub;
 
 import java.rmi.RemoteException;
+import java.util.List;
 
 import po.LogisticsPO;
 import dataService.LogisticsDataService;
 
 public class LogisticsDataStub implements LogisticsDataService {
 
-//
-//	public LogisticsPO find(String id) throws RemoteException {
-//		LogisticsPO po = new LogisticsPO();
-//		return po;
-//	}
-//
+
 
 	public void update(String logistics) throws RemoteException {
 		// TODO Auto-generated method stub
@@ -32,8 +28,28 @@ public class LogisticsDataStub implements LogisticsDataService {
 	}
 
 
+
+
+
 	@Override
-	public LogisticsPO find(String id) throws RemoteException {
+	public void add(LogisticsPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public boolean modify(String id, String message) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+
+
+
+	@Override
+	public List<LogisticsPO> getLogisticsList() throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -20,8 +20,18 @@ public class UserVO {
     //用户的职位
     private Position work;
 	
+    
     /**
-     * 人员的PO
+     * po转vo的构造方法
+     * @param po
+     */
+    public UserVO(UserPO po){
+    	this(po.getName(),po.getId(),po.getPassword(),po.getIdentityID(),po.getInstitutionID(),po.getWork());
+    }
+    
+    
+    /**
+     * 人员的VO的构造方法
      * @param id
      * @param name
      * @param password
@@ -29,7 +39,6 @@ public class UserVO {
      * @param institutionID
      * @param work
      */
-   
 	public UserVO(String name, String id, String password, String identityID,
 			String institutionID, Position work) {
 		super();
@@ -42,6 +51,10 @@ public class UserVO {
 	}
 	
 	
+  /**
+   * 将vo转为po
+   * @return
+   */
 	public UserPO transToPO(){
 		return new UserPO(name,id,password,identityID,institutionID,work);
 		
@@ -85,6 +98,8 @@ public class UserVO {
 	}
 
 
+	//重写了equals 方法只要就是为了通过比较人员的ID来进行 判断的人员po的存在与否 
+	//所以需要排除人员的ID重复的情况 ！！在对应的ＢＬ层需要排除人员的ｉｄ重复
 	@Override
 	public int hashCode() {
 		final int prime = 31;
