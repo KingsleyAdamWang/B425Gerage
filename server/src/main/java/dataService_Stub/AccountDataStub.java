@@ -19,7 +19,7 @@ public class AccountDataStub implements AccountDataService {
 
 
 	public AccountPO check(String id) throws RemoteException {
-		AccountPO po = new AccountPO(id, 500);
+		AccountPO po = new AccountPO(id,"535655", 500);
 		return po;
 	}
 
@@ -31,12 +31,7 @@ public class AccountDataStub implements AccountDataService {
 	}
 
 
-	@Override
-	public boolean update() throws RemoteException {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
+	
 
 	@Override
 	public boolean modify(AccountPO po, String name) throws RemoteException {
@@ -61,6 +56,13 @@ public class AccountDataStub implements AccountDataService {
 
 	@Override
 	public List<AccountPO> search(String key) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public List<AccountPO> getAccounts() throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
 	}

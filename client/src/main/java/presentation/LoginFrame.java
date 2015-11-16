@@ -140,7 +140,9 @@ public class LoginFrame {
 		// 获取用户输入的账户名和密码
 		String username = jTextField.getText();
 		String password = new String(jPasswordField.getPassword());
-
+         //我就想看下 显示一下密码
+		System.out.println("账号为："+username);
+		System.out.println("密码是："+password);
 		// 调用bl层查看是否有该账户的信息
 		// 如果账户和密码输入正确则登录
 		boolean result = bl.login(username, password);

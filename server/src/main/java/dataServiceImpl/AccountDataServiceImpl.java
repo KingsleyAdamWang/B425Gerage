@@ -1,7 +1,6 @@
 package dataServiceImpl;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -17,15 +16,16 @@ import dataService.AccountDataService;
 public class AccountDataServiceImpl extends UnicastRemoteObject implements
 		AccountDataService {
 
+	// 存储账户信息的文件地址
 	private File file = new File("src/main/java/data/Account.txt");
+
+	// 用于获取文件中的所有的相关信息的所有的账户的信息 的列表
 	private List<AccountPO> accounts = new ArrayList<AccountPO>();
 
 	public AccountDataServiceImpl() throws RemoteException {
 		super();
 		init();
 
-//		System.out.println(accounts.get(0).getBalance());
-//		System.out.println(accounts.get(1).getBalance());
 	}
 
 	/**
@@ -39,8 +39,9 @@ public class AccountDataServiceImpl extends UnicastRemoteObject implements
 			BufferedReader bf = new BufferedReader(new FileReader(file));
 			while ((temp = bf.readLine()) != null) {
 
-				accounts.add(new AccountPO(temp.split(" ")[0], Double
-						.parseDouble(temp.split(" ")[1])));
+				accounts.add(new AccountPO(temp.split(" ")[0],
+						temp.split(" ")[1],
+						Double.parseDouble(temp.split(" ")[2])));
 
 				// System.out.println("成功");
 			}
@@ -53,10 +54,10 @@ public class AccountDataServiceImpl extends UnicastRemoteObject implements
 		return true;
 	}
 
-	@Override
-	public boolean update() throws RemoteException {
+
+     private  boolean update()  throws RemoteException{
 		try {
-			
+
 			FileWriter fw = new FileWriter(file);
 			fw.write("");
 
@@ -76,27 +77,33 @@ public class AccountDataServiceImpl extends UnicastRemoteObject implements
 	public boolean modify(AccountPO po, String name) throws RemoteException {
 
 		double balance = po.getBalance();
+		String accountID = po.getAccountID();
 		accounts.remove(po);
-		accounts.add(new AccountPO(name, balance));
+		accounts.add(0, new AccountPO(name, accountID, balance));
+
+		update();
 
 		return true;
 	}
 
 	@Override
 	public boolean add(AccountPO po) throws RemoteException {
-
+		// TODO 注释该行
+		System.out.println("添加账户成功！！");
 		// 是否重名等逻辑判断放在最后BL层实现
 		accounts.add(po);
-
+		update();
 		return true;
 	}
 
 	@Override
 	public boolean delete(AccountPO po) throws RemoteException {
 
-		//由于重写了AccountPO的equals方法所以 只通过名称来进行查看
-		if (accounts.contains(po))
+		// 由于重写了AccountPO的equals方法所以 只通过名称来进行查看
+		if (accounts.contains(po)) {
 			accounts.remove(po);
+			update();
+		}
 		return true;
 	}
 
@@ -104,20 +111,28 @@ public class AccountDataServiceImpl extends UnicastRemoteObject implements
 	public List<AccountPO> search(String key) throws RemoteException {
 		// TODO
 		List<AccountPO> list = new ArrayList<AccountPO>();
-		//符合该关键字的po都加载到list里面
-		for(AccountPO po : accounts)
-			if(po.getName().contains(key))
+		// 符合该关键字的po都加载到list里面
+		for (AccountPO po : accounts)
+			if (po.getName().contains(key))
 				list.add(po);
-		
+
 		return list;
 	}
 
-//	//底层测试还好  成功了
-//	public static void main(String[] args) throws RemoteException {
-//		AccountDataServiceImpl temp = new AccountDataServiceImpl();
-//		temp.add(new AccountPO("shabi", 456.2));
-//		temp.delete(new AccountPO("呵呵", 123.2));
-//		temp.update();
-//
-//	}
+	// //底层测试还好 成功了
+	// public static void main(String[] args) throws RemoteException {
+	// AccountDataServiceImpl temp = new AccountDataServiceImpl();
+	// temp.add(new AccountPO("shabi", 456.2));
+	// temp.delete(new AccountPO("呵呵", 123.2));
+	// temp.update();
+	//
+	// }
+
+	
+
+	@Override
+	public List<AccountPO> getAccounts() throws RemoteException{
+		// TODO Auto-generated method stub
+		return this.accounts;
+	}
 }

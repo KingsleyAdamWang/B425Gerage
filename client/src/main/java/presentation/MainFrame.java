@@ -6,18 +6,28 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 
+/**
+ * //一个界面跳转的管理frame的 uimanager 主要就是负责呈现各种人员对应的工作的Jpanel
+ *
+ */
 public class MainFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private final int frameWidth = 800;
 	private final int frameHeight = 600;
 
+	
+	//构造函数  设置框架的风格为windows风格  //个人认为好丑呀 
 	public MainFrame() {
+		
+		
 		try {
 			UIManager
 					.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		//居中
 		int w = (Toolkit.getDefaultToolkit().getScreenSize().width - frameWidth) / 2;
 		int h = (Toolkit.getDefaultToolkit().getScreenSize().height - frameHeight) / 2;
 		this.setLocation(w, h);
@@ -27,6 +37,7 @@ public class MainFrame extends JFrame {
 		this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 	}
 
+	
 	
 	public void setView(JPanel panel) {
 		this.setVisible(true);

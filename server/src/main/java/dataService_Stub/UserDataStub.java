@@ -1,6 +1,7 @@
 package dataService_Stub;
 
 import java.rmi.RemoteException;
+import java.util.List;
 
 import po.UserPO;
 import dataService.UserDataService;
@@ -10,7 +11,7 @@ public class UserDataStub implements UserDataService {
 
 	public UserPO find(String id) throws RemoteException {
 		// TODO Auto-generated method stub
-		UserPO po = new UserPO(id, "Tom", "12345", id, id);
+		UserPO po = new UserPO(id, "Tom", "12345", id, id, null);
 		return po;
 	}
 
@@ -53,6 +54,21 @@ public class UserDataStub implements UserDataService {
 	public void add(UserPO po) throws RemoteException {
 		// TODO Auto-generated method stub
 		
+	}
+
+
+	@Override
+	public void modify(UserPO po, String id, String password)
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public List<UserPO> getUsers() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -20,11 +20,6 @@ public class SendDataStub implements SendDataService {
 	}
 
 
-	@Override
-	public SendPO find(String id) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 
 //	public SendPO find(String id) throws RemoteException {

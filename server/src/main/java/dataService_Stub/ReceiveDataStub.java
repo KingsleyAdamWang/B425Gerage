@@ -22,7 +22,7 @@ public class ReceiveDataStub implements ReceiveDataService {
 
 	public ReceivePO find(String id) throws RemoteException {
 		// TODO Auto-generated method stub
-		ReceivePO po = new ReceivePO();
+		ReceivePO po = new ReceivePO(null, id, id, id, null);
 		return po;
 	}
 

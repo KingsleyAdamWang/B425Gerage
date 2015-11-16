@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import dataServiceImpl.AccountDataServiceImpl;
-import dataServiceImpl.ApproveDataServiceImpl;
 import dataServiceImpl.ArrivalDataServiceImpl;
 import dataServiceImpl.DeliveryDataServiceImpl;
 import dataServiceImpl.EntruckDataServiceImpl;
@@ -51,7 +50,7 @@ public class RMIHelper {
     	//将dataService 里面的实现类加入到这个哈希表图中通过键值对来进行RMI的远程调用
     	
         NAMING_MAP.put("account-data", AccountDataServiceImpl.class);
-        NAMING_MAP.put("approve-data", ApproveDataServiceImpl.class);
+//        NAMING_MAP.put("approve-data", ApproveDataServiceImpl.class);
         NAMING_MAP.put("arrival-data", ArrivalDataServiceImpl.class);
         NAMING_MAP.put("delivery-data", DeliveryDataServiceImpl.class);
         NAMING_MAP.put("entruck-data", EntruckDataServiceImpl.class);
@@ -67,7 +66,7 @@ public class RMIHelper {
         NAMING_MAP.put("shipment-data", ShipmentDataServiceImpl.class);
         NAMING_MAP.put("transfer-data", TransferDataServiceImpl.class);
         NAMING_MAP.put("truck-data", TruckDataServiceImpl.class);
-        NAMING_MAP.put("user-data", UserDataServiceImpl.class);
+//        NAMING_MAP.put("user-data", UserDataServiceImpl.class);
  
         
         
