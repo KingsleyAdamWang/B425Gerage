@@ -24,47 +24,40 @@ public class AccountDataStub implements AccountDataService {
 	}
 
 
-	@Override
 	public boolean init() throws RemoteException {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 
-	
-
-	@Override
 	public boolean modify(AccountPO po, String name) throws RemoteException {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 
-	@Override
 	public boolean add(AccountPO po) throws RemoteException {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 
-	@Override
 	public boolean delete(AccountPO po) throws RemoteException {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 
-	@Override
 	public List<AccountPO> search(String key) throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 
-	@Override
 	public List<AccountPO> getAccounts() throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 }
