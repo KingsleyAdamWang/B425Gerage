@@ -19,5 +19,22 @@ public class FormController implements FormBLService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public void runForm(Date start,Date end){
+		
+	}
+	
+	public void costForm(){
+		
+		
+	}
+	
+	public void exportRunForm(){
+		
+	}
+	
+	public void exportCostForm(){
+		
+	}
 
 }

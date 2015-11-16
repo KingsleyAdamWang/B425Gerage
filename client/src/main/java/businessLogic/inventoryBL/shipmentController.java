@@ -3,7 +3,7 @@ package businessLogic.inventoryBL;
 import vo.ShipmentVO;
 import businessLogicService.inventoryBLService.ShipmentBLService;
 
-public class shipmentController implements ShipmentBLService {
+public class ShipmentController implements ShipmentBLService {
 
 	@Override
 	public void add(String id) {

@@ -1,5 +1,6 @@
 package businessLogicService.financeBLService;
 
+import java.rmi.RemoteException;
 import java.util.List;
 
 import vo.AccountVO;
@@ -11,31 +12,13 @@ import vo.AccountVO;
  */
 public interface AccountBLService {
 	
-	/**
-	 * 增
-	 * @param name
-	 * @param balance
-	 */
-	public void add(String name,double balance);
+	public String addAccount(String name, String accountID)throws RemoteException ;
 	
-	/**
-	 * 改
-	 * @param vo
-	 * @param name
-	 */
-	public void modify(AccountVO vo,String name);
+	public boolean deleteAccount(AccountVO vo)throws RemoteException ;
 	
-	/**
-	 * 删
-	 * @param vo
-	 */
-	public void delete(AccountVO vo);
+	public List<AccountVO> searchAccount(String key);
 	
-	/**
-	 * 查
-	 * @param key
-	 * @return
-	 */
-	public  List<AccountVO> check(String key);
-
+	public String modifyAccount(AccountVO vo, String newName) throws RemoteException ;
+	
+	public List<AccountVO> getAccounts();
 }

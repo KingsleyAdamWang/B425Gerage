@@ -1,4 +1,4 @@
-package vo;
+﻿package vo;
 
 import java.io.Serializable;
 import java.util.Vector;
@@ -15,13 +15,9 @@ public class AccountVO extends Vector<String> implements Serializable {
 	// 想来想去还是不要加空的构造方法比较好 因为账户添加必须要这两条信息好不好
 
 	
-	
-	
-	//po转vo的构造方法
 	public AccountVO(AccountPO po){
-	this(po.getName(),po.getAccountID(),po.getBalance());	
+		this(po.getName(),po.getAccountID(),po.getBalance());
 	}
-	
 	/**
 	 * 构造方法
 	 * 
@@ -70,5 +66,7 @@ public class AccountVO extends Vector<String> implements Serializable {
 			return false;
 		return true;
 	}
+	
+
 
 }

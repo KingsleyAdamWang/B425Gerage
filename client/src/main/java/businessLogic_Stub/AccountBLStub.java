@@ -1,5 +1,6 @@
 package businessLogic_Stub;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +31,43 @@ public class AccountBLStub implements AccountBLService {
 		// TODO Auto-generated method stub
 		List<AccountVO> list = new ArrayList<AccountVO>();
 		return list;
+	}
+
+
+	@Override
+	public String addAccount(String name, String accountID)
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public boolean deleteAccount(AccountVO vo) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	@Override
+	public List<AccountVO> searchAccount(String key) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public String modifyAccount(AccountVO vo, String newName)
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public List<AccountVO> getAccounts() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
