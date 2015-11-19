@@ -115,7 +115,7 @@ public class SendPO extends ReceiptsPO implements Serializable {
 				+ String.valueOf(weight) + " " + String.valueOf(volume) + " "
 				+ expressType.getExpressString() + " "
 				+ packType.getPackTypeString() + " " + String.valueOf(fare)
-				+ " " + String.valueOf(arriveDate);
+				+ " " + String.valueOf(arriveDate)+"\n";
 	}
 
 	public double getFare() {

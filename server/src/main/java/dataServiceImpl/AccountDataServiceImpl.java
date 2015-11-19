@@ -31,7 +31,7 @@ public class AccountDataServiceImpl extends UnicastRemoteObject implements
 	/**
 	 * 初始化操作 从服务器端将数据里面的所有账户信息都读取出来 建立一个AccountPO的列表
 	 */
-	private boolean init(){
+	private boolean init() {
 		// 初始化 将所有的行里面的信息读取出来 复制给一个列表
 		String temp = "";
 		try {
@@ -53,18 +53,18 @@ public class AccountDataServiceImpl extends UnicastRemoteObject implements
 		return true;
 	}
 
-
-     private  boolean update()  throws RemoteException{
+	private boolean update() throws RemoteException {
 		try {
 
 			FileWriter fw = new FileWriter(file);
 			fw.write("");
 
 			System.out.println(accounts.size());
-			for (AccountPO po : accounts)
+			for (AccountPO po : accounts) {
 				// 将列表中的数据再一次的更新到Account.txt文件中去
 				fw.append(po.getName() + " " + po.getBalance() + "\n");
-			fw.flush();
+				fw.flush();
+			}
 			fw.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -127,10 +127,8 @@ public class AccountDataServiceImpl extends UnicastRemoteObject implements
 	//
 	// }
 
-	
-
 	@Override
-	public List<AccountPO> getAccounts() throws RemoteException{
+	public List<AccountPO> getAccounts() throws RemoteException {
 		// TODO Auto-generated method stub
 		return this.accounts;
 	}

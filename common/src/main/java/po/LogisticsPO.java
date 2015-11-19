@@ -91,7 +91,7 @@ public class LogisticsPO implements Serializable {
 	 StringBuilder  result = new StringBuilder(this.id+" "+this.name+" ");
 	 for(String str:messages)
 		 result.append(str+";");
-	 return result.toString();
+	 return result.toString()+"\n";
 	 
  }
 

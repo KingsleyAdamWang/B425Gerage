@@ -1,25 +1,28 @@
-package po;
+package vo;
 
+import po.InstitutionPO;
 
-public class InstitutionPO {
+public class InstitutionVO {
 
 	private String institutionID;
 	private String city;
 	private String name;
-	
-	public InstitutionPO(String institutionID,String city,String Name){
-		this.institutionID=institutionID;
+
+	public InstitutionVO(String institutionID, String city, String Name) {
+		this.institutionID = institutionID;
 		this.name = name;
 		this.city = city;
-		
+
 	}
 
-	
-	
-	
-	public String toString(){
-		return institutionID+" "+city+" "+name+"\n";
+	public InstitutionVO(InstitutionPO po) {
+		this(po.getInstitutionID(), po.getCity(), po.getName());
 	}
+
+	public InstitutionPO transToPO() {
+		return new InstitutionPO(institutionID, city, name);
+	}
+
 	public String getInstitutionID() {
 		return institutionID;
 	}
@@ -36,18 +39,13 @@ public class InstitutionPO {
 		this.name = name;
 	}
 
-
 	public String getCity() {
 		return city;
 	}
 
-
 	public void setCity(String city) {
 		this.city = city;
 	}
-
-
-
 
 	@Override
 	public int hashCode() {
@@ -58,9 +56,6 @@ public class InstitutionPO {
 		return result;
 	}
 
-
-
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -69,7 +64,7 @@ public class InstitutionPO {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		InstitutionPO other = (InstitutionPO) obj;
+		InstitutionVO other = (InstitutionVO) obj;
 		if (institutionID == null) {
 			if (other.institutionID != null)
 				return false;
@@ -77,7 +72,5 @@ public class InstitutionPO {
 			return false;
 		return true;
 	}
-	
-	
 
 }

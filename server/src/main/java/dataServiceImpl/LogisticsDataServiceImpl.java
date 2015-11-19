@@ -57,9 +57,9 @@ public class LogisticsDataServiceImpl extends UnicastRemoteObject implements
 			FileWriter fw = new FileWriter(file);
 			fw.write("");
 			for (LogisticsPO po : logisticsList) {
-				fw.append(po.toString() + "\n");
+				fw.append(po.toString());
+				fw.flush();
 			}
-			fw.flush();
 			fw.close();
 		} catch (IOException e) {
 			e.printStackTrace();
