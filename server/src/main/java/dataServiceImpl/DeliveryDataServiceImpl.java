@@ -6,6 +6,11 @@ import java.rmi.server.UnicastRemoteObject;
 import po.DeliveryPO;
 import dataService.DeliveryDataService;
 
+/**
+ * 寄件单
+ * @author 王栋
+ *
+ */
 public class DeliveryDataServiceImpl extends UnicastRemoteObject implements
 		DeliveryDataService {
 
