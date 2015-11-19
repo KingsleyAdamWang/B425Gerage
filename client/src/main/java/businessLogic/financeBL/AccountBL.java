@@ -56,7 +56,7 @@ public class AccountBL {
 
 		for (AccountPO temp : accounts) {
 			if (temp.getName().contains(key))
-				result.add(temp.transferToVO());
+				result.add(new AccountVO(temp));
 		}
 		return result;
 	}
@@ -73,7 +73,7 @@ public class AccountBL {
 		List<AccountVO> result = new ArrayList<AccountVO>();
 
 		for (AccountPO temp : accounts) {
-			result.add(temp.transferToVO());
+			result.add(new AccountVO(temp));
 		}
 		return result;
 	}

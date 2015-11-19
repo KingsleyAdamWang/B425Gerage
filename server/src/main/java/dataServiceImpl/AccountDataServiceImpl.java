@@ -31,8 +31,7 @@ public class AccountDataServiceImpl extends UnicastRemoteObject implements
 	/**
 	 * 初始化操作 从服务器端将数据里面的所有账户信息都读取出来 建立一个AccountPO的列表
 	 */
-	@Override
-	public boolean init() throws RemoteException {
+	private boolean init(){
 		// 初始化 将所有的行里面的信息读取出来 复制给一个列表
 		String temp = "";
 		try {

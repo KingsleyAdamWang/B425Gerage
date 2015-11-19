@@ -1,6 +1,7 @@
 package po;
 
 import java.io.Serializable;
+import java.util.HashMap;
 
 public class ManageStrategyPO implements Serializable{
 	
@@ -10,12 +11,12 @@ public class ManageStrategyPO implements Serializable{
 	// 同城 各个营业厅之间的距离
 	public static final double LOCAL_DISTANCE = 30.0;
 
+	//一次货运量的最大值  飞机火车汽车
 	private static final int PLANE_MAX = 5000;
 	private static final int TRAIN_MAX = 200000;
 	private static final int CAR_MAX = 1000;
 
 	// 价格常量 分别代表三种交通运输工具的 价格常量 每公里每吨的价格常量
-
 	private double planeCost;
 	private double trainCost;
 	private double carCost;
@@ -28,20 +29,11 @@ public class ManageStrategyPO implements Serializable{
 	// 标准快递的运费价格常量 公里数/1000*23 该处这个23即为价格常量 需要总经理进行常量制定
 	// 制定好后便储存这些数据 等填写表单的时候自动获取这些数据
 	private double standard_const;
+	
+	//距离
+	private HashMap<String,Double> distance;
+	
 
-	// TODO 城市之间的距离 还没想好如何表示
-	public double[][] twoPlace = { { 0, 1064.7, 1888.8, 900 },
-			{ 1064.7, 0, 1213, 266 }, { 188.8, 1213, 0, 1132 },
-			{ 900, 266, 1132 } };
-
-	// public ManageStrategyPO(){
-	// }
-	//
-	//
-	// public ManageStrategyPO(double[][] twoPlace){
-	// this.twoPlace = twoPlace;
-	//
-	// }
 
 	
 	
@@ -110,14 +102,14 @@ public class ManageStrategyPO implements Serializable{
 	public void setStandard_const(double standard_const) {
 		this.standard_const = standard_const;
 	}
-
-	public double[][] getTwoPlace() {
-		return twoPlace;
-	}
-
-	public void setTwoPlace(double[][] twoPlace) {
-		this.twoPlace = twoPlace;
-	}
+//
+//	public double[][] getTwoPlace() {
+//		return twoPlace;
+//	}
+//
+//	public void setTwoPlace(double[][] twoPlace) {
+//		this.twoPlace = twoPlace;
+//	}
 
 	public static double getLocalDistance() {
 		return LOCAL_DISTANCE;

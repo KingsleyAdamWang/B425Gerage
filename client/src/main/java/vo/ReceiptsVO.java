@@ -5,8 +5,9 @@ import enumSet.ReceiptsState;
 
 public class ReceiptsVO {
 	
-	ReceiptsState state;
-	String userID;
+	protected ReceiptsState state;
+	
+	protected String userID;
 	
 	/**
 	 * 构造方法

@@ -12,6 +12,11 @@ import java.util.List;
 import po.ArrivalPO;
 import dataService.ArrivalDataService;
 
+/**
+ * 到达单的数据层的实现类
+ * @author 王栋
+ *
+ */
 public class ArrivalDataServiceImpl extends UnicastRemoteObject implements
 		ArrivalDataService {
 

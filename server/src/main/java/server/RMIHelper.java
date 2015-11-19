@@ -13,6 +13,7 @@ import dataServiceImpl.DeliveryDataServiceImpl;
 import dataServiceImpl.EntruckDataServiceImpl;
 import dataServiceImpl.EntryDataServiceImpl;
 import dataServiceImpl.FormDataServiceImpl;
+import dataServiceImpl.IncomeDataServiceImpl;
 import dataServiceImpl.InventoryDataServiceImpl;
 import dataServiceImpl.LogDataServiceImpl;
 import dataServiceImpl.LogisticsDataServiceImpl;
@@ -22,7 +23,6 @@ import dataServiceImpl.SendDataServiceImpl;
 import dataServiceImpl.ShipmentDataServiceImpl;
 import dataServiceImpl.TransferDataServiceImpl;
 import dataServiceImpl.TruckDataServiceImpl;
-import dataServiceImpl.UserDataServiceImpl;
 
 /**
  * RMI远程调用方法的服务器端的RMIHelper类
@@ -59,7 +59,7 @@ public class RMIHelper {
         NAMING_MAP.put("inventory-data", InventoryDataServiceImpl.class);
         NAMING_MAP.put("log-data", LogDataServiceImpl.class);
         NAMING_MAP.put("logistics-data", LogisticsDataServiceImpl.class);
-    //    NAMING_MAP.put("manage-data", ManageDataServiceImpl.class);
+        NAMING_MAP.put("income-data", IncomeDataServiceImpl.class);
         NAMING_MAP.put("money-data", MoneyDataServiceImpl.class);
         NAMING_MAP.put("receive-data", ReceiveDataServiceImpl.class);
         NAMING_MAP.put("send-data", SendDataServiceImpl.class);

@@ -9,9 +9,7 @@ import po.AccountPO;
 public interface AccountDataService extends Remote{
 	
 	
-	public boolean init()throws RemoteException;
-	
-//	public boolean update()throws RemoteException;
+
 	
 	public boolean modify(AccountPO po,String name)throws RemoteException;
 	
@@ -23,7 +21,5 @@ public interface AccountDataService extends Remote{
 	
 	public List<AccountPO> getAccounts() throws RemoteException;
 	
-//	public List<AccountPO> search(String key);
-	
-//	public AccountPO check(String id)throws RemoteException;
+
 }
