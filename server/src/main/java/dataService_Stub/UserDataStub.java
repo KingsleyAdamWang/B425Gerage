@@ -11,7 +11,7 @@ public class UserDataStub implements UserDataService {
 
 	public UserPO find(String id) throws RemoteException {
 		// TODO Auto-generated method stub
-		UserPO po = new UserPO(id, "Tom", "12345", id, id, null);
+		UserPO po = new UserPO(id,  "12345", id, id, null);
 		return po;
 	}
 
@@ -57,18 +57,19 @@ public class UserDataStub implements UserDataService {
 	}
 
 
-	@Override
-	public void modify(UserPO po, String id, String password)
-			throws RemoteException {
-		// TODO Auto-generated method stub
-		
-	}
 
 
 	@Override
 	public List<UserPO> getUsers() throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+	@Override
+	public void modify(UserPO po, String password) throws RemoteException {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

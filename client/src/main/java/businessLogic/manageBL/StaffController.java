@@ -10,19 +10,19 @@ public class StaffController implements StaffBLService {
 		return null;
 	}
 
-	public boolean addUser(String id, UserVO vo) {
+	public String addUser(String id, UserVO vo) {
 		// TODO Auto-generated method stub
-		return false;
+		return null;
 	}
 
-	public boolean updateUser(String id, UserVO vo) {
+	public String updateUser(String id, UserVO vo) {
 		// TODO Auto-generated method stub
-		return false;
+		return null;
 	}
 
-	public boolean deleteUser(String id) {
+	public String deleteUser(String id) {
 		// TODO Auto-generated method stub
-		return false;
+		return null;
 	}
 
 }

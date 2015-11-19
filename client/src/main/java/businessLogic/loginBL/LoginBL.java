@@ -26,7 +26,7 @@ public class LoginBL {
 	public boolean login(String id ,String password){
 		List<UserPO> list=this.list;
 		for(UserPO temp : list){
-			if(temp.getId().equals(id)){
+			if(temp.getIdentityID().equals(id)){
 				if(temp.getPassword().equals(password))//用户id和密码与输入的都相同
 				return true;
 			}else{
