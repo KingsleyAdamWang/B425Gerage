@@ -12,14 +12,12 @@ public class UserPO implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
-	
-	//用户的账户
-	private String id;
+
 	//用户的姓名
 	private String name;
 	//用户的密码
 	private String password;
-	//用户的员工号
+	//用户的员工号/账号
     private String identityID;
     //用户的所属机构号
     private String institutionID;
@@ -36,10 +34,10 @@ public class UserPO implements Serializable {
      * @param work
      */
    
-	public UserPO( String name,String id, String password, String identityID,
+	public UserPO( String name, String password, String identityID,
 			String institutionID, Position work) {
 		super();
-		this.id = id;
+	
 		this.name = name;
 		this.password = password;
 		this.identityID = identityID;
@@ -52,12 +50,7 @@ public class UserPO implements Serializable {
 	public String toString(){
 		return this.identityID;
 	}
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
+
 	public String getName() {
 		return name;
 	}

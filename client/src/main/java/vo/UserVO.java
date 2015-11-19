@@ -7,8 +7,7 @@ public class UserVO {
 
 
 	
-	//用户的账户
-	private String id;
+
 	//用户的姓名
 	private String name;
 	//用户的密码
@@ -26,7 +25,7 @@ public class UserVO {
      * @param po
      */
     public UserVO(UserPO po){
-    	this(po.getName(),po.getId(),po.getPassword(),po.getIdentityID(),po.getInstitutionID(),po.getWork());
+    	this(po.getName(),po.getPassword(),po.getIdentityID(),po.getInstitutionID(),po.getWork());
     }
     
     
@@ -39,10 +38,10 @@ public class UserVO {
      * @param institutionID
      * @param work
      */
-	public UserVO(String name, String id, String password, String identityID,
+	public UserVO(String name, String password, String identityID,
 			String institutionID, Position work) {
 		super();
-		this.id = id;
+
 		this.name = name;
 		this.password = password;
 		this.identityID = identityID;
@@ -56,15 +55,11 @@ public class UserVO {
    * @return
    */
 	public UserPO transToPO(){
-		return new UserPO(name,id,password,identityID,institutionID,work);
+		return new UserPO(name,password,identityID,institutionID,work);
 		
 	}
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
+
+	
 	public String getName() {
 		return name;
 	}

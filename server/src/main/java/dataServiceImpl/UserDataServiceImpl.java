@@ -39,8 +39,8 @@ public class UserDataServiceImpl extends UnicastRemoteObject implements
 			while ((temp = br.readLine()) != null) {
 				String str[] = temp.split(" ");
 				// 一行存一个userPO的存储数据 读取出来就进行添加到Users的对应List中
-				users.add(new UserPO(str[0], str[1], str[2], str[3], str[4],
-						Position.getPosition(str[5])));
+				users.add(new UserPO(str[0], str[1], str[2], str[3],
+						Position.getPosition(str[4])));
 
 			}
 			br.close();
@@ -87,9 +87,9 @@ public class UserDataServiceImpl extends UnicastRemoteObject implements
 			fw.write("");
 
 			for (UserPO po : users) {
-				fw.append(po.getName() + " " + po.getId() + " "
-						+ po.getPassword() + " " + po.getIdentityID() + " "
-						+ po.getInstitutionID() + po.getWork() + "\n");
+				fw.append(po.getName() + " " + po.getPassword() + " "
+						+ po.getIdentityID() + " " + po.getInstitutionID()
+						+ po.getWork() + "\n");
 				fw.flush();
 			}
 			fw.close();
@@ -106,10 +106,10 @@ public class UserDataServiceImpl extends UnicastRemoteObject implements
 	}
 
 	@Override
-	public void modify(UserPO po, String id, String password)
+	public void modify(UserPO po, String password)
 			throws RemoteException {
 
-		UserPO temp = new UserPO(po.getName(), id, password,
+		UserPO temp = new UserPO(po.getName(), password,
 				po.getIdentityID(), po.getInstitutionID(), po.getWork());
 		users.remove(po);
 		users.add(temp);
