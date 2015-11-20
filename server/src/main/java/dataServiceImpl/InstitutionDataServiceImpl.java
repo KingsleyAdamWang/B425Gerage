@@ -11,9 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dataService.InstitutionDataService;
+import enumSet.InsType;
 import po.InstitutionPO;
 
-public class InstitutionDataServiceImpl extends UnicastRemoteObject implements InstitutionDataService {
+public class InstitutionDataServiceImpl extends UnicastRemoteObject implements
+		InstitutionDataService {
 
 	private List<InstitutionPO> insList;
 	private File file = new File("src/main/java/data/Institution.txt");
@@ -32,7 +34,8 @@ public class InstitutionDataServiceImpl extends UnicastRemoteObject implements I
 			String temp;
 			while ((temp = br.readLine()) != null) {
 				insList.add(new InstitutionPO(temp.split(" ")[0], temp
-						.split(" ")[1], temp.split(" ")[2]));
+						.split(" ")[1], temp.split(" ")[2], InsType
+						.getInsType(temp.split(" ")[3])));
 			}
 			br.close();
 		} catch (IOException e) {
@@ -81,7 +84,7 @@ public class InstitutionDataServiceImpl extends UnicastRemoteObject implements I
 			if (po.getInstitutionID().equals(id)) {
 				insList.get(insList.indexOf(po)).setName(name);
 				update();
-				return ;
+				return;
 			}
 		}
 

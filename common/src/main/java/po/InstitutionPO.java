@@ -22,7 +22,7 @@ public class InstitutionPO implements Serializable {
 	}
 
 	public String toString() {
-		return institutionID + " " + city + " " + name + "\n";
+		return institutionID + " " + city + " " + name + " "+type.getInsTypeString()+"\n";
 	}
 
 	public String getInstitutionID() {

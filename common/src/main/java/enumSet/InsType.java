@@ -9,7 +9,7 @@ public enum InsType {
 		
 	}
 	
-	public InsType getInsType(String string){
+	public static InsType getInsType(String string){
 		switch(string){
 		case "营业厅":
 			return businessHall;
