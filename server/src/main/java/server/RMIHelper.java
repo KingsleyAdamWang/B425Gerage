@@ -14,6 +14,7 @@ import dataServiceImpl.EntruckDataServiceImpl;
 import dataServiceImpl.EntryDataServiceImpl;
 import dataServiceImpl.FormDataServiceImpl;
 import dataServiceImpl.IncomeDataServiceImpl;
+import dataServiceImpl.InstitutionDataServiceImpl;
 import dataServiceImpl.InventoryDataServiceImpl;
 import dataServiceImpl.LogDataServiceImpl;
 import dataServiceImpl.LogisticsDataServiceImpl;
@@ -66,6 +67,7 @@ public class RMIHelper {
         NAMING_MAP.put("shipment-data", ShipmentDataServiceImpl.class);
         NAMING_MAP.put("transfer-data", TransferDataServiceImpl.class);
         NAMING_MAP.put("truck-data", TruckDataServiceImpl.class);
+        NAMING_MAP.put("institution-data", InstitutionDataServiceImpl.class);
 //        NAMING_MAP.put("user-data", UserDataServiceImpl.class);
  
         

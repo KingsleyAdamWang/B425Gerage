@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 import java.util.List;
 
 import po.IncomePO;
@@ -31,6 +32,7 @@ public class IncomeDataServiceImpl extends UnicastRemoteObject implements
 	 * 初始化读取器数据
 	 */
 	private void init() {
+		incomeList = new ArrayList<IncomePO>();
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(file));
 			String temp;

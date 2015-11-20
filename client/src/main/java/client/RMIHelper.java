@@ -1,11 +1,13 @@
 package client;
 import java.rmi.Naming;
+
 import dataService.AccountDataService;
 import dataService.ArrivalDataService;
 import dataService.DeliveryDataService;
 import dataService.EntruckDataService;
 import dataService.EntryDataService;
 import dataService.FormDataService;
+import dataService.InstitutionDataService;
 import dataService.InventoryDataService;
 import dataService.LogDataService;
 import dataService.LogisticsDataService;
@@ -47,6 +49,7 @@ public class RMIHelper {
 	private static TruckDataService truckDataService;
 	private static UserDataService userDataService;
 
+	private static InstitutionDataService institutionDataService;
 	// //
 	// public synchronized static void init() throws ClientInitException {
 	// if (inited) {
@@ -163,6 +166,16 @@ public class RMIHelper {
 			logisticsDataService = (LogisticsDataService) Naming
 					.lookup(urlPrefix + "logistics-data");
 			System.out.println("RMI远程调用LogisticsDataService成功");
+		} catch (Exception e) {
+			throw new ClientInitException(e);
+		}
+	}
+	
+	public static void initInstitutionDataService() throws ClientInitException {
+		try {
+			institutionDataService = (InstitutionDataService) Naming
+					.lookup(urlPrefix + "institution-data");
+			System.out.println("RMI远程调用InstitutionDataService成功");
 		} catch (Exception e) {
 			throw new ClientInitException(e);
 		}
@@ -354,6 +367,11 @@ public class RMIHelper {
 	
 	public static UserDataService getUserDataService() {
 		return userDataService;
+	}
+
+
+	public static InstitutionDataService getInstitutionDataService() {
+		return institutionDataService;
 	}
 
 	

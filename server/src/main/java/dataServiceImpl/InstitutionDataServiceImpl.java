@@ -6,18 +6,19 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import po.InstitutionPO;
 import dataService.InstitutionDataService;
+import po.InstitutionPO;
 
-public class InstitutionDataServiceImpl implements InstitutionDataService {
+public class InstitutionDataServiceImpl extends UnicastRemoteObject implements InstitutionDataService {
 
 	private List<InstitutionPO> insList;
-	private File file = new File("src/main/java/data/Account.txt");
+	private File file = new File("src/main/java/data/Institution.txt");
 
-	public InstitutionDataServiceImpl() {
+	public InstitutionDataServiceImpl() throws RemoteException {
 		super();
 		init();
 
@@ -54,6 +55,7 @@ public class InstitutionDataServiceImpl implements InstitutionDataService {
 			if (po.getInstitutionID().equals(institutionID)) {
 				insList.remove(po);
 				update();
+				return;
 			}
 	}
 
@@ -79,6 +81,7 @@ public class InstitutionDataServiceImpl implements InstitutionDataService {
 			if (po.getInstitutionID().equals(id)) {
 				insList.get(insList.indexOf(po)).setName(name);
 				update();
+				return ;
 			}
 		}
 

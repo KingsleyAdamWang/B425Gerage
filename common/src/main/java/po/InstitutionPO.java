@@ -1,25 +1,30 @@
 package po;
 
+import java.io.Serializable;
 
-public class InstitutionPO {
+import enumSet.InsType;
+
+public class InstitutionPO implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private String institutionID;
 	private String city;
 	private String name;
-	
-	public InstitutionPO(String institutionID,String city,String Name){
-		this.institutionID=institutionID;
+	private InsType type;
+
+	public InstitutionPO(String institutionID, String city, String Name,InsType type) {
+		this.institutionID = institutionID;
 		this.name = name;
 		this.city = city;
-		
+		this.type = type;
+
 	}
 
-	
-	
-	
-	public String toString(){
-		return institutionID+" "+city+" "+name+"\n";
+	public String toString() {
+		return institutionID + " " + city + " " + name + "\n";
 	}
+
 	public String getInstitutionID() {
 		return institutionID;
 	}
@@ -36,18 +41,13 @@ public class InstitutionPO {
 		this.name = name;
 	}
 
-
 	public String getCity() {
 		return city;
 	}
 
-
 	public void setCity(String city) {
 		this.city = city;
 	}
-
-
-
 
 	@Override
 	public int hashCode() {
@@ -57,9 +57,6 @@ public class InstitutionPO {
 				+ ((institutionID == null) ? 0 : institutionID.hashCode());
 		return result;
 	}
-
-
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -76,6 +73,14 @@ public class InstitutionPO {
 		} else if (!institutionID.equals(other.institutionID))
 			return false;
 		return true;
+	}
+
+	public InsType getType() {
+		return type;
+	}
+
+	public void setType(InsType type) {
+		this.type = type;
 	}
 	
 	

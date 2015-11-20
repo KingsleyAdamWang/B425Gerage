@@ -1,6 +1,7 @@
 package vo;
 
 import po.InstitutionPO;
+import enumSet.InsType;
 
 public class InstitutionVO {
 
@@ -8,19 +9,21 @@ public class InstitutionVO {
 	private String city;
 	private String name;
 
-	public InstitutionVO(String institutionID, String city, String Name) {
+	private InsType type;
+	public InstitutionVO(String institutionID, String city, String Name,InsType type) {
 		this.institutionID = institutionID;
 		this.name = name;
 		this.city = city;
+		this.type = type;
 
 	}
 
 	public InstitutionVO(InstitutionPO po) {
-		this(po.getInstitutionID(), po.getCity(), po.getName());
+		this(po.getInstitutionID(), po.getCity(), po.getName(),po.getType());
 	}
 
 	public InstitutionPO transToPO() {
-		return new InstitutionPO(institutionID, city, name);
+		return new InstitutionPO(institutionID, city, name,type);
 	}
 
 	public String getInstitutionID() {
