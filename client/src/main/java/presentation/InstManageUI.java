@@ -17,25 +17,29 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import vo.AccountVO;
+import vo.InstitutionVO;
 import businessLogic.financeBL.AccountController;
+import businessLogic.manageBL.InstitutionController;
 
-public class AccountUI extends JPanel {
+public class InstManageUI extends JPanel {
 	private static final long serialVersionUID = 1L;
-	
+
 	// 一会儿删↓
 	static MainFrame f;
 	// 一会儿删↑
 
-	private AccountController ac;
+	private InstitutionController ic;
 	private JButton[] funcButton;
 	private JTable table;
-	private Vector<AccountVO> vData;
-//	String name;
-//	String id;
-//	boolean ready = false;
+	private Vector<InstitutionVO> vData;
 
-	public AccountUI() throws RemoteException {
-		this.ac = new AccountController();
+	public InstManageUI() {
+		try {
+			this.ic = new InstitutionController();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		this.initComponents();
 		this.initList();
 		this.validate();
@@ -44,12 +48,12 @@ public class AccountUI extends JPanel {
 	private void initComponents() {
 		this.setLayout(null);
 
-		String[] info = { "用户名", "账号", "余额" };
+		String[] info = { "机构编号", "机构名称", "地点" };
 		Vector<String> vColumns = new Vector<String>();
 		for (int i = 0; i < 3; i++) {
 			vColumns.add(info[i]);
 		}
-		vData = new Vector<AccountVO>();
+		vData = new Vector<InstitutionVO>();
 
 		table = new JTable(vData, vColumns) {
 			private static final long serialVersionUID = 1L;
@@ -69,7 +73,7 @@ public class AccountUI extends JPanel {
 		this.add(scrollPane);
 
 		funcButton = new JButton[5];
-		final String[] title = { "新增", "删除", "修改", "查询", "返回" };
+		final String[] title = { "新增机构", "删除机构", "修改信息", "人员管理", "返回" };
 		for (int i = 0; i < 5; i++) {
 			funcButton[i] = new JButton(title[i]);
 			funcButton[i].setBounds(50 + 150 * i, 450, 100, 25);
@@ -77,12 +81,7 @@ public class AccountUI extends JPanel {
 			case 0:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						try {
-							addAccount();
-						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
+						addInst();
 					}
 				});
 				break;
@@ -90,7 +89,7 @@ public class AccountUI extends JPanel {
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						try {
-							deleteAccount();
+							deleteInst();
 						} catch (RemoteException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
@@ -101,14 +100,13 @@ public class AccountUI extends JPanel {
 			case 2:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						updateAccount();
+						updateInst();
 					}
 				});
 				break;
 			case 3:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						searchAccount();
 					}
 				});
 				break;
@@ -125,91 +123,79 @@ public class AccountUI extends JPanel {
 
 	protected void initList() {
 		vData.clear();
-		List<AccountVO> list = ac.getAccounts();
-		for (AccountVO vo : list) {
+		 
+		for (InstitutionVO vo :ic.show()) {
 			vData.add(vo);
 		}
 		this.repaint();
 	}
 
-	protected void initList(List<AccountVO> list) {
-		vData.clear();
-		for (AccountVO vo : list) {
-			vData.add(vo);
-		}
-		this.repaint();
-	}
-
-	private void addAccount() throws RemoteException {
-		new AccountDialog(this, "add");
+	private void addInst() {
+		InstManageDialog dialog = new InstManageDialog(this, "add");
 		return;
 	}
 
-	private void deleteAccount() throws RemoteException {
+	private void deleteInst() throws RemoteException {
 		int index = table.getSelectedRow();
 		if (index == -1) {
-			JOptionPane.showMessageDialog(null, "请选择一个账户", "",
+			JOptionPane.showMessageDialog(null, "请选择一个机构", "",
 					JOptionPane.ERROR_MESSAGE);
 			return;
 		}
-		int n = JOptionPane.showConfirmDialog(null, "确定删除此账户吗?", "",
+		System.out.println(index);
+		int n = JOptionPane.showConfirmDialog(null, "确定删除此机构吗?", "",
 				JOptionPane.YES_NO_OPTION);
 		if (n != 0)
 			return;
-		ac.deleteAccount(vData.get(index));
+//		try {
+			ic.deleteIns(vData.get(index));
+//		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		initList();
 		return;
 	}
 
-	private void searchAccount() {
-		AccountDialog dialog = new AccountDialog(this, "search");
-		return;
-	}
-
-	private void updateAccount() {
+	private void updateInst() {
 		int index = table.getSelectedRow();
 		if (index == -1) {
-			JOptionPane.showMessageDialog(null, "请选择一个账户", "",
+			JOptionPane.showMessageDialog(null, "请选择一个机构", "",
 					JOptionPane.ERROR_MESSAGE);
 			return;
 		}
-		AccountDialog dialog = new AccountDialog(this, "update", vData.get(index));
+		InstManageDialog dialog = new InstManageDialog(this, "update",
+				vData.get(index));
 		return;
 	}
 
-	public AccountController getController() {
-		return this.ac;
-	}
-	
 	public static void main(String[] args) {
 		f = new MainFrame();
-		AccountUI view;
-		try {
-			view = new AccountUI();
-			f.setView(view);
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		InstManageUI view = new InstManageUI();
+		f.setView(view);
+	}
+
+	public InstitutionController getController() {
+		return this.ic;
 	}
 }
 
-class AccountDialog extends JDialog {
+class InstManageDialog extends JDialog {
 	private static final long serialVersionUID = 1L;
 	private String opr;
-	private String name;
-	private String id;
-	AccountUI ui;
-	AccountVO vo;
+	InstManageUI ui;
+	InstitutionVO vo;
 
 	private JButton okBtn;
 	private JButton returnBtn;
 	private JTextField nameField;
 	private JTextField idField;
+	private JTextField addrField;
 	private JLabel nameLabel;
 	private JLabel idLabel;
+	private JLabel addrLabel;
 
-	public AccountDialog() {
+	public InstManageDialog() {
 		this.setVisible(true);
 		this.setResizable(false);
 		this.setLayout(null);
@@ -219,7 +205,7 @@ class AccountDialog extends JDialog {
 		initComponents();
 	}
 
-	public AccountDialog(AccountUI ui, String opr) {
+	public InstManageDialog(InstManageUI ui, String opr) {
 		this.setVisible(true);
 		this.setResizable(false);
 		this.setLayout(null);
@@ -231,7 +217,7 @@ class AccountDialog extends JDialog {
 		initComponents();
 	}
 
-	public AccountDialog(AccountUI ui, String opr, AccountVO vo) {
+	public InstManageDialog(InstManageUI ui, String opr, InstitutionVO vo) {
 		this.setVisible(true);
 		this.setResizable(false);
 		this.setLayout(null);
@@ -245,40 +231,39 @@ class AccountDialog extends JDialog {
 	}
 
 	private void initComponents() {
-		if (opr.equals("search")) {
-			nameLabel = new JLabel("关键字:");
-			nameLabel.setBounds(25, 45, 50, 15);
-			nameField = new JTextField();
-			nameField.setBounds(100, 40, 175, 25);
-			this.getContentPane().add(nameLabel);
-			this.getContentPane().add(nameField);
-		} else {
-			nameLabel = new JLabel("账户名:");
-			nameLabel.setBounds(25, 25, 50, 15);
-			idLabel = new JLabel("账号:");
-			idLabel.setBounds(25, 75, 50, 15);
-			nameField = new JTextField();
-			nameField.setBounds(100, 20, 175, 25);
-			idField = new JTextField();
-			idField.setBounds(100, 70, 175, 25);
-			if (opr.equals("update")) {
-				nameField.setText(vo.getName());
-				idField.setText(vo.getAccountID());
-				idField.setEditable(false);
-			}
-			this.getContentPane().add(nameLabel);
-			this.getContentPane().add(idLabel);
-			this.getContentPane().add(nameField);
-			this.getContentPane().add(idField);
+		idLabel = new JLabel("机构编号:");
+		idLabel.setBounds(25, 15, 55, 15);
+		nameLabel = new JLabel("机构名称:");
+		nameLabel.setBounds(25, 45, 55, 15);
+		addrLabel = new JLabel("机构地点:");
+		addrLabel.setBounds(25, 75, 55, 15);
+		idField = new JTextField();
+		idField.setBounds(100, 10, 175, 25);
+		nameField = new JTextField();
+		nameField.setBounds(100, 40, 175, 25);
+		addrField = new JTextField();
+		addrField.setBounds(100, 70, 175, 25);
+		if (opr.equals("update")) {
+			nameField.setText(vo.getName());
+			idField.setText(vo.getInstitutionID());
+			addrField.setText(vo.getCity());
 		}
+		this.getContentPane().add(nameLabel);
+		this.getContentPane().add(idLabel);
+		this.getContentPane().add(nameField);
+		this.getContentPane().add(idField);
+		this.getContentPane().add(addrLabel);
+		this.getContentPane().add(addrField);
 
 		okBtn = new JButton("确定");
 		okBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (opr.equals("add")) {
+					String result;
 					try {
-						String result = ui.getController().addAccount(
-								getName(), getID());
+						result = ui.getController()
+								.addIns(new InstitutionVO(getID(), getCity(),
+										getName()));
 						if (result != null) {
 							JOptionPane.showMessageDialog(null, result, "",
 									JOptionPane.ERROR_MESSAGE);
@@ -286,16 +271,17 @@ class AccountDialog extends JDialog {
 							JOptionPane.showMessageDialog(null, "添加成功", "",
 									JOptionPane.INFORMATION_MESSAGE);
 						}
-						ui.initList();
 					} catch (RemoteException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
+					ui.initList();
 				}
 				if (opr.equals("update")) {
+					String result;
 					try {
-						String result = ui.getController().modifyAccount(vo,
-								getName());
+						result = ui.getController().modify(
+								vo.getInstitutionID(), getName());
 						if (result != null) {
 							JOptionPane.showMessageDialog(null, result, "",
 									JOptionPane.ERROR_MESSAGE);
@@ -303,16 +289,11 @@ class AccountDialog extends JDialog {
 							JOptionPane.showMessageDialog(null, "修改成功", "",
 									JOptionPane.INFORMATION_MESSAGE);
 						}
-						ui.initList();
 					} catch (RemoteException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-				}
-				if (opr.equals("search")) {
-					List<AccountVO> list = ui.getController().searchAccount(
-							getName());
-					ui.initList(list);
+					ui.initList();
 				}
 				setVisible(false);
 			}
@@ -328,16 +309,17 @@ class AccountDialog extends JDialog {
 		});
 		returnBtn.setBounds(175, 120, 75, 30);
 		this.getContentPane().add(returnBtn);
-
 	}
 
 	public String getName() {
-		name = nameField.getText();
-		return this.name;
+		return nameField.getText();
 	}
 
 	public String getID() {
-		id = idField.getText();
-		return this.id;
+		return idField.getText();
+	}
+
+	public String getCity() {
+		return addrField.getText();
 	}
 }

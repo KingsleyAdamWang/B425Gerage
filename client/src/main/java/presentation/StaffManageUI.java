@@ -17,25 +17,16 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import vo.AccountVO;
-import businessLogic.financeBL.AccountController;
+import vo.UserVO;
 
-public class AccountUI extends JPanel {
+public class StaffManageUI extends JPanel {
 	private static final long serialVersionUID = 1L;
-	
-	// 一会儿删↓
-	static MainFrame f;
-	// 一会儿删↑
 
-	private AccountController ac;
 	private JButton[] funcButton;
 	private JTable table;
-	private Vector<AccountVO> vData;
-//	String name;
-//	String id;
-//	boolean ready = false;
+	private Vector<UserVO> vData;
 
-	public AccountUI() throws RemoteException {
-		this.ac = new AccountController();
+	public StaffManageUI() {
 		this.initComponents();
 		this.initList();
 		this.validate();
@@ -44,12 +35,11 @@ public class AccountUI extends JPanel {
 	private void initComponents() {
 		this.setLayout(null);
 
-		String[] info = { "用户名", "账号", "余额" };
+		String[] info = { "姓名", "编号" };
 		Vector<String> vColumns = new Vector<String>();
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < 2; i++) {
 			vColumns.add(info[i]);
 		}
-		vData = new Vector<AccountVO>();
 
 		table = new JTable(vData, vColumns) {
 			private static final long serialVersionUID = 1L;
@@ -68,51 +58,31 @@ public class AccountUI extends JPanel {
 		table.setFillsViewportHeight(true);
 		this.add(scrollPane);
 
-		funcButton = new JButton[5];
-		final String[] title = { "新增", "删除", "修改", "查询", "返回" };
-		for (int i = 0; i < 5; i++) {
+		funcButton = new JButton[4];
+		final String[] title = { "新增人员", "删除人员", "修改人员信息", "返回" };
+		for (int i = 0; i < 4; i++) {
 			funcButton[i] = new JButton(title[i]);
-			funcButton[i].setBounds(50 + 150 * i, 450, 100, 25);
+			funcButton[i].setBounds(50 + 200 * i, 450, 100, 25);
 			switch (i) {
 			case 0:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						try {
-							addAccount();
-						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
 					}
 				});
 				break;
 			case 1:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						try {
-							deleteAccount();
-						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
 					}
 				});
 				break;
 			case 2:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						updateAccount();
 					}
 				});
 				break;
 			case 3:
-				funcButton[i].addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						searchAccount();
-					}
-				});
-				break;
-			case 4:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 					}
@@ -124,77 +94,16 @@ public class AccountUI extends JPanel {
 	}
 
 	protected void initList() {
-		vData.clear();
-		List<AccountVO> list = ac.getAccounts();
-		for (AccountVO vo : list) {
-			vData.add(vo);
-		}
+		// vData.clear();
+		// List<InstitutionVO> list = ic.getAccounts();
+		// for (InstitutionVO vo : list) {
+		// vData.add(vo);
+		// }
 		this.repaint();
-	}
-
-	protected void initList(List<AccountVO> list) {
-		vData.clear();
-		for (AccountVO vo : list) {
-			vData.add(vo);
-		}
-		this.repaint();
-	}
-
-	private void addAccount() throws RemoteException {
-		new AccountDialog(this, "add");
-		return;
-	}
-
-	private void deleteAccount() throws RemoteException {
-		int index = table.getSelectedRow();
-		if (index == -1) {
-			JOptionPane.showMessageDialog(null, "请选择一个账户", "",
-					JOptionPane.ERROR_MESSAGE);
-			return;
-		}
-		int n = JOptionPane.showConfirmDialog(null, "确定删除此账户吗?", "",
-				JOptionPane.YES_NO_OPTION);
-		if (n != 0)
-			return;
-		ac.deleteAccount(vData.get(index));
-		initList();
-		return;
-	}
-
-	private void searchAccount() {
-		AccountDialog dialog = new AccountDialog(this, "search");
-		return;
-	}
-
-	private void updateAccount() {
-		int index = table.getSelectedRow();
-		if (index == -1) {
-			JOptionPane.showMessageDialog(null, "请选择一个账户", "",
-					JOptionPane.ERROR_MESSAGE);
-			return;
-		}
-		AccountDialog dialog = new AccountDialog(this, "update", vData.get(index));
-		return;
-	}
-
-	public AccountController getController() {
-		return this.ac;
-	}
-	
-	public static void main(String[] args) {
-		f = new MainFrame();
-		AccountUI view;
-		try {
-			view = new AccountUI();
-			f.setView(view);
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 }
 
-class AccountDialog extends JDialog {
+class MyDialog extends JDialog {
 	private static final long serialVersionUID = 1L;
 	private String opr;
 	private String name;
@@ -209,7 +118,7 @@ class AccountDialog extends JDialog {
 	private JLabel nameLabel;
 	private JLabel idLabel;
 
-	public AccountDialog() {
+	public MyDialog() {
 		this.setVisible(true);
 		this.setResizable(false);
 		this.setLayout(null);
@@ -219,7 +128,7 @@ class AccountDialog extends JDialog {
 		initComponents();
 	}
 
-	public AccountDialog(AccountUI ui, String opr) {
+	public MyDialog(AccountUI ui, String opr) {
 		this.setVisible(true);
 		this.setResizable(false);
 		this.setLayout(null);
@@ -231,7 +140,7 @@ class AccountDialog extends JDialog {
 		initComponents();
 	}
 
-	public AccountDialog(AccountUI ui, String opr, AccountVO vo) {
+	public MyDialog(AccountUI ui, String opr, AccountVO vo) {
 		this.setVisible(true);
 		this.setResizable(false);
 		this.setLayout(null);
@@ -341,3 +250,4 @@ class AccountDialog extends JDialog {
 		return this.id;
 	}
 }
+
