@@ -123,8 +123,8 @@ public class InstManageUI extends JPanel {
 
 	protected void initList() {
 		vData.clear();
-		 
-		for (InstitutionVO vo :ic.show()) {
+
+		for (InstitutionVO vo : ic.show()) {
 			vData.add(vo);
 		}
 		this.repaint();
@@ -137,29 +137,28 @@ public class InstManageUI extends JPanel {
 
 	private void deleteInst() throws RemoteException {
 		int index = table.getSelectedRow();
-		if (index == -1) {
+		if (index == -1 || (vData.isEmpty() && index == 0)) {
 			JOptionPane.showMessageDialog(null, "请选择一个机构", "",
 					JOptionPane.ERROR_MESSAGE);
 			return;
 		}
-		System.out.println(index);
 		int n = JOptionPane.showConfirmDialog(null, "确定删除此机构吗?", "",
 				JOptionPane.YES_NO_OPTION);
 		if (n != 0)
 			return;
-//		try {
-			ic.deleteIns(vData.get(index));
-//		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		// try {
+		ic.deleteIns(vData.get(index));
+		// } catch (RemoteException e) {
+		// TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
 		initList();
 		return;
 	}
 
 	private void updateInst() {
 		int index = table.getSelectedRow();
-		if (index == -1) {
+		if (index == -1 || (vData.isEmpty() && index == 0)) {
 			JOptionPane.showMessageDialog(null, "请选择一个机构", "",
 					JOptionPane.ERROR_MESSAGE);
 			return;
