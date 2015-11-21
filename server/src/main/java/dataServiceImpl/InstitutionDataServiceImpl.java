@@ -89,7 +89,7 @@ public class InstitutionDataServiceImpl extends UnicastRemoteObject implements I
 	}
 
 	@Override
-	public List<InstitutionPO> institutionList() throws RemoteException {
+	public List<InstitutionPO> getInsList() throws RemoteException {
 
 		return insList;
 	}

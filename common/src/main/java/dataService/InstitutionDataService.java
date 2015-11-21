@@ -13,7 +13,7 @@ public interface InstitutionDataService extends Remote{
 	
 	public void modify(String id,String name)throws RemoteException;
 
-	public List<InstitutionPO> institutionList() throws RemoteException;
+	public List<InstitutionPO> getInsList() throws RemoteException;
 	
 	
 
