@@ -31,15 +31,10 @@ public class InstManageUI extends JPanel {
 	private InstitutionController ic;
 	private JButton[] funcButton;
 	private JTable table;
-	private Vector<InstitutionVO> vData;
+	private Vector<Vector<String>> vData;
 
 	public InstManageUI() {
-		try {
-			this.ic = new InstitutionController();
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		this.ic = new InstitutionController();
 		this.initComponents();
 		this.initList();
 		this.validate();
@@ -53,7 +48,7 @@ public class InstManageUI extends JPanel {
 		for (int i = 0; i < 3; i++) {
 			vColumns.add(info[i]);
 		}
-		vData = new Vector<InstitutionVO>();
+		vData = new Vector<Vector<String>>();
 
 		table = new JTable(vData, vColumns) {
 			private static final long serialVersionUID = 1L;
@@ -125,7 +120,11 @@ public class InstManageUI extends JPanel {
 		vData.clear();
 
 		for (InstitutionVO vo : ic.show()) {
-			vData.add(vo);
+			Vector<String> str = new Vector<String>();
+			str.add(vo.getInstitutionID());
+			str.add(vo.getName());
+			str.add(vo.getCity());
+			vData.add(str);
 		}
 		this.repaint();
 	}
