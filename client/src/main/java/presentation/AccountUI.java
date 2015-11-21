@@ -147,7 +147,7 @@ public class AccountUI extends JPanel {
 
 	private void deleteAccount() throws RemoteException {
 		int index = table.getSelectedRow();
-		if (index == -1) {
+		if (index == -1||(vData.isEmpty()&&index==0)) {
 			JOptionPane.showMessageDialog(null, "请选择一个账户", "",
 					JOptionPane.ERROR_MESSAGE);
 			return;
@@ -168,7 +168,7 @@ public class AccountUI extends JPanel {
 
 	private void updateAccount() {
 		int index = table.getSelectedRow();
-		if (index == -1) {
+		if (index == -1||(vData.isEmpty()&&index==0)) {
 			JOptionPane.showMessageDialog(null, "请选择一个账户", "",
 					JOptionPane.ERROR_MESSAGE);
 			return;
