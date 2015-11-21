@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dataService.InstitutionDataService;
+import enumSet.InsType;
 import po.InstitutionPO;
 
 public class InstitutionDataServiceImpl extends UnicastRemoteObject implements InstitutionDataService {
@@ -32,7 +33,7 @@ public class InstitutionDataServiceImpl extends UnicastRemoteObject implements I
 			String temp;
 			while ((temp = br.readLine()) != null) {
 				insList.add(new InstitutionPO(temp.split(" ")[0], temp
-						.split(" ")[1], temp.split(" ")[2]));
+						.split(" ")[1], temp.split(" ")[2],InsType.getInsType(temp.split(" ")[3])));
 			}
 			br.close();
 		} catch (IOException e) {
