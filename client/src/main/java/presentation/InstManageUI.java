@@ -32,7 +32,8 @@ public class InstManageUI extends JPanel {
 	private JButton[] funcButton;
 	private JTable table;
 	private Vector<Vector<String>> vData;
-
+	int a;
+	
 	public InstManageUI() {
 		this.ic = new InstitutionController();
 		this.initComponents();
