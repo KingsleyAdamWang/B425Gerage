@@ -17,20 +17,27 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import vo.AccountVO;
+import vo.InstitutionVO;
 import vo.UserVO;
+import businessLogic.manageBL.StaffController;
+import enumSet.Position;
 
 public class StaffManageUI extends JPanel {
 	private static final long serialVersionUID = 1L;
-	
+
 	// 一会儿删↓
 	static MainFrame f;
 	// 一会儿删↑
 
+	private StaffController sc;
 	private JButton[] funcButton;
 	private JTable table;
-	private Vector<UserVO> vData;
+	private Vector<Vector<String>> vData;
+	private InstitutionVO instVO;
 
-	public StaffManageUI() {
+	public StaffManageUI(InstitutionVO instVO) throws RemoteException {
+		this.sc = new StaffController();
+		this.instVO = instVO;
 		this.initComponents();
 		this.initList();
 		this.validate();
@@ -39,11 +46,12 @@ public class StaffManageUI extends JPanel {
 	private void initComponents() {
 		this.setLayout(null);
 
-		String[] info = { "姓名", "编号" };
+		String[] info = { "编号", "姓名", "职位" };
 		Vector<String> vColumns = new Vector<String>();
-		for (int i = 0; i < 2; i++) {
+		for (int i = 0; i < 3; i++) {
 			vColumns.add(info[i]);
 		}
+		vData = new Vector<Vector<String>>();
 
 		table = new JTable(vData, vColumns) {
 			private static final long serialVersionUID = 1L;
@@ -71,18 +79,21 @@ public class StaffManageUI extends JPanel {
 			case 0:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						addStaff();
 					}
 				});
 				break;
 			case 1:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						deleteStaff();
 					}
 				});
 				break;
 			case 2:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						updateStaff();
 					}
 				});
 				break;
@@ -97,29 +108,83 @@ public class StaffManageUI extends JPanel {
 		}
 	}
 
-	protected void initList() {
-		// vData.clear();
-		// List<InstitutionVO> list = ic.getAccounts();
-		// for (InstitutionVO vo : list) {
-		// vData.add(vo);
-		// }
+	protected void initList() throws RemoteException {
+		vData.clear();
+		List<UserVO> list = sc.getUsersOfIns(instVO.getInstitutionID());
+		for (UserVO vo : list) {
+			vData.add(toVector(vo));
+		}
 		this.repaint();
 	}
-	
-	public static void main(String[] args) {
+
+	private Vector<String> toVector(UserVO vo) {
+		Vector<String> str = new Vector<String>();
+		str.add(vo.getIdentityID());
+		str.add(vo.getName());
+		str.add(vo.getWork().getPositionString());
+		str.add(vo.getPassword());
+		str.add(vo.getInstitutionID());
+		return str;
+	}
+
+	private UserVO toVO(Vector<String> str) {
+		UserVO vo = new UserVO(str.get(1), str.get(3), str.get(0), str.get(4),
+				Position.getPosition(str.get(2)));
+		return vo;
+	}
+
+	private void addStaff() {
+		StaffDialog dialog = new StaffDialog(this, "add");
+		return;
+	}
+
+	private void deleteStaff() {
+		int index = table.getSelectedRow();
+		if (index == -1 || (vData.isEmpty() && index == 0)) {
+			JOptionPane.showMessageDialog(null, "请选择一个员工", "",
+					JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		int n = JOptionPane.showConfirmDialog(null, "确定删除此员工吗?", "",
+				JOptionPane.YES_NO_OPTION);
+		if (n != 0)
+			return;
+		try {
+			sc.deleteUser(toVO(vData.get(index)).getIdentityID());
+			initList();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return;
+	}
+
+	private void updateStaff() {
+		int index = table.getSelectedRow();
+		if (index == -1 || (vData.isEmpty() && index == 0)) {
+			JOptionPane.showMessageDialog(null, "请选择一个员工", "",
+					JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		StaffDialog dialog = new StaffDialog(this, "update",
+				toVO(vData.get(index)));
+		return;
+	}
+
+	public static void main(String[] args) throws RemoteException {
 		f = new MainFrame();
-		StaffManageUI view = new StaffManageUI();
-		f.setView(view);
+		// StaffManageUI view = new StaffManageUI("00000000");
+		// f.setView(view);
 	}
 }
 
-class MyDialog extends JDialog {
+class StaffDialog extends JDialog {
 	private static final long serialVersionUID = 1L;
 	private String opr;
 	private String name;
 	private String id;
-	AccountUI ui;
-	AccountVO vo;
+	StaffManageUI ui;
+	UserVO vo;
 
 	private JButton okBtn;
 	private JButton returnBtn;
@@ -128,7 +193,7 @@ class MyDialog extends JDialog {
 	private JLabel nameLabel;
 	private JLabel idLabel;
 
-	public MyDialog() {
+	public StaffDialog() {
 		this.setVisible(true);
 		this.setResizable(false);
 		this.setLayout(null);
@@ -138,7 +203,7 @@ class MyDialog extends JDialog {
 		initComponents();
 	}
 
-	public MyDialog(AccountUI ui, String opr) {
+	public StaffDialog(StaffManageUI ui, String opr) {
 		this.setVisible(true);
 		this.setResizable(false);
 		this.setLayout(null);
@@ -150,7 +215,7 @@ class MyDialog extends JDialog {
 		initComponents();
 	}
 
-	public MyDialog(AccountUI ui, String opr, AccountVO vo) {
+	public StaffDialog(StaffManageUI ui, String opr, UserVO vo) {
 		this.setVisible(true);
 		this.setResizable(false);
 		this.setLayout(null);
@@ -259,7 +324,5 @@ class MyDialog extends JDialog {
 		id = idField.getText();
 		return this.id;
 	}
-	
-	
-}
 
+}

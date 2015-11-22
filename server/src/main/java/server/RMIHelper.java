@@ -25,6 +25,7 @@ import dataServiceImpl.SendDataServiceImpl;
 import dataServiceImpl.ShipmentDataServiceImpl;
 import dataServiceImpl.TransferDataServiceImpl;
 import dataServiceImpl.TruckDataServiceImpl;
+import dataServiceImpl.UserDataServiceImpl;
 
 /**
  * RMI远程调用方法的服务器端的RMIHelper类
@@ -70,8 +71,7 @@ public class RMIHelper {
 		NAMING_MAP.put("truck-data", TruckDataServiceImpl.class);
 		NAMING_MAP.put("institution-data", InstitutionDataServiceImpl.class);
 		NAMING_MAP.put("priceconst-data", PriceConstDataServiceImpl.class);
-
-		// NAMING_MAP.put("user-data", UserDataServiceImpl.class);
+		NAMING_MAP.put("user-data", UserDataServiceImpl.class);
 
 	}
 
