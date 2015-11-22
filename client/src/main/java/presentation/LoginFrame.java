@@ -13,12 +13,14 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 
+import businessLogic.loginBL.LoginController;
 import businessLogicService.loginBLService.LoginBLService;
 import businessLogic_Stub.InquireBLStub;
 import client.Main;
 
 public class LoginFrame {
 
+	private LoginController lc;
 	private JFrame loginFrame;
 	private JButton loginButton;
 	private JButton cancelButton;
@@ -32,7 +34,7 @@ public class LoginFrame {
 	private JPanel panel3;
 	private final int frameWidth = 300;
 	private final int frameHeight = 200;
-	private LoginBLService bl;
+//	private LoginBLService bl;
 
 	public LoginFrame(LoginBLService bl) {
 		try {
@@ -47,7 +49,8 @@ public class LoginFrame {
 		initComponents();
 
 		loginFrame.setVisible(true);
-		this.bl = bl;
+//		this.bl = bl;
+		this.lc = new LoginController();
 	}
 
 	private void componentsInstantiation() {
@@ -145,15 +148,12 @@ public class LoginFrame {
 		System.out.println("密码是："+password);
 		// 调用bl层查看是否有该账户的信息
 		// 如果账户和密码输入正确则登录
-		boolean result = bl.login(username, password);
+		boolean result = lc.login(username, password);
 		if (!result) {
-//			// MainFrame frame = new MainFrame();
-//			// Main.frame.setView(new SendView(), "填写寄件单");
 			Main.frame.setVisible(true);
-
-			JOptionPane.showMessageDialog(null, "后面还没写", "",
-					JOptionPane.ERROR_MESSAGE);
 			loginFrame.setVisible(false);
+			String str = MainFrame.getUser().getWork().getPositionString();
+			
 		} else {
 			JOptionPane.showMessageDialog(null, "用户名或密码不正确", "",
 					JOptionPane.ERROR_MESSAGE);
@@ -162,7 +162,7 @@ public class LoginFrame {
 	}
 
 	private void guestLogin() {
-		// MainFrame frame = new MainFrame();
+//		 MainFrame frame = new MainFrame();
 		Main.frame.setView(new LogisticsUI(new InquireBLStub()), "物流信息查询");
 		loginFrame.setVisible(false);
 	}

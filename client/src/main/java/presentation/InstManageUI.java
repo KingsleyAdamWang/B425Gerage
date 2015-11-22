@@ -16,6 +16,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
+import enumSet.InsType;
 import vo.AccountVO;
 import vo.InstitutionVO;
 import businessLogic.financeBL.AccountController;
@@ -33,8 +34,8 @@ public class InstManageUI extends JPanel {
 	private JTable table;
 	private Vector<Vector<String>> vData;
 	int a;
-	
-	public InstManageUI() {
+
+	public InstManageUI() throws RemoteException {
 		this.ic = new InstitutionController();
 		this.initComponents();
 		this.initList();
@@ -121,16 +122,17 @@ public class InstManageUI extends JPanel {
 		vData.clear();
 
 		for (InstitutionVO vo : ic.show()) {
-			Vector<String> str = new Vector<String>();
-			str.add(vo.getInstitutionID());
-			str.add(vo.getName());
-			str.add(vo.getCity());
-			vData.add(str);
+			vData.add(toVector(vo));
 		}
 		this.repaint();
 	}
 
 	private void addInst() {
+		Object[] options = { "营业厅", "中转中心" };
+		int m = JOptionPane.showOptionDialog(null, "请选择机构类型", "",
+				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,
+				options, options[0]);
+		System.out.println(m);
 		InstManageDialog dialog = new InstManageDialog(this, "add");
 		return;
 	}
@@ -147,7 +149,7 @@ public class InstManageUI extends JPanel {
 		if (n != 0)
 			return;
 		// try {
-		ic.deleteIns(vData.get(index));
+		ic.deleteIns(toVO(vData.get(index)));
 		// } catch (RemoteException e) {
 		// TODO Auto-generated catch block
 		// e.printStackTrace();
@@ -164,11 +166,11 @@ public class InstManageUI extends JPanel {
 			return;
 		}
 		InstManageDialog dialog = new InstManageDialog(this, "update",
-				vData.get(index));
+				toVO(vData.get(index)));
 		return;
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws RemoteException {
 		f = new MainFrame();
 		InstManageUI view = new InstManageUI();
 		f.setView(view);
@@ -176,6 +178,21 @@ public class InstManageUI extends JPanel {
 
 	public InstitutionController getController() {
 		return this.ic;
+	}
+
+	private Vector<String> toVector(InstitutionVO vo) {
+		Vector<String> str = new Vector<String>();
+		str.add(vo.getInstitutionID());
+		str.add(vo.getName());
+		str.add(vo.getCity());
+		str.add(vo.getType().getInsTypeString());
+		return str;
+	}
+
+	private InstitutionVO toVO(Vector<String> str) {
+		InstitutionVO vo = new InstitutionVO(str.get(0), str.get(2),
+				str.get(1), InsType.getInsType(str.get(3)));
+		return vo;
 	}
 }
 

@@ -24,7 +24,7 @@ public class InstitutionBL {
 	
 	public  InstitutionBL() throws RemoteException {
 		try {
-			RMIHelper.initUserDataService();
+			RMIHelper.initInstitutionDataService();
 			insDS = RMIHelper.getInstitutionDataService();
 			insList = insDS.getInsList();
 
@@ -33,7 +33,6 @@ public class InstitutionBL {
 		}
 	}
 
-	
 	public List<InstitutionVO> show(){
 		List<InstitutionVO> result =new ArrayList<InstitutionVO>();
 		for(InstitutionPO temp : insList){

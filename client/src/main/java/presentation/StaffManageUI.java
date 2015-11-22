@@ -21,6 +21,10 @@ import vo.UserVO;
 
 public class StaffManageUI extends JPanel {
 	private static final long serialVersionUID = 1L;
+	
+	// 一会儿删↓
+	static MainFrame f;
+	// 一会儿删↑
 
 	private JButton[] funcButton;
 	private JTable table;
@@ -59,7 +63,7 @@ public class StaffManageUI extends JPanel {
 		this.add(scrollPane);
 
 		funcButton = new JButton[4];
-		final String[] title = { "新增人员", "删除人员", "修改人员信息", "返回" };
+		final String[] title = { "新增人员", "删除人员", "修改信息", "返回" };
 		for (int i = 0; i < 4; i++) {
 			funcButton[i] = new JButton(title[i]);
 			funcButton[i].setBounds(50 + 200 * i, 450, 100, 25);
@@ -100,6 +104,12 @@ public class StaffManageUI extends JPanel {
 		// vData.add(vo);
 		// }
 		this.repaint();
+	}
+	
+	public static void main(String[] args) {
+		f = new MainFrame();
+		StaffManageUI view = new StaffManageUI();
+		f.setView(view);
 	}
 }
 
@@ -249,5 +259,7 @@ class MyDialog extends JDialog {
 		id = idField.getText();
 		return this.id;
 	}
+	
+	
 }
 
