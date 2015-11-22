@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 
 import vo.UserVO;
+import businessLogic.logBL.LogController;
 
 /**
  * //一个界面跳转的管理frame的 uimanager 主要就是负责呈现各种人员对应的工作的Jpanel
@@ -17,10 +18,10 @@ public class MainFrame extends JFrame {
 	private final int frameWidth = 800;
 	private final int frameHeight = 600;
     private static UserVO user ;
-	
+	private static LogController logController;
 	//构造函数  设置框架的风格为windows风格  //个人认为好丑呀 
 	public MainFrame() {
-		
+		logController = new LogController();
 		
 		try {
 			UIManager

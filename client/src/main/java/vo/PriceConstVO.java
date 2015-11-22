@@ -55,7 +55,8 @@ public class PriceConstVO {
 	}
 
 	public PriceConstVO(PriceConstPO po) {
-		super();
+		
+	
 		this.planeCost = po.getPlaneCost();
 		this.trainCost = po.getTrainCost();
 		this.carCost = po.getCarCost();
@@ -65,8 +66,10 @@ public class PriceConstVO {
 		this.standard_const = po.getStandard_const();
 		this.distances = po.getDistances();
 		this.packPrice = po.getPackPrice();
+		
 	}
-
+	
+	
 	public PriceConstPO transToPO() {
 		return new PriceConstPO(planeCost, trainCost, carCost, economy,
 				standard, fast, standard_const, distances, packPrice);

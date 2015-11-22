@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 import po.UserPO;
+import presentation.MainFrame;
 import vo.UserVO;
 import client.ClientInitException;
 import client.RMIHelper;
@@ -13,8 +14,8 @@ public class LoginBL {
 	private UserDataService UserDS;
 	private UserPO user;
 	private List<UserPO> list;
-	
-	public LoginBL() throws RemoteException{
+
+	public LoginBL() throws RemoteException {
 		try {
 			RMIHelper.initUserDataService();
 			UserDS = RMIHelper.getUserDataService();
@@ -24,28 +25,21 @@ public class LoginBL {
 			e.printStackTrace();
 		}
 	}
-	
-	public boolean login(String id ,String password){
-		List<UserPO> list=this.list;
-		for(UserPO temp : list){
-			if(temp.getIdentityID().equals(id)){
-				if(temp.getPassword().equals(password))//用户id和密码与输入的都相同
-				return true;
-			}else{
-				return false;//找到用户id单密码不匹配
-			}
+
+	public boolean login(String id, String password) {
+
+		List<UserPO> list = this.list;
+		for (UserPO temp : list) {
+			if (temp.getIdentityID().equals(id)) {
+				if (temp.getPassword().equals(password)) {// 用户id和密码与输入的都相同
+					MainFrame.setUser(new UserVO(temp));
+					return true;
+				} else {
+					return false;// 找到用户id单密码不匹配
+				}
+			}	
 		}
-		return false;//未找到用户id
+		
+		return false;// 未找到用户id
 	}
-	
-	public UserVO getUser(String id){
-		for(UserPO temp : list){
-			if(temp.getIdentityID().equals(id)){
-				
-				return new UserVO(temp);
-			}
-	}
-		return null;
-}
-	
 }
