@@ -1,19 +1,32 @@
 package businessLogic.inventoryBL;
 
+import java.util.Date;
+import java.util.List;
+
+import po.InventoryPO;
+import vo.InventoryVO;
 import businessLogicService.inventoryBLService.InventoryBLService;
 
 public class InventoryController implements InventoryBLService {
 
-
-	public void update(String id) {
-		// TODO Auto-generated method stub
-
+	public List<InventoryPO> checkBetween(Date start,Date end){
+		return null;
 	}
-
-
-	public void end() {
-		// TODO Auto-generated method stub
-
+	
+	public List<InventoryPO> check(){
+		return null;
+	}
+	
+	public List<InventoryPO> getMessage(){
+		return null;
+	}
+	
+	public String adjust(InventoryVO from, InventoryVO to){
+		return null;
+	}
+	
+	public String init(){
+		return null;
 	}
 
 }

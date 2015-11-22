@@ -2,8 +2,9 @@ package businessLogicService.inventoryBLService;
 
 import java.util.Date;
 import java.util.List;
-import businessLogic.inventoryBL.inventoryPositionVO;
+
 import po.InventoryPO;
+import vo.InventoryVO;
 
 public interface InventoryBLService {
 	public List<InventoryPO> checkBetween(Date start,Date end);
@@ -12,7 +13,7 @@ public interface InventoryBLService {
 	
 	public List<InventoryPO> getMessage();
 	
-	public boolean adjust(inventoryPositionVO from, inventoryPositionVO to);
+	public String adjust(InventoryVO from, InventoryVO to);
 	
-	public boolean init();
+	public String init();
 }

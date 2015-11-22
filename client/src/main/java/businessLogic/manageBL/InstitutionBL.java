@@ -93,7 +93,12 @@ public class InstitutionBL {
 		UserDataService userDS= RMIHelper.getUserDataService();
 		List<UserPO> users= userDS.getUsers();
 		
+		if(vo.getType()==InsType.management){
+			return "管理机构无法删除";
+		}
+		
 		for(InstitutionPO temp : insList){
+			
 			if(temp.getInstitutionID().equals(vo.getInstitutionID())){
 				//如果找到对应ID的PO，则删除机构，并删除对应该机构的所有人员信息
 				for(UserPO tempUser : users){
