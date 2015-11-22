@@ -53,7 +53,7 @@ public class StaffBL {
 	
 	public String addUser(String id,UserVO vo) throws RemoteException{
 		UserPO po=vo.transToPO();
-		if(CheckUtil.checkStaffID(id)){
+		if(!CheckUtil.checkStaffID(id)){
 			return "编号格式不符合规范";
 		}
 		for(UserPO temp : users){

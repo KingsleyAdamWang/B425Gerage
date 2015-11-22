@@ -8,6 +8,7 @@ import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -108,11 +109,17 @@ public class StaffManageUI extends JPanel {
 		}
 	}
 
-	protected void initList() throws RemoteException {
+	protected void initList() {
 		vData.clear();
-		List<UserVO> list = sc.getUsersOfIns(instVO.getInstitutionID());
-		for (UserVO vo : list) {
-			vData.add(toVector(vo));
+		List<UserVO> list;
+		try {
+			list = sc.getUsersOfIns(instVO.getInstitutionID());
+			for (UserVO vo : list) {
+				vData.add(toVector(vo));
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		this.repaint();
 	}
@@ -171,11 +178,18 @@ public class StaffManageUI extends JPanel {
 		return;
 	}
 
-	public static void main(String[] args) throws RemoteException {
-		f = new MainFrame();
-		// StaffManageUI view = new StaffManageUI("00000000");
-		// f.setView(view);
+	protected String getInsType() {
+		return instVO.getType().getInsTypeString();
 	}
+
+	protected InstitutionVO getInsVO() {
+		return instVO;
+	}
+
+	protected StaffController getController() {
+		return this.sc;
+	}
+
 }
 
 class StaffDialog extends JDialog {
@@ -192,6 +206,9 @@ class StaffDialog extends JDialog {
 	private JTextField idField;
 	private JLabel nameLabel;
 	private JLabel idLabel;
+	private JLabel jobLabel;
+	private JComboBox jobBox;
+	private Vector<String> v;
 
 	public StaffDialog() {
 		this.setVisible(true);
@@ -229,40 +246,62 @@ class StaffDialog extends JDialog {
 	}
 
 	private void initComponents() {
-		if (opr.equals("search")) {
-			nameLabel = new JLabel("关键字:");
-			nameLabel.setBounds(25, 45, 50, 15);
-			nameField = new JTextField();
-			nameField.setBounds(100, 40, 175, 25);
-			this.getContentPane().add(nameLabel);
-			this.getContentPane().add(nameField);
-		} else {
-			nameLabel = new JLabel("账户名:");
-			nameLabel.setBounds(25, 25, 50, 15);
-			idLabel = new JLabel("账号:");
-			idLabel.setBounds(25, 75, 50, 15);
-			nameField = new JTextField();
-			nameField.setBounds(100, 20, 175, 25);
-			idField = new JTextField();
-			idField.setBounds(100, 70, 175, 25);
-			if (opr.equals("update")) {
-				nameField.setText(vo.getName());
-				idField.setText(vo.getAccountID());
-				idField.setEditable(false);
-			}
-			this.getContentPane().add(nameLabel);
-			this.getContentPane().add(idLabel);
-			this.getContentPane().add(nameField);
-			this.getContentPane().add(idField);
+		nameLabel = new JLabel("姓名:");
+		nameLabel.setBounds(25, 15, 50, 15);
+		idLabel = new JLabel("编号:");
+		idLabel.setBounds(25, 45, 50, 15);
+		jobLabel = new JLabel("职位:");
+		jobLabel.setBounds(25, 75, 50, 15);
+		nameField = new JTextField();
+		nameField.setBounds(90, 10, 185, 25);
+		idField = new JTextField();
+		idField.setBounds(90, 40, 185, 25);
+		idField.setText(ui.getInsVO().getInstitutionID());
+		v = new Vector<String>();
+		if (ui.getInsType().equals("营业厅")) {
+			v.add("快递员");
+			v.add("营业厅业务人员");
+		} else if (ui.getInsType().equals("中转中心")) {
+			v.add("中转中心业务人员");
+			v.add("中转中心仓库管理员");
+		} else if (ui.getInsType().equals("管理层机构")) {
+			v.add("财务人员（低）");
+			v.add("财务人员（高）");
+			v.add("总经理");
 		}
+		jobBox = new JComboBox<String>(v);
+		jobBox.setBounds(90, 70, 150, 25);
+		if (opr.equals("update")) {
+			nameField.setText(vo.getName());
+			idField.setText(vo.getIdentityID());
+			idField.setEditable(false);
+		}
+		this.getContentPane().add(nameLabel);
+		this.getContentPane().add(idLabel);
+		this.getContentPane().add(jobLabel);
+		this.getContentPane().add(nameField);
+		this.getContentPane().add(idField);
+		this.getContentPane().add(jobBox);
 
 		okBtn = new JButton("确定");
 		okBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (opr.equals("add")) {
+					if (getUserName().equals("")) {
+						JOptionPane.showMessageDialog(null, "请输入员工姓名", "",
+								JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+					if (getUserID().equals("")) {
+						JOptionPane.showMessageDialog(null, "请输入员工编号", "",
+								JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+					UserVO user = new UserVO(getUserName(), null, getUserID(),
+							ui.getInsVO().getInstitutionID(), getPosition());
 					try {
-						String result = ui.getController().addAccount(
-								getName(), getID());
+						String result = ui.getController().addUser(getUserID(),
+								user);
 						if (result != null) {
 							JOptionPane.showMessageDialog(null, result, "",
 									JOptionPane.ERROR_MESSAGE);
@@ -277,9 +316,16 @@ class StaffDialog extends JDialog {
 					}
 				}
 				if (opr.equals("update")) {
+					if (getUserName().equals("")) {
+						JOptionPane.showMessageDialog(null, "请输入员工姓名", "",
+								JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+					UserVO user = new UserVO(getUserName(), null, getUserID(),
+							ui.getInsVO().getInstitutionID(), getPosition());
 					try {
-						String result = ui.getController().modifyAccount(vo,
-								getName());
+						String result = ui.getController().updateUser(
+								vo.getIdentityID(), user);
 						if (result != null) {
 							JOptionPane.showMessageDialog(null, result, "",
 									JOptionPane.ERROR_MESSAGE);
@@ -292,11 +338,6 @@ class StaffDialog extends JDialog {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-				}
-				if (opr.equals("search")) {
-					List<AccountVO> list = ui.getController().searchAccount(
-							getName());
-					ui.initList(list);
 				}
 				setVisible(false);
 			}
@@ -315,14 +356,19 @@ class StaffDialog extends JDialog {
 
 	}
 
-	public String getName() {
+	private String getUserName() {
 		name = nameField.getText();
 		return this.name;
 	}
 
-	public String getID() {
+	private String getUserID() {
 		id = idField.getText();
 		return this.id;
 	}
 
+	private Position getPosition() {
+		int i = jobBox.getSelectedIndex();
+		Position p = Position.getPosition(v.get(i));
+		return p;
+	}
 }
