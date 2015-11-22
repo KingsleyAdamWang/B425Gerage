@@ -123,9 +123,16 @@ public class InstitutionBL {
 		return "未找到对应PO";
 	}
 	
+	
+	
 	public String modify(String id,String newName) throws RemoteException{
 		
-//		if(newName)
+		for(InstitutionPO temp : insList ){
+			if(temp.getName().equals(newName)){
+				return "与现有机构重名";
+			}
+		}
+		
 		for(InstitutionPO temp : insList){
 			if(temp.getInstitutionID().equals(id)){
 				//找到了ID对应的PO，根据ID更改名称
@@ -136,5 +143,44 @@ public class InstitutionBL {
 			}
 		}
 		return "未找到对应PO";
+	}
+	
+	public String modify(String id, InventoryVO vo) throws RemoteException{
+		InventoryDataService invDS=RMIHelper.getInventoryDataService();
+		List<InventoryPO> invList=invDS.getInventoryList();
+		for(InventoryPO temp : invList){
+			if(temp.getInstitutionID().equals(id)){
+				invList.remove(temp);
+				invList.add(vo.transToPO());
+				
+				
+				invDS.modify(vo.transToPO());
+				
+				return null;
+			}
+		}
+		return "未找到对应PO";
+	}
+	
+	public InstitutionVO searchInstitution(String id){
+		for(InstitutionPO temp : insList){
+			if(temp.getInstitutionID().equals(id)){
+				return new InstitutionVO(temp);
+			}
+		}
+		//未查找到对应VO
+		return null;
+	}
+	
+	public InventoryVO searchInventory(String id) throws RemoteException{
+		InventoryDataService invDS=RMIHelper.getInventoryDataService();
+		List<InventoryPO> invList =invDS.getInventoryList();
+		for(InventoryPO temp : invList){
+			if(temp.getInstitutionID().equals(id)){
+				return new InventoryVO(temp);
+			}
+		}
+		//未查找到对应VO
+		return null;
 	}
 }

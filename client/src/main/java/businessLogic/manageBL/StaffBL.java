@@ -1,6 +1,7 @@
 package businessLogic.manageBL;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.List;
 
 import client.ClientInitException;
@@ -26,10 +27,27 @@ public class StaffBL {
 		}
 	}
 	
-	public UserVO getUser(String id) throws RemoteException{
-		
+	public UserVO getUser(String id) throws RemoteException{	
 		UserPO po=this.userDS.find(id);
 		return new UserVO(po);
+	}
+	
+	public List<UserVO> getUsers(){
+		List<UserVO> users = new ArrayList<UserVO>();
+		for(UserPO temp : this.users){
+			users.add(new UserVO(temp));
+		}
+		return users;
+	}
+	
+	public List<UserVO> getUsersOfIns(String InstitutionID) throws RemoteException{
+		List<UserVO> users = new ArrayList<UserVO>();
+		for(UserPO temp : this.users){
+			if(temp.getInstitutionID().equals(InstitutionID)){
+				users.add(new UserVO(temp));
+			}
+		}
+		return users;
 	}
 	
 	public String addUser(String id,UserVO vo) throws RemoteException{
