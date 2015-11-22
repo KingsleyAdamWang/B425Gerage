@@ -13,4 +13,17 @@ public class CheckUtil {
 		}
 		return true;
 	}
+	
+	
+	public static boolean checkStaffID(String id){
+		if(id.length()!=10){
+			return false;
+		}
+		for(int i=0;i<id.length();i++){
+			if(id.charAt(i)<'0'||id.charAt(i)>'9'){
+				return false;
+			}
+		}
+		return true;
+	}
 }

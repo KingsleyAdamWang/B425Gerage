@@ -2,10 +2,12 @@ package businessLogic.manageBL;
 
 import java.rmi.RemoteException;
 import java.util.List;
+
 import client.ClientInitException;
 import client.RMIHelper;
 import dataService.UserDataService;
 import po.UserPO;
+import util.CheckUtil;
 import vo.UserVO;
 
 public class StaffBL {
@@ -32,7 +34,7 @@ public class StaffBL {
 	
 	public String addUser(String id,UserVO vo) throws RemoteException{
 		UserPO po=vo.transToPO();
-	
+		CheckUtil.checkStaffID(id);
 		for(UserPO temp : users){
 			if(temp.getIdentityID().equals(id)){
 				return "存在相同ID，添加失败";
@@ -45,13 +47,31 @@ public class StaffBL {
 		return null;
 	}
 	
-	public String updateUser(String id,UserVO vo){
+	public String updateUser(String id,UserVO vo) throws RemoteException{
 		UserPO po=vo.transToPO();
-		return null;
+		for(UserPO temp : users){
+			if(temp.getIdentityID().equals(id)){
+				//删除原有PO ，新增PO
+				users.remove(temp);
+				userDS.delete(temp);
+				
+				users.add(po);
+				userDS.add(po);
+				return null;
+			}
+		}
+		return "未找到对应PO";
 	}
 	
-	public String delete(String id){
-		return null;
+	public String delete(String id) throws RemoteException{
+		for(UserPO temp :users){
+			if(temp.getIdentityID().equals(id)){
+				userDS.delete(temp);
+				return null;
+			}
+		}
+		
+		return "未找到对应PO";
 	}
 	
 }

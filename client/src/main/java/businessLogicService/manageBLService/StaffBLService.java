@@ -1,13 +1,15 @@
 package businessLogicService.manageBLService;
 
+import java.rmi.RemoteException;
+
 import vo.UserVO;
 
 public interface StaffBLService {
-	public UserVO getUser(String id);
+	public UserVO getUser(String id) throws RemoteException;
 	
-	public String addUser(String id,UserVO vo);
+	public String addUser(String id,UserVO vo) throws RemoteException;
 	
-	public String updateUser(String id, UserVO vo);
+	public String updateUser(String id, UserVO vo) throws RemoteException;
 	
-	public String deleteUser(String id);
+	public String deleteUser(String id) throws RemoteException;
 }

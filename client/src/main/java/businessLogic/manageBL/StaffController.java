@@ -1,28 +1,35 @@
 package businessLogic.manageBL;
 
+import java.rmi.RemoteException;
+
 import vo.UserVO;
 import businessLogicService.manageBLService.StaffBLService;
 
 public class StaffController implements StaffBLService {
-
-	public UserVO getUser(String id) {
-		// TODO Auto-generated method stub
-		return null;
+	StaffBL staffBL;
+	
+	public StaffController() throws RemoteException{
+		staffBL= new StaffBL();
 	}
 
-	public String addUser(String id, UserVO vo) {
+	public UserVO getUser(String id) throws RemoteException {
 		// TODO Auto-generated method stub
-		return null;
+		return staffBL.getUser(id);
 	}
 
-	public String updateUser(String id, UserVO vo) {
+	public String addUser(String id, UserVO vo) throws RemoteException {
 		// TODO Auto-generated method stub
-		return null;
+		return staffBL.addUser(id, vo);
 	}
 
-	public String deleteUser(String id) {
+	public String updateUser(String id, UserVO vo) throws RemoteException {
 		// TODO Auto-generated method stub
-		return null;
+		return staffBL.updateUser(id, vo);
+	}
+
+	public String deleteUser(String id) throws RemoteException {
+		// TODO Auto-generated method stub
+		return staffBL.delete(id);
 	}
 
 }
