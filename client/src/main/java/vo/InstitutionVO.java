@@ -10,7 +10,9 @@ public class InstitutionVO {
 	private String name;
 
 	private InsType type;
-	public InstitutionVO(String institutionID, String city, String Name,InsType type) {
+
+	public InstitutionVO(String institutionID, String city, String Name,
+			InsType type) {
 		this.institutionID = institutionID;
 		this.name = name;
 		this.city = city;
@@ -19,11 +21,11 @@ public class InstitutionVO {
 	}
 
 	public InstitutionVO(InstitutionPO po) {
-		this(po.getInstitutionID(), po.getCity(), po.getName(),po.getType());
+		this(po.getInstitutionID(), po.getCity(), po.getName(), po.getType());
 	}
 
 	public InstitutionPO transToPO() {
-		return new InstitutionPO(institutionID, city, name,type);
+		return new InstitutionPO(institutionID, city, name, type);
 	}
 
 	public String getInstitutionID() {
@@ -84,5 +86,4 @@ public class InstitutionVO {
 		this.type = type;
 	}
 
-	
 }
