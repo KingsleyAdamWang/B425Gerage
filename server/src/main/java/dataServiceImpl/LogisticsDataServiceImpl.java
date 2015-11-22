@@ -91,7 +91,7 @@ public class LogisticsDataServiceImpl extends UnicastRemoteObject implements
 		update();
 	}
 	
-	@Override
+	
 	public List<LogisticsPO> getLogisticsList() throws RemoteException {
 		return this.logisticsList;
 	}

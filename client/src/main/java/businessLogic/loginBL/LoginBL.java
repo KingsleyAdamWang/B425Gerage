@@ -2,15 +2,17 @@ package businessLogic.loginBL;
 
 import java.rmi.RemoteException;
 import java.util.List;
+
+import po.UserPO;
+import vo.UserVO;
 import client.ClientInitException;
 import client.RMIHelper;
-import po.UserPO;
 import dataService.UserDataService;
 
 public class LoginBL {
-	UserDataService UserDS;
-	UserPO user;
-	List<UserPO> list;
+	private UserDataService UserDS;
+	private UserPO user;
+	private List<UserPO> list;
 	
 	public LoginBL() throws RemoteException{
 		try {
@@ -35,4 +37,15 @@ public class LoginBL {
 		}
 		return false;//未找到用户id
 	}
+	
+	public UserVO getUser(String id){
+		for(UserPO temp : list){
+			if(temp.getIdentityID().equals(id)){
+				
+				return new UserVO(temp);
+			}
+	}
+		return null;
+}
+	
 }
