@@ -88,7 +88,7 @@ public class UserDataServiceImpl extends UnicastRemoteObject implements
 
 			for (UserPO po : users) {
 				fw.append(po.getName() + " " + po.getPassword() + " "
-						+ po.getIdentityID() + " " + po.getInstitutionID()
+						+ po.getIdentityID() + " " + po.getInstitutionID()+" "
 						+ po.getWork() + "\n");
 				fw.flush();
 			}
