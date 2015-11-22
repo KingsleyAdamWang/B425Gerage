@@ -29,23 +29,24 @@ public class InstitutionController implements InstitutionBLService {
 		return insBL.deleteIns(vo);
 	}
 	
-	public String modify(String id,String newName) throws RemoteException{
-		return insBL.modify(id, newName);
+	public String modify(String institutionID,String newName) throws RemoteException{
+		return insBL.modify(institutionID, newName);
+	}
+	//用于更改inventoryPO，id与institutionPO相同
+	public String modify(String inventoryID, InventoryVO vo) throws RemoteException{
+		return insBL.modify(inventoryID, vo);
 	}
 	
-	public String modify(String id, InventoryVO vo) throws RemoteException{
-		return insBL.modify(id, vo);
+	public InstitutionVO searchInstitution(String institutionID){
+		return insBL.searchInstitution(institutionID);
 	}
 	
-	public InstitutionVO searchInstitution(String id){
-		return insBL.searchInstitution(id);
+	public InventoryVO searchInventory(String inventoryID) throws RemoteException{
+		return insBL.searchInventory(inventoryID);
 	}
 	
-	public InventoryVO searchInventory(String id) throws RemoteException{
-		return insBL.searchInventory(id);
-	}
-
-	public InstitutionVO search(String id) {
+//下面这个别管，没用
+	public InstitutionVO search(String institutionID) {
 		// TODO Auto-generated method stub
 		return null;
 	}

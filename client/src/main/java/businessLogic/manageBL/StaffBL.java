@@ -7,6 +7,7 @@ import java.util.List;
 import client.ClientInitException;
 import client.RMIHelper;
 import dataService.UserDataService;
+import enumSet.Position;
 import po.UserPO;
 import util.CheckUtil;
 import vo.UserVO;
@@ -84,6 +85,10 @@ public class StaffBL {
 	public String delete(String id) throws RemoteException{
 		for(UserPO temp :users){
 			if(temp.getIdentityID().equals(id)){
+				if(temp.getWork()==Position.JOB_7||temp.getWork()==Position.JOB_8){
+					//如果是总经理或管理员，无法删除
+					return "该人员无法删除";
+				}
 				userDS.delete(temp);
 				return null;
 			}

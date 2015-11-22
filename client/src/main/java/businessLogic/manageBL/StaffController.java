@@ -13,27 +13,28 @@ public class StaffController implements StaffBLService {
 		staffBL= new StaffBL();
 	}
 
-	public UserVO getUser(String id) throws RemoteException {
-		// TODO Auto-generated method stub
-		return staffBL.getUser(id);
+	public UserVO getUser(String userID) throws RemoteException {
+
+		return staffBL.getUser(userID);
 	}
 
-	public String addUser(String id, UserVO vo) throws RemoteException {
-		// TODO Auto-generated method stub
-		return staffBL.addUser(id, vo);
+	public String addUser(String institutionID, UserVO vo) throws RemoteException {
+
+		return staffBL.addUser(institutionID, vo);
 	}
 
-	public String updateUser(String id, UserVO vo) throws RemoteException {
-		// TODO Auto-generated method stub
-		return staffBL.updateUser(id, vo);
+	public String updateUser(String userID, UserVO vo) throws RemoteException {
+		
+		return staffBL.updateUser(userID, vo);
 	}
 
-	public String deleteUser(String id) throws RemoteException {
-		// TODO Auto-generated method stub
-		return staffBL.delete(id);
+	public String deleteUser(String userID) throws RemoteException {
+		
+		return staffBL.delete(userID);
 	}
 	
 	public List<UserVO> getUsers(){
+		
 		return staffBL.getUsers();
 	}
 	
