@@ -76,4 +76,13 @@ public class InstitutionVO {
 		return true;
 	}
 
+	public InsType getType() {
+		return type;
+	}
+
+	public void setType(InsType type) {
+		this.type = type;
+	}
+
+	
 }

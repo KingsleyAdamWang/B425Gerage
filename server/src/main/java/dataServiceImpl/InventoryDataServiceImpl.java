@@ -40,7 +40,6 @@ public class InventoryDataServiceImpl extends UnicastRemoteObject implements
 		}
 	}
 
-	@Override
 	public void add(InventoryPO po) throws RemoteException {
 		this.inventoryList.add(po);
 		FileWriter fw;
@@ -57,14 +56,12 @@ public class InventoryDataServiceImpl extends UnicastRemoteObject implements
 
 	}
 
-	@Override
 	public void modify(InventoryPO po) throws RemoteException {
 		inventoryList.set(inventoryList.indexOf(po), po);
 
 		update();
 	}
 
-	@Override
 	public void delete(String InstitutionID) throws RemoteException {
 		for (InventoryPO po : inventoryList) {
 			if (po.getInstitutionID().equals(InstitutionID)) {

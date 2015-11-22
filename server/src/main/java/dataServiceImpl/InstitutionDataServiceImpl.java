@@ -32,8 +32,7 @@ public class InstitutionDataServiceImpl extends UnicastRemoteObject implements I
 			BufferedReader br = new BufferedReader(new FileReader(file));
 			String temp;
 			while ((temp = br.readLine()) != null) {
-				insList.add(new InstitutionPO(temp.split(" ")[0], temp
-						.split(" ")[1], temp.split(" ")[2],InsType.getInsType(temp.split(" ")[3])));
+				insList.add(new InstitutionPO(temp));
 			}
 			br.close();
 		} catch (IOException e) {

@@ -21,8 +21,15 @@ public class InstitutionPO implements Serializable {
 
 	}
 
+	public InstitutionPO(String data){
+		String temp[] = data.split(" ");
+		this.institutionID = temp[0];
+		this.city = temp[1];
+		this.name = temp[2];
+		this.type = InsType.getInsType(temp[3]);
+	}
 	public String toString() {
-		return institutionID + " " + city + " " + name + "\n";
+		return institutionID + " " + city + " " + name + " "+type.getInsTypeString()+"\n";
 	}
 
 	public String getInstitutionID() {

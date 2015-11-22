@@ -1,7 +1,7 @@
 package enumSet;
 
 public enum InsType {
-	businessHall("营业厅"),intermediate("中转中心");
+	businessHall("营业厅"),intermediate("中转中心"),management("管理层机构");
 	
 	private String type;
 	private InsType(String string){
@@ -15,6 +15,8 @@ public enum InsType {
 			return businessHall;
 		case "中转中心":
 			return intermediate;
+		case "管理层机构":
+			return management;
 		default:
 			return null;
 		}
