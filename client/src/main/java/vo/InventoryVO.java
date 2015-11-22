@@ -1,18 +1,9 @@
-package po;
+package vo;
 
-import java.io.Serializable;
-
+import po.InventoryPO;
 import util.Storage;
 
-/**
- * 库存的PO
- * 
- * @author 王栋
- *
- */
-public class InventoryPO implements Serializable {
-
-	private static final long serialVersionUID = 1L;
+public class InventoryVO {
 
 	/**
 	 * 中转中心机构编号
@@ -27,7 +18,7 @@ public class InventoryPO implements Serializable {
 	private Storage car;// 汽运区
 	private Storage auto;// zi动区
 
-	public InventoryPO(String institutionID, Storage plane, Storage train,
+	public InventoryVO(String institutionID, Storage plane, Storage train,
 			Storage car, Storage auto) {
 		super();
 		this.institutionID = institutionID;
@@ -37,27 +28,14 @@ public class InventoryPO implements Serializable {
 		this.auto = auto;
 	}
 
-	public InventoryPO(String data) {
-		String temp[] = data.split(" ");
-		this.institutionID = temp[0];
-		this.plane = new Storage(Integer.parseInt(temp[1]),
-				Integer.parseInt(temp[2]), Integer.parseInt(temp[3]));
-		this.train = new Storage(Integer.parseInt(temp[4]),
-				Integer.parseInt(temp[5]), Integer.parseInt(temp[6]));
-		this.car = new Storage(Integer.parseInt(temp[7]),
-				Integer.parseInt(temp[8]), Integer.parseInt(temp[9]));
-		this.auto = new Storage(Integer.parseInt(temp[10]),
-				Integer.parseInt(temp[11]), Integer.parseInt(temp[12]));
+	public InventoryVO(InventoryPO po) {
+		this(po.getInstitutionID(), po.getPlane(), po.getTrain(), po.getCar(),
+				po.getAuto());
+
 	}
 
-	public String toString() {
-
-		return institutionID + " " + plane.getRow() + " " + plane.getShelf()
-				+ " " + plane.getPlace() + " " + train.getRow() + " "
-				+ train.getShelf() + " " + train.getPlace() + " "
-				+ car.getRow() + " " + car.getShelf() + " " + car.getPlace()
-				+ " " + auto.getRow() + " " + auto.getShelf() + " "
-				+ auto.getPlace() + "\n";
+	public InventoryPO transToPO() {
+		return new InventoryPO(institutionID, plane, train, car, auto);
 	}
 
 	@Override
@@ -77,7 +55,7 @@ public class InventoryPO implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		InventoryPO other = (InventoryPO) obj;
+		InventoryVO other = (InventoryVO) obj;
 		if (institutionID == null) {
 			if (other.institutionID != null)
 				return false;

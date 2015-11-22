@@ -10,7 +10,5 @@ public class LoginController implements LoginBLService {
 	public boolean login(String id, String password) {
 		MainFrame.setUser(loginBL.getUser(id));
 		return loginBL.login(id, password);
-		
-		
 	}
 }
