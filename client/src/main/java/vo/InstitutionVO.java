@@ -11,7 +11,7 @@ public class InstitutionVO {
 
 	private InsType type;
 
-	public InstitutionVO(String institutionID, String city, String Name,
+	public InstitutionVO(String institutionID, String city, String name,
 			InsType type) {
 		this.institutionID = institutionID;
 		this.name = name;

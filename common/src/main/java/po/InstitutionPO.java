@@ -13,7 +13,7 @@ public class InstitutionPO implements Serializable {
 	private String name;
 	private InsType type;
 
-	public InstitutionPO(String institutionID, String city, String Name,InsType type) {
+	public InstitutionPO(String institutionID, String city, String name,InsType type) {
 		this.institutionID = institutionID;
 		this.name = name;
 		this.city = city;
