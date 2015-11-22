@@ -92,6 +92,7 @@ public class StaffBL {
 					return "该人员无法删除";
 				}
 				userDS.delete(temp);
+				users.remove(temp);
 				return null;
 			}
 		}
