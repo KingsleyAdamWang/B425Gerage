@@ -46,14 +46,14 @@ public class IncomeDataServiceImpl extends UnicastRemoteObject implements
 		}
 	}
 
-	@Override
+	
 	public void add(IncomePO po) throws RemoteException {
 		incomeList.add(po);
 		update();
 
 	}
 
-	@Override
+	
 	public void delete() throws RemoteException {
 		// 我并不想删掉 收款单 …………
 		// TODO 看情况吧
@@ -77,7 +77,7 @@ public class IncomeDataServiceImpl extends UnicastRemoteObject implements
 
 	}
 
-	@Override
+	
 	public List<IncomePO> getIncomeList() throws RemoteException {
 
 		return incomeList;

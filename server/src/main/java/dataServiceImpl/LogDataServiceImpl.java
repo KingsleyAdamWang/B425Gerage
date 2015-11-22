@@ -43,7 +43,6 @@ public class LogDataServiceImpl extends UnicastRemoteObject implements
 
 	}
 
-	@Override
 	public List<LogPO> check(String id) throws RemoteException {
 		List<LogPO> result = new ArrayList<LogPO>();
 		for (LogPO po : logList) {
@@ -53,7 +52,6 @@ public class LogDataServiceImpl extends UnicastRemoteObject implements
 		return result;
 	}
 
-	@Override
 	public List<LogPO> check(Date date) throws RemoteException {
 		List<LogPO> result = new ArrayList<LogPO>();
 		for (LogPO po : logList) {
@@ -95,7 +93,6 @@ public class LogDataServiceImpl extends UnicastRemoteObject implements
 		return logList;
 	}
 
-	@Override
 	public void add(LogPO po) throws RemoteException {
 		logList.add(po);
 		FileWriter fw;

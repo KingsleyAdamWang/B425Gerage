@@ -43,14 +43,13 @@ public class InstitutionDataServiceImpl extends UnicastRemoteObject implements I
 
 	}
 
-	@Override
+	
 	public void add(InstitutionPO po) throws RemoteException {
 		insList.add(po);
 		update();
 
 	}
 
-	@Override
 	public void delete(String institutionID) throws RemoteException {
 		for (InstitutionPO po : insList)
 			if (po.getInstitutionID().equals(institutionID)) {
@@ -76,7 +75,7 @@ public class InstitutionDataServiceImpl extends UnicastRemoteObject implements I
 
 	}
 
-	@Override
+	
 	public void modify(String id, String name) throws RemoteException {
 		for (InstitutionPO po : insList) {
 			if (po.getInstitutionID().equals(id)) {
@@ -88,7 +87,7 @@ public class InstitutionDataServiceImpl extends UnicastRemoteObject implements I
 
 	}
 
-	@Override
+	
 	public List<InstitutionPO> getInsList() throws RemoteException {
 
 		return insList;

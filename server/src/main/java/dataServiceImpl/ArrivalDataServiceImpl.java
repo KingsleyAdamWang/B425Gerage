@@ -72,7 +72,7 @@ public class ArrivalDataServiceImpl extends UnicastRemoteObject implements
 		return null;
 	}
 
-	@Override
+
 	public ArrivalPO search(String id) throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;

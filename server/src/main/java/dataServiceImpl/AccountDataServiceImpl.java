@@ -85,7 +85,7 @@ public class AccountDataServiceImpl extends UnicastRemoteObject implements
 		return true;
 	}
 
-	@Override
+	
 	public boolean add(AccountPO po) throws RemoteException {
 		// TODO 注释该行
 		System.out.println("添加账户成功！！");
@@ -95,7 +95,7 @@ public class AccountDataServiceImpl extends UnicastRemoteObject implements
 		return true;
 	}
 
-	@Override
+
 	public boolean delete(AccountPO po) throws RemoteException {
 
 		// 由于重写了AccountPO的equals方法所以 只通过名称来进行查看
@@ -106,7 +106,7 @@ public class AccountDataServiceImpl extends UnicastRemoteObject implements
 		return true;
 	}
 
-	@Override
+	
 	public List<AccountPO> search(String key) throws RemoteException {
 		// TODO
 		List<AccountPO> list = new ArrayList<AccountPO>();
@@ -126,8 +126,6 @@ public class AccountDataServiceImpl extends UnicastRemoteObject implements
 	// temp.update();
 	//
 	// }
-
-	@Override
 	public List<AccountPO> getAccounts() throws RemoteException {
 		// TODO Auto-generated method stub
 		return this.accounts;
