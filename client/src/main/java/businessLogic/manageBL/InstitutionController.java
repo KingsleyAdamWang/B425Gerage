@@ -25,6 +25,10 @@ public class InstitutionController implements InstitutionBLService {
 		return insBL.addIns(vo);
 	}
 	
+
+	public String addIns(InstitutionVO vo,InventoryVO ivo) throws RemoteException{
+		return insBL.addIns(vo,ivo);
+	}
 	public String deleteIns(InstitutionVO vo) throws RemoteException{
 		return insBL.deleteIns(vo);
 	}

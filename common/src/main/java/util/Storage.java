@@ -1,6 +1,8 @@
 package util;
 
-public class Storage {
+import java.io.Serializable;
+
+public class Storage  implements Serializable{
    private int row;
    private int shelf;
    private int place;

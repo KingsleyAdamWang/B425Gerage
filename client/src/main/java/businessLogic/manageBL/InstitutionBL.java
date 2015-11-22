@@ -76,6 +76,12 @@ public class InstitutionBL {
 			}
 		}
 		// 增加新增仓库对应的库存信息
+		try {
+			RMIHelper.initInventoryDataService();
+		} catch (ClientInitException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		InventoryDataService invDS=RMIHelper.getInventoryDataService();
 		List<InventoryPO> invList= invDS.getInventoryList();
 		invList.add(invPO);
@@ -90,6 +96,12 @@ public class InstitutionBL {
 	
 	
 	public String deleteIns(InstitutionVO vo) throws RemoteException{
+		try {
+			RMIHelper.initUserDataService();
+		} catch (ClientInitException e) {
+	
+			e.printStackTrace();
+		}
 		UserDataService userDS= RMIHelper.getUserDataService();
 		List<UserPO> users= userDS.getUsers();
 		
@@ -110,6 +122,12 @@ public class InstitutionBL {
 				}
 				//删除机构，分情况，如果是仓库，则还需删除对应的库存信息
 				if(temp.getType()==InsType.intermediate){
+					try {
+						RMIHelper.initInventoryDataService();
+					} catch (ClientInitException e) {
+					
+						e.printStackTrace();
+					}
 					InventoryDataService invDS=RMIHelper.getInventoryDataService();
 					invDS.delete(temp.getInstitutionID());
 				}
@@ -173,6 +191,11 @@ public class InstitutionBL {
 	}
 	
 	public InventoryVO searchInventory(String id) throws RemoteException{
+		try {
+			RMIHelper.initInventoryDataService();
+		} catch (ClientInitException e) {
+			e.printStackTrace();
+		}
 		InventoryDataService invDS=RMIHelper.getInventoryDataService();
 		List<InventoryPO> invList =invDS.getInventoryList();
 		for(InventoryPO temp : invList){

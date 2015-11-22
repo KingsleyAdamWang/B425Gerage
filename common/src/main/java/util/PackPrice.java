@@ -1,8 +1,10 @@
 package util;
 
+import java.io.Serializable;
+
 import enumSet.PackType;
 
-public class PackPrice {
+public class PackPrice implements Serializable{
 
 	private PackType type;
 	private double fare;

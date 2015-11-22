@@ -403,12 +403,19 @@ class InstManageDialog extends JDialog {
 		okBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (opr.equals("add")) {
-					String result;
+					String result = "";
 					try {
-						result = ui.getController()
-								.addIns(new InstitutionVO(getInstID(),
-										getInstCity(), getInstName(), InsType
-												.getInsType(type)));
+						if (type.equals("中转中心")) {
+							result = ui.getController().addIns(
+									new InstitutionVO(getInstID(),
+											getInstCity(), getInstName(),
+											InsType.getInsType(type)),getInven());
+						} else {
+							result = ui.getController().addIns(
+									new InstitutionVO(getInstID(),
+											getInstCity(), getInstName(),
+											InsType.getInsType(type)));
+						}
 						if (result != null) {
 							JOptionPane.showMessageDialog(null, result, "",
 									JOptionPane.ERROR_MESSAGE);
@@ -416,6 +423,7 @@ class InstManageDialog extends JDialog {
 							JOptionPane.showMessageDialog(null, "添加成功", "",
 									JOptionPane.INFORMATION_MESSAGE);
 						}
+
 					} catch (RemoteException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -501,6 +509,6 @@ class InstManageDialog extends JDialog {
 		Storage train = new Storage(tmp[3], tmp[4], tmp[5]);
 		Storage car = new Storage(tmp[6], tmp[7], tmp[8]);
 		Storage auto = new Storage(tmp[9], tmp[10], tmp[11]);
-		return new InventoryVO(vo.getInstitutionID(), plane, train, car, auto);
+		return new InventoryVO(getInstID(), plane, train, car, auto);
 	}
 }

@@ -1,6 +1,8 @@
 package util;
 
-public class Distance {
+import java.io.Serializable;
+
+public class Distance implements Serializable{
 
 	private String city1;
 	private String city2;
