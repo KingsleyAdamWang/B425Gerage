@@ -93,7 +93,7 @@ public class LogDataServiceImpl extends UnicastRemoteObject implements
 		return logList;
 	}
 
-	public void add(LogPO po) throws RemoteException {
+	public void  add(LogPO po) throws RemoteException {
 		logList.add(po);
 		FileWriter fw;
 		try {

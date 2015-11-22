@@ -13,7 +13,8 @@ public class InstitutionPO implements Serializable {
 	private String name;
 	private InsType type;
 
-	public InstitutionPO(String institutionID, String city, String name,InsType type) {
+	public InstitutionPO(String institutionID, String city, String name,
+			InsType type) {
 		this.institutionID = institutionID;
 		this.name = name;
 		this.city = city;
@@ -21,15 +22,17 @@ public class InstitutionPO implements Serializable {
 
 	}
 
-	public InstitutionPO(String data){
+	public InstitutionPO(String data) {
 		String temp[] = data.split(" ");
 		this.institutionID = temp[0];
 		this.city = temp[1];
 		this.name = temp[2];
 		this.type = InsType.getInsType(temp[3]);
 	}
+
 	public String toString() {
-		return institutionID + " " + city + " " + name + " "+type.getInsTypeString()+"\n";
+		return institutionID + " " + city + " " + name + " "
+				+ type.getInsTypeString() + "\n";
 	}
 
 	public String getInstitutionID() {
@@ -89,7 +92,5 @@ public class InstitutionPO implements Serializable {
 	public void setType(InsType type) {
 		this.type = type;
 	}
-	
-	
 
 }

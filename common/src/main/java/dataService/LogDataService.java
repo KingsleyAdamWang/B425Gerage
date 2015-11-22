@@ -9,7 +9,7 @@ import po.LogPO;
 
 public interface LogDataService extends Remote {
 
-	public void add(LogPO po) throws RemoteException;
+	public  void add(LogPO po) throws RemoteException;
 
 	public List<LogPO> check(String id) throws RemoteException;
 

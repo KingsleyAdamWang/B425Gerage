@@ -12,6 +12,7 @@ import dataService.InventoryDataService;
 import dataService.LogDataService;
 import dataService.LogisticsDataService;
 import dataService.MoneyDataService;
+import dataService.PriceConstDataService;
 import dataService.ReceiveDataService;
 import dataService.SendDataService;
 import dataService.ShipmentDataService;
@@ -48,7 +49,7 @@ public class RMIHelper {
 	private static TransferDataService transferDataService;
 	private static TruckDataService truckDataService;
 	private static UserDataService userDataService;
-
+    private static PriceConstDataService priceConstDataService;
 	private static InstitutionDataService institutionDataService;
 	// //
 	// public synchronized static void init() throws ClientInitException {
@@ -272,7 +273,16 @@ public class RMIHelper {
 
 	}
 
-	
+	public static void initPriceConstDataService() throws ClientInitException {
+		try {
+			priceConstDataService = (PriceConstDataService) Naming.lookup(urlPrefix
+					+ "pricecnst-data");
+			System.out.println("RMI远程调用PriceConstDataService成功");
+		} catch (Exception e) {
+			throw new ClientInitException(e);
+		}
+
+	}
 	
 	// 获取各类的DataService 的对象 根据方法名字自己看
 	// 就是各种private 的dataService 属性的Getter方法
@@ -374,6 +384,8 @@ public class RMIHelper {
 		return institutionDataService;
 	}
 
-	
+	public static PriceConstDataService getPriceConstDataService() {
+		return priceConstDataService;
+	}
 	
 }
