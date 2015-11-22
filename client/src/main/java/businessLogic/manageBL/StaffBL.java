@@ -61,6 +61,9 @@ public class StaffBL {
 				return "存在相同ID，添加失败";
 			}	
 		}
+		if(!vo.getInstitutionID().equals(vo.getIdentityID().substring(0,7))){
+			return "编号前8位与机构编号不符";
+		}
 		users.add(po);
 		userDS.add(po);
 		
@@ -72,6 +75,7 @@ public class StaffBL {
 		UserPO po=vo.transToPO();
 		for(UserPO temp : users){
 			if(temp.getIdentityID().equals(id)){
+				
 				//删除原有PO ，新增PO
 				users.remove(temp);
 				userDS.delete(temp);

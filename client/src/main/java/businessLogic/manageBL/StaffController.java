@@ -18,9 +18,9 @@ public class StaffController implements StaffBLService {
 		return staffBL.getUser(userID);
 	}
 
-	public String addUser(String institutionID, UserVO vo) throws RemoteException {
+	public String addUser(String userID, UserVO vo) throws RemoteException {
 
-		return staffBL.addUser(institutionID, vo);
+		return staffBL.addUser(userID, vo);
 	}
 
 	public String updateUser(String userID, UserVO vo) throws RemoteException {
