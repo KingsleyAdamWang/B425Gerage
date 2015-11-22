@@ -43,6 +43,9 @@ public class DateUtil {
 	}
 	
 	
+	public static String dateToStringDetail(Date d){
+		return sdf2.format(d);
+	}
 	/**
 	 * 将string 转为date对象  是精确到时分秒的
 	 * @param d
