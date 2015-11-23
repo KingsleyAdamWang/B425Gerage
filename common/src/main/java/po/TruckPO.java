@@ -5,7 +5,8 @@ import java.io.Serializable;
 public class TruckPO implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
-
+	
+	
 	//车的编号
 	private String truckID ;
 	//车牌号
@@ -34,6 +35,7 @@ public class TruckPO implements Serializable{
 		this.years = years;
 	}
 	
+	//构造方法
 	
 	public TruckPO(String truckID, String truckNumber, int years) {
 		super();
@@ -42,6 +44,15 @@ public class TruckPO implements Serializable{
 		this.years = years;
 	}
 	
+	public TruckPO(String data){
+		String strs[] = data.split(" ");
+		this.truckID = strs[0];
+		this.truckNumber = strs[1];
+		this.years = Integer.parseInt(strs[2]);
+	}
 	
+	public String toString(){
+		return this.truckID + " " + this.truckNumber + " " + String.valueOf(years);
+	}
 
 }
