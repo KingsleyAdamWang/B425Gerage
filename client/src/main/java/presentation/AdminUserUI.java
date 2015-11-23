@@ -21,7 +21,7 @@ public class AdminUserUI extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	AdminController ac;
-	List<UserVO> list;
+		List<UserVO> list;
 	private JButton[] funcButton;
 	private JTable table;
 	private Vector<Vector<String>> vData;
