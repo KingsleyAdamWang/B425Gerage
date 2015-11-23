@@ -1,9 +1,11 @@
 package util;
 
+import enumSet.InsType;
+
 public class CheckUtil {
 	
-	public static boolean checkInsID(String id){
-		if(id.length()!=8){
+	public static boolean checkInsID(String id,InsType insType){
+		if((insType==InsType.businessHall&&id.length()!=6)||(insType==InsType.intermediate&&id.length()!=4)){
 			return false;
 		}
 		for(int i=0;i<id.length();i++){
@@ -15,8 +17,8 @@ public class CheckUtil {
 	}
 	
 	
-	public static boolean checkStaffID(String id){
-		if(id.length()!=10){
+	public static boolean checkStaffID(String id,String insID){
+		if(id.length()!=(insID.length()+2)){
 			return false;
 		}
 		for(int i=0;i<id.length();i++){

@@ -14,8 +14,8 @@ import vo.UserVO;
 
 public class StaffBL {
 	
-	UserDataService userDS;
-	List<UserPO> users;
+	private UserDataService userDS;
+	private List<UserPO> users;
 	
 	public  StaffBL() throws RemoteException {
 		try {
@@ -53,7 +53,7 @@ public class StaffBL {
 	
 	public String addUser(String id,UserVO vo) throws RemoteException{
 		UserPO po=vo.transToPO();
-		if(!CheckUtil.checkStaffID(id)){
+		if(!CheckUtil.checkStaffID(id,vo.getInstitutionID())){
 			return "编号格式不符合规范";
 		}
 		for(UserPO temp : users){

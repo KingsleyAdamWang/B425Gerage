@@ -45,7 +45,7 @@ public class InstitutionBL {
 	public String addIns(InstitutionVO vo) throws RemoteException{
 		InstitutionPO po= vo.transToPO();
 		
-		if(!CheckUtil.checkInsID(po.getInstitutionID())){
+		if(!CheckUtil.checkInsID(po.getInstitutionID(),po.getType())){
 			return "ID格式不符合标准";
 		}
 		
@@ -65,7 +65,7 @@ public class InstitutionBL {
 		InstitutionPO insPO= insVO.transToPO();
 		InventoryPO invPO=invVO.transToPO();
 		
-		if(!CheckUtil.checkInsID(insVO.getInstitutionID())){
+		if(!CheckUtil.checkInsID(insVO.getInstitutionID(),insVO.getType())){
 			return "ID格式不符合标准";
 		}
 		
