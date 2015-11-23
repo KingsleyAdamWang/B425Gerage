@@ -1,9 +1,11 @@
 package po;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import util.DateUtil;
 import enumSet.ReceiptsState;
 
 /**
@@ -12,8 +14,8 @@ import enumSet.ReceiptsState;
  * @author 王栋
  *
  */
-public class EntruckPO extends ReceiptsPO implements Serializable{
-	
+public class EntruckPO extends ReceiptsPO implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -81,72 +83,78 @@ public class EntruckPO extends ReceiptsPO implements Serializable{
 		this.truckID = truckID;
 		this.checkName = checkName;
 		this.deliverMan = deliverMan;
-		IDlist = iDlist;
+		this.IDlist = iDlist;
 		this.fare = fare;
+	}
+
+	public EntruckPO(String data) {
+		IDlist = new ArrayList<String>();
+		String[] temp = data.split(" ");
+		state = ReceiptsState.getReceiptsState(temp[0]);
+		userID = temp[1];
+		d = DateUtil.stringToDate(temp[2]);
+		destination = temp[3];
+		truckID = temp[4];
+		checkName=temp[5];
+		deliverMan = temp[6];
+		fare = Double.parseDouble(temp[8]);
+		String[] temp2 = temp[7].split(";");
+		for(String str : temp2)
+			IDlist.add(str);
+		
+	}
+
+	public String toString() {
+		StringBuilder result =  new StringBuilder(state.getReceiptsStateString() + " " + userID + " "
+				+ DateUtil.dateToString(d) + " " + qyID + " " + destination
+				+ " " + truckID + " " + checkName + " " + deliverMan + " ");
+		for(String temp:IDlist)
+			result.append(temp+";");
+		result.append(" ");
+		result.append(fare);
+		result.append("\n");
+		return result.toString();
+
 	}
 
 	public Date getD() {
 		return d;
 	}
 
-	public void setD(Date d) {
-		this.d = d;
-	}
 
 	public String getQyID() {
 		return qyID;
 	}
 
-	public void setQyID(String qyID) {
-		this.qyID = qyID;
-	}
 
 	public String getDestination() {
 		return destination;
 	}
 
-	public void setDestination(String destination) {
-		this.destination = destination;
-	}
 
 	public String getTruckID() {
 		return truckID;
 	}
 
-	public void setTruckID(String truckID) {
-		this.truckID = truckID;
-	}
 
 	public String getCheckName() {
 		return checkName;
 	}
 
-	public void setCheckName(String checkName) {
-		this.checkName = checkName;
-	}
 
 	public String getDeliverMan() {
 		return deliverMan;
 	}
 
-	public void setDeliverMan(String deliverMan) {
-		this.deliverMan = deliverMan;
-	}
 
 	public List<String> getIDlist() {
 		return IDlist;
 	}
 
-	public void setIDlist(List<String> iDlist) {
-		IDlist = iDlist;
-	}
 
 	public double getFare() {
 		return fare;
 	}
 
-	public void setFare(double fare) {
-		this.fare = fare;
-	}
 
 }
