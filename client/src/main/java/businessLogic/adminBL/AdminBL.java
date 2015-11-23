@@ -12,6 +12,7 @@ import dataService.InstitutionDataService;
 import dataService.UserDataService;
 
 public class AdminBL {
+	
 	private UserDataService UserDS;
 	/*
 	 * 存所有的user的list

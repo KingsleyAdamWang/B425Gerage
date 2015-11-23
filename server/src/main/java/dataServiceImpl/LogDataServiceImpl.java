@@ -43,36 +43,7 @@ public class LogDataServiceImpl extends UnicastRemoteObject implements
 
 	}
 
-	public List<LogPO> check(String id) throws RemoteException {
-		List<LogPO> result = new ArrayList<LogPO>();
-		for (LogPO po : logList) {
-			if (po.getIdentityID().equals(id))
-				result.add(po);
-		}
-		return result;
-	}
 
-	public List<LogPO> check(Date date) throws RemoteException {
-		List<LogPO> result = new ArrayList<LogPO>();
-		for (LogPO po : logList) {
-			if (DateUtil.dateToString(po.getD()).equals(
-					DateUtil.dateToString(date)))
-				result.add(po);
-		}
-
-		return result;
-	}
-
-	public List<LogPO> check(String id, Date date) {
-		List<LogPO> result = new ArrayList<LogPO>();
-		for (LogPO po : logList) {
-			if (DateUtil.dateToString(po.getD()).equals(
-					DateUtil.dateToString(date))
-					&& po.getIdentityID().equals(id))
-				result.add(po);
-		}
-		return result;
-	}
 
 	public void clear() throws RemoteException {
 		logList.clear();

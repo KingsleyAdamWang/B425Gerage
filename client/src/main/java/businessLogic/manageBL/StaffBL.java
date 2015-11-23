@@ -33,7 +33,8 @@ public class StaffBL {
 		return new UserVO(po);
 	}
 	
-	public List<UserVO> getUsers(){
+	public  List<UserVO>   getUsers(){
+		
 		List<UserVO> users = new ArrayList<UserVO>();
 		//按照职位排列返回user列表
 		for(Position tempPos: Position.values()){
@@ -43,9 +44,7 @@ public class StaffBL {
 				}
 			}
 		}
-//		for(UserPO temp : this.users){
-//			users.add(new UserVO(temp));
-//		}
+		
 		return users;
 	}
 	
