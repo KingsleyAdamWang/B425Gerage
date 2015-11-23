@@ -32,7 +32,7 @@ public class AdminBL {
 			UserDS = RMIHelper.getUserDataService();
 			userList = UserDS.getUsers();
 			System.out.println(userList.size());
-//			tempList = new ArrayList<UserPO>();
+			tempList = new ArrayList<UserPO>();
 
 		} catch (ClientInitException e) {
 			e.printStackTrace();
@@ -48,7 +48,7 @@ public class AdminBL {
 	 */
 	public List<UserVO> search(String key) {
 
-		tempList = new ArrayList<UserPO>();
+		tempList.clear();
 		
 		for (UserPO po : userList) {
 			if (po.getIdentityID().contains(key)
@@ -72,7 +72,7 @@ public class AdminBL {
 	 * 根据机构选择人员
 	 */
 	public List<UserVO> getUserListByInsID(String institutionID) {
-		tempList = new ArrayList<UserPO>();
+		tempList.clear();
 		for (UserPO po : userList) {
 			if (po.getInstitutionID().equals(institutionID))
 				tempList.add(po);
@@ -90,7 +90,7 @@ public class AdminBL {
 			RMIHelper.initInstitutionDataService();
 			insDS = RMIHelper.getInstitutionDataService();
 			insList = insDS.getInsList();
-//			tempList = new ArrayList<UserPO>();
+			tempList = new ArrayList<UserPO>();
 
 		} catch (ClientInitException e) {
 			e.printStackTrace();
