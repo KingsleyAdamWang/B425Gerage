@@ -42,7 +42,7 @@ public class StrategyBL {
 	
 	
 
-/*	public double calSendPrice(String city1, String city2, PackType packType, Express expressType) {
+	public double calSendPrice(String city1, String city2, PackType packType, Express expressType) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -50,7 +50,7 @@ public class StrategyBL {
 	public double calTransFare() {
 		// TODO Auto-generated method stub
 		return 0;
-	}*/
+	}
 	
 
 
