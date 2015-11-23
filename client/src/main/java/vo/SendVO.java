@@ -34,14 +34,15 @@ public class SendVO extends ReceiptsVO {
 	private int arriveDate;
 
 	public SendVO(SendPO po) {
-		this(po.getState(), po.getUserID(), po.getId(),po.getD(), new CustomerVO(
-				po.getSender()), new CustomerVO(po.getReceiver()), po
-				.getGoodsNum(), po.getName(), po.getWeight(), po.getVolume(),
-				po.getExpressType(), po.getPackType(), po.getFare(), po
+		this(po.getState(), po.getUserID(), po.getId(), po.getD(),
+				new CustomerVO(po.getSender()),
+				new CustomerVO(po.getReceiver()), po.getGoodsNum(), po
+						.getName(), po.getWeight(), po.getVolume(), po
+						.getExpressType(), po.getPackType(), po.getFare(), po
 						.getArriveDate());
 	}
 
-	public SendVO(ReceiptsState state, String userID, String id,Date d,
+	public SendVO(ReceiptsState state, String userID, String id, Date d,
 			CustomerVO sender, CustomerVO receiver, int goodsNum, String name,
 			double weight, double volume, Express expressType,
 			PackType packType, double fare, int arriveDate) {
@@ -66,7 +67,7 @@ public class SendVO extends ReceiptsVO {
 	 * @return
 	 */
 	public SendPO transToPO() {
-		return new SendPO(state, name,id, d, sender.transToPO(),
+		return new SendPO(state, name, id, d, sender.transToPO(),
 				receiver.transToPO(), goodsNum, name, weight, volume,
 				expressType, packType, fare, arriveDate);
 	}
@@ -118,6 +119,30 @@ public class SendVO extends ReceiptsVO {
 	public String getId() {
 		return id;
 	}
-	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		SendVO other = (SendVO) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
 
 }

@@ -12,6 +12,7 @@ import java.util.List;
 
 import po.SendPO;
 import dataService.SendDataService;
+import enumSet.ReceiptsState;
 
 public class SendDataServiceImpl extends UnicastRemoteObject implements
 		SendDataService {
@@ -47,7 +48,7 @@ public class SendDataServiceImpl extends UnicastRemoteObject implements
 
 	//新增寄件单
 	public void add(SendPO po) throws RemoteException {
-	sends.add(po);
+	sends.add(0,po);
 	update();
 
 	}
@@ -85,7 +86,11 @@ public class SendDataServiceImpl extends UnicastRemoteObject implements
 
 	@Override
 	public void modify(SendPO po) throws RemoteException {
-		// TODO Auto-generated method stub
+		if(sends.contains(po)){
+			sends.remove(po);
+			sends.add(0,po);
+			update();
+		}
 		
 	}
 
@@ -93,7 +98,13 @@ public class SendDataServiceImpl extends UnicastRemoteObject implements
 
 	@Override
 	public void agree(String id) throws RemoteException {
-		// TODO Auto-generated method stub
+		for(SendPO po: sends){
+			if(po.getId().equals(id)){
+				sends.get(sends.indexOf(po)).setState(ReceiptsState.approve);
+			    update();
+			    return;
+			}
+		}
 		
 	}
 
