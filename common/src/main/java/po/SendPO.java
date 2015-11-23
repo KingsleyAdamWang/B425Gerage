@@ -12,6 +12,7 @@ public class SendPO extends ReceiptsPO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	private String id;
 	// 寄件时间
 	private Date d;
 	// 寄件人的基本信息
@@ -55,13 +56,15 @@ public class SendPO extends ReceiptsPO implements Serializable {
 	// The constructor SendPO(ReceiptsState, UserPO, Date, CustomerPO,
 	// CustomerPO, int, String, double, double, Express, Package, Date) is
 	// undefined
-	
-	//构造方法
-	public SendPO(ReceiptsState state,String userID,Date d, CustomerPO sender, CustomerPO receiver, int goodsNum,
-			String name, double weight, double volume, Express expressType,
+
+	// 构造方法
+	public SendPO(ReceiptsState state, String userID, String id, Date d,
+			CustomerPO sender, CustomerPO receiver, int goodsNum, String name,
+			double weight, double volume, Express expressType,
 			PackType packType, double fare, int arriveDate) {
-		super(state,userID);
+		super(state, userID);
 		this.d = d;
+		this.id = id;
 		this.sender = sender;
 		this.receiver = receiver;
 		this.goodsNum = goodsNum;
@@ -74,48 +77,35 @@ public class SendPO extends ReceiptsPO implements Serializable {
 		this.arriveDate = arriveDate;
 	}
 
-
-
-   //从读取的数据中构造一个对应的po对象
-	public SendPO(String data){
-//		super(state, user);
+	// 从读取的数据中构造一个对应的po对象
+	public SendPO(String data) {
+		// super(state, user);
 		String strs[] = data.split(" ");
-		this.userID = strs[0];
-	    this.sender = new CustomerPO(strs[1]);
-	    this.receiver = new CustomerPO(strs[2]);
-	    String strsO[] = strs[3].split(" ");
-	    this.state = ReceiptsState.getReceiptsState(strsO[0]);
-	    this.d =  DateUtil.stringToDate(strsO[1]);
-	    this.goodsNum=Integer.parseInt(strsO[2]);
-	    this.name = strsO[3];
-	    this.weight=Double
-				.parseDouble(strsO[4]);
-	    this.volume=Double
-				.parseDouble(strsO[5]);
-	    this.arriveDate = Integer
-				.parseInt(strsO[9]);
-	    this.expressType =  Express
-				.getExpress(strsO[6]);
-	    this.packType=PackType
-				.getPackType(strsO[7]);
-	    this.fare = Double
-				.parseDouble(strsO[8]);
+		this.state = ReceiptsState.getReceiptsState(strs[0]);
+		this.userID = strs[1];
+
+		this.sender = new CustomerPO(strs[2]);
+		this.receiver = new CustomerPO(strs[3]);
+
+		this.id = strs[4];
+		this.d = DateUtil.stringToDate(strs[5]);
+		this.goodsNum = Integer.parseInt(strs[6]);
+		this.name = strs[7];
+		this.weight = Double.parseDouble(strs[8]);
+		this.volume = Double.parseDouble(strs[9]);
+		this.arriveDate = Integer.parseInt(strs[10]);
+		this.expressType = Express.getExpress(strs[11]);
+		this.packType = PackType.getPackType(strs[12]);
+		this.fare = Double.parseDouble(strs[13]);
 	}
-	
-	
-
-
-
 
 	public String toString() {
-		return this.userID+ ";" + sender.toString() + ";"
-				+ receiver.toString() + ";" + state.getReceiptsStateString()
-				+ " " + DateUtil.dateToString(d) + " "
-				+ String.valueOf(goodsNum) + " " + name + " "
-				+ String.valueOf(weight) + " " + String.valueOf(volume) + " "
+		return state.getReceiptsStateString() + " " + userID + " "
+				+ sender.toString() + " " + receiver.toString() + " " + id
+				+ " " + DateUtil.dateToString(d) + " " + goodsNum + " " + name
+				+ " " + weight + " " + volume + " " + arriveDate + " "
 				+ expressType.getExpressString() + " "
-				+ packType.getPackTypeString() + " " + String.valueOf(fare)
-				+ " " + String.valueOf(arriveDate)+"\n";
+				+ packType.getPackTypeString() + " "+fare+"\n";
 	}
 
 	public double getFare() {
@@ -202,11 +192,12 @@ public class SendPO extends ReceiptsPO implements Serializable {
 		this.packType = packType;
 	}
 
-
-
 	public int getArriveDate() {
 		return arriveDate;
 	}
 
-	
+	public String getId() {
+		return id;
+	}
+
 }

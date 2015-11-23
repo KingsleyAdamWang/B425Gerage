@@ -9,6 +9,7 @@ import enumSet.ReceiptsState;
 
 public class SendVO extends ReceiptsVO {
 
+	private String id;
 	// 寄件时间
 	private Date d;
 	// 寄件人的基本信息
@@ -33,19 +34,20 @@ public class SendVO extends ReceiptsVO {
 	private int arriveDate;
 
 	public SendVO(SendPO po) {
-		this(po.getState(), po.getUserID(), po.getD(), new CustomerVO(
+		this(po.getState(), po.getUserID(), po.getId(),po.getD(), new CustomerVO(
 				po.getSender()), new CustomerVO(po.getReceiver()), po
 				.getGoodsNum(), po.getName(), po.getWeight(), po.getVolume(),
 				po.getExpressType(), po.getPackType(), po.getFare(), po
 						.getArriveDate());
 	}
 
-	public SendVO(ReceiptsState state, String userID, Date d,
+	public SendVO(ReceiptsState state, String userID, String id,Date d,
 			CustomerVO sender, CustomerVO receiver, int goodsNum, String name,
 			double weight, double volume, Express expressType,
 			PackType packType, double fare, int arriveDate) {
 		super(state, userID);
 		this.d = d;
+		this.id = id;
 		this.sender = sender;
 		this.receiver = receiver;
 		this.goodsNum = goodsNum;
@@ -64,7 +66,7 @@ public class SendVO extends ReceiptsVO {
 	 * @return
 	 */
 	public SendPO transToPO() {
-		return new SendPO(state, name, d, sender.transToPO(),
+		return new SendPO(state, name,id, d, sender.transToPO(),
 				receiver.transToPO(), goodsNum, name, weight, volume,
 				expressType, packType, fare, arriveDate);
 	}
@@ -112,5 +114,10 @@ public class SendVO extends ReceiptsVO {
 	public int getArriveDate() {
 		return arriveDate;
 	}
+
+	public String getId() {
+		return id;
+	}
+	
 
 }

@@ -48,7 +48,7 @@ public class CustomerPO implements Serializable {
 	// 读文件的时候可以这样用来构造一个 对应的 寄件人和收件人的对应的po
 	// 寄件单操作需要用到
 	public CustomerPO(String data) {
-		String strs[] = data.split(" ");
+		String strs[] = data.split(";");
 		this.name = strs[0];
 		this.city = strs[1];
 		this.postCode = strs[2];
@@ -59,8 +59,8 @@ public class CustomerPO implements Serializable {
 
 	public String toString() {
 
-		return getName() + " " + getCity() + " " + getPostCode() + " "
-				+ getAddress() + " " + getCompany() + " " + getTelephone();
+		return getName() + ";" + getCity() + ";" + getPostCode() + ";"
+				+ getAddress() + ";" + getCompany() + ";" + getTelephone();
 	}
 
 	public String getPostCode() {

@@ -2,8 +2,8 @@ package dataServiceImpl;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
@@ -26,7 +26,7 @@ public class EntruckDataServiceImpl extends UnicastRemoteObject implements
 	private void init() {
     try {
 		BufferedReader br = new BufferedReader(new FileReader(file));
-	} catch (FileNotFoundException e) {
+	} catch (IOException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}

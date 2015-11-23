@@ -2,6 +2,7 @@ package dataService;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.List;
 
 import po.SendPO;
 
@@ -14,7 +15,10 @@ public interface SendDataService extends Remote{
 	public void delete(SendPO po)throws RemoteException;
 
 
+	public List<SendPO> getSendList()throws RemoteException;
 	
+    public void modify(SendPO po)throws RemoteException;	
+    
+    public void agree(String id)throws RemoteException;
 
-	
 }

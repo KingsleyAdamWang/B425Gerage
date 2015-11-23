@@ -6,13 +6,15 @@ import java.util.List;
 
 import po.InstitutionPO;
 import po.UserPO;
+import vo.InstitutionVO;
+import vo.UserVO;
 import client.ClientInitException;
 import client.RMIHelper;
 import dataService.InstitutionDataService;
 import dataService.UserDataService;
 
 public class AdminBL {
-	
+
 	private UserDataService UserDS;
 	/*
 	 * 存所有的user的list
@@ -24,7 +26,7 @@ public class AdminBL {
 	 */
 	private List<UserPO> tempList;
 
-	public AdminBL()  {
+	public AdminBL() {
 		try {
 			RMIHelper.initUserDataService();
 			UserDS = RMIHelper.getUserDataService();
@@ -43,7 +45,7 @@ public class AdminBL {
 	/*
 	 * 关键字查询用户
 	 */
-	public List<UserPO> search(String key) {
+	public List<UserVO> search(String key) {
 
 		tempList.clear();
 		for (UserPO po : userList) {
@@ -54,25 +56,32 @@ public class AdminBL {
 				tempList.add(po);
 		}
 		// tempList = result;
-		return tempList;
+		return transToVOList(tempList);
+	}
+
+	private List<UserVO> transToVOList(List<UserPO> temp) {
+		List<UserVO> voList = new ArrayList<UserVO>(temp.size());
+        for(UserPO po: temp)
+        	voList.add(new UserVO(po));
+        return  voList;
 	}
 
 	/**
 	 * 根据机构选择人员
 	 */
-	public List<UserPO> getUserListByInsID(String institutionID) {
+	public List<UserVO> getUserListByInsID(String institutionID) {
 		tempList.clear();
 		for (UserPO po : userList) {
 			if (po.getIdentityID().equals(institutionID))
 				tempList.add(po);
 		}
-		return tempList;
+		return transToVOList(tempList);
 	}
 
 	/*
 	 * 获取机构列表
 	 */
-	public List<InstitutionPO> getInsList() {
+	public List<InstitutionVO> getInsList() {
 		InstitutionDataService insDS;
 		List<InstitutionPO> insList = new ArrayList<InstitutionPO>();
 		try {
@@ -88,11 +97,15 @@ public class AdminBL {
 			e.printStackTrace();
 		}
 
-		return insList;
+		List<InstitutionVO> result = new ArrayList<InstitutionVO>(insList.size());
+		for(InstitutionPO po : insList)
+			result.add(new InstitutionVO(po));
+		return result;
 	}
 
 	/**
 	 * 修改某个账户的密码
+	 * 
 	 * @param identityID
 	 * @param newPassWord
 	 * @return
@@ -117,6 +130,5 @@ public class AdminBL {
 		}
 
 	}
-	
-	
+
 }

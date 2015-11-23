@@ -28,7 +28,7 @@ public class SendDataServiceImpl extends UnicastRemoteObject implements
 	
 	
 	// 初始化操作 将所有的寄件单写入一个列表
-	public void init() {
+	private void init() {
 
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(file));
@@ -79,6 +79,22 @@ public class SendDataServiceImpl extends UnicastRemoteObject implements
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+
+
+	@Override
+	public void modify(SendPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void agree(String id) throws RemoteException {
+		// TODO Auto-generated method stub
+		
 	}
 
 

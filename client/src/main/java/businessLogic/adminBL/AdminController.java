@@ -1,15 +1,9 @@
 package businessLogic.adminBL;
 
-import java.rmi.RemoteException;
-
-import javax.swing.text.Position;
-
-import po.InstitutionPO;
-import po.UserPO;
-
-import java.rmi.RemoteException;
 import java.util.List;
 
+import vo.InstitutionVO;
+import vo.UserVO;
 import businessLogicService.adminBLService.AdminBLService;
 
 /**
@@ -32,7 +26,7 @@ public class AdminController implements AdminBLService {
 	 * businessLogicService.adminBLService.AdminBLService#search(java.lang.String
 	 * )
 	 */
-	public List<UserPO> search(String key) {
+	public List<UserVO> search(String key) {
 
 		return adminBL.search(key);
 	}
@@ -55,7 +49,7 @@ public class AdminController implements AdminBLService {
 	 * businessLogicService.adminBLService.AdminBLService#getUserListByInsID
 	 * (java.lang.String)
 	 */
-	public List<UserPO> getUserListByInsID(String institutionID) {
+	public List<UserVO> getUserListByInsID(String institutionID) {
 
 		return adminBL.getUserListByInsID(institutionID);
 	}
@@ -65,7 +59,7 @@ public class AdminController implements AdminBLService {
 	 * 
 	 * @see businessLogicService.adminBLService.AdminBLService#getInsList()
 	 */
-	public List<InstitutionPO> getInsList() {
+	public List<InstitutionVO> getInsList() {
 
 		return adminBL.getInsList();
 	}

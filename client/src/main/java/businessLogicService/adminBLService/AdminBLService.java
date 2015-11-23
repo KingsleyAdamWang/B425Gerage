@@ -2,20 +2,20 @@ package businessLogicService.adminBLService;
 
 import java.util.List;
 
-import po.InstitutionPO;
-import po.UserPO;
+import vo.InstitutionVO;
+import vo.UserVO;
 
 public interface AdminBLService {
 
 
    //查找某一个特定的用户
-   public List<UserPO> search(String Key);
+   public List<UserVO> search(String Key);
    //修改一个用户的秘密
    public String modify(String identityID,String newPassWord);
    //输入机构的id 返回属于这个机构的所有的UserPO
-   public List<UserPO> getUserListByInsID(String institutionID);
+   public List<UserVO> getUserListByInsID(String institutionID);
    //刚开始的时候是显示各个机构的列表
-   public List<InstitutionPO> getInsList();
+   public List<InstitutionVO> getInsList();
   
    
    
