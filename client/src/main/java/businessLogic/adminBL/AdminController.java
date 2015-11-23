@@ -13,7 +13,7 @@ import businessLogicService.adminBLService.AdminBLService;
  */
 public class AdminController implements AdminBLService {
 
-	AdminBL adminBL;
+	private AdminBL adminBL;
 
 	public AdminController() {
 		adminBL = new AdminBL();
