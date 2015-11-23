@@ -48,6 +48,7 @@ public class AdminBL {
 	public List<UserVO> search(String key) {
 
 		tempList.clear();
+		
 		for (UserPO po : userList) {
 			if (po.getIdentityID().contains(key)
 					|| po.getInstitutionID().contains(key)
@@ -72,7 +73,7 @@ public class AdminBL {
 	public List<UserVO> getUserListByInsID(String institutionID) {
 		tempList.clear();
 		for (UserPO po : userList) {
-			if (po.getIdentityID().equals(institutionID))
+			if (po.getInstitutionID().equals(institutionID))
 				tempList.add(po);
 		}
 		return transToVOList(tempList);
