@@ -35,9 +35,17 @@ public class StaffBL {
 	
 	public List<UserVO> getUsers(){
 		List<UserVO> users = new ArrayList<UserVO>();
-		for(UserPO temp : this.users){
-			users.add(new UserVO(temp));
+		//按照职位排列返回user列表
+		for(Position tempPos: Position.values()){
+			for(UserPO temp : this.users){
+				if(temp.getWork()==tempPos){
+					users.add(new UserVO(temp));
+				}
+			}
 		}
+//		for(UserPO temp : this.users){
+//			users.add(new UserVO(temp));
+//		}
 		return users;
 	}
 	
@@ -61,9 +69,7 @@ public class StaffBL {
 				return "存在相同ID，添加失败";
 			}	
 		}
-		if(!vo.getInstitutionID().equals(vo.getIdentityID().substring(0,7))){
-			return "编号前8位与机构编号不符";
-		}
+	
 		users.add(po);
 		userDS.add(po);
 		

@@ -35,10 +35,15 @@ public class InstitutionBL {
 
 	public List<InstitutionVO> show(){
 		List<InstitutionVO> result =new ArrayList<InstitutionVO>();
-		for(InstitutionPO temp : insList){
-			result.add(new InstitutionVO(temp));
-			//将list中所有PO转换成VO返回list
+		//按照机构类型排列，返回机构列表
+		for(InsType tempType : InsType.values()){
+			for(InstitutionPO temp : insList){
+				if(temp.getType()==tempType){
+					result.add(new InstitutionVO(temp));
+				}
+			}
 		}
+		
 		return result;
 	}
 	
