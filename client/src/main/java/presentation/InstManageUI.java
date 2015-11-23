@@ -37,7 +37,7 @@ public class InstManageUI extends JPanel {
 	private JScrollPane scrollPane;
 
 	public InstManageUI() throws RemoteException {
-		// vData = new Vector<Vector<String>>();
+		vData = new Vector<Vector<String>>();
 		this.ic = new InstitutionController();
 		this.initComponents();
 		this.initList();
@@ -52,7 +52,7 @@ public class InstManageUI extends JPanel {
 		for (int i = 0; i < 4; i++) {
 			vColumns.add(info[i]);
 		}
-		vData = new Vector<Vector<String>>();
+		// vData = new Vector<Vector<String>>();
 
 		table = new JTable(vData, vColumns) {
 			private static final long serialVersionUID = 1L;
@@ -64,8 +64,7 @@ public class InstManageUI extends JPanel {
 		table.setBorder(BorderFactory.createEtchedBorder());
 		table.setRowHeight(35);
 		table.setRowSelectionAllowed(true);
-		// table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		table.setBounds(50, 50, 700, 385);
+//		table.setBounds(50, 50, 700, 385);
 
 		scrollPane = new JScrollPane();
 		scrollPane.getViewport().add(table);
@@ -148,8 +147,8 @@ public class InstManageUI extends JPanel {
 		for (InstitutionVO vo : ic.show()) {
 			vData.add(toVector(vo));
 		}
-		// scrollPane.getViewport().removeAll();
-		// scrollPane.getViewport().add(table);
+		scrollPane.getViewport().removeAll();
+		scrollPane.getViewport().add(table);
 		this.repaint();
 	}
 
@@ -452,7 +451,7 @@ class InstManageDialog extends JDialog {
 						String result;
 						try {
 							result = ui.getController().modify(
-									vo.getInstitutionID(), getName());
+									vo.getInstitutionID(), getInstName());
 							if (result != null) {
 								JOptionPane.showMessageDialog(null, result, "",
 										JOptionPane.ERROR_MESSAGE);
@@ -468,7 +467,7 @@ class InstManageDialog extends JDialog {
 						String result;
 						try {
 							result = ui.getController().modify(
-									vo.getInstitutionID(), getName());
+									vo.getInstitutionID(), getInstName());
 							if (result != null) {
 								JOptionPane.showMessageDialog(null, result, "",
 										JOptionPane.ERROR_MESSAGE);

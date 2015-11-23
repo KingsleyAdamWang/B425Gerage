@@ -11,7 +11,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.TableModel;
 
+import vo.InstitutionVO;
 import vo.UserVO;
 import businessLogic.adminBL.AdminController;
 
@@ -81,22 +83,31 @@ public class AdminUserUI extends JPanel {
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						int index = table.getSelectedRow();
+						if (index == -1) {
+							JOptionPane.showMessageDialog(null, "请选择一个员工", "",
+									JOptionPane.ERROR_MESSAGE);
+							return;
+						}
 						UserVO vo = list.get(index);
 						String tmp = (String) JOptionPane.showInputDialog(null,
 								"请输入新的密码：\n", "title",
 								JOptionPane.PLAIN_MESSAGE, null, null,
 								vo.getPassword());
 						if (tmp == null) {
-							JOptionPane.showMessageDialog(null, "请输入密码", "",
-									JOptionPane.ERROR_MESSAGE);
+							// JOptionPane.showMessageDialog(null, "请输入密码", "",
+							// JOptionPane.ERROR_MESSAGE);
 							return;
 						}
-						System.out.println(tmp);
+						// System.out.println(tmp);
 						tmp = ac.modify(vo.getIdentityID(), tmp);
 						if (tmp != null) {
 							JOptionPane.showMessageDialog(null, tmp, "",
 									JOptionPane.ERROR_MESSAGE);
+						} else {
+							JOptionPane.showMessageDialog(null, "修改成功", "",
+									JOptionPane.INFORMATION_MESSAGE);
 						}
+						reInitList();
 					}
 				});
 				break;
@@ -118,15 +129,35 @@ public class AdminUserUI extends JPanel {
 			list = ac.search(this.searchKey);
 		}
 		vData = getShowList();
+		// table.validate();
+		// scrollPane.getViewport().removeAll();
+		// scrollPane.getViewport().add(table);
+		// this.initComponents();
+		this.repaint();
+	}
+
+	private void reInitList() {
+		if (this.searchType == 1) {
+			list = ac.getUserListByInsID(this.searchKey);
+		} else {
+			list = ac.search(this.searchKey);
+		}
+		vData.clear();
+
+		for (UserVO vo : list) {
+			vData.add(toVector(vo));
+		}
+
+		scrollPane.getViewport().removeAll();
+		scrollPane.getViewport().add(table);
 		this.repaint();
 	}
 
 	private Vector<Vector<String>> getShowList() {
 		Vector<Vector<String>> v = new Vector<Vector<String>>();
-		Vector<String> tmp;
 		int n = list.size();
 		for (int i = 0; i < n; i++) {
-			tmp = new Vector<String>();
+			Vector<String> tmp = new Vector<String>();
 			UserVO vo = list.get(i);
 			tmp.add(vo.getIdentityID());
 			tmp.add(vo.getName());
@@ -137,5 +168,15 @@ public class AdminUserUI extends JPanel {
 			// System.out.println(vo.getName());
 		}
 		return v;
+	}
+
+	private Vector<String> toVector(UserVO vo) {
+		Vector<String> tmp = new Vector<String>();
+		tmp.add(vo.getIdentityID());
+		tmp.add(vo.getName());
+		tmp.add(vo.getPassword());
+		tmp.add(vo.getWork().getPositionString());
+		tmp.add(vo.getInstitutionID());
+		return tmp;
 	}
 }
