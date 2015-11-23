@@ -15,12 +15,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
 
 import util.Storage;
 import vo.InstitutionVO;
 import vo.InventoryVO;
 import businessLogic.manageBL.InstitutionController;
-import businessLogic.manageBL.StaffController;
 import enumSet.InsType;
 
 public class InstManageUI extends JPanel {
@@ -34,8 +34,10 @@ public class InstManageUI extends JPanel {
 	private JButton[] funcButton;
 	private JTable table;
 	private Vector<Vector<String>> vData;
+	private JScrollPane scrollPane;
 
 	public InstManageUI() throws RemoteException {
+		// vData = new Vector<Vector<String>>();
 		this.ic = new InstitutionController();
 		this.initComponents();
 		this.initList();
@@ -62,9 +64,15 @@ public class InstManageUI extends JPanel {
 		table.setBorder(BorderFactory.createEtchedBorder());
 		table.setRowHeight(35);
 		table.setRowSelectionAllowed(true);
+		// table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		table.setBounds(50, 50, 700, 385);
 
-		JScrollPane scrollPane = new JScrollPane();
+		scrollPane = new JScrollPane();
 		scrollPane.getViewport().add(table);
+		// scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		// scrollPane.setLocation(50, 50);
+		scrollPane.setAutoscrolls(false);
+		// scrollPane.setVisible(true);
 		scrollPane.setBounds(50, 50, 700, 385);
 		table.setFillsViewportHeight(true);
 		this.add(scrollPane);
@@ -140,8 +148,16 @@ public class InstManageUI extends JPanel {
 		for (InstitutionVO vo : ic.show()) {
 			vData.add(toVector(vo));
 		}
+		// scrollPane.getViewport().removeAll();
+		// scrollPane.getViewport().add(table);
 		this.repaint();
 	}
+
+	// protected void reInitList() {
+	// initComponents();
+	// initList();
+	// initComponents();
+	// }
 
 	private void addInst() {
 		Object[] options = { "营业厅", "中转中心" };
@@ -409,7 +425,8 @@ class InstManageDialog extends JDialog {
 							result = ui.getController().addIns(
 									new InstitutionVO(getInstID(),
 											getInstCity(), getInstName(),
-											InsType.getInsType(type)),getInven());
+											InsType.getInsType(type)),
+									getInven());
 						} else {
 							result = ui.getController().addIns(
 									new InstitutionVO(getInstID(),

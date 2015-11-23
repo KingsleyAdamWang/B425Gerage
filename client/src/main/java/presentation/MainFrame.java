@@ -1,6 +1,7 @@
 package presentation;
 
 import java.awt.Toolkit;
+import java.rmi.RemoteException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -21,7 +22,12 @@ public class MainFrame extends JFrame {
 	private static LogController logController;
 	//构造函数  设置框架的风格为windows风格  //个人认为好丑呀 
 	public MainFrame() {
-		logController = new LogController();
+		try {
+			logController = new LogController();
+		} catch (RemoteException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 		try {
 			UIManager
