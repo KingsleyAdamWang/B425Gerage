@@ -65,13 +65,16 @@ public class LogDataServiceImpl extends UnicastRemoteObject implements
 	}
 
 	public void  add(LogPO po) throws RemoteException {
-		logList.add(po);
+		logList.add(0, po);;
 		FileWriter fw;
 		try {
 			fw = new FileWriter(file);
-			fw.append(po.toString());
+			fw.write("");
+			for(LogPO potemp: logList){
+			fw.append(potemp.toString());
 			fw.flush();
 			fw.close();
+			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
