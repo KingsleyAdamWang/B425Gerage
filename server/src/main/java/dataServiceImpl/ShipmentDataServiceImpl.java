@@ -12,24 +12,31 @@ public class ShipmentDataServiceImpl extends UnicastRemoteObject implements
 
 	public ShipmentDataServiceImpl() throws RemoteException {
 		super();
-		// TODO Auto-generated constructor stub
+	
+	}
+	
+	private void init(){
+		
 	}
 
+	private void update(){
+		
+	}
 
 	public void add(ShipmentPO po) throws RemoteException {
-		// TODO Auto-generated method stub
+	
 		
 	}
 
 
 	public void delete(ShipmentPO po) throws RemoteException {
-		// TODO Auto-generated method stub
+	
 		
 	}
 
 
 	public ShipmentPO find(String id) throws RemoteException {
-		// TODO Auto-generated method stub
+	
 		return null;
 	}
 

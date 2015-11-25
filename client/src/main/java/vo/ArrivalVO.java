@@ -1,76 +1,89 @@
 package vo;
 
 import java.util.Date;
+import java.util.Vector;
 
 import po.ArrivalPO;
+import util.DateUtil;
 import enumSet.ArrivalState;
 import enumSet.ReceiptsState;
 
-public class ArrivalVO extends ReceiptsVO {
-	Date date;
-	String transferId;
-	String departure;
-	ArrivalState condition;
-	String institutionID;
+/**
+ * 达到单vo
+ * @author 王栋
+ *
+ */
+public class ArrivalVO extends Vector<String> {
+	// Date date;
+	// String transferId;
+	// String departure;
+	// ArrivalState condition;
+	// String institutionID;
 
 	public ArrivalVO(ReceiptsState state, String userID, Date date,
-			String institutionID,String transferId, String departure, ArrivalState condition) {
-		super(state, userID);
-		this.date = date;
-		this.transferId = transferId;
-		this.departure = departure;
-		this.condition = condition;
-		this.institutionID = institutionID;
+			String institutionID, String transferId, String departure,
+			ArrivalState condition) {
+		this.add(state.getReceiptsStateString());
+		this.add(userID);
+		this.add(DateUtil.dateToString(date));
+		this.add(institutionID);
+		this.add(transferId);
+		this.add(departure);
+		this.add(condition.getStateString());
+
+	}
+
+	public ArrivalVO(String state, String userID, String date,
+			String institutionID, String transferId, String departure,
+			String condition) {
+
+		this.add(state);
+		this.add(userID);
+		this.add(date);
+		this.add(institutionID);
+		this.add(transferId);
+		this.add(departure);
+		this.add(condition);
 	}
 
 	public ArrivalVO(ArrivalPO po) {
-		this(po.getState(), po.getUserID(), po.getDate(), po.getInstitutionID(),po.getTransferId(),
-				po.getDeparture(), po.getCondition());
+		this(po.getState(), po.getUserID(), po.getDate(),
+				po.getInstitutionID(), po.getTransferId(), po.getDeparture(),
+				po.getCondition());
 	}
 
 	public ArrivalPO transToPO() {
-		return new ArrivalPO(this.state, this.userID, this.date,
-				this.institutionID,this.transferId, this.departure, this.condition);
+		return new ArrivalPO(ReceiptsState.getReceiptsState(get(0)), get(1),
+				DateUtil.stringToDate(get(2)), get(3), get(4), get(5),
+				ArrivalState.getArrivalState(get(6)));
+	}
+
+	public String getState() {
+		return this.get(0);
+	}
+
+	public String getUserID() {
+		return this.get(1);
 	}
 
 	public String getInstitutionID() {
-		return institutionID;
+		return this.get(3);
 	}
 
-	public void setInstitutionID(String institutionID) {
-		this.institutionID = institutionID;
+	public String getDate() {
+		return this.get(2);
 	}
 
-	public Date getDate() {
-		return date;
-	}
-
-	public void setDate(Date date) {
-		this.date = date;
-	}
-
-	public String getId() {
-		return transferId;
-	}
-
-	public void setId(String id) {
-		this.transferId = id;
+	public String getTransferId() {
+		return this.get(4);
 	}
 
 	public String getDeparture() {
-		return departure;
+		return this.get(5);
 	}
 
-	public void setDeparture(String departure) {
-		this.departure = departure;
-	}
-
-	public ArrivalState getCondition() {
-		return condition;
-	}
-
-	public void setCondition(ArrivalState condition) {
-		this.condition = condition;
+	public String getCondition() {
+		return this.get(6);
 	}
 
 	@Override
@@ -78,7 +91,7 @@ public class ArrivalVO extends ReceiptsVO {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result
-				+ ((transferId == null) ? 0 : transferId.hashCode());
+				+ ((this.get(4) == null) ? 0 : this.get(4).hashCode());
 		return result;
 	}
 
@@ -91,14 +104,12 @@ public class ArrivalVO extends ReceiptsVO {
 		if (getClass() != obj.getClass())
 			return false;
 		ArrivalVO other = (ArrivalVO) obj;
-		if (transferId == null) {
-			if (other.transferId != null)
+		if (this.get(4) == null) {
+			if (other.get(4) != null)
 				return false;
-		} else if (!transferId.equals(other.transferId))
+		} else if (!this.get(4).equals(other.get(4)))
 			return false;
 		return true;
 	}
 
-	
-	
 }

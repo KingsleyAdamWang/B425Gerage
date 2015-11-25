@@ -71,32 +71,22 @@ public class IncomePO extends ReceiptsPO implements Serializable {
 		return date;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
-	}
+	
 
 	public double getIncome() {
 		return income;
 	}
 
-	public void setIncome(double income) {
-		this.income = income;
-	}
 
 	public String getKdyID() {
 		return kdyID;
 	}
 
-	public void setKdyID(String kdyID) {
-		this.kdyID = kdyID;
-	}
+	
 
 	public List<String> getIdList() {
 		return idList;
 	}
 
-	public void setIdList(List<String> idList) {
-		this.idList = idList;
-	}
-
+	
 }

@@ -18,6 +18,7 @@ public class MainFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private final int frameWidth = 800;
 	private final int frameHeight = 600;
+	//卧槽 我好喜欢 这个 user 爱死了 简直了 @！！
     private static UserVO user ;
 	private static LogController logController;
 	//构造函数  设置框架的风格为windows风格  //个人认为好丑呀 

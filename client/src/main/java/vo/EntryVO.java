@@ -2,17 +2,25 @@ package vo;
 
 import java.util.Date;
 
-public class EntryVO {
+import po.EntryPO;
+import enumSet.InventoryArea;
+import enumSet.ReceiptsState;
+
+public class EntryVO extends ReceiptsVO {
 	String id;
+	String institutionID;
 	Date date;
 	String destination;
-	int area, row, shelf, place;
+	int row, shelf, place;
+	InventoryArea area;
 
-	public EntryVO(String id, Date date, String destination, int area, int row,
-			int shelf, int place) {
-		super();
+	public EntryVO(ReceiptsState state, String userID, String id,
+			String institutionID, Date date, String destination, int row,
+			int shelf, int place, InventoryArea area) {
+		super(state, userID);
 		this.id = id;
 		this.date = date;
+		this.institutionID = institutionID;
 		this.destination = destination;
 		this.area = area;
 		this.row = row;
@@ -20,64 +28,60 @@ public class EntryVO {
 		this.place = place;
 	}
 
-	public EntryVO() {
-		// TODO Auto-generated constructor stub
+	public EntryVO(EntryPO po) {
+		this(po.getState(), po.getUserID(), po.getId(), po.getInstitutionID(),
+				po.getDate(), po.getDestination(), po.getRow(), po.getShelf(),
+				po.getPlace(), po.getArea());
+
 	}
 
-	public String getId() {
-		return id;
+	public EntryPO transToPO() {
+		return new EntryPO(state, userID, id, institutionID, date, destination,
+				row, shelf, place, area);
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((area == null) ? 0 : area.hashCode());
+		result = prime * result
+				+ ((institutionID == null) ? 0 : institutionID.hashCode());
+		result = prime * result + place;
+		result = prime * result + row;
+		result = prime * result + shelf;
+		return result;
 	}
 
-	public Date getDate() {
-		return date;
+	public String getInstitutionID() {
+		return institutionID;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		EntryVO other = (EntryVO) obj;
+		if (area != other.area)
+			return false;
+		if (institutionID == null) {
+			if (other.institutionID != null)
+				return false;
+		} else if (!institutionID.equals(other.institutionID))
+			return false;
+		if (place != other.place)
+			return false;
+		if (row != other.row)
+			return false;
+		if (shelf != other.shelf)
+			return false;
+		return true;
 	}
 
-	public String getDestination() {
-		return destination;
-	}
-
-	public void setDestination(String destination) {
-		this.destination = destination;
-	}
-
-	public int getArea() {
-		return area;
-	}
-
-	public void setArea(int area) {
-		this.area = area;
-	}
-
-	public int getRow() {
-		return row;
-	}
-
-	public void setRow(int row) {
-		this.row = row;
-	}
-
-	public int getShelf() {
-		return shelf;
-	}
-
-	public void setShelf(int shelf) {
-		this.shelf = shelf;
-	}
-
-	public int getPlace() {
-		return place;
-	}
-
-	public void setPlace(int place) {
-		this.place = place;
-	}
+	
 
 }

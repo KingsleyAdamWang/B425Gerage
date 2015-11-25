@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import po.EntruckPO;
+import util.DateUtil;
 import enumSet.ReceiptsState;
 
 public class EntruckVO extends ReceiptsVO {
@@ -11,38 +12,38 @@ public class EntruckVO extends ReceiptsVO {
 	/**
 	 * 装车时间
 	 */
-	private Date d;
+	 public String d;
 
 	/**
 	 * 汽运编号
 	 */
-	private String qyID;
+	public  String qyID;
 
 	/**
 	 * 到达地
 	 */
-	private String destination;
+	public  String destination;
 
 	/**
 	 * 车辆代号
 	 */
-	private String truckID;
+	public  String truckID;
 
 	/**
 	 * 检装员
 	 */
-	private String checkName;
+	public  String checkName;
 
 	/**
 	 * 押运员
 	 */
-	private String deliverMan;
+	public  String deliverMan;
 
 	/**
 	 * 本次装车的所有ID 所有货物的订单条形码号
 	 */
 
-	List<String> IDlist;
+	public List<String> IDlist;
 
 	/**
 	 * 本次运费
@@ -63,7 +64,7 @@ public class EntruckVO extends ReceiptsVO {
 	 * @param iDlist
 	 * @param fare
 	 */
-	public EntruckVO(ReceiptsState state, String userID, Date d, String qyID,
+	public EntruckVO(ReceiptsState state, String userID, String d, String qyID,
 			String destination, String truckID, String checkName,
 			String deliverMan, List<String> iDlist, double fare) {
 		super(state, userID);
@@ -82,40 +83,9 @@ public class EntruckVO extends ReceiptsVO {
 	}
 
 	public EntruckPO transToPO() {
-		return new EntruckPO(state, userID, d, qyID, destination, truckID,
+		return new EntruckPO(state, userID, DateUtil.stringToDate(d), qyID, destination, truckID,
 				checkName, deliverMan, IDlist, fare);
 	}
 
-	public Date getD() {
-		return d;
-	}
-
-	public String getQyID() {
-		return qyID;
-	}
-
-	public String getDestination() {
-		return destination;
-	}
-
-	public String getTruckID() {
-		return truckID;
-	}
-
-	public String getCheckName() {
-		return checkName;
-	}
-
-	public String getDeliverMan() {
-		return deliverMan;
-	}
-
-	public List<String> getIDlist() {
-		return IDlist;
-	}
-
-	public double getFare() {
-		return fare;
-	}
 
 }

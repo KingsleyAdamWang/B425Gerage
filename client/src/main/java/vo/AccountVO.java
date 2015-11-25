@@ -1,12 +1,11 @@
 ﻿package vo;
 
-import java.io.Serializable;
 import java.util.Vector;
 
 import po.AccountPO;
 
-public class AccountVO extends Vector<String> implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class AccountVO extends Vector<String> {
+//	private static final long serialVersionUID = 1L;
 
 	// private String name;
 	// private String accountID;
@@ -23,7 +22,7 @@ public class AccountVO extends Vector<String> implements Serializable {
 	 * 
 	 * @param name
 	 * @param accountID
-	 * @param balance
+//	 * @param balance
 	 */
 	public AccountVO(String name, String accountID, double balance) {
 		this.add(name);
