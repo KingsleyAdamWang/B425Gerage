@@ -1,8 +1,10 @@
 package businessLogic.manageBL;
 
 import java.rmi.RemoteException;
+import java.util.List;
 
 import po.PriceConstPO;
+import util.Distance;
 import vo.PriceConstVO;
 import client.ClientInitException;
 import client.RMIHelper;
@@ -24,6 +26,32 @@ public class StrategyBL {
 		}
 	}
 	
+	public List<String> getCities(){
+		List<String> cities = null;
+		List<Distance> distances=pcPO.getDistances();
+		int label=0;//label表示状态，0表示未找到相同，1表示已找到相同
+		for(Distance temp: distances){
+			String city= temp.getCity1();
+			for(String tempCity: cities){
+				if(tempCity.equals(city)){
+					//如果找到相同的城市，label设置为1，跳出
+					label=1;
+					break;
+				}
+			}
+			//找到和未找到2中情况的判断
+			if(label==1){
+				label=0;
+			}else{
+				cities.add(city);
+			}
+			
+			
+			
+		}
+		
+		return cities;
+	}
 	
 	public PriceConstVO getVO(){
 		if(pcPO!=null){
