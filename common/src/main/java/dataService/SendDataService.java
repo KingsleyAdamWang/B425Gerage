@@ -21,6 +21,7 @@ public interface SendDataService extends Remote {
 	public void modify(SendPO po) throws RemoteException;
 
 	// 审批通过 某一个寄件单 通过条形码号来进行修改
-	public void agree(String id) throws RemoteException;
+	public void approval(SendPO po) throws RemoteException;
 
+	public void approvalAll() throws RemoteException;
 }

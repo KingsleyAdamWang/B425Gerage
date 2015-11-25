@@ -72,6 +72,7 @@ public class InventoryDataServiceImpl extends UnicastRemoteObject implements
 		update();
 
 	}
+	
 
 	private void update() {
 		FileWriter fw;

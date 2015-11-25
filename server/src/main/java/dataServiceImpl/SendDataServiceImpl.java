@@ -97,15 +97,24 @@ public class SendDataServiceImpl extends UnicastRemoteObject implements
 
 
 	@Override
-	public void agree(String id) throws RemoteException {
-		for(SendPO po: sends){
-			if(po.getId().equals(id)){
+	public void approval(SendPO po) throws RemoteException {
+	
 				sends.get(sends.indexOf(po)).setState(ReceiptsState.approve);
 			    update();
-			    return;
+			
 			}
-		}
 		
+		
+	
+
+
+
+	@Override
+	public void approvalAll() throws RemoteException {
+	  for(int i=0 ; i < sends.size() ;i ++){
+		  sends.get(i).setState(ReceiptsState.approve);
+	  }
+		update();
 	}
 
 
