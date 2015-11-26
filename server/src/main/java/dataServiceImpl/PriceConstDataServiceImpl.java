@@ -24,6 +24,7 @@ public class PriceConstDataServiceImpl extends UnicastRemoteObject implements
 	}
 
 	private void init() {
+		price =  null;
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(file));
 			ArrayList<String> result = new ArrayList<String>();
