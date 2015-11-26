@@ -27,7 +27,7 @@ public class StrategyBL {
 	}
 	
 	public List<String> getCities(){
-		List<String> cities = null;
+		List<String> cities = new ArrayList<String>;
 		List<Distance> distances=pcPO.getDistances();
 		int label=0;//label表示状态，0表示未找到相同，1表示已找到相同
 		for(Distance temp: distances){
@@ -45,8 +45,6 @@ public class StrategyBL {
 			}else{
 				cities.add(city);
 			}
-			
-			
 			
 		}
 		
