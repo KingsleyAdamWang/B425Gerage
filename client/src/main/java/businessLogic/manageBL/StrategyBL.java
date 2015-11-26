@@ -17,7 +17,7 @@ public class StrategyBL {
 	private PriceConstPO pcPO;
 	public  StrategyBL() throws RemoteException {
 		try {
-			RMIHelper.initPriceConstDataService();
+				RMIHelper.initPriceConstDataService();
 			pcDS = RMIHelper.getPriceConstDataService();
 			pcPO=pcDS.getPriceConst();
 

@@ -276,7 +276,7 @@ public class RMIHelper {
 	public static void initPriceConstDataService() throws ClientInitException {
 		try {
 			priceConstDataService = (PriceConstDataService) Naming.lookup(urlPrefix
-					+ "pricecnst-data");
+					+ "priceconst-data");
 			System.out.println("RMI远程调用PriceConstDataService成功");
 		} catch (Exception e) {
 			throw new ClientInitException(e);
