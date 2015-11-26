@@ -39,7 +39,7 @@ public class RMIHelper {
 
 	private static Map<String, Class<? extends UnicastRemoteObject>> NAMING_MAP = new HashMap<>();
 
-	// 设置服务器的端口号为1099
+	// 设置服务器的端口.号为1099
 	private static final int PORT = 1099;
 
 	// 设置初始化状态为false
