@@ -39,7 +39,8 @@ public class InstitutionBL {
 		for(InsType tempType : InsType.values()){
 			for(InstitutionPO temp : insList){
 				if(temp.getType()==tempType){
-					result.add(new InstitutionVO(temp));
+					result.add(0,new InstitutionVO(temp));
+					
 				}
 			}
 		}
