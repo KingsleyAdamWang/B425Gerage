@@ -8,28 +8,33 @@ import businessLogicService.manageBLService.StrategyBLService;
 
 public class StrategyController implements StrategyBLService {
 	private StrategyBL strategyBL;
-	
-	public StrategyController() throws RemoteException{
-		strategyBL=new StrategyBL();
+
+	public StrategyController() throws RemoteException {
+		strategyBL = new StrategyBL();
 	}
-	
-	public PriceConstVO getVO(){
+
+	public PriceConstVO getVO() {
 		return strategyBL.getVO();
 	}
-	
-	public String modify(PriceConstVO vo) throws RemoteException{
+
+	public String modify(PriceConstVO vo) throws RemoteException {
 		return strategyBL.modify(vo);
 	}
-	
-	public List<String> getCities(){
+
+	public List<String> getCities() {
 		return strategyBL.getCities();
 	}
-/*	public double calSendPrice(String city1, String city2, PackType packType, Express expressType){
-		return strategyBL.calSendPrice(city1,city2,packType,expressType);
+
+	public double getDistance(String city1, String city2) {
+		return strategyBL.getDistance(city1, city2);
 	}
-	
-	public double calTransFare(String city1, String city2){
-		return strategyBL.calTransFare();
-	}*/
-	
+	/*
+	 * public double calSendPrice(String city1, String city2, PackType packType,
+	 * Express expressType){ return
+	 * strategyBL.calSendPrice(city1,city2,packType,expressType); }
+	 * 
+	 * public double calTransFare(String city1, String city2){ return
+	 * strategyBL.calTransFare(); }
+	 */
+
 }

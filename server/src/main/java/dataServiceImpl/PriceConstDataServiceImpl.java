@@ -50,7 +50,7 @@ public class PriceConstDataServiceImpl extends UnicastRemoteObject implements
 		try {
 			FileWriter fw = new FileWriter(file);
 			fw.write("");
-			fw.write(price.toString());
+			fw.write(po.toString());
 			fw.flush();
 			fw.close();
 		} catch (IOException e) {
