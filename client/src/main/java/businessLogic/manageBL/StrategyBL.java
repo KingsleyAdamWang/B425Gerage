@@ -34,18 +34,21 @@ public class StrategyBL {
 		int label2=0;
 		for(Distance temp: distances){
 			label1=0;
+			label2=0;
 			String city1= temp.getCity1();
 			String city2=temp.getCity2();
 			for(String tempCity: cities){
 				if(tempCity.equals(city1)){
 					//如果找到相同的城市，label设置为1，跳出
 					label1=1;
-					break;
+					
 				}
 				if(tempCity.equals(city2)){
 					label2=1;
-					break;
+					
 				}
+				if(label1==1||label2==1)
+					break;
 			}
 			//找到和未找到2中情况的判断
 			if(label1==1){
@@ -53,6 +56,7 @@ public class StrategyBL {
 			}else{
 				cities.add(city1);
 			}
+			
 			if(label2==1){
 				label2=0;
 			}else{

@@ -2,28 +2,27 @@ package util;
 
 import java.io.Serializable;
 
-public class Distance implements Serializable{
+public class Distance implements Serializable {
 
 	private String city1;
 	private String city2;
 	private double distance;
-	
-	
+
 	public Distance(String city1, String city2, double distance) {
 		super();
 		this.city1 = city1;
 		this.city2 = city2;
 		this.distance = distance;
 	}
-	
-	
-	public Distance(String data){
+
+	public Distance(String data) {
 		String temp[] = data.split(";");
-		city1 =temp[0];
+		city1 = temp[0];
 		city2 = temp[1];
 		distance = Double.parseDouble(temp[2]);
-		
+
 	}
+
 	public String getCity1() {
 		return city1;
 	}
@@ -35,6 +34,7 @@ public class Distance implements Serializable{
 	public double getDistance() {
 		return distance;
 	}
+
 	public void setDistance(double distance) {
 		this.distance = distance;
 	}
@@ -45,9 +45,6 @@ public class Distance implements Serializable{
 		int result = 1;
 		result = prime * result + ((city1 == null) ? 0 : city1.hashCode());
 		result = prime * result + ((city2 == null) ? 0 : city2.hashCode());
-		long temp;
-		temp = Double.doubleToLongBits(distance);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
 		return result;
 	}
 
@@ -60,13 +57,19 @@ public class Distance implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Distance other = (Distance) obj;
-		if(other.city1.equals(city1)&&other.city2.equals(city2))
-				return true;
-		if(other.city2.equals(city1)&&other.city1.equals(city2))
+
+		if (city1 == null) {
+			if (other.city1 != null)
+				return false;
+		}
+		if (city2 == null) {
+			if (other.city2 != null)
+				return false;
+		}
+		if ((other.city1.equals(city1) && other.city2.equals(city2))
+				|| (other.city1.equals(city2) && other.city2.equals(city1)))
 			return true;
-		return true;
+	return false;
 	}
-	
-	
 	
 }
