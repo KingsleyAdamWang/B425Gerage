@@ -1,6 +1,7 @@
 package businessLogic.manageBL;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.List;
 
 import po.PriceConstPO;
@@ -27,24 +28,37 @@ public class StrategyBL {
 	}
 	
 	public List<String> getCities(){
-		List<String> cities = new ArrayList<String>;
+		List<String> cities = new ArrayList<String>();
 		List<Distance> distances=pcPO.getDistances();
-		int label=0;//label表示状态，0表示未找到相同，1表示已找到相同
+		int label1=0;//label表示状态，0表示未找到相同，1表示已找到相同
+		int label2=0;
 		for(Distance temp: distances){
-			String city= temp.getCity1();
+			label1=0;
+			String city1= temp.getCity1();
+			String city2=temp.getCity2();
 			for(String tempCity: cities){
-				if(tempCity.equals(city)){
+				if(tempCity.equals(city1)){
 					//如果找到相同的城市，label设置为1，跳出
-					label=1;
+					label1=1;
+					break;
+				}
+				if(tempCity.equals(city2)){
+					label2=1;
 					break;
 				}
 			}
 			//找到和未找到2中情况的判断
-			if(label==1){
-				label=0;
+			if(label1==1){
+				label1=0;
 			}else{
-				cities.add(city);
+				cities.add(city1);
 			}
+			if(label2==1){
+				label2=0;
+			}else{
+				cities.add(city2);
+			}
+			
 			
 		}
 		
@@ -69,10 +83,14 @@ public class StrategyBL {
 	public double getDistance(String city1, String city2) {
 		List<Distance> distances=pcPO.getDistances();
 		double result = 0;
+		Distance newD= new Distance(city1, city2,0);
+		
 		for(Distance temp: distances){
-			if((temp.getCity1()==city1&&temp.getCity2()==city2)||(temp.getCity2()==city1&&temp.getCity1()==city2)){
-				result=temp.getDistance();
-			}
+//			if((temp.getCity1()==city1&&temp.getCity2()==city2)||(temp.getCity2()==city1&&temp.getCity1()==city2)){
+				if(newD.equals(temp)){
+					result=temp.getDistance();
+					return result;
+				}
 		}
 		
 		return result;
