@@ -25,6 +25,7 @@ public int getShelf() {
 }
 public void setShelf(int shelf) {
 	this.shelf = shelf;
+	
 }
 public int getPlace() {
 	return place;

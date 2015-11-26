@@ -68,6 +68,17 @@ public class StrategyBL {
 		return null;
 	}
 	
+	public double getDistance(String city1, String city2) {
+		List<Distance> distances=pcPO.getDistances();
+		double result = 0;
+		for(Distance temp: distances){
+			if((temp.getCity1()==city1&&temp.getCity2()==city2)||(temp.getCity2()==city1&&temp.getCity1()==city2)){
+				result=temp.getDistance();
+			}
+		}
+		
+		return result;
+	}
 	
 
 	public double calSendPrice(String city1, String city2, PackType packType, Express expressType) {
