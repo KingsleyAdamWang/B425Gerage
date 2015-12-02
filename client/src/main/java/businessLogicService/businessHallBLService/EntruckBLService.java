@@ -1,5 +1,7 @@
 package businessLogicService.businessHallBLService;
 
+import java.rmi.RemoteException;
+
 import vo.EntruckVO;
 
 /**
@@ -8,9 +10,9 @@ import vo.EntruckVO;
  *
  */
 public interface EntruckBLService {
-	public String add(EntruckVO eVO);
+	public String add(EntruckVO eVO) throws RemoteException;
 
-	public  EntruckVO search(String id);
+	public  EntruckVO search(String id) throws RemoteException;
 
 	/**
 	 * 装车单提交
@@ -19,5 +21,5 @@ public interface EntruckBLService {
 	 */
 	public String submit(EntruckVO eVO);
 	
-	public String delete(EntruckVO eVO);
+	public String delete(EntruckVO eVO) throws RemoteException;
 }
