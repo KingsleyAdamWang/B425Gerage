@@ -3,82 +3,83 @@ package vo;
 import java.util.Date;
 import java.util.List;
 
-public class TransferVO {
+import enumSet.ReceiptsState;
+import enumSet.TransportType;
+import po.TransferPO;
+
+public class TransferVO extends ReceiptsVO {
+	// 时间
 	Date d;
-	String institutionID, hangbanID, departure, destination, counterID;
-	UserVO user;
+	// 机构编号
+	String institutionID;
+	// 中转中心的货运编号/航空编号
+	String transferID;
+	// 出发地城市
+	String departure;
+	// 目的地城市
+	String destination;
+
+	// 该中转单所具有的所有物流的快递单号
 	List<String> list;
+	// 中转产生的运费
 	double fare;
-	public TransferVO(Date d, String institutionID, String hangbanID,
-			String departure, String destination, String counterID,
-			UserVO user, List<String> list, double fare) {
-		super();
+	// 中转的类型 飞机 火车 还是汽车
+	TransportType type;
+	// 检装员
+	String name;
+	// 根据类型不同 飞机是货柜号 火车是车厢号 汽车是押运员
+	String temp;
+
+	public TransferVO(ReceiptsState state, String userID, Date d,
+			String institutionID, String transferID, String departure,
+			String destination, List<String> list, double fare,
+			TransportType type, String name, String temp) {
+		super(state, userID);
 		this.d = d;
 		this.institutionID = institutionID;
-		this.hangbanID = hangbanID;
+		this.transferID = transferID;
 		this.departure = departure;
 		this.destination = destination;
-		this.counterID = counterID;
-		this.user = user;
 		this.list = list;
 		this.fare = fare;
+		this.type = type;
+		this.name = name;
+		this.temp = temp;
 	}
-	public TransferVO() {
-		// TODO Auto-generated constructor stub
+
+	public TransferVO(TransferPO po) {
+		this(po.getState(), po.getTransferID(), po.getD(), po
+				.getInstitutionID(), po.getTransferID(), po.getDeparture(), po
+				.getDestination(), po.getList(), po.getFare(), po.getType(), po
+				.getName(), po.getTemp());
 	}
-	public Date getD() {
-		return d;
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((transferID == null) ? 0 : transferID.hashCode());
+		return result;
 	}
-	public void setD(Date d) {
-		this.d = d;
-	}
-	public String getInstitutionID() {
-		return institutionID;
-	}
-	public void setInstitutionID(String institutionID) {
-		this.institutionID = institutionID;
-	}
-	public String getHangbanID() {
-		return hangbanID;
-	}
-	public void setHangbanID(String hangbanID) {
-		this.hangbanID = hangbanID;
-	}
-	public String getDeparture() {
-		return departure;
-	}
-	public void setDeparture(String departure) {
-		this.departure = departure;
-	}
-	public String getDestination() {
-		return destination;
-	}
-	public void setDestination(String destination) {
-		this.destination = destination;
-	}
-	public String getCounterID() {
-		return counterID;
-	}
-	public void setCounterID(String counterID) {
-		this.counterID = counterID;
-	}
-	public UserVO getUser() {
-		return user;
-	}
-	public void setUser(UserVO user) {
-		this.user = user;
-	}
-	public List<String> getList() {
-		return list;
-	}
-	public void setList(List<String> list) {
-		this.list = list;
-	}
-	public double getFare() {
-		return fare;
-	}
-	public void setFare(double fare) {
-		this.fare = fare;
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TransferVO other = (TransferVO) obj;
+		if (transferID == null) {
+			if (other.transferID != null)
+				return false;
+		} else if (!transferID.equals(other.transferID))
+			return false;
+		return true;
 	}
 	
+	
+
 }
