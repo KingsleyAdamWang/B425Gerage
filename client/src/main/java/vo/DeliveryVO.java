@@ -2,44 +2,53 @@ package vo;
 
 import java.util.Date;
 
-public class DeliveryVO {
+import po.DeliveryPO;
+import enumSet.ReceiptsState;
+
+public class DeliveryVO extends ReceiptsVO {
 	Date d;
 	String id;
-	UserVO user;
+	String name;
 
-	public DeliveryVO(Date d, String id, UserVO user) {
-		super();
+	public DeliveryVO(ReceiptsState state, String userID, Date d, String id,
+			String name) {
+		super(state, userID);
 		this.d = d;
 		this.id = id;
-		this.user = user;
+		this.name = name;
 	}
 
-	public DeliveryVO() {
-		// TODO Auto-generated constructor stub
+	public DeliveryVO(DeliveryPO po) {
+		this(po.getState(), po.getUserID(), po.getD(), po.getId(), po.getName());
 	}
 
-	public Date getD() {
-		return d;
+	public DeliveryPO transToPO() {
+		return new DeliveryPO(state, userID, d, id, name);
 	}
 
-	public void setD(Date d) {
-		this.d = d;
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
 	}
 
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public UserVO getUser() {
-		return user;
-	}
-
-	public void setUser(UserVO user) {
-		this.user = user;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		DeliveryVO other = (DeliveryVO) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
 	}
 
 }
