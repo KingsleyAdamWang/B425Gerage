@@ -25,15 +25,15 @@ public class EntruckBL {
 	}
 	
 	public EntruckVO search(String EntruckID) throws RemoteException{
-/*		for(EntruckPO temp: entruckList){
+		for(EntruckPO temp: entruckList){
 			if(temp.getQyID()==EntruckID){
 				return new EntruckVO(temp);
 			}
 		}
-		return null;*/
+		return null;
 		
 		//发现DataService里有find方法。如果没有，用上面注释的内容应该也行。
-		return new EntruckVO(entruckDS.find(EntruckID));
+//		return new EntruckVO(entruckDS.find(EntruckID));
 	}
 	
 	public String add(EntruckVO vo) throws RemoteException{
@@ -70,7 +70,7 @@ public class EntruckBL {
 			if(temp.equals(po)){
 				entruckDS.modify(po);
 				//不知道这样更新entruckList行不行，试一下
-				this.entruckList=entruckDS.getEntruckList();
+				entruckList=entruckDS.getEntruckList();
 				return null;
 			}
 		}

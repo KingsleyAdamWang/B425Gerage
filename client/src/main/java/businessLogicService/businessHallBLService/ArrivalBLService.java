@@ -2,6 +2,7 @@ package businessLogicService.businessHallBLService;
 
 import java.rmi.RemoteException;
 
+import client.ClientInitException;
 import vo.ArrivalVO;
 
 /**
@@ -11,9 +12,9 @@ import vo.ArrivalVO;
  */
 public interface ArrivalBLService {
 	
-	public String add(ArrivalVO arrivalVO) throws RemoteException;
+	public String add(ArrivalVO arrivalVO) throws RemoteException, ClientInitException;
 
-	public ArrivalVO search(String id);
+	public ArrivalVO search(String id) throws RemoteException;
 
 	public String delete(ArrivalVO arrivalVO) throws RemoteException ;
 	

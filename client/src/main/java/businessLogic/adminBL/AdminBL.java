@@ -6,7 +6,9 @@ import java.util.List;
 
 import po.InstitutionPO;
 import po.UserPO;
+import presentation.MainFrame;
 import vo.InstitutionVO;
+import vo.LogVO;
 import vo.UserVO;
 import client.ClientInitException;
 import client.RMIHelper;
@@ -31,9 +33,9 @@ public class AdminBL {
 			RMIHelper.initUserDataService();
 			UserDS = RMIHelper.getUserDataService();
 			userList = UserDS.getUsers();
-			System.out.println(userList.size());
+//			System.out.println(userList.size());
 			tempList = new ArrayList<UserPO>();
-
+			
 		} catch (ClientInitException e) {
 			e.printStackTrace();
 		} catch (RemoteException e) {
@@ -125,6 +127,9 @@ public class AdminBL {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
+					
+					//操作成功录入操作日志，还没写
+//					LogVO logVO=new LogVO(null,MainFrame.getUser().getIdentityID(), "人员管理 增加");
 
 					return null;
 				}

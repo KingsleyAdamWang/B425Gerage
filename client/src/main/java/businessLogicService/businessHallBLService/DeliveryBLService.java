@@ -1,5 +1,7 @@
 package businessLogicService.businessHallBLService;
 
+import java.rmi.RemoteException;
+
 import vo.DeliveryVO;
 
 /**
@@ -13,9 +15,9 @@ public interface DeliveryBLService {
 	 * 传入一个VO
 	 * 返回String类型的结果告知是否成功
 	 * */
-	public String add(DeliveryVO dVO);
+	public String add(DeliveryVO dVO) throws RemoteException;
 	
-	public DeliveryVO search(String id);
+	public DeliveryVO search(String id) throws RemoteException;
 	
 	/**
 	 * 提交派件单操作
@@ -24,5 +26,5 @@ public interface DeliveryBLService {
 	 */
 	public String submit(DeliveryVO dVO) ;
 	
-	public String delete(DeliveryVO dVO);
+	public String delete(DeliveryVO dVO) throws RemoteException;
 }

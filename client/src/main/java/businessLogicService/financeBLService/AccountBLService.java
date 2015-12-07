@@ -12,13 +12,13 @@ import vo.AccountVO;
  */
 public interface AccountBLService {
 	
-	public boolean addAccount(String name, String accountID)throws RemoteException ;
+	public String addAccount(String name, String accountID)throws RemoteException ;
 	
 	public boolean deleteAccount(AccountVO vo)throws RemoteException ;
 	
-	public List<AccountVO> searchAccount(String key);
+	public List<AccountVO> searchAccount(String key) throws RemoteException;
 	
-	public boolean modifyAccount(AccountVO vo, String newName) throws RemoteException ;
+	public String modifyAccount(AccountVO vo, String newName) throws RemoteException ;
 	
 	public List<AccountVO> getAccounts();
 }

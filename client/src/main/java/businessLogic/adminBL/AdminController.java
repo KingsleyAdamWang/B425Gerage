@@ -1,7 +1,15 @@
 package businessLogic.adminBL;
 
+import java.rmi.RemoteException;
+import java.util.Date;
 import java.util.List;
 
+import po.LogPO;
+import presentation.MainFrame;
+import client.ClientInitException;
+import client.RMIHelper;
+import dataService.LogDataService;
+import util.DateUtil;
 import vo.InstitutionVO;
 import vo.UserVO;
 import businessLogicService.adminBLService.AdminBLService;
@@ -14,9 +22,12 @@ import businessLogicService.adminBLService.AdminBLService;
 public class AdminController implements AdminBLService {
 
 	private AdminBL adminBL;
-
-	public AdminController() {
+	private LogDataService logDS;
+	
+	public AdminController() throws ClientInitException {
 		adminBL = new AdminBL();
+		RMIHelper.initLogDataService();
+		logDS=RMIHelper.getLogDataService();
 	}
 
 	/*
@@ -27,7 +38,7 @@ public class AdminController implements AdminBLService {
 	 * )
 	 */
 	public List<UserVO> search(String key) {
-
+		
 		return adminBL.search(key);
 	}
 
@@ -38,7 +49,8 @@ public class AdminController implements AdminBLService {
 	 * businessLogicService.adminBLService.AdminBLService#modify(java.lang.String
 	 * , java.lang.String)
 	 */
-	public String modify(String identityID, String newPassWord) {
+	public String modify(String identityID, String newPassWord) throws RemoteException {
+		logDS.add(new LogPO(new Date(), MainFrame.getUser().getIdentityID(), "人员管理 修改人员"));
 		return adminBL.modify(identityID, newPassWord);
 	}
 

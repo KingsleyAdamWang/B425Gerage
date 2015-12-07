@@ -4,13 +4,16 @@ import java.lang.Thread.State;
 import java.rmi.RemoteException;
 import java.util.List;
 
+import businessLogic.logisticsBL.LogisticsBL;
 import po.ArrivalPO;
 import po.EntruckPO;
+import po.TransferPO;
 import vo.ArrivalVO;
 import client.ClientInitException;
 import client.RMIHelper;
 import dataService.ArrivalDataService;
 import dataService.EntruckDataService;
+import dataService.TransferDataService;
 import enumSet.ReceiptsState;
 
 public class ArrivalBL {
@@ -37,6 +40,7 @@ public class ArrivalBL {
 	}
 	
 	public String add(ArrivalVO vo) throws RemoteException{
+		
 		ArrivalPO po=vo.transToPO();
 		
 		for(ArrivalPO temp:arrivalList){
@@ -49,9 +53,23 @@ public class ArrivalBL {
 
 		arrivalList.add(po);
 		arrivalDS.add(po);
-		//TODO 更新对应的物流信息
+		
+		//更新物流信息
+		//第一次的TransferID就是装车单，这些TransferID需要人工填入
+		List<String> goodsID=getIDList(po.getTransferId());
+		businessLogic.manageBL.InstitutionBL insBL=new businessLogic.manageBL.InstitutionBL();
+		String insName=insBL.searchInstitution(po.getInstitutionID()).getName();
+		updateLogistics(goodsID,insName);
 		return null;
 	}
+	
+	public String updateLogistics(List<String> goodsID,String institutionName) throws RemoteException{
+		LogisticsBL logisticsBL=new LogisticsBL();
+		for(String temp: goodsID){
+			logisticsBL.update(temp, "到达"+institutionName);
+		}
+		return null;
+	} 
 	
 	public String delete(ArrivalVO vo) throws RemoteException{
 		ArrivalPO po=vo.transToPO();
@@ -81,15 +99,15 @@ public class ArrivalBL {
 		return "未找到对应到达单";
 	}
 	
-	//通过装车单单号查询对应的所有快递单号列表
-	public List<String> getIDList(String entruckID) throws RemoteException{
+	//通过中转单单号查询对应的所有快递单号列表
+	public List<String> getIDList(String transferID) throws RemoteException{
 //		EntruckDataService entruckDS=new EntruckDataService();
 		
 		try {
-			RMIHelper.initEntruckDataService();
-			EntruckDataService entruckDS = RMIHelper.getEntruckDataService();
-			EntruckPO entruckPO=entruckDS.find(entruckID);
-			return entruckPO.getIDlist();
+			RMIHelper.initTransferDataService();
+			TransferDataService transferDS = RMIHelper.getTransferDataService();
+			TransferPO transferPO=transferDS.find(transferID);
+			return transferPO.getList();
 			//		List<EntruckPO> entruckList = entruckDS.getEntruckList();
 		} catch (ClientInitException e) {
 			e.printStackTrace();
