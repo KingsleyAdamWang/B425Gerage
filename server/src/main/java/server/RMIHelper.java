@@ -21,6 +21,7 @@ import dataServiceImpl.LogisticsDataServiceImpl;
 import dataServiceImpl.MoneyDataServiceImpl;
 import dataServiceImpl.PriceConstDataServiceImpl;
 import dataServiceImpl.ReceiveDataServiceImpl;
+import dataServiceImpl.SalaryDataServiceImpl;
 import dataServiceImpl.SendDataServiceImpl;
 import dataServiceImpl.ShipmentDataServiceImpl;
 import dataServiceImpl.TransferDataServiceImpl;
@@ -72,6 +73,7 @@ public class RMIHelper {
 		NAMING_MAP.put("institution-data", InstitutionDataServiceImpl.class);
 		NAMING_MAP.put("priceconst-data", PriceConstDataServiceImpl.class);
 		NAMING_MAP.put("user-data", UserDataServiceImpl.class);
+		NAMING_MAP.put("salary-data", SalaryDataServiceImpl.class);
 
 	}
 

@@ -14,6 +14,7 @@ import dataService.LogisticsDataService;
 import dataService.MoneyDataService;
 import dataService.PriceConstDataService;
 import dataService.ReceiveDataService;
+import dataService.SalaryDataService;
 import dataService.SendDataService;
 import dataService.ShipmentDataService;
 import dataService.TransferDataService;
@@ -51,6 +52,7 @@ public class RMIHelper {
 	private static UserDataService userDataService;
     private static PriceConstDataService priceConstDataService;
 	private static InstitutionDataService institutionDataService;
+	private static SalaryDataService salaryDataService;
 	// //
 	// public synchronized static void init() throws ClientInitException {
 	// if (inited) {
@@ -284,6 +286,16 @@ public class RMIHelper {
 
 	}
 	
+	public static void initSalaryDataService() throws ClientInitException {
+		try {
+			salaryDataService = (SalaryDataService) Naming.lookup(urlPrefix
+					+ "salary-data");
+			System.out.println("RMI远程调用SalaryDataService成功");
+		} catch (Exception e) {
+			throw new ClientInitException(e);
+		}
+
+	}
 	// 获取各类的DataService 的对象 根据方法名字自己看
 	// 就是各种private 的dataService 属性的Getter方法
 	// 不需要Setter方法
@@ -388,4 +400,8 @@ public class RMIHelper {
 		return priceConstDataService;
 	}
 	
+	public static SalaryDataService getSalaryDataService(){
+		return salaryDataService;
+		
+	}
 }
