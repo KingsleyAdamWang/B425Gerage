@@ -8,10 +8,12 @@ import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import po.EntryPO;
 import dataService.EntryDataService;
+import enumSet.ReceiptsState;
 
 public class EntryDataServiceImpl extends UnicastRemoteObject implements EntryDataService {
 
@@ -86,8 +88,39 @@ public class EntryDataServiceImpl extends UnicastRemoteObject implements EntryDa
 	}
 	
 	
+	public void modify(EntryPO po)throws RemoteException{
+		entryList.set(entryList.indexOf(po), po);
+		update();
+	}
 	
-	public List<EntryPO> getEntryList(){
+	
+	public void approval(EntryPO po )throws RemoteException{
+		entryList.get(entryList.indexOf(po)).setState(ReceiptsState.approve);
+		update();
+		
+		
+	}
+	
+	
+	public void approvalAll()throws RemoteException{
+		Iterator<EntryPO> it = entryList.iterator();
+		while(it.hasNext()){
+			it.next().setState(ReceiptsState.approve);
+		}
+		update();
+	}
+	
+	public List<EntryPO> getEntryList(String institutionID)throws RemoteException{
+		List<EntryPO> listByIns = new ArrayList<EntryPO>();
+		for(EntryPO po : entryList){
+			if(po.getInstitutionID().equals(institutionID)){
+				listByIns.add(po);
+			}
+		}
+		return listByIns;
+	}
+	
+	public List<EntryPO> getEntryList()throws RemoteException{
 		return entryList;
 	}
 

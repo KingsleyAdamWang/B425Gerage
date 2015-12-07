@@ -27,28 +27,9 @@ public class ShipmentPO extends ReceiptsPO implements Serializable {
 	/**
 	 * 出库单填写po
 	 * 
-	 * @param state
 	 * @param user
-	 * @param institutionID
-	 * @param id
-	 * @param date
-	 * @param destination
-	 * @param transferID
-	 * @param type
 	 */
 
-	public ShipmentPO(ReceiptsState state, String userID, String institutionID,
-			String id, Date date, String destination, String transferID,
-			TransportType type) {
-		super(state, userID);
-		this.institutionID = institutionID;
-		this.id = id;
-		this.date = date;
-		this.destination = destination;
-		this.transferID = transferID;
-		this.type = type;
-
-	}
 
 	public ShipmentPO(String data) {
 		String[] temp = data.split(" ");
@@ -61,6 +42,18 @@ public class ShipmentPO extends ReceiptsPO implements Serializable {
 		this.transferID = temp[6];
 		this.type = TransportType.getTransportType(temp[7]);
 
+	}
+
+	public ShipmentPO(ReceiptsState state, String userID, String institutionID,
+			String id, Date date, String destination, String transferID,
+			TransportType type) {
+		super(state, userID);
+		this.institutionID = institutionID;
+		this.id = id;
+		this.date = date;
+		this.destination = destination;
+		this.transferID = transferID;
+		this.type = type;
 	}
 
 	public String toString() {
