@@ -48,10 +48,16 @@ public class TransferVO extends ReceiptsVO {
 	}
 
 	public TransferVO(TransferPO po) {
-		this(po.getState(), po.getTransferID(), po.getD(), po
-				.getInstitutionID(), po.getTransferID(), po.getDeparture(), po
-				.getDestination(), po.getList(), po.getFare(), po.getType(), po
-				.getName(), po.getTemp());
+		this(po.getState(), po.getUserID(), po.getD(), po.getInstitutionID(),
+				po.getTransferID(), po.getDeparture(), po.getDestination(), po
+						.getList(), po.getFare(), po.getType(), po.getName(),
+				po.getTemp());
+	}
+
+	public TransferPO transToPO() {
+		return new TransferPO(state, userID, d, institutionID, transferID,
+				departure, destination, list, fare, type, name, temp);
+
 	}
 
 	@Override
@@ -79,7 +85,5 @@ public class TransferVO extends ReceiptsVO {
 			return false;
 		return true;
 	}
-	
-	
 
 }
