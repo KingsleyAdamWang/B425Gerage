@@ -1,5 +1,6 @@
 package businessLogicService.businessHallBLService;
 
+import java.rmi.RemoteException;
 import java.util.List;
 
 import vo.CashRegisterVO;
@@ -10,7 +11,7 @@ import vo.CashRegisterVO;
  *
  */
 public interface CashRegisterBLService {
-	public String add(CashRegisterVO crVO);
+	public String add(CashRegisterVO crVO) throws RemoteException;
 
 	public String search(String id);
 
