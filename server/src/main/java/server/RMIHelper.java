@@ -64,7 +64,7 @@ public class RMIHelper {
 		NAMING_MAP.put("log-data", LogDataServiceImpl.class);
 		NAMING_MAP.put("logistics-data", LogisticsDataServiceImpl.class);
 		NAMING_MAP.put("income-data", IncomeDataServiceImpl.class);
-		NAMING_MAP.put("money-data", MoneyDataServiceImpl.class);
+//		NAMING_MAP.put("money-data", MoneyDataServiceImpl.class);
 		NAMING_MAP.put("receive-data", ReceiveDataServiceImpl.class);
 		NAMING_MAP.put("send-data", SendDataServiceImpl.class);
 		NAMING_MAP.put("shipment-data", ShipmentDataServiceImpl.class);

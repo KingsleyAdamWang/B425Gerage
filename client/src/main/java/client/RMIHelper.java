@@ -1,4 +1,5 @@
 package client;
+
 import java.rmi.Naming;
 
 import dataService.AccountDataService;
@@ -7,6 +8,7 @@ import dataService.DeliveryDataService;
 import dataService.EntruckDataService;
 import dataService.EntryDataService;
 import dataService.FormDataService;
+import dataService.IncomeDataService;
 import dataService.InstitutionDataService;
 import dataService.InventoryDataService;
 import dataService.LogDataService;
@@ -20,7 +22,6 @@ import dataService.ShipmentDataService;
 import dataService.TransferDataService;
 import dataService.TruckDataService;
 import dataService.UserDataService;
-
 
 public class RMIHelper {
 
@@ -43,16 +44,18 @@ public class RMIHelper {
 	private static InventoryDataService inventoryDataService;
 	private static LogDataService logDataService;
 	private static LogisticsDataService logisticsDataService;
-	private static MoneyDataService moneyDataService;
+	private static IncomeDataService incomeDataService;
+	// private static MoneyDataService moneyDataService;
 	private static ReceiveDataService receiveDataService;
 	private static SendDataService sendDataService;
 	private static ShipmentDataService shipmentDataService;
 	private static TransferDataService transferDataService;
 	private static TruckDataService truckDataService;
 	private static UserDataService userDataService;
-    private static PriceConstDataService priceConstDataService;
+	private static PriceConstDataService priceConstDataService;
 	private static InstitutionDataService institutionDataService;
 	private static SalaryDataService salaryDataService;
+
 	// //
 	// public synchronized static void init() throws ClientInitException {
 	// if (inited) {
@@ -69,7 +72,6 @@ public class RMIHelper {
 	//
 	// //
 
-
 	// 初始化AccountDataService对象 下面的各个方法都是对对应的DataService进行相应的初始化
 	public static void initAccountDataService() throws ClientInitException {
 		try {
@@ -81,7 +83,6 @@ public class RMIHelper {
 		}
 	}
 
-	
 	public static void initArrivalDataService() throws ClientInitException {
 		try {
 			arrivalDataService = (ArrivalDataService) Naming.lookup(urlPrefix
@@ -92,7 +93,6 @@ public class RMIHelper {
 		}
 	}
 
-	
 	public static void initDeliveryDataService() throws ClientInitException {
 		try {
 			deliveryDataService = (DeliveryDataService) Naming.lookup(urlPrefix
@@ -103,8 +103,6 @@ public class RMIHelper {
 		}
 	}
 
-	
-	
 	public static void initEntruckDataService() throws ClientInitException {
 		try {
 			entruckDataService = (EntruckDataService) Naming.lookup(urlPrefix
@@ -115,7 +113,6 @@ public class RMIHelper {
 		}
 	}
 
-	
 	public static void initEntryDataService() throws ClientInitException {
 		try {
 			entryDataService = (EntryDataService) Naming.lookup(urlPrefix
@@ -126,8 +123,6 @@ public class RMIHelper {
 		}
 	}
 
-	
-	
 	public static void initFormDataService() throws ClientInitException {
 		try {
 			formDataService = (FormDataService) Naming.lookup(urlPrefix
@@ -138,8 +133,6 @@ public class RMIHelper {
 		}
 	}
 
-	
-	
 	public static void initInventoryDataService() throws ClientInitException {
 		try {
 			inventoryDataService = (InventoryDataService) Naming
@@ -150,8 +143,6 @@ public class RMIHelper {
 		}
 	}
 
-	
-	
 	public static void initLogDataService() throws ClientInitException {
 		try {
 			logDataService = (LogDataService) Naming.lookup(urlPrefix
@@ -162,8 +153,6 @@ public class RMIHelper {
 		}
 	}
 
-	
-	
 	public static void initLogisticsDataService() throws ClientInitException {
 		try {
 			logisticsDataService = (LogisticsDataService) Naming
@@ -173,7 +162,7 @@ public class RMIHelper {
 			throw new ClientInitException(e);
 		}
 	}
-	
+
 	public static void initInstitutionDataService() throws ClientInitException {
 		try {
 			institutionDataService = (InstitutionDataService) Naming
@@ -184,20 +173,26 @@ public class RMIHelper {
 		}
 	}
 
-	
-	
-	public static void initMoneyDataService() throws ClientInitException {
+	public static void initIncomeDataService() throws ClientInitException {
 		try {
-			moneyDataService = (MoneyDataService) Naming.lookup(urlPrefix
-					+ "money-data");
-			System.out.println("RMI远程调用MoneyDataService成功");
+			incomeDataService = (IncomeDataService) Naming.lookup(urlPrefix
+					+ "income-data");
+			System.out.println("RMI远程调用IncomeDataService成功");
 		} catch (Exception e) {
 			throw new ClientInitException(e);
 		}
 	}
-   
-	
-	
+
+	// public static void initMoneyDataService() throws ClientInitException {
+	// try {
+	// moneyDataService = (MoneyDataService) Naming.lookup(urlPrefix
+	// + "money-data");
+	// System.out.println("RMI远程调用MoneyDataService成功");
+	// } catch (Exception e) {
+	// throw new ClientInitException(e);
+	// }
+	// }
+
 	public static void initReceiveDataService() throws ClientInitException {
 		try {
 			receiveDataService = (ReceiveDataService) Naming.lookup(urlPrefix
@@ -209,8 +204,6 @@ public class RMIHelper {
 
 	}
 
-	
-	
 	public static void initSendDataService() throws ClientInitException {
 		try {
 			sendDataService = (SendDataService) Naming.lookup(urlPrefix
@@ -222,8 +215,6 @@ public class RMIHelper {
 
 	}
 
-	
-	
 	public static void initShipmentDataService() throws ClientInitException {
 		try {
 			shipmentDataService = (ShipmentDataService) Naming.lookup(urlPrefix
@@ -235,9 +226,6 @@ public class RMIHelper {
 
 	}
 
-	
-	
-	
 	public static void initTransferDataService() throws ClientInitException {
 		try {
 			transferDataService = (TransferDataService) Naming.lookup(urlPrefix
@@ -249,8 +237,6 @@ public class RMIHelper {
 
 	}
 
-	
-	
 	public static void initTruckDataService() throws ClientInitException {
 		try {
 			truckDataService = (TruckDataService) Naming.lookup(urlPrefix
@@ -262,8 +248,6 @@ public class RMIHelper {
 
 	}
 
-	
-	
 	public static void initUserDataService() throws ClientInitException {
 		try {
 			userDataService = (UserDataService) Naming.lookup(urlPrefix
@@ -277,15 +261,15 @@ public class RMIHelper {
 
 	public static void initPriceConstDataService() throws ClientInitException {
 		try {
-			priceConstDataService = (PriceConstDataService) Naming.lookup(urlPrefix
-					+ "priceconst-data");
+			priceConstDataService = (PriceConstDataService) Naming
+					.lookup(urlPrefix + "priceconst-data");
 			System.out.println("RMI远程调用PriceConstDataService成功");
 		} catch (Exception e) {
 			throw new ClientInitException(e);
 		}
 
 	}
-	
+
 	public static void initSalaryDataService() throws ClientInitException {
 		try {
 			salaryDataService = (SalaryDataService) Naming.lookup(urlPrefix
@@ -296,6 +280,7 @@ public class RMIHelper {
 		}
 
 	}
+
 	// 获取各类的DataService 的对象 根据方法名字自己看
 	// 就是各种private 的dataService 属性的Getter方法
 	// 不需要Setter方法
@@ -303,94 +288,69 @@ public class RMIHelper {
 		return accountDataService;
 	}
 
-	
-	
 	public static ArrivalDataService getArrivalDataService() {
 		return arrivalDataService;
 	}
 
-	
-	
 	public static DeliveryDataService getDeliveryDataService() {
 		return deliveryDataService;
 	}
 
-	
-	
 	public static EntruckDataService getEntruckDataService() {
 		return entruckDataService;
 	}
 
-	
 	public static EntryDataService getEntryDataService() {
 		return entryDataService;
 	}
 
-	
-	
 	public static FormDataService getFormDataService() {
 		return formDataService;
 	}
 
-	
-	
 	public static InventoryDataService getInventoryDataService() {
 		return inventoryDataService;
 	}
 
-	
-	
 	public static LogDataService getLogDataService() {
 		return logDataService;
 	}
 
-	
-	
 	public static LogisticsDataService getLogisticsDataService() {
 		return logisticsDataService;
 	}
 
-	
-	
-	public static MoneyDataService getMoneyDataService() {
-		return moneyDataService;
+	public static IncomeDataService getIncomeDataService() {
+		return incomeDataService;
 	}
 
-	
-	
+	// public static MoneyDataService getMoneyDataService() {
+	// return moneyDataService;
+	// }
+
 	public static ReceiveDataService getReceiveDataService() {
 		return receiveDataService;
 	}
 
-	
-	
 	public static SendDataService getSendDataService() {
 		return sendDataService;
 	}
 
-	
-	
 	public static ShipmentDataService getShipmentDataService() {
 		return shipmentDataService;
 	}
 
-	
 	public static TransferDataService getTransferDataService() {
 		return transferDataService;
 	}
 
-	
-	
 	public static TruckDataService getTruckDataService() {
 		return truckDataService;
 	}
 
-	
-	
 	public static UserDataService getUserDataService() {
 		return userDataService;
 	}
-
 
 	public static InstitutionDataService getInstitutionDataService() {
 		return institutionDataService;
@@ -399,9 +359,9 @@ public class RMIHelper {
 	public static PriceConstDataService getPriceConstDataService() {
 		return priceConstDataService;
 	}
-	
-	public static SalaryDataService getSalaryDataService(){
+
+	public static SalaryDataService getSalaryDataService() {
 		return salaryDataService;
-		
+
 	}
 }
