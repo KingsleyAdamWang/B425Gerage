@@ -25,4 +25,22 @@ public class ReceiveBLStub implements ReceiveBLService {
 		return true;
 	}
 
+
+	public String add(ReceiveVO rVO) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	public String delete(ReceiveVO rVO) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	public ReceiveVO search(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

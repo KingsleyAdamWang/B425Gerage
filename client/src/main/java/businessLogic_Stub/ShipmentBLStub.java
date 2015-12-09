@@ -25,4 +25,10 @@ public class ShipmentBLStub implements ShipmentBLService {
 		return true;
 	}
 
+
+	public boolean submitShipment(ShipmentVO vo) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

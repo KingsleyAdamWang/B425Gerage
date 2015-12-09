@@ -19,7 +19,7 @@ public class LoginBLTest {
 	public void testLogin() throws RemoteException {
 		LoginBL bl = new LoginBL();
 		UserPO po = new MockUserPO("wangdong", "12345");
-		bl.list.add(po);
+//		bl.list.add(po);
 		assertEquals(true, bl.login("wangdong", "12345"));
 	}
 

@@ -1,5 +1,8 @@
 package businessLogic_Stub;
 
+import java.rmi.RemoteException;
+
+import client.ClientInitException;
 import vo.ArrivalVO;
 import businessLogicService.businessHallBLService.ArrivalBLService;
 
@@ -22,6 +25,25 @@ public class ArrivalBLStub implements ArrivalBLService {
 		// TODO Auto-generated method stub
 		System.out.println("到达单提交成功");
 		return true;
+	}
+
+
+	public String add(ArrivalVO arrivalVO) throws RemoteException,
+			ClientInitException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	public ArrivalVO search(String id) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	public String delete(ArrivalVO arrivalVO) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
