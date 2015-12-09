@@ -5,15 +5,9 @@ import java.util.Vector;
 import po.AccountPO;
 
 public class AccountVO extends Vector<String> {
-//	private static final long serialVersionUID = 1L;
 
-	// private String name;
-	// private String accountID;
-	// private double balance;
+	private static final long serialVersionUID = 1L;
 
-	// 想来想去还是不要加空的构造方法比较好 因为账户添加必须要这两条信息好不好
-
-	
 	public AccountVO(AccountPO po){
 		this(po.getName(),po.getAccountID(),po.getBalance());
 	}

@@ -14,11 +14,8 @@ import enumSet.ReceiptsState;
  *
  */
 public class ArrivalVO extends Vector<String> {
-	// Date date;
-	// String transferId;
-	// String departure;
-	// ArrivalState condition;
-	// String institutionID;
+
+	private static final long serialVersionUID = 1L;
 
 	public ArrivalVO(ReceiptsState state, String userID, Date date,
 			String institutionID, String transferId, String departure,
