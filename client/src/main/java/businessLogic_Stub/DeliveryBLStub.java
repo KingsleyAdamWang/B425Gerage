@@ -1,5 +1,7 @@
 package businessLogic_Stub;
 
+import java.rmi.RemoteException;
+
 import vo.DeliveryVO;
 import businessLogicService.businessHallBLService.DeliveryBLService;
 
@@ -19,10 +21,28 @@ public class DeliveryBLStub implements DeliveryBLService {
 	}
 
 
-	public boolean submit(DeliveryVO vo) {
+	public String submit(DeliveryVO vo) {
 		// TODO Auto-generated method stub
 		System.out.println("派件单提交成功");
-		return true;
+		return null;
+	}
+
+
+	public String add(DeliveryVO dVO) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	public DeliveryVO search(String id) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	public String delete(DeliveryVO dVO) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

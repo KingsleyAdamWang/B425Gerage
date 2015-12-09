@@ -1,5 +1,6 @@
 package businessLogic_Stub;
 
+import java.rmi.RemoteException;
 import java.util.List;
 
 import vo.CashRegisterVO;
@@ -27,10 +28,10 @@ public class CashRegisterBLStub implements CashRegisterBLService {
 	}
 
 	
-	public boolean submit(CashRegisterVO vo) {
+	public String submit1(CashRegisterVO vo) {
 		// TODO Auto-generated method stub
 		System.out.println("收款单提交成功");
-		return true;
+		return null;
 	}
 
 	
@@ -41,6 +42,30 @@ public class CashRegisterBLStub implements CashRegisterBLService {
 					result+= vo.getFare();
 				}
 		return result;
+	}
+
+
+	public String add(CashRegisterVO crVO) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	public String search(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	public String delete(CashRegisterVO crVO) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	public String submit(CashRegisterVO vo) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 

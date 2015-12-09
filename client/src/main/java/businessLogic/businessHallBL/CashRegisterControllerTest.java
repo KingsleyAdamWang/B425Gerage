@@ -2,6 +2,7 @@ package businessLogic.businessHallBL;
 
 import static org.junit.Assert.assertEquals;
 
+import java.rmi.RemoteException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -13,7 +14,7 @@ public class CashRegisterControllerTest {
 
 	@SuppressWarnings("deprecation")
 	@Test
-	public void testTotal() {
+	public void testTotal() throws RemoteException {
 		CashRegisterController controller = new CashRegisterController();
 		MockCashRegisterVO vo1 = new MockCashRegisterVO(3.95);
 		MockCashRegisterVO vo2 = new MockCashRegisterVO(4.03);

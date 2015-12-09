@@ -7,6 +7,7 @@ import java.util.List;
 import client.ClientInitException;
 import client.RMIHelper;
 import dataService.InventoryDataService;
+import po.EntryPO;
 import po.InventoryPO;
 import vo.InventoryVO;
 
@@ -25,12 +26,24 @@ public class InventoryBL {
 		}
 	}
 	
-	public List<InventoryPO> checkBetween(Date start, Date end){
-		//缺少入库时间的量
+	public InventoryPO getInventoryPO(String institutionID){
 		for(InventoryPO temp: invList){
-			if(temp.g)
+			if(temp.getInstitutionID()==institutionID){
+				return temp;
+			}
 		}
 		return null;
+	}
+	
+	public List<EntryPO> checkBetween(Date start, Date end) throws RemoteException{
+		EntryBL entryBL=new EntryBL();
+		List<EntryPO> entryList=entryBL.getEntryList();
+		for(EntryPO temp: entryList){
+			if(!((!temp.getDate().before(start))&&temp.getDate().before(end))){
+				entryList.remove(temp);
+			}
+		}
+		return entryList;
 	}
 	public List<InventoryPO> check(){
 	
@@ -46,7 +59,16 @@ public class InventoryBL {
 		return null;
 	}
 	
-	public String adjust(InventoryVO from, InventoryVO to){
+	public String adjust(InventoryVO from, InventoryVO to) throws RemoteException{
+		InventoryPO po1=from.transToPO();
+		InventoryPO po2=from.transToPO();
+	
+		for(InventoryPO temp:invList){
+			if(temp.equals(po1)){
+				invDS.modify(po2);
+				invList=invDS.getInventoryList();
+			}
+		}
 		return null;
 	}
 	public String init(){

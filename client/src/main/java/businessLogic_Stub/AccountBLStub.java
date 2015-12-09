@@ -34,7 +34,6 @@ public class AccountBLStub implements AccountBLService {
 	}
 
 
-	@Override
 	public String addAccount(String name, String accountID)
 			throws RemoteException {
 		// TODO Auto-generated method stub
@@ -42,21 +41,18 @@ public class AccountBLStub implements AccountBLService {
 	}
 
 
-	@Override
 	public boolean deleteAccount(AccountVO vo) throws RemoteException {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 
-	@Override
 	public List<AccountVO> searchAccount(String key) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 
-	@Override
 	public String modifyAccount(AccountVO vo, String newName)
 			throws RemoteException {
 		// TODO Auto-generated method stub
@@ -64,7 +60,6 @@ public class AccountBLStub implements AccountBLService {
 	}
 
 
-	@Override
 	public List<AccountVO> getAccounts() {
 		// TODO Auto-generated method stub
 		return null;
