@@ -3,6 +3,7 @@ package presentation;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
@@ -18,6 +19,7 @@ import javax.swing.JTextField;
 
 import vo.AccountVO;
 import businessLogic.financeBL.AccountController;
+import client.ClientInitException;
 
 public class AccountUI extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -34,7 +36,7 @@ public class AccountUI extends JPanel {
 //	String id;
 //	boolean ready = false;
 
-	public AccountUI() throws RemoteException {
+	public AccountUI() throws RemoteException, ClientInitException {
 		this.ac = new AccountController();
 		this.initComponents();
 		this.initList();
@@ -181,7 +183,7 @@ public class AccountUI extends JPanel {
 		return this.ac;
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ClientInitException {
 		f = new MainFrame();
 		AccountUI view;
 		try {
@@ -310,8 +312,14 @@ class AccountDialog extends JDialog {
 					}
 				}
 				if (opr.equals("search")) {
-					List<AccountVO> list = ui.getController().searchAccount(
-							getName());
+					List<AccountVO> list = new ArrayList<AccountVO>();
+					try {
+						list = ui.getController().searchAccount(
+								getName());
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					ui.initList(list);
 				}
 				setVisible(false);

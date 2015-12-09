@@ -11,12 +11,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import vo.UserVO;
+
 public class YYTUI extends JPanel {
 	private static final long serialVersionUID = 1L;
-
-	// 一会儿删↓
-	static MainFrame f;
-	// 一会儿删↑
 
 	private JButton[] funcButton;
 	private JTable table;
@@ -29,16 +27,18 @@ public class YYTUI extends JPanel {
 
 	private void initComponents() {
 		this.setLayout(null);
-		String[] info = { "姓名", "员工编号", "职位", "所属机构", "机构编号" };
+		String[] info = { "姓名", "员工编号", "职位", "机构编号" };
 		Vector<String> vColumns = new Vector<String>();
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 4; i++) {
 			vColumns.add(info[i]);
 		}
 		Vector<String[]> vData = new Vector<String[]>();
 
 		infoListModel = new DefaultTableModel(vData, vColumns);
-		infoListModel.addRow(new String[] { "王栋", "141250132", "sb", "b425",
-				"425" });
+		UserVO user = MainFrame.getUser();
+		infoListModel.addRow(new String[] { user.getName(),
+				user.getIdentityID(), user.getWork().getPositionString(),
+				user.getInstitutionID() });
 		table = new JTable(infoListModel) {
 			private static final long serialVersionUID = 1L;
 
@@ -97,11 +97,5 @@ public class YYTUI extends JPanel {
 			}
 			this.add(funcButton[i]);
 		}
-	}
-
-	public static void main(String[] args) {
-		f = new MainFrame();
-		YYTUI view = new YYTUI();
-		f.setView(view);
 	}
 }

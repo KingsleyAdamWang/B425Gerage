@@ -3,8 +3,6 @@ package presentation;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.swing.BoxLayout;
@@ -15,8 +13,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import client.ClientInitException;
 import vo.LogisticsVO;
-import businessLogicService.logisticsBLService.InquireBLService;
+import businessLogic.logisticsBL.LogisticsController;
 
 public class LogisticsUI extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -24,10 +23,10 @@ public class LogisticsUI extends JPanel {
 	private JLabel label;
 	private JTextField jTextField;
 	private JTextArea area;
-	private InquireBLService bl;
+	private LogisticsController lc;
 
-	public LogisticsUI(InquireBLService bl) {
-		this.bl = bl;
+	public LogisticsUI() throws RemoteException, ClientInitException {
+		this.lc = new LogisticsController();
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.initComponents();
 		this.validate();
@@ -54,30 +53,28 @@ public class LogisticsUI extends JPanel {
 							JOptionPane.ERROR_MESSAGE);
 				} else {
 					String s = jTextField.getText();
-					try {
-						List<LogisticsVO> list = bl.getLogisticsList(s);
-						for (LogisticsVO vo : list) {
-							String str = "";
-							str += vo.getDate().toString();
-							DateFormat df = new SimpleDateFormat(
-									"yyyy-MM-dd HH:mm:ss");
-							str = df.format(vo.getDate());
-							if (vo.getAddress() != null) {
-								str += " 到达";
-								str += vo.getAddress();
-							} else if (vo.getNumber() != null) {
-								str += " 派件中，派件员：";
-								str += vo.getName();
-								str += "，联系电话：";
-								str += vo.getNumber();
-							} else {
-								str += " 已收件，收件员：";
-								str += vo.getName();
-							}
-							area.setText(area.getText() + "\n" + str);
-						}
-					} catch (RemoteException e1) {
-						e1.printStackTrace();
+					LogisticsVO vo = lc.getLogisticsMessage(s);
+					List<String> msg = vo.getMessages();
+					for (String tmp : msg) {
+						// String str = "";
+						// str += vo.getDate().toString();
+						// DateFormat df = new SimpleDateFormat(
+						// "yyyy-MM-dd HH:mm:ss");
+						// str = df.format(vo.getDate());
+						// if (vo.getAddress() != null) {
+						// str += " 到达";
+						// str += vo.getAddress();
+						// } else if (vo.getNumber() != null) {
+						// str += " 派件中，派件员：";
+						// str += vo.getName();
+						// str += "，联系电话：";
+						// str += vo.getNumber();
+						// } else {
+						// str += " 已收件，收件员：";
+						// str += vo.getName();
+						// }
+						// str += vo.getMessages();
+						area.setText(area.getText() + "\n" + tmp);
 					}
 				}
 			}

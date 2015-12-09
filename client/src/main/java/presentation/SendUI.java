@@ -1,15 +1,25 @@
 package presentation;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 
+import client.ClientInitException;
+import util.DateUtil;
 import vo.CustomerVO;
+import vo.SendVO;
+import businessLogic.deliveryBL.SendController;
 import enumSet.Express;
 import enumSet.PackType;
+import enumSet.ReceiptsState;
 
 public class SendUI extends JPanel {
 	// 一会儿删↓
@@ -20,18 +30,20 @@ public class SendUI extends JPanel {
 
 	private static final int PADDING = 10;
 
+	private SendController sc;
 	private final String[] labelName = { "姓名", "城市", "邮编", "地址", "单位", "电话" };
 	private JLabel[] labelS;
 	private JLabel[] labelR;
 	private JTextField[] textFieldS;
 	private JTextField[] textFieldR;
 	private final String[] labelName2 = { "原件数", "内件品名", "实际重量", "体积", "运送方式",
-			"包装方式", "快递单号" };
+			"包装方式", "快递单号", "寄件日期" };
 	private JLabel[] labelO;
 	private JTextField[] textFieldO;
 	private String[] cities;
 	private final String[] exType = { "标准", "经济", "特快", "其它" };
 	private final String[] pkType = { "纸箱", "木箱", "快递袋", "其他" };
+	private double fare;
 
 	private JComboBox<String> expressType;
 	private JComboBox<String> packType;
@@ -41,7 +53,8 @@ public class SendUI extends JPanel {
 	private JButton yesButton;
 	private JButton noButton;
 
-	public SendUI() {
+	public SendUI() throws RemoteException, ClientInitException {
+		sc = new SendController();
 		this.initComponents();
 		this.validate();
 	}
@@ -75,9 +88,9 @@ public class SendUI extends JPanel {
 		js.setBounds(0, 300, 800, 10);
 		this.add(js);
 
-		labelO = new JLabel[7];
-		textFieldO = new JTextField[7];
-		for (int i = 0; i < 7; i++) {
+		labelO = new JLabel[8];
+		textFieldO = new JTextField[8];
+		for (int i = 0; i < 8; i++) {
 			labelO[i] = new JLabel(labelName2[i] + ":");
 			labelO[i]
 					.setBounds(20 + 400 * (i % 2), 320 + 40 * (i / 2), 100, 20);
@@ -100,8 +113,12 @@ public class SendUI extends JPanel {
 		textFieldS[1].setVisible(false);
 		textFieldR[1].setVisible(false);
 
-		// JComboBox expressType;
-		// JComboBox packType;
+		expressType = new JComboBox<String>(exType);
+		packType = new JComboBox<String>(pkType);
+		expressType.setBounds(105, 400, 250, 30);
+		packType.setBounds(505, 400, 250, 30);
+		this.add(expressType);
+		this.add(packType);
 
 		initCities();
 		cityComboR = new JComboBox<String>(cities);
@@ -110,6 +127,49 @@ public class SendUI extends JPanel {
 		cityComboS.setBounds(105, 80, 250, 30);
 		this.add(cityComboR);
 		this.add(cityComboS);
+
+		textFieldO[7].setText(DateUtil.dateToString());
+
+		yesButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (hasEmpty()) {
+					JOptionPane.showMessageDialog(null, "尚未填写完整", "",
+							JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+				try {
+					String dep = cities[cityComboS.getSelectedIndex()];
+					String des = cities[cityComboR.getSelectedIndex()];
+					double wei = Double.parseDouble(textFieldO[2].getText());
+					double vol = Double.parseDouble(textFieldO[3].getText());
+
+					fare = sc.getFare(dep, des, getPackType(), getExpress(),
+							wei, vol, 1, 1);
+					String result = sc.add(getSendVO());
+					if (result != null) {
+						JOptionPane.showMessageDialog(null, result, "",
+								JOptionPane.ERROR_MESSAGE);
+					} else {
+						JOptionPane.showMessageDialog(null, "提交成功", "",
+								JOptionPane.INFORMATION_MESSAGE);
+					}
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (ClientInitException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (NumberFormatException e1) {
+					JOptionPane.showMessageDialog(null, "输入信息有误", "",
+							JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
+
+		noButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 	}
 
 	private void initCities() {
@@ -148,25 +208,37 @@ public class SendUI extends JPanel {
 		return PackType.getPackType((String) packType.getSelectedItem());
 	}
 
+	private SendVO getSendVO() {
+		return new SendVO(ReceiptsState.getReceiptsState("未审批"), MainFrame
+				.getUser().getIdentityID(), textFieldO[6].getText(),
+				DateUtil.stringToDate(textFieldO[7].getText()), getSender(),
+				getReceiver(), Integer.parseInt(textFieldO[0].getText()),
+				textFieldO[1].getText(), Double.parseDouble(textFieldO[2]
+						.getText()),
+				Double.parseDouble(textFieldO[3].getText()), this.getExpress(),
+				this.getPackType(), fare, 0);
+	}
+
 	private boolean hasEmpty() {
 		for (int i = 0; i < 6; i++) {
 			if (i != 1) {
-				if (textFieldR[i].getText() == null)
+				if (textFieldR[i].getText().equals(""))
 					return true;
-				if (textFieldS[i].getText() == null)
+				if (textFieldS[i].getText().equals(""))
 					return true;
 			}
 		}
 		for (int i = 0; i < 7; i++) {
 			if (i != 4 && i != 5) {
-				if (textFieldO[i].getText() == null)
+				if (textFieldO[i].getText().equals(""))
 					return true;
 			}
 		}
 		return false;
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws RemoteException,
+			ClientInitException {
 		f = new MainFrame();
 		SendUI view = new SendUI();
 		f.setView(view);

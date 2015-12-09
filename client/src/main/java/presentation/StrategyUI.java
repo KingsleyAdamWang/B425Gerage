@@ -24,6 +24,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
+import client.Main;
 import util.Distance;
 import util.PackPrice;
 import vo.PriceConstVO;
@@ -46,7 +47,7 @@ public class StrategyUI extends JPanel implements TableModelListener {
 	private JTable table;
 	private DefaultTableModel model;
 	private Vector<Vector<String>> vData;
-	private JScrollPane scroll;
+	// private JScrollPane scroll;
 	private List<String> list;
 	private JButton[] button;
 
@@ -220,6 +221,7 @@ public class StrategyUI extends JPanel implements TableModelListener {
 		});
 		button[2].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Main.frame.setView(new ManagerUI());
 			}
 		});
 
@@ -310,6 +312,7 @@ public class StrategyUI extends JPanel implements TableModelListener {
 	}
 
 	private void setShowData() {
+		vo = sc.getVO();
 		field[0].setText(vo.getCarCost() + "");
 		field[1].setText(vo.getTrainCost() + "");
 		field[2].setText(vo.getPlaneCost() + "");

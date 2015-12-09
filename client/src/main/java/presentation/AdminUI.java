@@ -13,16 +13,17 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import vo.UserVO;
+import client.ClientInitException;
 import client.Main;
 
-public class ManagerUI extends JPanel {
+public class AdminUI extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	private JButton[] funcButton;
 	private JTable table;
 	private DefaultTableModel infoListModel;
 
-	public ManagerUI() {
+	public AdminUI() {
 		this.initComponents();
 		this.validate();
 	}
@@ -64,64 +65,18 @@ public class ManagerUI extends JPanel {
 		this.add(scrollPane);
 		// this.add(table);
 
-		funcButton = new JButton[6];
-		final String[] title = { "人员机构管理", "查看统计分析", "审批单据", "薪水策略制定",
-				"业务策略制定", "日志查询" };
-		for (int i = 0; i < 6; i++) {
+		funcButton = new JButton[5];
+		final String[] title = { "账户密码管理" };
+		for (int i = 0; i < 1; i++) {
 			funcButton[i] = new JButton(title[i]);
-			funcButton[i].setBounds(150 + (i / 3) * 300, 200 + 100 * (i % 3),
-					200, 50);
+			funcButton[i].setBounds(300, 170 + 70 * i, 200, 50);
 			switch (i) {
 			case 0:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						try {
-							Main.frame.setView(new InstManageUI(), "人员机构管理");
-						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
-					}
-				});
-				break;
-			case 1:
-				funcButton[i].addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-					}
-				});
-				break;
-			case 2:
-				funcButton[i].addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						Main.frame.setView(new ApprovalUI(), "审批单据");
-					}
-				});
-				break;
-			case 3:
-				funcButton[i].addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						Main.frame.setView(new SalaryUI(), "薪水策略制定");
-					}
-				});
-				break;
-			case 4:
-				funcButton[i].addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						try {
-							Main.frame.setView(new StrategyUI(), "业务策略制定");
-						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
-					}
-				});
-				break;
-			case 5:
-				funcButton[i].addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						try {
-							Main.frame.setView(new LogUI(), "日志查询");
-						} catch (RemoteException e1) {
+							Main.frame.setView(new AdminSearchUI(), "账户密码管理");
+						} catch (ClientInitException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
@@ -132,10 +87,4 @@ public class ManagerUI extends JPanel {
 			this.add(funcButton[i]);
 		}
 	}
-
-//	public static void main(String[] args) {
-//		f = new MainFrame();
-//		ManagerUI view = new ManagerUI();
-//		f.setView(view);
-//	}
 }

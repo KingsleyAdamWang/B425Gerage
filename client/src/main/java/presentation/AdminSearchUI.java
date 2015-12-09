@@ -13,6 +13,8 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
+import client.ClientInitException;
+import client.Main;
 import vo.InstitutionVO;
 import businessLogic.adminBL.AdminController;
 
@@ -36,7 +38,7 @@ public class AdminSearchUI extends JPanel {
 	private JButton returnBtn;
 	private List<InstitutionVO> list;
 
-	public AdminSearchUI() {
+	public AdminSearchUI() throws ClientInitException {
 		this.ac = new AdminController();
 		this.initList();
 		this.initComponents();
@@ -84,19 +86,25 @@ public class AdminSearchUI extends JPanel {
 
 		searchBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AdminUserUI view = new AdminUserUI();
-				if (insBtn.isSelected()) {
-					view = new AdminUserUI(getInsID(),1);
-				} else if (keyBtn.isSelected()) {
-					view = new AdminUserUI(getKey(),2);
+				AdminUserUI view;
+				try {
+					view = new AdminUserUI();
+					if (insBtn.isSelected()) {
+						view = new AdminUserUI(getInsID(),1);
+					} else if (keyBtn.isSelected()) {
+						view = new AdminUserUI(getKey(),2);
+					}
+					Main.frame.setView(view, "账户密码管理");
+				} catch (ClientInitException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
-				f.setView(view);
 			}
 		});
 
 		returnBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				Main.frame.setView(new AdminUI());
 			}
 		});
 
@@ -147,7 +155,7 @@ public class AdminSearchUI extends JPanel {
 		return field.getText();
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ClientInitException {
 		f = new MainFrame();
 		f.setView(new AdminSearchUI());
 	}

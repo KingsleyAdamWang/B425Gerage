@@ -2,6 +2,7 @@ package presentation;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 import java.util.List;
 import java.util.Vector;
 
@@ -13,6 +14,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.TableModel;
 
+import client.ClientInitException;
+import client.Main;
 import vo.InstitutionVO;
 import vo.UserVO;
 import businessLogic.adminBL.AdminController;
@@ -20,8 +23,8 @@ import businessLogic.adminBL.AdminController;
 public class AdminUserUI extends JPanel {
 	private static final long serialVersionUID = 1L;
 
-	AdminController ac;
-		List<UserVO> list;
+	private AdminController ac;
+	private List<UserVO> list;
 	private JButton[] funcButton;
 	private JTable table;
 	private Vector<Vector<String>> vData;
@@ -29,14 +32,14 @@ public class AdminUserUI extends JPanel {
 	private String searchKey;
 	private int searchType;
 
-	public AdminUserUI() {
+	public AdminUserUI() throws ClientInitException {
 		this.ac = new AdminController();
 		// this.initComponents();
 		// this.initList();
 		// this.validate();
 	}
 
-	public AdminUserUI(String s, int i) {
+	public AdminUserUI(String s, int i) throws ClientInitException {
 		this.ac = new AdminController();
 		this.searchKey = s;
 		this.searchType = i;
@@ -99,7 +102,12 @@ public class AdminUserUI extends JPanel {
 							return;
 						}
 						// System.out.println(tmp);
-						tmp = ac.modify(vo.getIdentityID(), tmp);
+						try {
+							tmp = ac.modify(vo.getIdentityID(), tmp);
+						} catch (RemoteException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 						if (tmp != null) {
 							JOptionPane.showMessageDialog(null, tmp, "",
 									JOptionPane.ERROR_MESSAGE);
@@ -114,6 +122,12 @@ public class AdminUserUI extends JPanel {
 			case 1:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						try {
+							Main.frame.setView(new AdminSearchUI(),"账户密码管理");
+						} catch (ClientInitException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 					}
 				});
 				break;

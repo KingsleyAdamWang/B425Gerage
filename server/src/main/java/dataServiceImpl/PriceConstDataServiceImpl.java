@@ -47,6 +47,7 @@ public class PriceConstDataServiceImpl extends UnicastRemoteObject implements
 
 	@Override
 	public void update(PriceConstPO po) throws RemoteException {
+		price = po ;
 		try {
 			FileWriter fw = new FileWriter(file);
 			fw.write("");

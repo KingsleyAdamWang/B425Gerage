@@ -12,12 +12,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import vo.UserVO;
+import client.ClientInitException;
+import client.Main;
+
 public class FinanceUI extends JPanel {
 	private static final long serialVersionUID = 1L;
-
-	// 一会儿删↓
-	static MainFrame f;
-	// 一会儿删↑
 
 	private JButton[] funcButton;
 	private JTable table;
@@ -30,20 +30,19 @@ public class FinanceUI extends JPanel {
 
 	private void initComponents() {
 		this.setLayout(null);
-		String[] info = { "姓名", "员工编号", "职位", "所属机构", "机构编号" };
+		String[] info = { "姓名", "员工编号", "职位", "机构编号" };
 		Vector<String> vColumns = new Vector<String>();
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 4; i++) {
 			vColumns.add(info[i]);
 		}
 		Vector<String[]> vData = new Vector<String[]>();
-		// vData.add(new String[]{"王栋","141250132","sb","b425","425"});
 
 		infoListModel = new DefaultTableModel(vData, vColumns);
-		infoListModel.addRow(new String[] { "王栋", "141250132", "sb", "b425",
-				"425" });
-		// table = new JTable(2, 5) {
+		UserVO user = MainFrame.getUser();
+		infoListModel.addRow(new String[] { user.getName(),
+				user.getIdentityID(), user.getWork().getPositionString(),
+				user.getInstitutionID() });
 		table = new JTable(infoListModel) {
-			// table = new JTable(new String[][]{{"1","2","3","4","5"}},info) {
 			private static final long serialVersionUID = 1L;
 
 			public boolean isCellEditable(int row, int column) {
@@ -67,8 +66,9 @@ public class FinanceUI extends JPanel {
 		// this.add(table);
 
 		funcButton = new JButton[5];
-		final String[] title = { "结算管理", "成本管理", "统计报表", "账户管理", "日志查询" };
-		for (int i = 0; i < 5; i++) {
+		final String[] title = { "期初建账", "收款单管理", "付款单管理", "统计报表", "账户管理",
+				"日志查询" };
+		for (int i = 0; i < 6; i++) {
 			funcButton[i] = new JButton(title[i]);
 			funcButton[i].setBounds(300, 170 + 70 * i, 200, 50);
 			switch (i) {
@@ -94,8 +94,11 @@ public class FinanceUI extends JPanel {
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						try {
-							f.setView(new AccountUI(), title[3]);
+							Main.frame.setView(new AccountUI(), title[3]);
 						} catch (RemoteException e1) {
+							e1.printStackTrace();
+						} catch (ClientInitException e1) {
+							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}
@@ -110,11 +113,5 @@ public class FinanceUI extends JPanel {
 			}
 			this.add(funcButton[i]);
 		}
-	}
-
-	public static void main(String[] args) {
-		f = new MainFrame();
-		FinanceUI view = new FinanceUI();
-		f.setView(view);
 	}
 }

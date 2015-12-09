@@ -1,5 +1,7 @@
 package presentation;
 
-public class CangkuUI {
+import javax.swing.JPanel;
+
+public class CangkuUI extends JPanel {
 
 }

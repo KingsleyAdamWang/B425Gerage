@@ -3,6 +3,7 @@ package presentation;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -16,6 +17,7 @@ import javax.swing.UIManager;
 import businessLogic.loginBL.LoginController;
 import businessLogicService.loginBLService.LoginBLService;
 import businessLogic_Stub.InquireBLStub;
+import client.ClientInitException;
 import client.Main;
 
 public class LoginFrame {
@@ -34,7 +36,8 @@ public class LoginFrame {
 	private JPanel panel3;
 	private final int frameWidth = 300;
 	private final int frameHeight = 200;
-//	private LoginBLService bl;
+
+	// private LoginBLService bl;
 
 	public LoginFrame(LoginBLService bl) {
 		try {
@@ -49,8 +52,16 @@ public class LoginFrame {
 		initComponents();
 
 		loginFrame.setVisible(true);
-//		this.bl = bl;
-		this.lc = new LoginController();
+		// this.bl = bl;
+		try {
+			this.lc = new LoginController();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClientInitException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	private void componentsInstantiation() {
@@ -96,7 +107,15 @@ public class LoginFrame {
 		// 游客访问按钮
 		guestButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				guestLogin();
+				try {
+					guestLogin();
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (ClientInitException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 
@@ -143,17 +162,39 @@ public class LoginFrame {
 		// 获取用户输入的账户名和密码
 		String username = jTextField.getText();
 		String password = new String(jPasswordField.getPassword());
-         //我就想看下 显示一下密码
-		System.out.println("账号为："+username);
-		System.out.println("密码是："+password);
+		// 我就想看下 显示一下密码
+		System.out.println("账号为：" + username);
+		System.out.println("密码是：" + password);
 		// 调用bl层查看是否有该账户的信息
 		// 如果账户和密码输入正确则登录
-		boolean result = lc.login(username, password);
-		if (!result) {
+		boolean result = false;
+		try {
+			result = lc.login(username, password);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (result) {
 			Main.frame.setVisible(true);
 			loginFrame.setVisible(false);
 			String str = MainFrame.getUser().getWork().getPositionString();
-			
+			if (str.equals("管理员")) {
+				Main.frame.setView(new AdminUI());
+			} else if (str.equals("总经理")) {
+				Main.frame.setView(new ManagerUI());
+			} else if (str.equals("快递员")) {
+				Main.frame.setView(new KuaidiyuanUI());
+			} else if (str.equals("营业厅业务人员")) {
+				Main.frame.setView(new YYTUI());
+			} else if (str.equals("中转中心业务人员")) {
+				Main.frame.setView(new YYTUI());
+			} else if (str.equals("中转中心仓库管理员")) {
+				Main.frame.setView(new CangkuUI());
+			} else if (str.equals("财务人员（高）")) {
+				Main.frame.setView(new FinanceUI());
+			} else if (str.equals("财务人员（低）")) {
+				Main.frame.setView(new FinanceLowUI());
+			}
 		} else {
 			JOptionPane.showMessageDialog(null, "用户名或密码不正确", "",
 					JOptionPane.ERROR_MESSAGE);
@@ -161,9 +202,9 @@ public class LoginFrame {
 		}
 	}
 
-	private void guestLogin() {
-//		 MainFrame frame = new MainFrame();
-		Main.frame.setView(new LogisticsUI(new InquireBLStub()), "物流信息查询");
+	private void guestLogin() throws RemoteException, ClientInitException {
+		// MainFrame frame = new MainFrame();
+		Main.frame.setView(new LogisticsUI(), "物流信息查询");
 		loginFrame.setVisible(false);
 	}
 

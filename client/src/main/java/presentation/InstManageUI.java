@@ -3,10 +3,13 @@ package presentation;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -15,20 +18,17 @@ import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.ScrollPaneConstants;
 
+import client.Main;
 import util.Storage;
 import vo.InstitutionVO;
 import vo.InventoryVO;
 import businessLogic.manageBL.InstitutionController;
+import businessLogic.manageBL.StrategyController;
 import enumSet.InsType;
 
 public class InstManageUI extends JPanel {
 	private static final long serialVersionUID = 1L;
-
-	// 一会儿删↓
-	static MainFrame f;
-	// 一会儿删↑
 
 	private InstitutionController ic;
 	private JButton[] funcButton;
@@ -64,7 +64,7 @@ public class InstManageUI extends JPanel {
 		table.setBorder(BorderFactory.createEtchedBorder());
 		table.setRowHeight(35);
 		table.setRowSelectionAllowed(true);
-//		table.setBounds(50, 50, 700, 385);
+		// table.setBounds(50, 50, 700, 385);
 
 		scrollPane = new JScrollPane();
 		scrollPane.getViewport().add(table);
@@ -118,7 +118,10 @@ public class InstManageUI extends JPanel {
 							return;
 						}
 						try {
-							f.setView(new StaffManageUI(toVO(vData.get(index))));
+
+							Main.frame.setView(
+									(new StaffManageUI(toVO(vData.get(index)))),
+									"人员机构管理");
 						} catch (RemoteException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
@@ -129,6 +132,7 @@ public class InstManageUI extends JPanel {
 			case 4:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						Main.frame.setView(new ManagerUI());
 					}
 				});
 				break;
@@ -197,12 +201,6 @@ public class InstManageUI extends JPanel {
 		return;
 	}
 
-	public static void main(String[] args) throws RemoteException {
-		f = new MainFrame();
-		InstManageUI view = new InstManageUI();
-		f.setView(view);
-	}
-
 	public InstitutionController getController() {
 		return this.ic;
 	}
@@ -238,8 +236,9 @@ class InstManageDialog extends JDialog {
 	private JLabel nameLabel;
 	private JLabel idLabel;
 	private JLabel addrLabel;
-
+	private JComboBox<String> box;
 	private JTextField[] invenField;
+	private List<String> cities;
 
 	public InstManageDialog() {
 		this.setVisible(true);
@@ -312,15 +311,27 @@ class InstManageDialog extends JDialog {
 			idField.setBounds(100, 10, 175, 25);
 			nameField = new JTextField();
 			nameField.setBounds(100, 40, 175, 25);
-			addrField = new JTextField();
-			addrField.setBounds(100, 70, 175, 25);
+			// addrField = new JTextField();
+			// addrField.setBounds(100, 70, 175, 25);
+			try {
+				cities = (new StrategyController()).getCities();
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			String[] tmpArray = new String[cities.size()];
+			for (int i = 0; i < cities.size(); i++) {
+				tmpArray[i] = cities.get(i);
+			}
+			box = new JComboBox<String>(tmpArray);
+			box.setBounds(100, 70, 175, 25);
 
 			this.getContentPane().add(nameLabel);
 			this.getContentPane().add(idLabel);
 			this.getContentPane().add(nameField);
 			this.getContentPane().add(idField);
 			this.getContentPane().add(addrLabel);
-			this.getContentPane().add(addrField);
+			this.getContentPane().add(box);
 			okBtn = new JButton("确定");
 			okBtn.setBounds(50, 120, 75, 30);
 			this.getContentPane().add(okBtn);
@@ -338,14 +349,27 @@ class InstManageDialog extends JDialog {
 			idField.setBounds(80, 10, 175, 25);
 			nameField = new JTextField();
 			nameField.setBounds(340, 10, 175, 25);
-			addrField = new JTextField();
-			addrField.setBounds(80, 40, 175, 25);
+			// addrField = new JTextField();
+			// addrField.setBounds(80, 40, 175, 25);
+			try {
+				cities = (new StrategyController()).getCities();
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			String[] tmpArray = new String[cities.size()];
+			for (int i = 0; i < cities.size(); i++) {
+				tmpArray[i] = cities.get(i);
+			}
+			box = new JComboBox<String>(tmpArray);
+			box.setBounds(80, 40, 175, 25);
+
 			this.getContentPane().add(nameLabel);
 			this.getContentPane().add(idLabel);
 			this.getContentPane().add(nameField);
 			this.getContentPane().add(idField);
 			this.getContentPane().add(addrLabel);
-			this.getContentPane().add(addrField);
+			this.getContentPane().add(box);
 
 			okBtn = new JButton("确定");
 			okBtn.setBounds(150, 250, 75, 30);
@@ -513,7 +537,7 @@ class InstManageDialog extends JDialog {
 	}
 
 	private String getInstCity() {
-		return addrField.getText();
+		return (String) box.getSelectedItem();
 	}
 
 	private InventoryVO getInven() {
