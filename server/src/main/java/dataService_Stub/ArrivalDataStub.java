@@ -1,32 +1,51 @@
 package dataService_Stub;
 
 import java.rmi.RemoteException;
+import java.util.List;
 
 import po.ArrivalPO;
 import dataService.ArrivalDataService;
 
 public class ArrivalDataStub implements ArrivalDataService {
 
-
-
 	@Override
-	public boolean add(ArrivalPO po) throws RemoteException {
+	public void add(ArrivalPO po) throws RemoteException {
 		// TODO Auto-generated method stub
-		return false;
+		
 	}
 
-
 	@Override
-	public boolean delete(ArrivalPO po) throws RemoteException {
+	public void delete(ArrivalPO po) throws RemoteException {
 		// TODO Auto-generated method stub
-		return false;
+		
 	}
 
+	@Override
+	public void modify(ArrivalPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
 
 	@Override
-	public ArrivalPO search(String id) throws RemoteException {
+	public void approval(ArrivalPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void approvalAll() throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<ArrivalPO> getArrivalList() throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
+
+	
 
 }

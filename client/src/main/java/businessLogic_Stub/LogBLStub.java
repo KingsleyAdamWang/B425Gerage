@@ -19,4 +19,10 @@ public class LogBLStub implements LogBLService {
 		return null;
 	}
 
+
+	public List<LogVO> getLogList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -1,28 +1,33 @@
 package businessLogic_Stub;
 
+import java.rmi.RemoteException;
+
 import vo.EntruckVO;
 import businessLogicService.businessHallBLService.EntruckBLService;
 
 public class EntruckBLStub implements EntruckBLService {
 	EntruckVO vo;
 
-	
-	public void add(String id) {
+	public String add(EntruckVO eVO) throws RemoteException {
 		// TODO Auto-generated method stub
+		return null;
+	}
 
+	public EntruckVO search(String id) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String submit(EntruckVO eVO) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String delete(EntruckVO eVO) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	
-	public void end() {
-		// TODO Auto-generated method stub
-
-	}
-
-	
-	public boolean submit(EntruckVO vo) {
-		// TODO Auto-generated method stub
-		System.out.println("装车单提交成功");
-		return true;
-	}
 
 }
