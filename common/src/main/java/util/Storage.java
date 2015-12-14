@@ -33,7 +33,9 @@ public int getPlace() {
 public void setPlace(int place) {
 	this.place = place;
 }
-   
+  public int getNum(){
+	  return row*shelf*place;
+  }
   
    
 }

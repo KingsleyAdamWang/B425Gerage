@@ -2,6 +2,7 @@ package po;
 
 import java.io.Serializable;
 
+import enumSet.InventoryArea;
 import util.Storage;
 
 /**
@@ -26,6 +27,10 @@ public class InventoryPO implements Serializable {
 	private Storage train;// 铁运区
 	private Storage car;// 汽运区
 	private Storage auto;// zi动区
+	private boolean[] isBusy1;
+	private boolean[] isBusy2;
+	private boolean[] isBusy3;
+	private boolean[] isBusy4;
 
 	public InventoryPO(String institutionID, Storage plane, Storage train,
 			Storage car, Storage auto) {
@@ -35,6 +40,10 @@ public class InventoryPO implements Serializable {
 		this.train = train;
 		this.car = car;
 		this.auto = auto;
+		isBusy1 = new boolean[plane.getNum()];
+		isBusy2 = new boolean[train.getNum()];
+		isBusy3 = new boolean[car.getNum()];
+		isBusy4 = new boolean[auto.getNum()];
 	}
 
 	public InventoryPO(String data) {
@@ -48,6 +57,71 @@ public class InventoryPO implements Serializable {
 				Integer.parseInt(temp[8]), Integer.parseInt(temp[9]));
 		this.auto = new Storage(Integer.parseInt(temp[10]),
 				Integer.parseInt(temp[11]), Integer.parseInt(temp[12]));
+
+		this.isBusy1 = getBusy(temp[13]);
+		this.isBusy2 = getBusy(temp[14]);
+		this.isBusy3 = getBusy(temp[15]);
+		this.isBusy4 = getBusy(temp[16]);
+	}
+
+	private boolean[] getBusy(String data) {
+		boolean[] result = new boolean[data.length()];
+		for (int i = 0; i < data.length(); i++) {
+			if (data.charAt(i) == '0')
+				result[i] = false;
+			else
+				result[i] = true;
+		}
+		return result;
+	}
+
+	private String getBusyString(boolean[] data) {
+		StringBuilder str = new StringBuilder();
+		for (int i = 0; i < data.length; i++) {
+			if (data[i])
+				str.append("1");
+			else
+				str.append("0");
+		}
+		return str.toString();
+	}
+
+	
+	public boolean isBusy(InventoryArea area, int num) {
+		boolean temp[];
+
+		switch (area) {
+		case AREA_FOR_PLANE:
+			temp = isBusy1;
+			break;
+		case AREA_FOR_TRAIN:
+			temp = isBusy2;
+			break;
+		case AREA_FOR_CAR:
+			temp = isBusy3;
+			break;
+		default:
+			temp = isBusy4;
+		}
+
+		return temp[num - 1];
+	}
+	
+	public void setIsBusy(InventoryArea area, int num){
+		
+		switch (area) {
+		case AREA_FOR_PLANE:
+			 isBusy1[num-1]=true;
+			break;
+		case AREA_FOR_TRAIN:
+			isBusy2[num-1]=true;
+			break;
+		case AREA_FOR_CAR:
+			isBusy3[num-1]=true;
+			break;
+		default:
+			isBusy4[num-1]=true;
+		}
 	}
 
 	public String toString() {
@@ -57,7 +131,9 @@ public class InventoryPO implements Serializable {
 				+ train.getShelf() + " " + train.getPlace() + " "
 				+ car.getRow() + " " + car.getShelf() + " " + car.getPlace()
 				+ " " + auto.getRow() + " " + auto.getShelf() + " "
-				+ auto.getPlace() + "\n";
+				+ auto.getPlace() + " " + getBusyString(isBusy1) + " "
+				+ getBusyString(isBusy2) + " " + getBusyString(isBusy3) + " "
+				+ getBusyString(isBusy4) + "\n";
 	}
 
 	@Override
