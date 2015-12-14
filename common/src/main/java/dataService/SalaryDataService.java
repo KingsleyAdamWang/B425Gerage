@@ -5,6 +5,11 @@ import java.rmi.RemoteException;
 
 import po.SalaryPO;
 
+/**
+ * 制定工资常量的数据层接口类
+ * @author 王栋
+ *
+ */
 public interface SalaryDataService extends Remote{
 	
 	

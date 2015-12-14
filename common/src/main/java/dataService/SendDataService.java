@@ -6,6 +6,11 @@ import java.util.List;
 
 import po.SendPO;
 
+/**
+ * 寄件单数据层接口
+ * @author 王栋
+ *
+ */
 public interface SendDataService extends Remote {
 
 	// 增加一个 寄件单 的数据

@@ -2,9 +2,13 @@ package dataService;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-
 import po.TruckPO;
 
+/**
+ * 司机信息的数据层接口
+ * @author 王栋
+ *
+ */
 public interface TruckDataService extends Remote{
 	public void add(TruckPO po)throws RemoteException;
 	

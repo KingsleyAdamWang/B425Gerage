@@ -6,6 +6,11 @@ import java.util.List;
 
 import po.LogisticsPO;
 
+/**
+ * 快递物流信息的数据层接口
+ * @author 王栋
+ *
+ */
 public interface LogisticsDataService extends Remote {
 
 //	public void update(String logistics) throws RemoteException;

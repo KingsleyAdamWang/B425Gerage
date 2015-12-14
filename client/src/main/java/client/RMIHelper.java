@@ -13,7 +13,7 @@ import dataService.InstitutionDataService;
 import dataService.InventoryDataService;
 import dataService.LogDataService;
 import dataService.LogisticsDataService;
-import dataService.MoneyDataService;
+import dataService.PaymentDataService;
 import dataService.PriceConstDataService;
 import dataService.ReceiveDataService;
 import dataService.SalaryDataService;

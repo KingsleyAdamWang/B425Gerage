@@ -3,9 +3,10 @@ package dataServiceImpl;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
-import dataService.MoneyDataService;
+import po.PaymentPO;
+import dataService.PaymentDataService;
 
-public class MoneyDataServiceImpl extends UnicastRemoteObject	 implements MoneyDataService {
+public class MoneyDataServiceImpl extends UnicastRemoteObject	 implements PaymentDataService {
 
 
 	public MoneyDataServiceImpl() throws RemoteException {
@@ -14,7 +15,7 @@ public class MoneyDataServiceImpl extends UnicastRemoteObject	 implements MoneyD
 	}
 
 
-	public void addPayment() {
+	public void addPayment(PaymentPO po) {
 		// TODO Auto-generated method stub
 		
 	}

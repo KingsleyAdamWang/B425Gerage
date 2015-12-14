@@ -6,6 +6,11 @@ import java.util.List;
 
 import po.ReceivePO;
 
+/**
+ * 收件单的数据层的接口 接口的信息注释省略（同其他单据）
+ * @author 王栋
+ *
+ */
 public interface ReceiveDataService extends Remote {
 	public void add(ReceivePO po) throws RemoteException;
 

@@ -6,6 +6,11 @@ import java.util.List;
 
 import po.TransferPO;
 
+/**
+ * 中转单数据层接口
+ * @author 王栋
+ *
+ */
 public interface TransferDataService extends Remote{
 	public void add(TransferPO po)throws RemoteException;
 	

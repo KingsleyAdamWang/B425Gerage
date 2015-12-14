@@ -6,6 +6,11 @@ import java.util.List;
 
 import po.ShipmentPO;
 
+/**
+ * 出库单数据层接口
+ * @author 王栋
+ *
+ */
 public interface ShipmentDataService extends Remote{
 	
 	public void add(ShipmentPO po)throws RemoteException;
