@@ -7,7 +7,6 @@ import dataService.ArrivalDataService;
 import dataService.DeliveryDataService;
 import dataService.EntruckDataService;
 import dataService.EntryDataService;
-import dataService.FormDataService;
 import dataService.IncomeDataService;
 import dataService.InstitutionDataService;
 import dataService.InventoryDataService;
@@ -40,7 +39,7 @@ public class RMIHelper {
 	private static DeliveryDataService deliveryDataService;
 	private static EntruckDataService entruckDataService;
 	private static EntryDataService entryDataService;
-	private static FormDataService formDataService;
+	private static PaymentDataService paymentDataService;
 	private static InventoryDataService inventoryDataService;
 	private static LogDataService logDataService;
 	private static LogisticsDataService logisticsDataService;
@@ -123,10 +122,10 @@ public class RMIHelper {
 		}
 	}
 
-	public static void initFormDataService() throws ClientInitException {
+	public static void initPaymentDataService() throws ClientInitException {
 		try {
-			formDataService = (FormDataService) Naming.lookup(urlPrefix
-					+ "form-data");
+			paymentDataService = (PaymentDataService) Naming.lookup(urlPrefix
+					+ "payment-data");
 			System.out.println("RMI远程调用FormDataService成功");
 		} catch (Exception e) {
 			throw new ClientInitException(e);
@@ -304,8 +303,8 @@ public class RMIHelper {
 		return entryDataService;
 	}
 
-	public static FormDataService getFormDataService() {
-		return formDataService;
+	public static PaymentDataService getPaymentDataService() {
+		return paymentDataService;
 	}
 
 	public static InventoryDataService getInventoryDataService() {

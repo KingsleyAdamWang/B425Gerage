@@ -8,10 +8,13 @@ import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import po.IncomePO;
 import dataService.IncomeDataService;
+import enumSet.ReceiptsState;
 
 public class IncomeDataServiceImpl extends UnicastRemoteObject implements
 		IncomeDataService {
@@ -46,19 +49,6 @@ public class IncomeDataServiceImpl extends UnicastRemoteObject implements
 		}
 	}
 
-	
-	public void add(IncomePO po) throws RemoteException {
-		incomeList.add(po);
-		update();
-
-	}
-
-	
-	public void delete() throws RemoteException {
-		// 我并不想删掉 收款单 …………
-		// TODO 看情况吧
-
-	}
 
 	private void update() {
 		try {
@@ -67,7 +57,6 @@ public class IncomeDataServiceImpl extends UnicastRemoteObject implements
 			fw.write("");
 			for (IncomePO po : incomeList) {
 				fw.append(po.toString());
-
 				fw.flush();
 			}
 			fw.close();
@@ -77,10 +66,60 @@ public class IncomeDataServiceImpl extends UnicastRemoteObject implements
 
 	}
 
+	@Override
+	public void add(IncomePO po) throws RemoteException {
+		incomeList.add(0,po);
+		update();
+		
+	}
 	
 	public List<IncomePO> getIncomeList() throws RemoteException {
 
 		return incomeList;
 	}
+
+	@Override
+	public void delete(IncomePO po) throws RemoteException {
+	  if(incomeList.contains(po)){
+		  incomeList.remove(po);
+		  update();
+	  }
+		
+	}
+
+	@Override
+	public void modify(IncomePO po) throws RemoteException {
+		incomeList.set(incomeList.indexOf(po),po);
+		update();
+		
+	}
+
+	@Override
+	public void approval(IncomePO po) throws RemoteException {
+		incomeList.get(incomeList.indexOf(po)).setState(ReceiptsState.approve);
+		update();
+	}
+
+	@Override
+	public void apprivalAll() throws RemoteException {
+		Iterator<IncomePO> it = incomeList.iterator();
+		while(it.hasNext()){
+			it.next().setState(ReceiptsState.approve);
+		}
+		update();
+		
+	}
+
+	@Override
+	public List<IncomePO> getListByDate(Date d) throws RemoteException {
+		List<IncomePO> result = new ArrayList<IncomePO>();
+		for(IncomePO po : incomeList){
+			if(po.getDate().equals(d))
+				result.add(po);
+		}
+		return result;
+	}
+
+
 
 }

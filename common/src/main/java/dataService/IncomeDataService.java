@@ -2,6 +2,7 @@ package dataService;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.Date;
 import java.util.List;
 
 import po.IncomePO;
@@ -26,29 +27,34 @@ public interface IncomeDataService extends Remote{
 	public void delete(IncomePO po)throws RemoteException;
 	
 	/**
-	 * 
+	 * 修改
 	 * @param po
 	 * @throws RemoteException
 	 */
 	public void modify(IncomePO po)throws RemoteException;
 	/**
-	 * 
+	 * 审批通过一个
 	 * @param po
 	 * @throws RemoteException
 	 */
 	public void approval(IncomePO po)throws RemoteException;
 	/**
-	 * 
+	 * 一键审批
 	 * @throws RemoteException
 	 */
 	public void apprivalAll()throws RemoteException;
 	/**
-	 * 
+	 * 获得收款单列表
 	 * @return
 	 * @throws RemoteException
 	 */
 	public List<IncomePO> getIncomeList()throws RemoteException;
-	
-	
+	/**
+	 * 输入时间 返回符合该时间的时间列表
+	 * @param d时间参数
+	 * @return
+	 * @throws RemoteException
+	 */
+	public List<IncomePO> getListByDate(Date d)throws RemoteException;
 
 }

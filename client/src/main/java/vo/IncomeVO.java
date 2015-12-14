@@ -7,11 +7,10 @@ import po.IncomePO;
 import enumSet.ReceiptsState;
 
 public class IncomeVO extends ReceiptsVO{
-
-	private Date date;
-	private double income;
-	private String kdyID;
-	private List<String> idList;
+	 Date date;
+	 double income;
+	 String kdyID;
+	 List<String> idList;
 
 	/**
 	 * 构造函数
@@ -53,38 +52,34 @@ public class IncomeVO extends ReceiptsVO{
 		return new IncomePO(state, kdyID, date, income, kdyID, idList);
 	}
 
-
-
-	public Date getDate() {
-		return date;
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((date == null) ? 0 : date.hashCode());
+		result = prime * result + ((kdyID == null) ? 0 : kdyID.hashCode());
+		return result;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		IncomeVO other = (IncomeVO) obj;
+		if (date == null) {
+			if (other.date != null)
+				return false;
+		} else if (!date.equals(other.date))
+			return false;
+		if (kdyID == null) {
+			if (other.kdyID != null)
+				return false;
+		} else if (!kdyID.equals(other.kdyID))
+			return false;
+		return true;
 	}
-
-	public double getIncome() {
-		return income;
-	}
-
-	public void setIncome(double income) {
-		this.income = income;
-	}
-
-	public String getKdyID() {
-		return kdyID;
-	}
-
-	public void setKdyID(String kdyID) {
-		this.kdyID = kdyID;
-	}
-
-	public List<String> getIdList() {
-		return idList;
-	}
-
-	public void setIdList(List<String> idList) {
-		this.idList = idList;
-	}
-
 }

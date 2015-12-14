@@ -88,5 +88,38 @@ public class IncomePO extends ReceiptsPO implements Serializable {
 		return idList;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((date == null) ? 0 : date.hashCode());
+		result = prime * result + ((kdyID == null) ? 0 : kdyID.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		IncomePO other = (IncomePO) obj;
+		if (date == null) {
+			if (other.date != null)
+				return false;
+		} else if (!date.equals(other.date))
+			return false;
+		if (kdyID == null) {
+			if (other.kdyID != null)
+				return false;
+		} else if (!kdyID.equals(other.kdyID))
+			return false;
+		return true;
+	}
+
+
+
 	
 }

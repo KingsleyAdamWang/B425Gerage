@@ -40,6 +40,11 @@ public class PaymentVO extends ReceiptsVO {
 				.getTimes());
 	}
 
+	public PaymentPO transToPO() {
+		return new PaymentPO(state, userID, d, payment, payName, bankID, type,
+				comment, times);
+	}
+
 	public Date getD() {
 		return d;
 	}
