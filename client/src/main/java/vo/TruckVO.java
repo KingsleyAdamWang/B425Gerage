@@ -3,6 +3,7 @@ package vo;
 import java.util.Date;
 
 import po.TruckPO;
+import util.DateUtil;
 
 public class TruckVO {
 	String institutionID;
@@ -12,6 +13,8 @@ public class TruckVO {
 	 String truckNumber;
 	// 开始服役时间
 	Date startTime;
+	//
+	int years;
 
 	public TruckVO(String institutionID,String truckID, String truckNumber, Date startTime) {
 		// TODO 自动生成的构造函数存根
@@ -19,6 +22,7 @@ public class TruckVO {
 		this.truckID = truckID;
 		this.truckNumber = truckNumber;
 		this.startTime = startTime;
+		this.years=getYears(startTime);
 	}
 	
 	public TruckVO(TruckPO po){
@@ -30,7 +34,10 @@ public class TruckVO {
 	public TruckPO transToPO(){
 		return new TruckPO(institutionID,truckID,truckNumber,startTime);
 	}
-
+	public int getYears(Date startTime){
+		Date  date = DateUtil.stringToDate(DateUtil.dateToString());
+		return date.getYear()-startTime.getYear();
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;

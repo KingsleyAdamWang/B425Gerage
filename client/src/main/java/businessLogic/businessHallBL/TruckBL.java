@@ -1,6 +1,7 @@
 package businessLogic.businessHallBL;
 
 import java.rmi.RemoteException;
+import java.util.Date;
 import java.util.List;
 
 import po.TruckPO;
@@ -48,7 +49,9 @@ public class TruckBL {
 	}
 	
 	public String delete(TruckPO po){
-		for(TruckPO temp: truckList)
+		for(TruckPO temp: truckList){
+			
+		}
 		
 	}
 	

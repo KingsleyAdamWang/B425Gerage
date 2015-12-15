@@ -1,6 +1,7 @@
 package businessLogic.businessHallBL;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.List;
 
 import po.DriverPO;
@@ -45,6 +46,9 @@ public class DriverBL {
 		if(!(CheckUtil.isNumber(po.getId())&&po.getId().length()==8)){
 			return "人员编号格式有误";
 		}
+		if(!(CheckUtil.isNumber(po.getIDnumber())&&po.getIDnumber().length()==18)){
+			return "身份证号格式有误";
+		}
 		
 		
 		driverList.add(po);
@@ -85,5 +89,15 @@ public class DriverBL {
 		}
 		
 		return "未找到对应司机";
+	}
+	
+	public List<DriverVO> getDriversByIns(String institutionID){
+		List<DriverVO> drivers = new ArrayList<DriverVO>();
+		for(DriverPO temp: driverList){
+			if(temp.getInstitutionID()==institutionID){
+				drivers.add(new DriverVO(temp));
+			}
+		}
+		return drivers;
 	}
 }
