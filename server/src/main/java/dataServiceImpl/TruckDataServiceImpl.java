@@ -27,12 +27,12 @@ public class TruckDataServiceImpl extends UnicastRemoteObject implements
 	private File file = new File("src/main/java/data/Truck.txt");
 
 	// 用于获取文件中所有车辆的信息的列表
-	private List<TruckPO> truck = new ArrayList<TruckPO>();
+	private List<TruckPO> truck;
 
 	public TruckDataServiceImpl() throws RemoteException {
 		super();
 		init();
-		// TODO Auto-generated constructor stub
+
 	}
 
 	/**
@@ -41,13 +41,13 @@ public class TruckDataServiceImpl extends UnicastRemoteObject implements
 	 * @return
 	 */
 	private boolean init() {
+		truck = new ArrayList<TruckPO>();
 		// 初始化 将所有的行里面的信息读取出来 复制给一个列表
 		String temp = "";
 		try {
 			BufferedReader bf = new BufferedReader(new FileReader(file));
 			while ((temp = bf.readLine()) != null) {
-				truck.add(new TruckPO(temp.split(" ")[0], temp.split(" ")[1],
-						Integer.parseInt(temp.split(" ")[2])));
+				truck.add(new TruckPO(temp));
 			}
 			bf.close();
 		} catch (IOException e) {
@@ -65,14 +65,14 @@ public class TruckDataServiceImpl extends UnicastRemoteObject implements
 			fw.write("");
 
 			System.out.println(truck.size());
-			for (TruckPO po : truck)
+			for (TruckPO po : truck) {
 				// 将列表中的数据再一次的更新到Truck.txt文件中去
-				fw.append(po.getTruckID() + " " + po.getTruckNumber() + " "
-						+ po.getYears() + "\n");
-			fw.flush();
+				fw.append(po.toString());
+				fw.flush();
+			}
 			fw.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		}
 		return true;
@@ -80,36 +80,40 @@ public class TruckDataServiceImpl extends UnicastRemoteObject implements
 
 	public void add(TruckPO po) throws RemoteException {
 		// TODO 注释该行
-		truck.add(po);
+		truck.add(0, po);
 		update();
 	}
 
 	public void delete(TruckPO po) throws RemoteException {
-		// TODO Auto-generated method stub
 		if (truck.contains(po)) {
 			truck.remove(po);
 			update();
 		}
 
 	}
-	//查询可以用编号和车牌号
+
+	// 查询可以用编号和车牌号
 	public TruckPO find(String id) throws RemoteException {
-		// TODO Auto-generated method stub
-		TruckPO target = new TruckPO(null, null, 0);
-		for (TruckPO po : truck){
-			target = po;
-			if (po.getTruckID().contains(id)
-					|| po.getTruckNumber().contains(id))
-				break;
+
+		for (TruckPO po : truck) {
+			if (po.getTruckNumber().equals(id)) {
+				return po;
+			}
 		}
-		return target;	
+		return null;
 	}
-	
-//	 public static void main(String[] args) throws RemoteException {
-//		 TruckDataServiceImpl temp = new TruckDataServiceImpl();
-//		 temp.add(new TruckPO("123","123" ,456));
-//		 temp.delete(new TruckPO("123","123", 456));
-//		 temp.update();		
-//		 }
+
+	@Override
+	public void modify(TruckPO po) throws RemoteException {
+	truck.set(truck.indexOf(po),po);
+	update();
+		
+	}
+
+	@Override
+	public List<TruckPO> getList() throws RemoteException {
+		return truck;
+	}
+
 
 }

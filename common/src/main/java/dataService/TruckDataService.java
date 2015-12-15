@@ -2,6 +2,8 @@ package dataService;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.List;
+
 import po.TruckPO;
 
 /**
@@ -10,9 +12,14 @@ import po.TruckPO;
  *
  */
 public interface TruckDataService extends Remote{
+	
 	public void add(TruckPO po)throws RemoteException;
 	
 	public void delete(TruckPO po)throws RemoteException;
 	
 	public TruckPO find(String id)throws RemoteException;
+	
+	public void modify(TruckPO po)throws RemoteException;
+	
+	public List<TruckPO> getList()throws RemoteException;
 }
