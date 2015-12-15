@@ -50,7 +50,9 @@ public class TruckBL {
 	
 	public String delete(TruckPO po){
 		for(TruckPO temp: truckList){
-			
+			if(temp.equals(po)){
+				
+			}
 		}
 		
 	}
