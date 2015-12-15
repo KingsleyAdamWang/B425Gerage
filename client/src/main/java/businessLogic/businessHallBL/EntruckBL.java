@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
+import po.DriverPO;
 import po.EntruckPO;
 import po.InstitutionPO;
 import vo.EntruckVO;
@@ -102,16 +103,21 @@ public class EntruckBL {
 		return institutionBL.searchInstitution(id);
 	}
 	
-	public List<String> getDriverNames(String id,String name){
+	public List<String> getDriverNames(String id,String name) throws RemoteException{
+		List<String> driverNames=new ArrayList<String>();
+		DriverBL driverBL=new DriverBL();
+		List<DriverPO> drivers;
 		try {
 			if(getInsByID(id).getType()==InsType.businessHall){
-				
+				drivers=driverBL.getDriversByIns(id);
 			}else{
 				
 			}
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
+		
+		return driverNames;
 	}
 	
 	public double getDistance(String id,String name){
