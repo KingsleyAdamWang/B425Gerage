@@ -7,9 +7,9 @@ import enumSet.ReceiptsState;
 import enumSet.TransportType;
 
 public class ShipmentVO extends ReceiptsVO {
-	String id;
-	Date date;
-	String institutionID, destination, type, transferID;
+	public String id;
+	public Date date;
+	public String institutionID, destination, type, transferID;
 
 	public ShipmentVO(ReceiptsState state, String userID, String id, Date date,
 			String institutionID, String destination, String type,

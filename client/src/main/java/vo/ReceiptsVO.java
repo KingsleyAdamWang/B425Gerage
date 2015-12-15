@@ -5,9 +5,9 @@ import enumSet.ReceiptsState;
 
 public class ReceiptsVO {
 	
-	protected ReceiptsState state;
+	public  ReceiptsState state;
 	
-	protected String userID;
+	public  String userID;
 	
 	/**
 	 * 构造方法
@@ -20,16 +20,16 @@ public class ReceiptsVO {
 		this.userID = userID;
 	}
 	
-	//各种getSet方法
-	public ReceiptsState getState() {
-		return state;
-	}
-	public void setState(ReceiptsState state) {
-		this.state = state;
-	}
-	public String getUserID() {
-		return userID;
-	}
+//	//各种getSet方法
+//	public ReceiptsState getState() {
+//		return state;
+//	}
+//	public void setState(ReceiptsState state) {
+//		this.state = state;
+//	}
+//	public String getUserID() {
+//		return userID;
+//	}
 
 	
 	

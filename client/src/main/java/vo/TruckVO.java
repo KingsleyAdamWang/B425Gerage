@@ -6,15 +6,15 @@ import po.TruckPO;
 import util.DateUtil;
 
 public class TruckVO {
-	String institutionID;
+	public String institutionID;
 	// 车的编号
-	 String truckID;
+	public  String truckID;
 	// 车牌号
-	 String truckNumber;
+	public  String truckNumber;
 	// 开始服役时间
-	Date startTime;
+	public Date startTime;
 	//
-	int years;
+	public int years;
 
 	public TruckVO(String institutionID,String truckID, String truckNumber, Date startTime) {
 		// TODO 自动生成的构造函数存根

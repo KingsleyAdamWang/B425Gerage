@@ -6,10 +6,10 @@ import po.LogPO;
 
 
 public class LogVO {
-	private Date d;
+	public Date d;
 
-	private String identityID;
-	private String message;
+	public  String identityID;
+	public  String message;
 
 	/**
 	 * 构造函数
@@ -37,24 +37,17 @@ public class LogVO {
 		return d;
 	}
 
-	public void setD(Date d) {
-		this.d = d;
-	}
 
 	public String getMessage() {
 		return message;
 	}
 
-	public void setMessage(String message) {
-		this.message = message;
-	}
+
 
 	public String getIdentityID() {
 		return identityID;
 	}
 
-	public void setIdentityID(String identityID) {
-		this.identityID = identityID;
-	}
+
 
 }

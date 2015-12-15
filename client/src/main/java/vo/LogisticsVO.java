@@ -8,11 +8,11 @@ import po.LogisticsPO;
 
 public class LogisticsVO {
 	// 快递单号
-	private String id;
+	public  String id;
 	// 快递的名称
-	private String name;
+	public  String name;
 	// 快递的物流信息
-	private List<String> messages;
+	public  List<String> messages;
 
 	public LogisticsVO(LogisticsPO po) {
 
@@ -63,17 +63,13 @@ public class LogisticsVO {
 		return id;
 	}
 
-	public void setId(String id) {
-		this.id = id;
-	}
+	
 
 	public String getName() {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
+	
 
 	public void addMessages(String string) {
 		messages.add(string);
@@ -84,10 +80,7 @@ public class LogisticsVO {
 		return messages;
 	}
 
-	public void setMessages(List<String> messages) {
-		this.messages = messages;
-	}
-
+	
 	public String toString() {
 
 		StringBuilder result = new StringBuilder(this.id + " " + this.name

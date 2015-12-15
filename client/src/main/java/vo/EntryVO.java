@@ -7,12 +7,12 @@ import enumSet.InventoryArea;
 import enumSet.ReceiptsState;
 
 public class EntryVO extends ReceiptsVO {
-	String id;
-	String institutionID;
-	Date date;
-	String destination;
-	int row, shelf, place;
-	InventoryArea area;
+	public String id;
+	public String institutionID;
+	public Date date;
+	public String destination;
+	public int row, shelf, place;
+	public InventoryArea area;
 
 	public EntryVO(ReceiptsState state, String userID, String id,
 			String institutionID, Date date, String destination, int row,

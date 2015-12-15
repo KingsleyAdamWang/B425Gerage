@@ -7,19 +7,19 @@ import enumSet.ReceiptsState;
 
 public class PaymentVO extends ReceiptsVO {
 	// 付款日期
-	Date d;
+	public Date d;
 	// 付款金額
-	double payment;
+	public double payment;
 	// 付款人姓名
-	String payName;
+	public String payName;
 	// 付款账号
-	String bankID;
+	public String bankID;
 	// 条目
-	String type;
+	public String type;
 	// 备注
-	String comment;
+	public String comment;
 	// 次数 月份数
-	int times;
+	public int times;
 
 	public PaymentVO(ReceiptsState state, String userID, Date d,
 			double payment, String payName, String bankID, String type,
@@ -45,28 +45,6 @@ public class PaymentVO extends ReceiptsVO {
 				comment, times);
 	}
 
-	public Date getD() {
-		return d;
-	}
 
-	public double getPayment() {
-		return payment;
-	}
-
-	public String getPayName() {
-		return payName;
-	}
-
-	public String getBankID() {
-		return bankID;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public String getComment() {
-		return comment;
-	}
 
 }

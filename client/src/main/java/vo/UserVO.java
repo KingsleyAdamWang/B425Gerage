@@ -63,33 +63,21 @@ public class UserVO {
 	public String getName() {
 		return name;
 	}
-	public void setName(String name) {
-		this.name = name;
-	}
+
 	public String getPassword() {
 		return password;
 	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
+
 	public String getIdentityID() {
 		return identityID;
 	}
-	public void setIdentityID(String identityID) {
-		this.identityID = identityID;
-	}
+	
 	public String getInstitutionID() {
 		return institutionID;
 	}
-	public void setInstitutionID(String institutionID) {
-		this.institutionID = institutionID;
-	}
-	
+
 	public Position getWork() {
 		return work;
-	}
-	public void setWork(Position work) {
-		this.work = work;
 	}
 
 

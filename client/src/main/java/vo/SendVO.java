@@ -9,29 +9,29 @@ import enumSet.ReceiptsState;
 
 public class SendVO extends ReceiptsVO {
 
-	 String id;
+	public  String id;
 	// 寄件时间
-	Date d;
+	public Date d;
 	// 寄件人的基本信息
-	 CustomerVO sender;
+	public  CustomerVO sender;
 	// 收件人的基本信息
-	 CustomerVO receiver;
+	public  CustomerVO receiver;
 	// 寄件的个数
-	 int goodsNum;
+	public  int goodsNum;
 	// 快递物品的名称
-	 String name;
+	public  String name;
 	// 快递的重量
-	 double weight;
+	public  double weight;
 	// 快递的体积
-	 double volume;
+	public  double volume;
 	// 快递的种类
-	 Express expressType;
+	public  Express expressType;
 	// 快递的包装的种类
-	 PackType packType;
+	public  PackType packType;
 	// 快递费用 自动生成
-	 double fare;
+	public  double fare;
 	// 预计到达时间 在没有历史数据的情况下是显示0
-	 int arriveDate;
+	public  int arriveDate;
 
 	public SendVO(SendPO po) {
 		this(po.getState(), po.getUserID(), po.getId(), po.getD(),

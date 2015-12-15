@@ -9,26 +9,26 @@ import po.TransferPO;
 
 public class TransferVO extends ReceiptsVO {
 	// 时间
-	Date d;
+	public Date d;
 	// 机构编号
-	String institutionID;
+	public String institutionID;
 	// 中转中心的货运编号/航空编号
-	String transferID;
+	public String transferID;
 	// 出发地城市
-	String departure;
+	public String departure;
 	// 目的地城市
-	String destination;
+	public String destination;
 
 	// 该中转单所具有的所有物流的快递单号
-	List<String> list;
+	public List<String> list;
 	// 中转产生的运费
-	double fare;
+	public double fare;
 	// 中转的类型 飞机 火车 还是汽车
-	TransportType type;
+	public TransportType type;
 	// 检装员
-	String name;
+	public String name;
 	// 根据类型不同 飞机是货柜号 火车是车厢号 汽车是押运员
-	String temp;
+	public String temp;
 
 	public TransferVO(ReceiptsState state, String userID, Date d,
 			String institutionID, String transferID, String departure,

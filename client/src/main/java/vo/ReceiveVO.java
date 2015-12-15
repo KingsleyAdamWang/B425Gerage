@@ -7,7 +7,7 @@ import util.DateUtil;
 import enumSet.ReceiptsState;
 
 public class ReceiveVO extends ReceiptsVO {
-	String id, name, telNum, d;
+	public String id, name, telNum, d;
 
 	public ReceiveVO(ReceiptsState state, String userID, String id,
 			String name, String telNum, String d) {

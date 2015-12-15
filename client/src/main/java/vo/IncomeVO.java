@@ -7,10 +7,10 @@ import po.IncomePO;
 import enumSet.ReceiptsState;
 
 public class IncomeVO extends ReceiptsVO{
-	 Date date;
-	 double income;
-	 String kdyID;
-	 List<String> idList;
+	public  Date date;
+	public  double income;
+	public  String kdyID;
+	public  List<String> idList;
 
 	/**
 	 * 构造函数

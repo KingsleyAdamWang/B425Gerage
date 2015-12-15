@@ -8,15 +8,15 @@ public class InventoryVO {
 	/**
 	 * 中转中心机构编号
 	 */
-	private String institutionID;
+	public  String institutionID;
 
 	/**
 	 * 要改用需求规格说明 假设一个中转中心内的四个分区的库存是一样的 即排架号的数量是一样的
 	 */
-	private Storage plane;// 航运区
-	private Storage train;// 铁运区
-	private Storage car;// 汽运区
-	private Storage auto;// zi动区
+	public  Storage plane;// 航运区
+    public  Storage train;// 铁运区
+	public  Storage car;// 汽运区
+	public  Storage auto;// zi动区
 
 	public InventoryVO(String institutionID, Storage plane, Storage train,
 			Storage car, Storage auto) {
@@ -72,36 +72,19 @@ public class InventoryVO {
 		return plane;
 	}
 
-	public void setPlane(Storage plane) {
-		this.plane = plane;
-	}
-
 	public Storage getTrain() {
 		return train;
 	}
 
-	public void setTrain(Storage train) {
-		this.train = train;
-	}
+
 
 	public Storage getCar() {
 		return car;
-	}
-
-	public void setCar(Storage car) {
-		this.car = car;
 	}
 
 	public Storage getAuto() {
 		return auto;
 	}
 
-	public void setAuto(Storage auto) {
-		this.auto = auto;
-	}
-
-	public void setInstitutionID(String institutionID) {
-		this.institutionID = institutionID;
-	}
 
 }

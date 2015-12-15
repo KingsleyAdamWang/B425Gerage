@@ -6,9 +6,9 @@ import po.DeliveryPO;
 import enumSet.ReceiptsState;
 
 public class DeliveryVO extends ReceiptsVO {
-	Date d;
-	String id;
-	String name;
+	public Date d;
+	public String id;
+	public String name;
 
 	public DeliveryVO(ReceiptsState state, String userID, Date d, String id,
 			String name) {
