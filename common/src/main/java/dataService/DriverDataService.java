@@ -2,6 +2,7 @@ package dataService;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.List;
 
 import po.DriverPO;
 
@@ -11,7 +12,6 @@ import po.DriverPO;
  *
  */
 public interface DriverDataService extends Remote{
-	
 	/**
 	 * 增加司机信息 数据中增加一个DriverPO
 	 * @param po DriverPO
@@ -38,4 +38,11 @@ public interface DriverDataService extends Remote{
 	 * @throws RemoteException
 	 */
 	public void Modify(DriverPO po)throws RemoteException;
+	
+	/**
+	 * 返回列表
+	 * @return
+	 * @throws RemoteException
+	 */
+	public List<DriverPO> getList()throws RemoteException;
 }

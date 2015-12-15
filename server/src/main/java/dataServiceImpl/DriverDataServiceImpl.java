@@ -92,6 +92,9 @@ public class DriverDataServiceImpl extends UnicastRemoteObject implements
 	public void Modify(DriverPO po) throws RemoteException {
 		driver.set(driver.indexOf(po),po);
 		update();
-		
+	}
+	
+	public List<DriverPO> getList()throws RemoteException{
+		return driver;
 	}
 }
