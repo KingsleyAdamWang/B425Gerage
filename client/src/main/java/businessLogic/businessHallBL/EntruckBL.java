@@ -120,15 +120,27 @@ public class EntruckBL {
 	}
 	
 	public double getDistance(String id,String name){
+		double result=0;
 		try {
 			StrategyBL strategyBL=new StrategyBL();
-			return strategyBL.getDistance(getInsByID(id).getCity(), getInsByName(name).getCity());
+			result=strategyBL.getDistance(getInsByID(id).getCity(), getInsByName(name).getCity());
+			if(result==0){
+				return result;
+			}else{
+				return 30;
+			}
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 			
 		return 0;
+	}
+	
+	public double getFare(String departureID,String destinationName){
+		double fare=0;
+		double distance=getDistance(departureID,destinationName);
+		//TODO 根据距离算运费
+		return fare;
 	}
 	
 	//提供给别的BL使用的

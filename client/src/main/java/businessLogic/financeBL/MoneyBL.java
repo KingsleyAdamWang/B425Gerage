@@ -1,16 +1,69 @@
 package businessLogic.financeBL;
 
+import java.rmi.RemoteException;
 import java.util.Date;
 import java.util.List;
 
+import client.ClientInitException;
+import client.RMIHelper;
 import po.CashRegisterPO;
 import po.IncomePO;
 import po.PaymentPO;
+import util.DateUtil;
+import dataService.IncomeDataService;
+import dataService.PaymentDataService;
 
 public class MoneyBL {
-	public double getIncome(){
-		return 0;
+//	private CashRegisterBL crBL;
+//	private PaymentBL paymentBL;
+	private IncomeDataService incomeDS;
+	private List<IncomePO> incomeList;
+	private PaymentDataService paymentDS;
+	private List<PaymentPO> paymentList;
+	
+	public MoneyBL() throws RemoteException{
+		try {
+			RMIHelper.initIncomeDataService();
+			incomeDS = RMIHelper.getIncomeDataService();
+			incomeList = incomeDS.getIncomeList();
+
+			RMIHelper.initPaymentDataService();
+			paymentDS = RMIHelper.getPaymentDataService();
+			paymentList = paymentDS.getList();
+		} catch (ClientInitException e) {
+			e.printStackTrace();
+		}
 	}
+	
+	public double getIncomeBetween(Date start,Date end){
+		double result=0;
+		start	=DateUtil.stringToDate(DateUtil.dateToString(start));
+		end		=DateUtil.stringToDate(DateUtil.dateToString(end));
+		for(IncomePO temp : incomeList){
+			if(temp.getDate().after(start)&&temp.getDate().before(end)){
+				result=result+temp.getIncome();
+			}
+		}
+		
+		return result;
+	}
+	
+	public double getPaymentBetween(Date start,Date end){
+		double result=0;
+		start	=DateUtil.stringToDate(DateUtil.dateToString(start));
+		end		=DateUtil.stringToDate(DateUtil.dateToString(end));
+		for(PaymentPO temp : paymentList){
+			if(temp.getD().after(start)&&temp.getD().before(end)){
+				result=result+temp.getAmmounts();
+			}
+		}
+		
+		return result;
+	}
+	
+
+	
+	//后面都没用
 	
 	public double getCashTotal(List<CashRegisterPO> list){
 		return 0;
