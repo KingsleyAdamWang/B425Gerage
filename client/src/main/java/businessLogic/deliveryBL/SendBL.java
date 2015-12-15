@@ -6,6 +6,7 @@ import java.util.List;
 
 import po.PriceConstPO;
 import po.SendPO;
+import util.CheckUtil;
 import util.PackPrice;
 import vo.SendVO;
 import businessLogic.manageBL.StrategyBL;
@@ -37,7 +38,15 @@ public class SendBL {
 				return "存在相同编号的快递单";
 		}
 		
-//		if(po.getSender().)
+		if(!(CheckUtil.isNumber(po.getSender().getPostCode())&&po.getSender().getPostCode().length()==6)){
+			return "邮编格式有误";
+		}
+		if(!(CheckUtil.isNumber(po.getSender().getTelephone())&&po.getSender().getTelephone().length()>=7)){
+			return "寄件人电话格式有误";
+		}
+		if(!(CheckUtil.isNumber(po.getReceiver().getTelephone())&&po.getReceiver().getTelephone().length()>=7)){
+			return "收件人电话格式有误";
+		}
 		
 		
 		

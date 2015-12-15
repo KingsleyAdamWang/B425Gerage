@@ -10,6 +10,7 @@ import java.util.Map.Entry;
 import dataServiceImpl.AccountDataServiceImpl;
 import dataServiceImpl.ArrivalDataServiceImpl;
 import dataServiceImpl.DeliveryDataServiceImpl;
+import dataServiceImpl.DriverDataServiceImpl;
 import dataServiceImpl.EntruckDataServiceImpl;
 import dataServiceImpl.EntryDataServiceImpl;
 import dataServiceImpl.IncomeDataServiceImpl;
@@ -56,6 +57,7 @@ public class RMIHelper {
 		// NAMING_MAP.put("approve-data", ApproveDataServiceImpl.class);
 		NAMING_MAP.put("arrival-data", ArrivalDataServiceImpl.class);
 		NAMING_MAP.put("delivery-data", DeliveryDataServiceImpl.class);
+		NAMING_MAP.put("driver-data", DriverDataServiceImpl.class);
 		NAMING_MAP.put("entruck-data", EntruckDataServiceImpl.class);
 		NAMING_MAP.put("entry-data", EntryDataServiceImpl.class);
 		NAMING_MAP.put("payment-data", PaymentDataServiceImpl.class);

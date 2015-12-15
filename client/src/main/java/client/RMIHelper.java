@@ -5,6 +5,7 @@ import java.rmi.Naming;
 import dataService.AccountDataService;
 import dataService.ArrivalDataService;
 import dataService.DeliveryDataService;
+import dataService.DriverDataService;
 import dataService.EntruckDataService;
 import dataService.EntryDataService;
 import dataService.IncomeDataService;
@@ -37,6 +38,7 @@ public class RMIHelper {
 	private static AccountDataService accountDataService;
 	private static ArrivalDataService arrivalDataService;
 	private static DeliveryDataService deliveryDataService;
+	private static DriverDataService driverDataService;
 	private static EntruckDataService entruckDataService;
 	private static EntryDataService entryDataService;
 	private static PaymentDataService paymentDataService;
@@ -101,7 +103,16 @@ public class RMIHelper {
 			throw new ClientInitException(e);
 		}
 	}
-
+	
+	public static void initDriverDataService() throws ClientInitException {
+		try {
+			driverDataService = (DriverDataService) Naming.lookup(urlPrefix
+					+ "driver-data");
+			System.out.println("RMI远程调用DriverDataService成功");
+		} catch (Exception e) {
+			throw new ClientInitException(e);
+		}
+	}
 	public static void initEntruckDataService() throws ClientInitException {
 		try {
 			entruckDataService = (EntruckDataService) Naming.lookup(urlPrefix
@@ -293,6 +304,10 @@ public class RMIHelper {
 
 	public static DeliveryDataService getDeliveryDataService() {
 		return deliveryDataService;
+	}
+	
+	public static DriverDataService getDriverDataService() {
+		return driverDataService;
 	}
 
 	public static EntruckDataService getEntruckDataService() {

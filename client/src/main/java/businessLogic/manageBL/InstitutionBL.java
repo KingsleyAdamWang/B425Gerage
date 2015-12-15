@@ -48,6 +48,22 @@ public class InstitutionBL {
 		return result;
 	}
 	
+	public List<InstitutionVO> showByCity() throws RemoteException{
+		StrategyBL strategyBL=new StrategyBL();
+		List<String> cities=strategyBL.getCities();
+		
+		List<InstitutionVO>result=new ArrayList<InstitutionVO>();
+		for(String cityName: cities){
+			for(InstitutionPO temp: insList){
+				if(temp.getCity().equals(cityName)){
+					result.add(new InstitutionVO(temp));
+				}
+			}
+		}
+		
+		return result;
+	}
+	
 	public String addIns(InstitutionVO vo) throws RemoteException{
 		InstitutionPO po= vo.transToPO();
 		
@@ -190,6 +206,16 @@ public class InstitutionBL {
 		for(InstitutionPO temp : insList){
 			if(temp.getInstitutionID().equals(id)){
 				return new InstitutionVO(temp);
+			}
+		}
+		//未查找到对应VO
+		return null;
+	}
+	
+	public InstitutionPO searchByName(String name){
+		for(InstitutionPO temp : insList){
+			if(temp.getName().equals(name)){
+				return temp;
 			}
 		}
 		//未查找到对应VO

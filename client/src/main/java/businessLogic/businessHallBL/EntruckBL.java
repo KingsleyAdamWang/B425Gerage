@@ -5,10 +5,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import po.EntruckPO;
+import po.InstitutionPO;
 import vo.EntruckVO;
+import vo.InstitutionVO;
+import businessLogic.manageBL.InstitutionBL;
+import businessLogic.manageBL.StrategyBL;
 import client.ClientInitException;
 import client.RMIHelper;
 import dataService.EntruckDataService;
+import enumSet.InsType;
 
 public class EntruckBL {
 	private EntruckDataService entruckDS;
@@ -78,11 +83,55 @@ public class EntruckBL {
 		return "未找到对应装车单";
 	}
 	
+	public List<String> getInstitutionNames() throws RemoteException{
+		InstitutionBL institutionBL=new InstitutionBL();
+		List<InstitutionVO> insVOList=institutionBL.showByCity();
+		List<String> result=new ArrayList<String>();
+		for(InstitutionVO temp: insVOList){
+			result.add(temp.getName());
+		}
+		return result;
+	}
+	
+	private InstitutionPO getInsByName(String name) throws RemoteException{
+		InstitutionBL institutionBL=new InstitutionBL();
+		return institutionBL.searchByName(name);
+	}
+	private InstitutionVO getInsByID(String id) throws RemoteException{
+		InstitutionBL institutionBL=new InstitutionBL();
+		return institutionBL.searchInstitution(id);
+	}
+	
+	public List<String> getDriverNames(String id,String name){
+		try {
+			if(getInsByID(id).getType()==InsType.businessHall){
+				
+			}else{
+				
+			}
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public double getDistance(String id,String name){
+		try {
+			StrategyBL strategyBL=new StrategyBL();
+			return strategyBL.getDistance(getInsByID(id).getCity(), getInsByName(name).getCity());
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			
+		return 0;
+	}
+	
 	//提供给别的BL使用的
 	public List<String> getGoodsID(String entruckID) throws RemoteException{
 		EntruckPO po=entruckDS.find(entruckID);
 		
 		return po.getIDlist();
 	}
+	
 	
 }
