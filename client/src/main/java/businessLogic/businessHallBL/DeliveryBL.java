@@ -63,4 +63,14 @@ public class DeliveryBL {
 		
 		return "未找到对应派件单";
 	}
+
+	public void approve() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void approveAll() {
+		// TODO Auto-generated method stub
+		
+	}
 }

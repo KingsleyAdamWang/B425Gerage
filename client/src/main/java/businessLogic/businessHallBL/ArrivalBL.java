@@ -30,6 +30,11 @@ public class ArrivalBL {
 		}
 	}
 	
+//	public ArrivalVO newArrival(){
+//		ArrivalVO arrivalVO=new ArrivalVO(new ArrivalPO());
+//		arrivalVO.
+//	}
+	
 	public ArrivalVO search(String transferID){
 		for(ArrivalPO temp: arrivalList){
 			if(temp.getTransferId().equals(transferID)){
@@ -99,6 +104,8 @@ public class ArrivalBL {
 		return "未找到对应到达单";
 	}
 	
+
+	
 	//通过中转单单号查询对应的所有快递单号列表
 	public List<String> getIDList(String transferID) throws RemoteException{
 //		EntruckDataService entruckDS=new EntruckDataService();
@@ -116,6 +123,20 @@ public class ArrivalBL {
 		
 		
 		
+		
+	}
+	public List<ArrivalVO> getUnapproveArrival(){
+		
+		return null;
+	}
+
+	public void approve() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void approveAll() {
+		// TODO Auto-generated method stub
 		
 	}
 }

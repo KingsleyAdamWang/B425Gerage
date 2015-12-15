@@ -58,7 +58,11 @@ public class ArrivalVO extends Vector<String> {
 	public String getState() {
 		return this.get(0);
 	}
-
+	
+	public void setState(String state){
+		this.set(0, state);
+	}
+	
 	public String getUserID() {
 		return this.get(1);
 	}

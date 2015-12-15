@@ -42,4 +42,14 @@ public class MoneyBL {
 	public boolean addPayment(PaymentPO po){
 		return false;
 	}
+
+	public void approveIncome() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void approveAllIncome() {
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import po.AccountPO;
+import po.PaymentPO;
 import vo.AccountVO;
 import client.ClientInitException;
 import client.RMIHelper;
@@ -71,7 +72,11 @@ public class AccountBL {
 		accountDS.modify(vo.transToPO(), newName);
 		return null;
 	}
-
+	
+	public String pay(String AccountPO,PaymentPO paymentPO){
+		
+		return null;
+	}
 	public List<AccountVO> getAccounts() {
 		List<AccountVO> result = new ArrayList<AccountVO>();
 

@@ -61,4 +61,14 @@ public class EntryBL {
 	public EntryPO find(String ID) throws RemoteException{
 		return entryDS.find(ID);
 	}
+
+	public void approve() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void approveAll() {
+		// TODO Auto-generated method stub
+		
+	}
 }

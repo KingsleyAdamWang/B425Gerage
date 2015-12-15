@@ -77,5 +77,15 @@ public class CashRegisterBL {
 		
 		return result;
 	}
+
+	public void approve() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void approveAll() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

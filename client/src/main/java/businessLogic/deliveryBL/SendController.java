@@ -36,6 +36,11 @@ public class SendController implements SendBLService {
 	public double getFare(String departure, String destination, PackType packType,Express  transferType,double weight,double length,double width,double height) throws RemoteException, ClientInitException {
 		return sendBL.getPrice(departure, destination, packType, transferType, weight,length,width,height);
 	}
+	
+	public int getTime(SendVO vo){
+		
+		return sendBL.getTime(vo);
+	}
 	//只有以上的有用
 
 
