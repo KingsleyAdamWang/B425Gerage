@@ -3,7 +3,7 @@ package vo;
 import java.util.Date;
 
 import po.DriverPO;
-import util.DateUtil;
+import enumSet.Sex;
 
 public class DriverVO {
 	/**
@@ -23,6 +23,10 @@ public class DriverVO {
 	 */
 	Date birth;
 	/**
+	 * 司机的性别
+	 */
+	Sex sex;
+	/**
 	 * 手机号码
 	 */
 	String telNumber;
@@ -35,14 +39,15 @@ public class DriverVO {
 	 */
 	Date driveLicence;
 
-	public DriverVO(String id, String name, String iDnumber, Date d,
-			String telNumber, String institutionID, String truckID,
-			int workYears, Date driveLicence) {
+	public DriverVO(String id, String name, String iDnumber, Date d, Sex sex,
+			String telNumber, String institutionID, 
+			 Date driveLicence) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.IDnumber = iDnumber;
 		this.birth = d;
+		this.sex = sex;
 		this.telNumber = telNumber;
 		this.institutionID = institutionID;
 		this.driveLicence = driveLicence;
@@ -50,11 +55,12 @@ public class DriverVO {
 
 	public DriverVO(DriverPO po) {
 		this(po.getId(), po.getName(), po.getIDnumber(), po.getBirth(), po
-				.getTelNumber(), po.getInstitutionID(), po.getDriveLicence());
+				.getSex(), po.getTelNumber(), po.getInstitutionID(), po
+				.getDriveLicence());
 	}
 
 	public DriverPO transtoPO() {
-		return new DriverPO(id, name, IDnumber, birth, telNumber,
+		return new DriverPO(id, name, IDnumber, birth, sex, telNumber,
 				institutionID, driveLicence);
 
 	}
@@ -90,7 +96,5 @@ public class DriverVO {
 			return false;
 		return true;
 	}
-
-
 
 }

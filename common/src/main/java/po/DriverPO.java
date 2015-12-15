@@ -3,6 +3,7 @@ package po;
 import java.io.Serializable;
 import java.util.Date;
 
+import enumSet.Sex;
 import util.DateUtil;
 
 /**
@@ -32,6 +33,10 @@ public class DriverPO implements Serializable {
 	 */
 	private Date birth;
 	/**
+	 * 司机的性别
+	 */
+	private Sex sex;
+	/**
 	 * 手机号码
 	 */
 	private String telNumber;
@@ -45,13 +50,14 @@ public class DriverPO implements Serializable {
 	 */
 	private Date driveLicence;
 
-	public DriverPO(String id, String name, String iDnumber, Date d,
+	public DriverPO(String id, String name, String iDnumber, Date d,Sex sex,
 			String telNumber, String institutionID, Date driveLicence) {
 		super();
 		this.id = id;
 		this.name = name;
 		IDnumber = iDnumber;
 		this.birth = d;
+		this.sex = sex;
 		this.telNumber = telNumber;
 		this.institutionID = institutionID;
 		this.driveLicence = driveLicence;
@@ -63,14 +69,15 @@ public class DriverPO implements Serializable {
 		this.name = strs[1];
 		this.IDnumber = strs[2];
 		this.birth = DateUtil.stringToDate(strs[3]);
-		this.telNumber = strs[4];
-		this.institutionID = strs[5];
-		this.driveLicence = DateUtil.stringToDate(strs[6]);
+		this.sex = Sex.getSex(strs[4]);
+		this.telNumber = strs[5];
+		this.institutionID = strs[6];
+		this.driveLicence = DateUtil.stringToDate(strs[7]);
 	}
 
 	public String toString() {
 		return id + " " + name + " " + IDnumber + " "
-				+ DateUtil.dateToString(birth) + " " + telNumber + " "
+				+ DateUtil.dateToString(birth) + " "+sex.getSexString()+" " + telNumber + " "
 				+ institutionID + " " + DateUtil.dateToString(driveLicence)+"\n";
 	}
 
@@ -100,6 +107,10 @@ public class DriverPO implements Serializable {
 
 	public Date getBirth() {
 		return birth;
+	}
+
+	public Sex getSex(){
+	  return sex;
 	}
 
 	@Override

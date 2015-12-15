@@ -6,7 +6,7 @@ public class TruckPO implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
-	
+	private String institutionID;
 	//车的编号
 	private String truckID ;
 	//车牌号
