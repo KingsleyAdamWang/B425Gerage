@@ -104,7 +104,8 @@ public class DriverBL {
 		List<String> names=new ArrayList<String>();
 		List<DriverVO> drivers=getDriversByIns(institutionID);
 		for(DriverVO temp: drivers){
-			names.add(temp.)
+			names.add(temp.name);
 		}
+		return names;
 	}
 }

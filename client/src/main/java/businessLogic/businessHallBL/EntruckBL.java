@@ -109,14 +109,13 @@ public class EntruckBL {
 		List<DriverPO> drivers;
 		try {
 			if(getInsByID(id).getType()==InsType.businessHall){
-				drivers=driverBL.getDriversByIns(id);
+				driverNames=driverBL.getDriverNamesByIns(id);
 			}else{
-				
+				driverNames=driverBL.getDriverNamesByIns(getInsByName(name).getInstitutionID());
 			}
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
-		
 		return driverNames;
 	}
 	
