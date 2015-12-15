@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 import po.DriverPO;
+import util.CheckUtil;
 import vo.DriverVO;
 import client.ClientInitException;
 import client.RMIHelper;
@@ -32,14 +33,26 @@ public class DriverBL {
 		return null;
 	}
 	
-	public String addDriver(DriverVO vo){
-		DriverPO po=vo.transtoPO();
+	public String addDriver(DriverPO po){
+//		DriverPO po=vo.transtoPO();
 		
 		for(DriverPO temp:driverList){
 			if(temp.getId()==po.getId()){
 				return "存在相同编号";
 			}
-		}	
+		}
+		
+		if(!(CheckUtil.isNumber(po.getId())&&po.getId().length()==8)){
+			return "人员编号格式有误";
+		}
+		
+		
+		driverList.add(po);
+		try {
+			driverDS.add(po);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		return null; 
 	}
 	
@@ -63,6 +76,7 @@ public class DriverBL {
 				try {
 					driverDS.delete(po);
 					driverList=driverDS.getList();
+					addDriver(po);
 					return null;
 				} catch (RemoteException e) {
 					e.printStackTrace();
