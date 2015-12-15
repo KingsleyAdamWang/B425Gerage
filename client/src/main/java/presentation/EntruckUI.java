@@ -14,7 +14,10 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
+import client.Main;
+import util.DateUtil;
 import vo.EntruckVO;
+import businessLogic.intermediateBL.EntruckController;
 import enumSet.ReceiptsState;
 
 public class EntruckUI extends JPanel {
@@ -24,8 +27,9 @@ public class EntruckUI extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	private final String[] labelName = { "汽运编号", "车辆代号", "目的地", "装车时间", "监装员",
-			"押运员" };
+	private EntruckController ec;
+	private final String[] labelName = { "机构编号", "汽运编号", "车辆代号", "装车日期", "目的地",
+			"运费", "监装员", "押运员" };
 	private JLabel[] label;
 	private JTextField[] field;
 	private JTextField idField;
@@ -46,13 +50,13 @@ public class EntruckUI extends JPanel {
 		this.setLayout(null);
 
 		vData = new Vector<String>();
-		label = new JLabel[6];
-		field = new JTextField[6];
-		for (int i = 0; i < 6; i++) {
+		label = new JLabel[8];
+		field = new JTextField[8];
+		for (int i = 0; i < 8; i++) {
 			label[i] = new JLabel(labelName[i] + ":");
-			label[i].setBounds(20 + 400 * (i % 2), 40 + 40 * (i / 2), 100, 20);
+			label[i].setBounds(20 + 400 * (i % 2), 30 + 40 * (i / 2), 100, 20);
 			field[i] = new JTextField();
-			field[i].setBounds(105 + 400 * (i % 2), 40 + 40 * (i / 2), 250, 30);
+			field[i].setBounds(105 + 400 * (i % 2), 30 + 40 * (i / 2), 250, 30);
 			this.add(label[i]);
 			this.add(field[i]);
 		}
@@ -61,25 +65,25 @@ public class EntruckUI extends JPanel {
 		// js.setBounds(0, 180, 800, 10);
 		// this.add(js);
 
-		JLabel listLabel = new JLabel("订单号：");
-		listLabel.setBounds(20, 160, 100, 20);
+		JLabel listLabel = new JLabel("订单号:");
+		listLabel.setBounds(20, 190, 100, 20);
 		this.add(listLabel);
 
 		idField = new JTextField();
-		idField.setBounds(105, 160, 250, 30);
+		idField.setBounds(105, 190, 250, 30);
 		this.add(idField);
 
 		addIDBtn = new JButton("添加货物");
 		delIDBtn = new JButton("删除货物");
-		addIDBtn.setBounds(400, 160, 80, 30);
-		delIDBtn.setBounds(500, 160, 80, 30);
+		addIDBtn.setBounds(400, 190, 80, 30);
+		delIDBtn.setBounds(500, 190, 80, 30);
 		this.add(addIDBtn);
 		this.add(delIDBtn);
 
 		list = new JList<String>(vData);
 		// list.setBounds(20, 180, 600, 300);
 		sp = new JScrollPane();
-		sp.setBounds(100, 200, 600, 300);
+		sp.setBounds(100, 240, 600, 250);
 		sp.getViewport().add(list);
 		this.add(sp);
 
@@ -127,34 +131,54 @@ public class EntruckUI extends JPanel {
 							JOptionPane.ERROR_MESSAGE);
 					return;
 				}
-
+				String result = ec.submit(getVO());
+				if (result != null) {
+					JOptionPane.showMessageDialog(null, result, "",
+							JOptionPane.ERROR_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(null, "提交成功", "",
+							JOptionPane.INFORMATION_MESSAGE);
+				}
 			}
 		});
 
 		returnBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Main.frame.returnToTop();
 			}
 		});
+
+		field[0].setText(MainFrame.getUser().getIdentityID());
+		field[0].setEditable(false);
+		field[3].setText(DateUtil.dateToString());
 	}
 
 	private void initList() {
+		list = new JList<String>(vData);
+		sp.getViewport().add(list);
+		list.repaint();
+		sp.repaint();
+	}
 
+	private void setFare() {
+		field[7].setText("");
 	}
 
 	private EntruckVO getVO() {
 		String date = field[3].getText();
-		String qyID = field[0].getText();
-		String destination = field[2].getText();
-		String truckID = field[1].getText();
-		String checkName = field[4].getText();
-		String deliverMan = field[5].getText();
+		String qyID = field[1].getText();
+		String destination = field[4].getText();
+		String truckID = field[2].getText();
+		String checkName = field[6].getText();
+		String deliverMan = field[7].getText();
+		String fare = field[7].getText();
 		List<String> idList = new ArrayList<String>();
 		for (int i = 0; i < vData.size(); i++) {
 			idList.add(vData.get(i));
 		}
 		return new EntruckVO(ReceiptsState.getReceiptsState("未审批"), MainFrame
 				.getUser().getIdentityID(), date, qyID, destination, truckID,
-				checkName, deliverMan,idList,0);
+				checkName, deliverMan, idList, 0);
 	}
 
 	private boolean hasEmpty() {

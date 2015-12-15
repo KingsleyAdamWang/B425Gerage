@@ -2,7 +2,11 @@ package presentation;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -12,11 +16,12 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 
-import client.ClientInitException;
 import util.DateUtil;
 import vo.CustomerVO;
 import vo.SendVO;
 import businessLogic.deliveryBL.SendController;
+import client.ClientInitException;
+import client.Main;
 import enumSet.Express;
 import enumSet.PackType;
 import enumSet.ReceiptsState;
@@ -37,7 +42,7 @@ public class SendUI extends JPanel {
 	private JTextField[] textFieldS;
 	private JTextField[] textFieldR;
 	private final String[] labelName2 = { "原件数", "内件品名", "实际重量", "体积", "运送方式",
-			"包装方式", "快递单号", "寄件日期" };
+			"包装方式", "快递单号", "寄件日期", "预计天数" };
 	private JLabel[] labelO;
 	private JTextField[] textFieldO;
 	private String[] cities;
@@ -59,7 +64,7 @@ public class SendUI extends JPanel {
 		this.validate();
 	}
 
-	private void initComponents() {
+	private void initComponents() throws RemoteException {
 		this.setLayout(null);
 
 		labelS = new JLabel[6];
@@ -85,27 +90,27 @@ public class SendUI extends JPanel {
 		}
 
 		JSeparator js = new JSeparator();
-		js.setBounds(0, 300, 800, 10);
+		js.setBounds(0, 290, 800, 10);
 		this.add(js);
 
-		labelO = new JLabel[8];
-		textFieldO = new JTextField[8];
-		for (int i = 0; i < 8; i++) {
+		labelO = new JLabel[9];
+		textFieldO = new JTextField[9];
+		for (int i = 0; i < 9; i++) {
 			labelO[i] = new JLabel(labelName2[i] + ":");
 			labelO[i]
-					.setBounds(20 + 400 * (i % 2), 320 + 40 * (i / 2), 100, 20);
+					.setBounds(20 + 400 * (i % 2), 310 + 40 * (i / 2), 100, 20);
 			textFieldO[i] = new JTextField();
-			textFieldO[i].setBounds(105 + 400 * (i % 2), 320 + 40 * (i / 2),
+			textFieldO[i].setBounds(105 + 400 * (i % 2), 310 + 40 * (i / 2),
 					250, 30);
 			this.add(labelO[i]);
 			this.add(textFieldO[i]);
 		}
 
 		yesButton = new JButton("提交");
-		yesButton.setBounds(200, 500, 100, 30);
+		yesButton.setBounds(200, 520, 100, 30);
 		this.add(yesButton);
 		noButton = new JButton("返回");
-		noButton.setBounds(500, 500, 100, 30);
+		noButton.setBounds(500, 520, 100, 30);
 		this.add(noButton);
 
 		textFieldO[4].setVisible(false);
@@ -115,8 +120,8 @@ public class SendUI extends JPanel {
 
 		expressType = new JComboBox<String>(exType);
 		packType = new JComboBox<String>(pkType);
-		expressType.setBounds(105, 400, 250, 30);
-		packType.setBounds(505, 400, 250, 30);
+		expressType.setBounds(105, 390, 250, 30);
+		packType.setBounds(505, 390, 250, 30);
 		this.add(expressType);
 		this.add(packType);
 
@@ -129,6 +134,7 @@ public class SendUI extends JPanel {
 		this.add(cityComboS);
 
 		textFieldO[7].setText(DateUtil.dateToString());
+		setDays();
 
 		yesButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -168,16 +174,29 @@ public class SendUI extends JPanel {
 
 		noButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Main.frame.returnToTop();
+			}
+		});
+
+		cityComboR.addItemListener(new ItemListener() {
+			public void itemStateChanged(final ItemEvent e) {
+				setDays();
+			}
+		});
+
+		cityComboS.addItemListener(new ItemListener() {
+			public void itemStateChanged(final ItemEvent e) {
+				setDays();
 			}
 		});
 	}
 
-	private void initCities() {
-		cities = new String[4];
-		cities[0] = "北京";
-		cities[1] = "上海";
-		cities[2] = "广州";
-		cities[3] = "南京";
+	private void initCities() throws RemoteException {
+		List<String> list = sc.getCities();
+		cities = new String[list.size()];
+		for (int i = 0; i < list.size(); i++) {
+			cities[i] = list.get(i);
+		}
 	}
 
 	private CustomerVO getSender() {
@@ -228,13 +247,19 @@ public class SendUI extends JPanel {
 					return true;
 			}
 		}
-		for (int i = 0; i < 7; i++) {
+		for (int i = 0; i < 8; i++) {
 			if (i != 4 && i != 5) {
 				if (textFieldO[i].getText().equals(""))
 					return true;
 			}
 		}
 		return false;
+	}
+
+	private void setDays() {
+		String s2 = (String) cityComboS.getSelectedItem();
+		String s1 = (String) cityComboR.getSelectedItem();
+		textFieldO[8].setText(sc.getDays(s1, s2) + "");
 	}
 
 	public static void main(String[] args) throws RemoteException,

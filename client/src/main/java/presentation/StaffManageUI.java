@@ -17,6 +17,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
+import client.Main;
 import vo.AccountVO;
 import vo.InstitutionVO;
 import vo.UserVO;
@@ -101,6 +102,12 @@ public class StaffManageUI extends JPanel {
 			case 3:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						try {
+							Main.frame.setView(new InstManageUI(), "人员机构管理");
+						} catch (RemoteException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 					}
 				});
 				break;

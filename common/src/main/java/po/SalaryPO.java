@@ -38,6 +38,7 @@ public class SalaryPO implements Serializable {
 	}
 
 	public List<Salary> getSalaryList() {
+		System.out.println(salaryList.size());
 		return salaryList;
 	}
 	

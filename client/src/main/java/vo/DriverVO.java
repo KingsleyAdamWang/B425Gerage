@@ -9,35 +9,35 @@ public class DriverVO {
 	/**
 	 * 司机的编号
 	 */
-	String id;
+	public String id;
 	/**
 	 * 司机的姓名
 	 */
-	String name;
+	public String name;
 	/**
 	 * 司机的身份证号
 	 */
-	String IDnumber;
+	public String IDnumber;
 	/**
 	 * 司机的出生日期
 	 */
-	Date birth;
+	public Date birth;
 	/**
 	 * 司机的性别
 	 */
-	Sex sex;
+	public Sex sex;
 	/**
 	 * 手机号码
 	 */
-	String telNumber;
+	public String telNumber;
 	/**
 	 * 司机的所属的机构的编号
 	 */
-	String institutionID;
+	public String institutionID;
 	/**
 	 * 行驶证期限 也就是行驶证的能用到什么时候 额没有行驶证大致猜测一下就是这个功能
 	 */
-	Date driveLicence;
+	public Date driveLicence;
 
 	public DriverVO(String id, String name, String iDnumber, Date d, Sex sex,
 			String telNumber, String institutionID, 

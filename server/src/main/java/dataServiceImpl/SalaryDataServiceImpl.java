@@ -21,7 +21,7 @@ public class SalaryDataServiceImpl extends UnicastRemoteObject implements Salary
 	private File file = new File("src/main/java/data/Salary.txt");
 	public  SalaryDataServiceImpl() throws RemoteException {
 		super();
-	
+	    init();
 	}
 
 	private void init(){

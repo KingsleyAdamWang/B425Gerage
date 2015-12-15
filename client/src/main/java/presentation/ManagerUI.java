@@ -100,7 +100,12 @@ public class ManagerUI extends JPanel {
 			case 3:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						Main.frame.setView(new SalaryUI(), "薪水策略制定");
+						try {
+							Main.frame.setView(new SalaryUI(), "薪水策略制定");
+						} catch (RemoteException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 					}
 				});
 				break;

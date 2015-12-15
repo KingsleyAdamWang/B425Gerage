@@ -2,6 +2,7 @@ package presentation;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 import java.util.Vector;
 
 import javax.swing.BorderFactory;
@@ -11,6 +12,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import client.ClientInitException;
+import client.Main;
 import vo.UserVO;
 
 public class YYTUI extends JPanel {
@@ -67,6 +70,15 @@ public class YYTUI extends JPanel {
 			case 0:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						try {
+							Main.frame.setView(new ArrivalUI(), "填写到达单");
+						} catch (RemoteException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (ClientInitException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 					}
 				});
 				break;
@@ -79,6 +91,7 @@ public class YYTUI extends JPanel {
 			case 2:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						Main.frame.setView(new EntruckUI(), "填写装车单");
 					}
 				});
 				break;
@@ -91,6 +104,14 @@ public class YYTUI extends JPanel {
 			case 4:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						Main.frame.setView(new TruckUI(), "车辆信息管理");
+					}
+				});
+				break;
+			case 5:
+				funcButton[i].addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						Main.frame.setView(new DriverAddUI(), "司机信息管理");
 					}
 				});
 				break;
