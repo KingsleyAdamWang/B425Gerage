@@ -107,7 +107,7 @@ public class SendBL {
 		return Double.parseDouble(df.format(result));
 	}
 	
-	public int getTime(SendVO sendVO){
+	public int getDays(SendVO sendVO){
 		return 0;
 	}
 

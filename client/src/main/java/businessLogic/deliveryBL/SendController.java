@@ -37,9 +37,9 @@ public class SendController implements SendBLService {
 		return sendBL.getPrice(departure, destination, packType, transferType, weight,length,width,height);
 	}
 	
-	public int getTime(SendVO vo){
+	public int getDays(SendVO vo){
 		
-		return sendBL.getTime(vo);
+		return sendBL.getDays(vo);
 	}
 	//只有以上的有用
 
