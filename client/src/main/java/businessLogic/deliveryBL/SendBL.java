@@ -107,7 +107,7 @@ public class SendBL {
 		return Double.parseDouble(df.format(result));
 	}
 	
-	public int getDays(SendVO sendVO){
+	public int getDays(String departure,String destination){
 		return 0;
 	}
 
