@@ -2,16 +2,17 @@ package businessLogic.deliveryBL;
 
 import java.rmi.RemoteException;
 import java.util.Date;
+import java.util.List;
 
 import po.LogPO;
 import presentation.MainFrame;
+import vo.SendVO;
+import businessLogicService.deliveryBLService.SendBLService;
 import client.ClientInitException;
 import client.RMIHelper;
 import dataService.LogDataService;
 import enumSet.Express;
 import enumSet.PackType;
-import vo.SendVO;
-import businessLogicService.deliveryBLService.SendBLService;
 
 public class SendController implements SendBLService {
 	private SendBL sendBL;
@@ -40,6 +41,10 @@ public class SendController implements SendBLService {
 	public int getDays(String departure,String destination){
 		
 		return sendBL.getDays(departure,destination);
+	}
+	
+	public List<String> getCities() throws RemoteException{
+		return sendBL.getCities();
 	}
 	//只有以上的有用
 

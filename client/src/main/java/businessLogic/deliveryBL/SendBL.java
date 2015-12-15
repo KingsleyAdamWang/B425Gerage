@@ -36,6 +36,11 @@ public class SendBL {
 			if (temp.getId().equals(po.getId()))
 				return "存在相同编号的快递单";
 		}
+		
+//		if(po.getSender().)
+		
+		
+		
 		sendList.add(po);
 		sendDS.add(po);
 

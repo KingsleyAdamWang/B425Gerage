@@ -4,6 +4,16 @@ import enumSet.InsType;
 
 public class CheckUtil {
 	
+	
+	public static boolean isNumber(String s){
+		for(int i=0;i<s.length();i++){
+			if(s.charAt(i)<'0'||s.charAt(i)>'9'){
+				return false;
+			}
+		}
+		return true;
+	}
+	
 	public static boolean checkInsID(String id,InsType insType){
 		if((insType==InsType.businessHall&&id.length()!=6)||(insType==InsType.intermediate&&id.length()!=4)){
 			return false;
