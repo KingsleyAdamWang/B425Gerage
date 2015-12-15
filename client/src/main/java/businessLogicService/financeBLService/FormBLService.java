@@ -12,19 +12,8 @@ import vo.RunVO;
  */
 public interface FormBLService {
 	
-
 	
-	/**
-	 * 传入起始时间申城对应的经营情况表
-	 * @param start
-	 * @param end
-	 * @return 返回经营情况VO
-	 */
-	public RunVO checkRun(Date start , Date end);
-
-	/**
-	 * 查看成本收益表
-	 * @return 截止到目前日期 也就是所有的收付款单据生成的成本收益VO
-	 */
-	public CostVO checkCost();
+	public void exportCostForm();
+	public void exportRunForm(Date start,Date end);
+	
 }

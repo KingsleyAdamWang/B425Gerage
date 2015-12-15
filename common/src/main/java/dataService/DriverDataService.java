@@ -11,6 +11,7 @@ import po.DriverPO;
  *
  */
 public interface DriverDataService extends Remote{
+	
 	/**
 	 * 增加司机信息 数据中增加一个DriverPO
 	 * @param po DriverPO
@@ -30,4 +31,11 @@ public interface DriverDataService extends Remote{
 	 * @throws RemoteException远程异常 RMI提供
 	 */
 	public DriverPO find(String id)throws RemoteException;
+	
+	/**
+	 * 修改司机信息
+	 * @param po
+	 * @throws RemoteException
+	 */
+	public void Modify(DriverPO po)throws RemoteException;
 }
