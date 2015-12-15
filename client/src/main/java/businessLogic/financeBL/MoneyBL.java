@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import po.CashRegisterPO;
+import po.IncomePO;
 import po.PaymentPO;
 
 public class MoneyBL {
@@ -51,5 +52,10 @@ public class MoneyBL {
 	public void approveAllIncome() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public List<IncomePO> getUnapproved() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -4,13 +4,16 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
+import po.TransferPO;
 import po.ShipmentPO;
 import po.TransferPO;
+import vo.TransferVO;
 import vo.TransferVO;
 import businessLogic.inventoryBL.ShipmentBL;
 import client.ClientInitException;
 import client.RMIHelper;
 import dataService.TransferDataService;
+import enumSet.ReceiptsState;
 
 public class TransferBL {
 	TransferDataService transferDS;
@@ -66,4 +69,22 @@ public class TransferBL {
 		
 		return result;
 	}
+
+//	public void approve(TransferPO po) throws RemoteException {
+//		transferDS.approval(po);
+//	}
+//
+//	public void approveAll() throws RemoteException {
+//		transferDS.approvalAll();
+//	}
+//
+//	public List<TransferVO> getUnapproved() {
+//		List<TransferVO> result=new ArrayList<TransferVO>();
+//		for(TransferPO temp: transferList){
+//			if(temp.getState()==ReceiptsState.unapprove){
+//				result.add(new TransferVO(temp));
+//			}
+//		}
+//		return result;
+//	}
 }

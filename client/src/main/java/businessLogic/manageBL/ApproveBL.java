@@ -12,10 +12,14 @@ import vo.ArrivalVO;
 import vo.CashRegisterVO;
 import vo.DeliveryVO;
 import vo.EntryVO;
+import vo.IncomeVO;
+import vo.PaymentVO;
+import vo.ShipmentVO;
 import businessLogic.businessHallBL.CashRegisterBL;
 import businessLogic.businessHallBL.DeliveryBL;
 import businessLogic.deliveryBL.ReceiveBL;
 import businessLogic.financeBL.MoneyBL;
+import businessLogic.financeBL.PaymentBL;
 import businessLogic.intermediateBL.TransferBL;
 import businessLogic.inventoryBL.EntryBL;
 import businessLogic.inventoryBL.ShipmentBL;
@@ -30,6 +34,7 @@ public class ApproveBL {
 	private ReceiveBL receiveBL;
 	private ShipmentBL shipmentBL;
 	private TransferBL transferBL;
+	private PaymentBL paymentBL;
 	
 	public ApproveBL() throws RemoteException{
 		arrivalBL_B=new businessLogic.businessHallBL.ArrivalBL();
@@ -41,6 +46,7 @@ public class ApproveBL {
 		receiveBL=new ReceiveBL();
 		shipmentBL=new ShipmentBL();
 		transferBL=new TransferBL();
+		paymentBL=new PaymentBL();
 		
 	}
 	
@@ -49,80 +55,98 @@ public class ApproveBL {
 	}
 	public List<ArrivalVO> getUnapprovedArrival(){
 		
-		return null;
+		return arrivalBL_B.getUnapproved();
 	}
 	
-	public void setApprovedArrival(){
-		arrivalBL_B.approve();
+	public void setApprovedArrival(ArrivalVO vo) throws RemoteException{
+		arrivalBL_B.approve(vo.transToPO());
 	}
-	public void setAllApprovedArrival(){
+	public void setAllApprovedArrival() throws RemoteException{
 		arrivalBL_B.approveAll();
 	}
 	
-	public List<CashRegisterVO> getUnapprovedCashRegister(){
-		return null;
+	public List<IncomeVO> getUnapprovedIncome(){
+		return crBL.getUnapproved();
 	}
 	
-	public void setApprovedCashRegister(){
-		crBL.approve();
+	public void setApproved(IncomeVO vo) throws RemoteException{
+		crBL.approve(vo.transToPO());
 	}
-	public void setAllApprovedCashRegister(){
+	public void setAllApproved() throws RemoteException{
 		crBL.approveAll();
 	}
 	
-	public List<DeliveryVO> getUnapprovedDelivery(){
-		return null;
-	}
-	
-	public void setApprovedDelivery(){
-		deliveryBL.approve();
-	}
-	public void setAllApprovedDelivery(){
-		deliveryBL.approveAll();
-	}
+//	public List<DeliveryVO> getUnapprovedDelivery(){
+//		return deliveryBL.getUnapproved();
+//	}
+//	
+//	public void setApprovedDelivery(){
+//		deliveryBL.approve();
+//	}
+//	public void setAllApprovedDelivery(){
+//		deliveryBL.approveAll();
+//	}
 	
 	public List<EntryVO> getUnapproveEntry(){
-		return null;
+		return entryBL.getUnapproved();
 	}
 	
-	public void setApprovedEntry(){
-		entryBL.approve();
+	public void setApprovedEntry(EntryVO vo) throws RemoteException{
+		entryBL.approve(vo.transToPO());
 	}
-	public void setAllApprovedEntry(){
+	public void setAllApprovedEntry() throws RemoteException{
 		entryBL.approveAll();
 	}
 	
-	public List<IncomePO> getUnapproveIncome(){
-		return null;
+//	public List<IncomePO> getUnapproveIncome(){
+//		return moneyBL.getUnapproved();
+//	}
+//	
+//	public void setApprovedIncome(){
+//		moneyBL.approveIncome();
+//	}
+//	public void setAllApprovedIncome(){
+//		moneyBL.approveAllIncome();
+//	}
+	
+	public List<PaymentVO> getUnapprovePayment(){
+		return paymentBL.getUnapproved();
 	}
 	
-	public void setApprovedIncome(){
-		moneyBL.approveIncome();
+	public void setApprovedPayment(PaymentVO vo) throws RemoteException{
+		paymentBL.approve(vo.transToPO());
 	}
-	public void setAllApprovedIncome(){
-		moneyBL.approveAllIncome();
-	}
-	
-	public List<PaymentPO> getUnapprovePayment(){
-		return null;
+	public void setAllApprovedPayment() throws RemoteException{
+		paymentBL.approveAll();
 	}
 	
-	public void setApprovedCashRegister(){
-		crBL.approve();
+//	public List<ReceivePO> getUnapproveReceive(){
+//		return receiveBL.getUnapproved();
+//	}
+//	public void setApprovedReceive(){
+//		receiveBL.approve();
+//	}
+//	public void setAllApprovedReceive(){
+//		receiveBL.approveAll();
+//	}
+	
+	public List<ShipmentVO> getUnapproveShipment(){
+		return shipmentBL.getUnapproved();
 	}
-	public void setAllApprovedCashRegister(){
-		crBL.approveAll();
+	public void setApprovedShipment(ShipmentVO vo) throws RemoteException{
+		shipmentBL.approve(vo.transToPO());
+	}
+	public void setAllApprovedShipment() throws RemoteException{
+		shipmentBL.approveAll();
 	}
 	
-	public List<ReceivePO> getUnapproveReceive(){
-		return null;
-	}
-	
-	public List<ShipmentPO> getUnapproveShipment(){
-		return null;
-	}
-	
-	public List<TransferPO> getUnapproveTransfer(){
-		return null;
-	}
+//	public List<TransferPO> getUnapproveTransfer(){
+//		return transferBL.getUnapproved();
+//	}
+//	public void setApprovedTransfer(){
+//		transferBL.approve();
+//	}
+//	public void setAllApprovedTransfer(){
+//		transferBL.approveAll();
+//	}
 }

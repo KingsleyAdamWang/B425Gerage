@@ -1,15 +1,20 @@
 package businessLogic.businessHallBL;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import po.ArrivalPO;
 import po.CashRegisterPO;
 import po.IncomePO;
+import vo.ArrivalVO;
+import vo.CashRegisterVO;
 import vo.IncomeVO;
 import client.ClientInitException;
 import client.RMIHelper;
 import dataService.IncomeDataService;
+import enumSet.ReceiptsState;
 
 public class CashRegisterBL {
 	private IncomeDataService incomeDS;
@@ -28,6 +33,8 @@ public class CashRegisterBL {
 	
 	public String add(IncomeVO vo) throws RemoteException{
 		IncomePO po=vo.transToPO();
+		
+		po.setState(ReceiptsState.unapprove);
 		
 		incomeList.add(po);
 		incomeDS.add(po);
@@ -78,14 +85,22 @@ public class CashRegisterBL {
 		return result;
 	}
 
-	public void approve() {
-		// TODO Auto-generated method stub
-		
+	public void approve(IncomePO po) throws RemoteException {
+		incomeDS.approval(po);
 	}
 
-	public void approveAll() {
-		// TODO Auto-generated method stub
-		
+	public void approveAll() throws RemoteException {
+		incomeDS.apprivalAll();
+	}
+
+	public List<IncomeVO> getUnapproved() {
+		List<IncomeVO> result=new ArrayList<IncomeVO>();
+		for(IncomePO temp: incomeList){
+			if(temp.getState()==ReceiptsState.unapprove){
+				result.add(new IncomeVO(temp));
+			}
+		}
+		return result;
 	}
 	
 }

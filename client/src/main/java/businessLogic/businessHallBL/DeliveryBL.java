@@ -3,18 +3,22 @@
 package businessLogic.businessHallBL;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import businessLogic.logBL.LogBL;
 import businessLogic.logisticsBL.LogisticsBL;
 import businessLogic.manageBL.InstitutionBL;
+import po.ArrivalPO;
 import po.DeliveryPO;
 import presentation.MainFrame;
+import vo.ArrivalVO;
 import vo.DeliveryVO;
 import client.ClientInitException;
 import client.RMIHelper;
 import dataService.DeliveryDataService;
+import enumSet.ReceiptsState;
 
 public class DeliveryBL {
 	private DeliveryDataService deliveryDS;
@@ -64,13 +68,21 @@ public class DeliveryBL {
 		return "未找到对应派件单";
 	}
 
-	public void approve() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void approveAll() {
-		// TODO Auto-generated method stub
-		
-	}
+//	public void approve(DeliveryPO po) throws RemoteException {
+//		deliveryDS.approval(po);
+//	}
+//
+//	public void approveAll() throws RemoteException {
+//		deliveryDS.approvalAll();
+//	}
+//
+//	public List<DeliveryVO> getUnapproved() {
+//		List<DeliveryVO> result=new ArrayList<DeliveryVO>();
+//		for(DeliveryPO temp: deliveryList){
+//			if(temp.getState()==ReceiptsState.unapprove){
+//				result.add(new DeliveryVO(temp));
+//			}
+//		}
+//		return result;
+//	}
 }

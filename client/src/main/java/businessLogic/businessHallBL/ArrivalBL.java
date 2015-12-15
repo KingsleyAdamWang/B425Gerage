@@ -1,18 +1,16 @@
 package businessLogic.businessHallBL;
 
-import java.lang.Thread.State;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.List;
 
-import businessLogic.logisticsBL.LogisticsBL;
 import po.ArrivalPO;
-import po.EntruckPO;
 import po.TransferPO;
 import vo.ArrivalVO;
+import businessLogic.logisticsBL.LogisticsBL;
 import client.ClientInitException;
 import client.RMIHelper;
 import dataService.ArrivalDataService;
-import dataService.EntruckDataService;
 import dataService.TransferDataService;
 import enumSet.ReceiptsState;
 
@@ -55,7 +53,7 @@ public class ArrivalBL {
 		}
 		
 		po.setState(ReceiptsState.unapprove);
-
+		
 		arrivalList.add(po);
 		arrivalDS.add(po);
 		
@@ -119,24 +117,24 @@ public class ArrivalBL {
 		} catch (ClientInitException e) {
 			e.printStackTrace();
 		}
-		return null;
-		
-		
-		
-		
-	}
-	public List<ArrivalVO> getUnapproveArrival(){
-		
-		return null;
+		return null;	
 	}
 
-	public void approve() {
-		// TODO Auto-generated method stub
-		
+	public void approve(ArrivalPO po) throws RemoteException {
+		arrivalDS.approval(po);
 	}
 
-	public void approveAll() {
-		// TODO Auto-generated method stub
-		
+	public void approveAll() throws RemoteException {
+		arrivalDS.approvalAll();
+	}
+
+	public List<ArrivalVO> getUnapproved() {
+		List<ArrivalVO> result=new ArrayList<ArrivalVO>();
+		for(ArrivalPO temp: arrivalList){
+			if(temp.getState()==ReceiptsState.unapprove){
+				result.add(new ArrivalVO(temp));
+			}
+		}
+		return result;
 	}
 }

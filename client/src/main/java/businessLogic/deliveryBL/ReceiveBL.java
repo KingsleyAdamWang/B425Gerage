@@ -1,13 +1,17 @@
 package businessLogic.deliveryBL;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.List;
 
 import po.ReceivePO;
+import po.ReceivePO;
+import vo.ReceiveVO;
 import vo.ReceiveVO;
 import client.ClientInitException;
 import client.RMIHelper;
 import dataService.ReceiveDataService;
+import enumSet.ReceiptsState;
 
 public class ReceiveBL {
 	private ReceiveDataService receiveDS;
@@ -61,4 +65,22 @@ public class ReceiveBL {
 		}
 		return "未找到对应收件单";
 	}
+
+//	public void approve(ReceivePO po) throws RemoteException {
+//		receiveDS.approval(po);
+//	}
+//
+//	public void approveAll() throws RemoteException {
+//		receiveDS.approvalAll();
+//	}
+//
+//	public List<ReceiveVO> getUnapproved() {
+//		List<ReceiveVO> result=new ArrayList<ReceiveVO>();
+//		for(ReceivePO temp: receiveList){
+//			if(temp.getState()==ReceiptsState.unapprove){
+//				result.add(new ReceiveVO(temp));
+//			}
+//		}
+//		return result;
+//	}
 }

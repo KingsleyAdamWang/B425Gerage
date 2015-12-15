@@ -1,13 +1,17 @@
 package businessLogic.inventoryBL;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.List;
 
 import po.ShipmentPO;
+import po.ShipmentPO;
+import vo.ShipmentVO;
 import vo.ShipmentVO;
 import client.ClientInitException;
 import client.RMIHelper;
 import dataService.ShipmentDataService;
+import enumSet.ReceiptsState;
 
 public class ShipmentBL {
 	private ShipmentDataService ShipmentDS;
@@ -32,6 +36,9 @@ public class ShipmentBL {
 				return "存在相同出库单号";
 			}
 		}
+		
+		ShipmentPO.setState(ReceiptsState.unapprove);
+		
 		ShipmentList.add(ShipmentPO);
 		ShipmentDS.add(ShipmentPO);
 		return null;
@@ -60,5 +67,23 @@ public class ShipmentBL {
 	
 	public ShipmentPO find(String ID) throws RemoteException{
 		return ShipmentDS.find(ID);
+	}
+
+	public void approve(ShipmentPO po) throws RemoteException {
+		ShipmentDS.approval(po);
+	}
+
+	public void approveAll() throws RemoteException {
+		ShipmentDS.approvalAll();
+	}
+
+	public List<ShipmentVO> getUnapproved() {
+		List<ShipmentVO> result=new ArrayList<ShipmentVO>();
+		for(ShipmentPO temp: ShipmentList){
+			if(temp.getState()==ReceiptsState.unapprove){
+				result.add(new ShipmentVO(temp));
+			}
+		}
+		return result;
 	}
 }

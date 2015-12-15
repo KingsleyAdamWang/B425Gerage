@@ -15,25 +15,32 @@ import businessLogic.logBL.LogBL;
 public class PaymentController {
 	private PaymentBL paymentBL;
 	private LogBL logBL;
-	
-	public PaymentController() throws RemoteException{
-		paymentBL=new PaymentBL();
-		logBL=new LogBL();
+
+	public PaymentController() throws RemoteException {
+		paymentBL = new PaymentBL();
+		logBL = new LogBL();
 	}
-	
-	public void addPayment(PaymentVO vo) throws RemoteException{
-		logBL.add(new LogVO(new LogPO(DateUtil.stringToDate(DateUtil.dateToString(new Date())), MainFrame.getUser().getIdentityID(), "增加付款单")));
+
+	public void addPayment(PaymentVO vo) throws RemoteException {
+		logBL.add(new LogVO(new LogPO(DateUtil.stringToDate(DateUtil
+				.dateToString(new Date())),
+				MainFrame.getUser().getIdentityID(), "增加付款单")));
 		paymentBL.addPayment(vo.transToPO());
 	}
-	
-	public List<PaymentPO> findByDate(Date d) throws RemoteException{
-		logBL.add(new LogVO(new LogPO(DateUtil.stringToDate(DateUtil.dateToString(new Date())), MainFrame.getUser().getIdentityID(), "查找付款单")));
+
+	public List<PaymentPO> findByDate(Date d) throws RemoteException {
+		logBL.add(new LogVO(new LogPO(DateUtil.stringToDate(DateUtil
+				.dateToString(new Date())),
+				MainFrame.getUser().getIdentityID(), "查找付款单")));
 		return paymentBL.findByDate(d);
 	}
-	
-	public List<PaymentPO> betweenDate(Date start,Date end) throws RemoteException{
-		logBL.add(new LogVO(new LogPO(DateUtil.stringToDate(DateUtil.dateToString(new Date())), MainFrame.getUser().getIdentityID(), "查找时间段之间的付款单")));
-		return paymentBL.betweenDate(start,end);		
-		}
+
+	public List<PaymentPO> betweenDate(Date start, Date end)
+			throws RemoteException {
+		logBL.add(new LogVO(new LogPO(DateUtil.stringToDate(DateUtil
+				.dateToString(new Date())),
+				MainFrame.getUser().getIdentityID(), "查找时间段之间的付款单")));
+		return paymentBL.betweenDate(start, end);
 	}
+
 }
