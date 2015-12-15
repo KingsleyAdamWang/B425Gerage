@@ -4,11 +4,11 @@ import java.rmi.RemoteException;
 import java.text.DecimalFormat;
 import java.util.List;
 
-import businessLogic.manageBL.StrategyBL;
 import po.PriceConstPO;
 import po.SendPO;
 import util.PackPrice;
 import vo.SendVO;
+import businessLogic.manageBL.StrategyBL;
 import client.ClientInitException;
 import client.RMIHelper;
 import dataService.PriceConstDataService;
@@ -109,6 +109,11 @@ public class SendBL {
 	
 	public int getDays(String departure,String destination){
 		return 0;
+	}
+	
+	public List<String> getCities() throws RemoteException{
+		StrategyBL strategyBL=new StrategyBL();
+		return strategyBL.getCities();
 	}
 
 }
