@@ -141,39 +141,41 @@ public class EntruckBL {
 
 		return 0;
 	}
-	
-	public double getWeight(List<SendVO> sendList){
-		double weight=0;
-		
-		for(SendVO temp:sendList){
-			weight=weight+temp.getWeight();
+
+	public double getWeight(List<SendVO> sendList) {
+		double weight = 0;
+
+		for (SendVO temp : sendList) {
+			weight = weight + temp.getWeight();
 		}
 		return weight;
 	}
 
-	public double getFare(List<String> sendList) throws RemoteException{
-		double fare=0;
-		double tCoeff=0;
-		double weight=0;
-		double distance=30;
-		SendBL sendBL=new SendBL();
-		List<SendVO> sendVOList=new ArrayList<SendVO>();
-		for(String temp: sendList){
-			weight=weight+sendBL.getSend(temp).weight;
+	public double getFare(List<String> sendList) throws RemoteException {
+		double fare = 0;
+		double tCoeff = 0;
+		double weight = 0;
+		double distance = 30;
+		SendBL sendBL = new SendBL();
+		List<SendVO> sendVOList = new ArrayList<SendVO>();
+		for (String temp : sendList) {
+			if (sendBL.getSend(temp) != null) {
+				weight = weight + sendBL.getSend(temp).weight;
+			}
 		}
-		
-//		weight=getWeight(sendVOList);
-//		if(t.getTransportTypeString().equals("飞机")){ 
-//			tCoeff=20;
-//			}else{
-//				if(t.getTransportTypeString().equals("火车")){
-//					tCoeff=0.2;
-//				}else{
-//					tCoeff=2;
-//				}
-//			}
-		
-		fare=30*2*weight;
+
+		// weight=getWeight(sendVOList);
+		// if(t.getTransportTypeString().equals("飞机")){
+		// tCoeff=20;
+		// }else{
+		// if(t.getTransportTypeString().equals("火车")){
+		// tCoeff=0.2;
+		// }else{
+		// tCoeff=2;
+		// }
+		// }
+
+		fare = 30 * 2 * weight;
 		return fare;
 	}
 
