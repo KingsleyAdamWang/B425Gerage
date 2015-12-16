@@ -1,17 +1,18 @@
 package businessLogic.businessHallBL;
 
-import vo.EntruckVO;
-import businessLogicService.businessHallBLService.EntruckBLService;
-
 import java.rmi.RemoteException;
 import java.util.Date;
 import java.util.List;
 
 import po.LogPO;
 import presentation.MainFrame;
+import vo.EntruckVO;
+import vo.SendVO;
+import businessLogicService.businessHallBLService.EntruckBLService;
 import client.ClientInitException;
 import client.RMIHelper;
 import dataService.LogDataService;
+import enumSet.TransportType;
 
 public class EntruckController implements EntruckBLService {
 
@@ -53,8 +54,8 @@ public class EntruckController implements EntruckBLService {
 		return entruckBL.getDistance(id, name);
 	}
 	
-	public double getFare(String departureID,String destinationName){
-		return entruckBL.getFare(departureID, destinationName);
+	public double getFare(TransportType t, List<SendVO> sendList,String departureID,String destinationName){
+		return entruckBL.getFare(t, sendList, departureID, destinationName);
 	}
 	
 	
