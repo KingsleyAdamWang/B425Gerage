@@ -44,9 +44,9 @@ public class CashRegisterBL {
 		return null;
 	}
 	
-	public String find(){
-		
-	}
+//	public String find(){
+//		
+//	}
 //不想删掉收款单	
 	/*public String delete(IncomeVO vo){
 		IncomePO po=vo.transToPO();

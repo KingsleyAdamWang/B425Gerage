@@ -5,6 +5,7 @@ import businessLogicService.businessHallBLService.EntruckBLService;
 
 import java.rmi.RemoteException;
 import java.util.Date;
+import java.util.List;
 
 import po.LogPO;
 import presentation.MainFrame;
@@ -43,6 +44,19 @@ public class EntruckController implements EntruckBLService {
 		logDS.add(new LogPO(new Date(), MainFrame.getUser().getIdentityID(), "修改装车单"));
 		return entruckBL.modify(entruckVO);
 	}
+	
+	public List<String> getInstitutionNames() throws RemoteException{
+		return entruckBL.getInstitutionNames();
+	}
+	
+	public double getDistance(String id,String name){
+		return entruckBL.getDistance(id, name);
+	}
+	
+	public double getFare(String departureID,String destinationName){
+		return entruckBL.getFare(departureID, destinationName);
+	}
+	
 	
 //好像没用了，不管
 	public String submit(EntruckVO eVO){
