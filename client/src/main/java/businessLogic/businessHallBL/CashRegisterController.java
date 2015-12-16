@@ -27,8 +27,12 @@ public class CashRegisterController implements CashRegisterBLService {
 		return crBL.add(incomeVO);
 	}
 	
-	public List<SendVO> getSendByStaffID(Date d,String staffID){
-		return crBL.getSendByStaffID(d, staffID)
+	public List<SendVO> getSendByStaffID(Date d,String staffID) throws RemoteException{
+		return crBL.getSendByStaffID(d, staffID);
+	}
+	
+	public double getAmmounts(List<SendVO> sendList){
+		return crBL.getAmmounts(sendList);
 	}
 
 
