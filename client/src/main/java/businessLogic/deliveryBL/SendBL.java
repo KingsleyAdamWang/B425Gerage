@@ -51,7 +51,7 @@ public class SendBL {
 			return "收件人电话格式有误";
 		}
 		
-		
+//		po.setWeight(getWeight(po.getWeight(),po.get));
 		
 		sendList.add(po);
 		sendDS.add(po);

@@ -159,10 +159,10 @@ public class EntruckBL {
 		SendBL sendBL=new SendBL();
 		List<SendVO> sendVOList=new ArrayList<SendVO>();
 		for(String temp: sendList){
-			sendVOList.add(sendBL.getSend(temp));
+			weight=weight+sendBL.getSend(temp).weight;
 		}
 		
-		weight=getWeight(sendVOList);
+//		weight=getWeight(sendVOList);
 //		if(t.getTransportTypeString().equals("飞机")){ 
 //			tCoeff=20;
 //			}else{
