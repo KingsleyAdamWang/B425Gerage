@@ -54,7 +54,7 @@ public class EntruckController implements EntruckBLService {
 		return entruckBL.getDistance(id, name);
 	}
 	
-	public double getFare(List<String> sendList){
+	public double getFare(List<String> sendList) throws RemoteException{
 		return entruckBL.getFare(sendList);
 	}
 	
