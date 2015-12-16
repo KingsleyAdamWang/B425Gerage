@@ -140,7 +140,7 @@ public class SendBL {
 				sendList.add(new SendVO(temp));
 			}
 		}
-		return null;
+		return sendList;
 	}
 
 }
