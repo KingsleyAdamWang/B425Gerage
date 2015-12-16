@@ -34,6 +34,10 @@ public class CashRegisterBL {
 		
 		po.setState(ReceiptsState.unapprove);
 		
+		if(po.getIdList().size()==0){
+			return "无寄件单，无法建立相关收款单";
+		}
+		
 		incomeList.add(po);
 		incomeDS.add(po);
 		

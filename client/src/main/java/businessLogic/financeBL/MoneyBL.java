@@ -61,9 +61,9 @@ public class MoneyBL {
 		return result;
 	}
 	
-	public getPaymentByDate(){
-		
-	}
+//	public getPaymentByDate(){
+//		
+//	}
 	
 
 	
