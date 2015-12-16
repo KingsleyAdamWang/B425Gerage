@@ -7,6 +7,8 @@ import java.util.List;
 
 import po.IncomePO;
 import vo.IncomeVO;
+import vo.SendVO;
+import businessLogic.deliveryBL.SendBL;
 import client.ClientInitException;
 import client.RMIHelper;
 import dataService.IncomeDataService;
@@ -105,6 +107,20 @@ public class CashRegisterBL {
 				result.add(new IncomeVO(temp));
 			}
 		}
+		return result;
+	}
+	
+	public List<SendVO> getSendByStaffID(Date d,String staffID) throws RemoteException{
+		SendBL sendBL=new SendBL();
+		return sendBL.getSendByStaff(d,staffID);
+	}
+	
+	public double getAmmounts(List<SendVO> sendList){
+		double result = 0;
+		for(SendVO temp: sendList){
+			result=result+temp.getFare();
+		}
+		
 		return result;
 	}
 }

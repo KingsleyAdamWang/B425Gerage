@@ -1,13 +1,14 @@
 package businessLogic.businessHallBL;
 
+import java.rmi.RemoteException;
 import java.util.Date;
 import java.util.List;
-import java.rmi.RemoteException;
 
 import presentation.MainFrame;
 import vo.CashRegisterVO;
 import vo.IncomeVO;
 import vo.LogVO;
+import vo.SendVO;
 import businessLogic.logBL.LogBL;
 import businessLogicService.businessHallBLService.CashRegisterBLService;
 
@@ -22,9 +23,12 @@ public class CashRegisterController implements CashRegisterBLService {
 	}
 
 	public String add(IncomeVO incomeVO) throws RemoteException {
-		// TODO Auto-generated method stub
 		logBL.add(new LogVO(new Date(), MainFrame.getUser().getIdentityID(), "新增收款单"));
 		return crBL.add(incomeVO);
+	}
+	
+	public List<SendVO> getSendByStaffID(Date d,String staffID){
+		return crBL.getSendByStaffID(d, staffID)
 	}
 
 

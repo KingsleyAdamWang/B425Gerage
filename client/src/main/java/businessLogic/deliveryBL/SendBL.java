@@ -2,11 +2,14 @@ package businessLogic.deliveryBL;
 
 import java.rmi.RemoteException;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import po.PriceConstPO;
 import po.SendPO;
 import util.CheckUtil;
+import util.DateUtil;
 import util.PackPrice;
 import vo.SendVO;
 import businessLogic.manageBL.StrategyBL;
@@ -128,6 +131,16 @@ public class SendBL {
 	public List<String> getCities() throws RemoteException{
 		StrategyBL strategyBL=new StrategyBL();
 		return strategyBL.getCities();
+	}
+
+	public List<SendVO> getSendByStaff(Date d,String id) {
+		List<SendVO> sendList=new ArrayList<SendVO>();
+		for(SendPO temp: this.sendList){
+			if(DateUtil.dateToString(temp.getD()).equals(DateUtil.dateToString(d))&&temp.getUserID().equals(id)){
+				sendList.add(new SendVO(temp));
+			}
+		}
+		return null;
 	}
 
 }

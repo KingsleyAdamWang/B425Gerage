@@ -61,6 +61,10 @@ public class MoneyBL {
 		return result;
 	}
 	
+	public getPaymentByDate(){
+		
+	}
+	
 
 	
 	//后面都没用
