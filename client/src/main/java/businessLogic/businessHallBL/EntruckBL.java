@@ -10,13 +10,13 @@ import po.InstitutionPO;
 import vo.EntruckVO;
 import vo.InstitutionVO;
 import vo.SendVO;
+import businessLogic.deliveryBL.SendBL;
 import businessLogic.manageBL.InstitutionBL;
 import businessLogic.manageBL.StrategyBL;
 import client.ClientInitException;
 import client.RMIHelper;
 import dataService.EntruckDataService;
 import enumSet.InsType;
-import enumSet.TransportType;
 
 public class EntruckBL {
 	private EntruckDataService entruckDS;
@@ -151,22 +151,29 @@ public class EntruckBL {
 		return weight;
 	}
 
-	public double getFare(TransportType t,List<SendVO> sendList,String departureID,String destinationName){
+	public double getFare(List<String> sendList) throws RemoteException{
 		double fare=0;
 		double tCoeff=0;
-		double weight=getWeight(sendList);
-		double distance=getDistance(departureID,destinationName);
-		if(t.getTransportTypeString().equals("飞机")){ 
-			tCoeff=20;
-			}else{
-				if(t.getTransportTypeString().equals("火车")){
-					tCoeff=0.2;
-				}else{
-					tCoeff=2;
-				}
-			}
+		double weight=0;
+		double distance=30;
+		SendBL sendBL=new SendBL();
+		List<SendVO> sendVOList=new ArrayList<SendVO>();
+		for(String temp: sendList){
+			sendVOList.add(sendBL.getSend(temp));
+		}
 		
-		fare=distance*tCoeff*weight;
+		weight=getWeight(sendVOList);
+//		if(t.getTransportTypeString().equals("飞机")){ 
+//			tCoeff=20;
+//			}else{
+//				if(t.getTransportTypeString().equals("火车")){
+//					tCoeff=0.2;
+//				}else{
+//					tCoeff=2;
+//				}
+//			}
+		
+		fare=30*2*weight;
 		return fare;
 	}
 

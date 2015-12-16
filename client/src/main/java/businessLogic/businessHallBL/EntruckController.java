@@ -54,8 +54,8 @@ public class EntruckController implements EntruckBLService {
 		return entruckBL.getDistance(id, name);
 	}
 	
-	public double getFare(TransportType t, List<SendVO> sendList,String departureID,String destinationName){
-		return entruckBL.getFare(t, sendList, departureID, destinationName);
+	public double getFare(List<String> sendList){
+		return entruckBL.getFare(sendList);
 	}
 	
 	

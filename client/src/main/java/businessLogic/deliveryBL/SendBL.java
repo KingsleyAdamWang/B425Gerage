@@ -132,7 +132,16 @@ public class SendBL {
 		StrategyBL strategyBL=new StrategyBL();
 		return strategyBL.getCities();
 	}
-
+	
+	public SendVO getSend(String id){
+		for(SendPO temp:sendList){
+			if(temp.getId().equals(id)){
+				return new SendVO(temp);
+			}
+		}
+		return null;
+	}
+	
 	public List<SendVO> getSendByStaff(Date d,String id) {
 		List<SendVO> sendList=new ArrayList<SendVO>();
 		for(SendPO temp: this.sendList){
