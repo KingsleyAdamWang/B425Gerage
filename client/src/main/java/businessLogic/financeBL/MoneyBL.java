@@ -37,10 +37,10 @@ public class MoneyBL {
 	
 	public double getIncomeBetween(Date start,Date end){
 		double result=0;
-		start	=DateUtil.stringToDate(DateUtil.dateToString(start));
-		end		=DateUtil.stringToDate(DateUtil.dateToString(end));
+//		start	=DateUtil.stringToDate(DateUtil.dateToString(start));
+//		end		=DateUtil.stringToDate(DateUtil.dateToString(end));
 		for(IncomePO temp : incomeList){
-			if(temp.getDate().after(start)&&temp.getDate().before(end)){
+			if(temp.getDate().getTime()>=start.getTime()&&temp.getDate().getTime()<=end.getTime()){
 				result=result+temp.getIncome();
 			}
 		}
@@ -50,10 +50,10 @@ public class MoneyBL {
 	
 	public double getPaymentBetween(Date start,Date end){
 		double result=0;
-		start	=DateUtil.stringToDate(DateUtil.dateToString(start));
-		end		=DateUtil.stringToDate(DateUtil.dateToString(end));
+//		start	=DateUtil.stringToDate(DateUtil.dateToString(start));
+//		end		=DateUtil.stringToDate(DateUtil.dateToString(end));
 		for(PaymentPO temp : paymentList){
-			if(temp.getD().after(start)&&temp.getD().before(end)){
+			if(temp.getD().getTime()>=start.getTime()&&temp.getD().getTime()<=end.getTime()){
 				result=result+temp.getAmmounts();
 			}
 		}
@@ -65,50 +65,50 @@ public class MoneyBL {
 	
 	//后面都没用
 	
-	public double getCashTotal(List<CashRegisterPO> list){
-		return 0;
-	}
-	
-	public double getPayTotal(List<PaymentPO> list){
-		return 0;
-	}
-	
-	public List<PaymentPO> getPayList(){
-		return null;
-	}
-	
-	public List<PaymentPO> getPayList(String start,String end){
-		return null;
-	}
-	
-	public List<CashRegisterPO> getCashList(String start,String end){
-		return null;
-	}
-	
-	public List<CashRegisterPO> getCashList(String id){
-		return null;
-	}
-	
-	public List<CashRegisterPO> getCashList(Date d){
-		return null;
-	}
-	
-	public boolean addPayment(PaymentPO po){
-		return false;
-	}
-
-	public void approveIncome() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void approveAllIncome() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public List<IncomePO> getUnapproved() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	public double getCashTotal(List<CashRegisterPO> list){
+//		return 0;
+//	}
+//	
+//	public double getPayTotal(List<PaymentPO> list){
+//		return 0;
+//	}
+//	
+//	public List<PaymentPO> getPayList(){
+//		return null;
+//	}
+//	
+//	public List<PaymentPO> getPayList(String start,String end){
+//		return null;
+//	}
+//	
+//	public List<CashRegisterPO> getCashList(String start,String end){
+//		return null;
+//	}
+//	
+//	public List<CashRegisterPO> getCashList(String id){
+//		return null;
+//	}
+//	
+//	public List<CashRegisterPO> getCashList(Date d){
+//		return null;
+//	}
+//	
+//	public boolean addPayment(PaymentPO po){
+//		return false;
+//	}
+//
+//	public void approveIncome() {
+//		// TODO Auto-generated method stub
+//		
+//	}
+//
+//	public void approveAllIncome() {
+//		// TODO Auto-generated method stub
+//		
+//	}
+//
+//	public List<IncomePO> getUnapproved() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 }

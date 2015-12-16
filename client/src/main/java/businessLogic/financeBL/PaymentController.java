@@ -11,8 +11,9 @@ import util.DateUtil;
 import vo.LogVO;
 import vo.PaymentVO;
 import businessLogic.logBL.LogBL;
+import businessLogicService.financeBLService.PaymentBLService;
 
-public class PaymentController {
+public class PaymentController implements PaymentBLService{
 	private PaymentBL paymentBL;
 	private LogBL logBL;
 

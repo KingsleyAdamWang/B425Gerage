@@ -5,11 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import po.ArrivalPO;
-import po.CashRegisterPO;
 import po.IncomePO;
-import vo.ArrivalVO;
-import vo.CashRegisterVO;
 import vo.IncomeVO;
 import client.ClientInitException;
 import client.RMIHelper;
@@ -64,21 +60,30 @@ public class CashRegisterBL {
 	}
 	
 	public List<IncomePO> getIncomePOByPerson(String staffID){
-		List<IncomePO> result=incomeList;
+		List<IncomePO> result=new ArrayList<IncomePO>();
 		for(IncomePO temp: incomeList){
-			if(temp.getKdyID()!=staffID){
-				result.remove(temp);
+			if(temp.getKdyID()==staffID){
+				result.add(temp);
+			}
+		}	
+		return result;
+	}
+	
+	public List<IncomePO> getIncomeBetweemDate(Date start ,Date end){
+		List<IncomePO> result=new ArrayList<IncomePO>();
+		for(IncomePO temp: incomeList){
+			if(temp.getDate().getTime()>=start.getTime()&&temp.getDate().getTime()<=end.getTime()){
+				result.add(temp);
 			}
 		}
-		
 		return result;
 	}
 	
 	public List<IncomePO> getIncomeListByDate(Date d){
-		List<IncomePO> result=incomeList;
+		List<IncomePO> result=new ArrayList<IncomePO>();
 		for(IncomePO temp: result){
-			if(!temp.getDate().equals(d)){
-				result.remove(temp);
+			if(temp.getDate().equals(d)){
+				result.add(temp);
 			}
 		}
 		
@@ -102,5 +107,4 @@ public class CashRegisterBL {
 		}
 		return result;
 	}
-	
 }

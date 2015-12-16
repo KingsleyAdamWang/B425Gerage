@@ -30,6 +30,10 @@ public class PaymentBL {
 		}
 	}
 	
+	public List<PaymentPO> getPaymentList(){
+		return paymentList;
+	}
+	
 	public void addPayment(PaymentPO po) throws RemoteException{
 		
 		if(po.getComment()==null){
@@ -51,7 +55,8 @@ public class PaymentBL {
 	public List<PaymentPO> betweenDate(Date start,Date end) {
 		List<PaymentPO> payments=new ArrayList<PaymentPO>();
 		for(PaymentPO temp: paymentList){
-			if(temp.getD().after(start)&&temp.getD().before(end)){
+			//别给我什么 after 和 before
+			if(temp.getD().getTime()>=start.getTime()&&temp.getD().getTime()<=end.getTime()){
 				payments.add(temp);
 			}
 		}
