@@ -10,6 +10,7 @@ import po.TransferPO;
 import vo.TransferVO;
 import vo.TransferVO;
 import businessLogic.inventoryBL.ShipmentBL;
+import businessLogic.manageBL.StrategyBL;
 import client.ClientInitException;
 import client.RMIHelper;
 import dataService.TransferDataService;
@@ -39,8 +40,6 @@ public class TransferBL {
 		
 		transferList.add(po);
 		transferDS.add(po);
-		
-		
 		return null;
 	}
 	
@@ -68,6 +67,11 @@ public class TransferBL {
 		}
 		
 		return result;
+	}
+	
+	public List<String> getCities() throws RemoteException{
+		StrategyBL strategyBL=new StrategyBL();
+		return strategyBL.getCities();
 	}
 
 //	public void approve(TransferPO po) throws RemoteException {
