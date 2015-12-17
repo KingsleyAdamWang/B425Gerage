@@ -117,6 +117,10 @@ public class PaymentPO extends ReceiptsPO implements Serializable {
 	public int getTimes() {
 		return times;
 	}
+	
+	public void setComment(String comment){
+		this.comment=comment;
+	}
 
 	@Override
 	public int hashCode() {

@@ -45,6 +45,11 @@ public class InventoryBL {
 		}
 		return entryList;
 	}
+	
+	public String add(EntryPO po){
+		
+	}
+	
 	public List<InventoryPO> check(){
 	
 		return null;

@@ -6,6 +6,7 @@ import java.util.List;
 
 import po.EntryPO;
 import po.EntryPO;
+import po.InventoryPO;
 import vo.EntryVO;
 import vo.EntryVO;
 import client.ClientInitException;
@@ -17,12 +18,14 @@ public class EntryBL {
 	private EntryDataService entryDS;
 	private List<EntryPO> entryList;
 	private EntryPO entryPO;
+	private InventoryBL inventoryBL;
 	
 	public EntryBL() throws RemoteException {
 		try {
 			RMIHelper.initEntryDataService();
 			entryDS = RMIHelper.getEntryDataService();
 			entryList = entryDS.getEntryList();
+			inventoryBL=new InventoryBL();
 		} catch (ClientInitException e) {
 			e.printStackTrace();
 		}
@@ -35,6 +38,9 @@ public class EntryBL {
 			if(temp.equals(entryPO)){
 				return "存在相同入库单号";
 			}
+		}
+		if(inventoryBL.add(entryPO)!=null){
+			return inventoryBL.add(entryPO);
 		}
 		
 		entryPO.setState(ReceiptsState.unapprove);
