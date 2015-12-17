@@ -36,5 +36,8 @@ public class ArrivalController implements ArrivalBLService {
 		logBL.add(new LogVO(new Date(), MainFrame.getUser().getIdentityID(), "删除到达单"));
 		return arrivalBL.delete(arrivalVO);
 	}
+	public String getInstitutionName() throws RemoteException{
+		return arrivalBL.getInstitutionName();
+	}
 
 }
