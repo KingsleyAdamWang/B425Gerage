@@ -3,22 +3,16 @@
 package businessLogic.businessHallBL;
 
 import java.rmi.RemoteException;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import businessLogic.logBL.LogBL;
-import businessLogic.logisticsBL.LogisticsBL;
-import businessLogic.manageBL.InstitutionBL;
-import po.ArrivalPO;
 import po.DeliveryPO;
-import presentation.MainFrame;
-import vo.ArrivalVO;
 import vo.DeliveryVO;
+import vo.SendVO;
+import businessLogic.deliveryBL.SendBL;
+import businessLogic.logisticsBL.LogisticsBL;
 import client.ClientInitException;
 import client.RMIHelper;
 import dataService.DeliveryDataService;
-import enumSet.ReceiptsState;
 
 public class DeliveryBL {
 	private DeliveryDataService deliveryDS;
@@ -66,6 +60,11 @@ public class DeliveryBL {
 		}
 		
 		return "未找到对应派件单";
+	}
+	
+	public SendVO getSendMessage(String ID) throws RemoteException{
+		SendBL sendBL=new SendBL();
+		return sendBL.getSend(ID);
 	}
 
 //	public void approve(DeliveryPO po) throws RemoteException {

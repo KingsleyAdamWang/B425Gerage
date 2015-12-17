@@ -1,14 +1,14 @@
 package businessLogic.businessHallBL;
 
-import vo.DeliveryVO;
-import vo.LogVO;
-import businessLogic.logBL.LogBL;
-import businessLogicService.businessHallBLService.DeliveryBLService;
-
 import java.rmi.RemoteException;
 import java.util.Date;
 
 import presentation.MainFrame;
+import vo.DeliveryVO;
+import vo.LogVO;
+import vo.SendVO;
+import businessLogic.logBL.LogBL;
+import businessLogicService.businessHallBLService.DeliveryBLService;
 
 public class DeliveryController implements DeliveryBLService {
 	private DeliveryBL deliveryBL;
@@ -33,6 +33,10 @@ public class DeliveryController implements DeliveryBLService {
 	public String delete(DeliveryVO vo) throws RemoteException{
 		logBL.add(new LogVO(new Date(),MainFrame.getUser().getIdentityID(),"删除派件单"));
 		return deliveryBL.delete(vo);
+	}
+	
+	public SendVO getSendMessage(String ID) throws RemoteException{
+		return deliveryBL.getSendMessage(ID);
 	}
 
 
