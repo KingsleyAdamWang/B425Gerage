@@ -1,15 +1,16 @@
 package businessLogic.intermediateBL;
 
-import java.lang.Thread.State;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
-import businessLogic.logisticsBL.LogisticsBL;
 import po.ArrivalPO;
 import po.EntruckPO;
 import po.TransferPO;
+import presentation.MainFrame;
 import vo.ArrivalVO;
+import businessLogic.logisticsBL.LogisticsBL;
+import businessLogic.manageBL.InstitutionBL;
 import client.ClientInitException;
 import client.RMIHelper;
 import dataService.ArrivalDataService;
@@ -130,6 +131,14 @@ public class ArrivalBL {
 		TransferDataService transferDS=RMIHelper.getTransferDataService();
 		TransferPO transferPO=transferDS.find(transferID);
 		return transferPO.getList();
+	}
+	
+	public String getInstitutionName() throws RemoteException{
+		String result=null;
+		
+		InstitutionBL institutionBL=new InstitutionBL();
+		result=institutionBL.searchInstitution(MainFrame.getUser().getInstitutionID()).getName();
+		return result;
 	}
 	
 	public void approve(ArrivalPO po) throws RemoteException {
