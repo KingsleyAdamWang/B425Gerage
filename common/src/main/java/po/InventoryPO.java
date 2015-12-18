@@ -107,20 +107,51 @@ public class InventoryPO implements Serializable {
 		return temp[num - 1];
 	}
 	
-	public void setIsBusy(InventoryArea area, int num){
+	public boolean alert(InventoryArea area, double rate){
+		boolean temp[];
+		switch (area) {
+		case AREA_FOR_PLANE:
+			temp= isBusy1;
+			break;
+		case AREA_FOR_TRAIN:
+			temp=isBusy2;
+			break;
+		case AREA_FOR_CAR:
+			temp=isBusy3;
+			break;
+		default:
+			temp=isBusy4;
+		}
+		long total=temp.length;
+		long result=(long) (total*rate);
+		long count=0;
+		for(boolean bool:temp){
+			if(bool){
+				count++;
+			}
+		}
+		
+		if(count>result){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	public void setIsBusy(InventoryArea area, int num,boolean  isBusy){
 		
 		switch (area) {
 		case AREA_FOR_PLANE:
-			 isBusy1[num-1]=true;
+			 isBusy1[num-1]=isBusy;
 			break;
 		case AREA_FOR_TRAIN:
-			isBusy2[num-1]=true;
+			isBusy2[num-1]=isBusy;
 			break;
 		case AREA_FOR_CAR:
-			isBusy3[num-1]=true;
+			isBusy3[num-1]=isBusy;
 			break;
 		default:
-			isBusy4[num-1]=true;
+			isBusy4[num-1]=isBusy;
 		}
 	}
 
