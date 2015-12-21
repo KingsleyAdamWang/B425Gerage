@@ -79,7 +79,7 @@ public class AccountBL {
         	 
         	 if(vo.getAccountID().equals(temp.getAccountID())){
         		 accountDS.modify(newAccount);
-        		 accounts=accountDS.getAccounts();
+        		 accounts.set(accounts.indexOf(temp), vo.transToPO());
      			return null;
         	 }
          }
