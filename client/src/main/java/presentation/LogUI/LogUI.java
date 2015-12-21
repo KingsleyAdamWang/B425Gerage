@@ -18,7 +18,7 @@ import presentation.MainFrame;
 import presentation.FinanceUI.FinanceHighUI;
 import presentation.ManageUI.ManagerUI;
 import util.DateUtil;
-import vo.LogVO;
+import vo.LogVo.LogVO;
 import businessLogic.logBL.LogController;
 import client.ClientInitException;
 import client.Main;

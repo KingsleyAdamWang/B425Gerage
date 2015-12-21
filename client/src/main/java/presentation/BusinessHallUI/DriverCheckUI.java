@@ -18,7 +18,7 @@ import javax.swing.text.DateFormatter;
 
 import presentation.MainFrame;
 import util.DateUtil;
-import vo.DriverVO;
+import vo.BussinessHallVo.DriverVO;
 import businessLogic.businessHallBL.DriverController;
 import client.Main;
 import enumSet.Sex;

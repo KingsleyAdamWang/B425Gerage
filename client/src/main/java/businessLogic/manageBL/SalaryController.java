@@ -4,8 +4,8 @@ import java.rmi.RemoteException;
 import java.util.Date;
 
 import presentation.MainFrame;
-import vo.LogVO;
-import vo.SalaryVO;
+import vo.LogVo.LogVO;
+import vo.ManageVo.SalaryVO;
 import businessLogic.logBL.LogBL;
 import businessLogicService.manageBLService.SalaryBLService;
 

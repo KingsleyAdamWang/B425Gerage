@@ -11,7 +11,7 @@ import po.SendPO;
 import util.CheckUtil;
 import util.DateUtil;
 import util.PackPrice;
-import vo.SendVO;
+import vo.DeliverymanVo.SendVO;
 import businessLogic.manageBL.StrategyBL;
 import client.ClientInitException;
 import client.RMIHelper;

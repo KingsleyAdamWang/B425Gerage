@@ -1,6 +1,6 @@
 package businessLogic_Stub;
 
-import vo.TruckVO;
+import vo.BussinessHallVo.TruckVO;
 import businessLogicService.businessHallBLService.TruckBLService;
 
 public class TruckBLStub implements TruckBLService {

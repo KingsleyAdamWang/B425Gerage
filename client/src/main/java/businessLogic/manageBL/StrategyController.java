@@ -3,7 +3,7 @@ package businessLogic.manageBL;
 import java.rmi.RemoteException;
 import java.util.List;
 
-import vo.PriceConstVO;
+import vo.ManageVo.PriceConstVO;
 import businessLogicService.manageBLService.StrategyBLService;
 
 public class StrategyController implements StrategyBLService {

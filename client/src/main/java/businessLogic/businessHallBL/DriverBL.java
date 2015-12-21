@@ -6,7 +6,7 @@ import java.util.List;
 
 import po.DriverPO;
 import util.CheckUtil;
-import vo.DriverVO;
+import vo.BussinessHallVo.DriverVO;
 import client.ClientInitException;
 import client.RMIHelper;
 import dataService.DriverDataService;

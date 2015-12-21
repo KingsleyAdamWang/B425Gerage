@@ -6,7 +6,7 @@ import java.util.List;
 
 import po.LogPO;
 import presentation.MainFrame;
-import vo.AccountVO;
+import vo.FinanceVo.AccountVO;
 import businessLogicService.financeBLService.AccountBLService;
 import client.ClientInitException;
 import client.RMIHelper;

@@ -4,7 +4,7 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 import po.EntryPO;
-import vo.EntryVO;
+import vo.InventoryVo.EntryVO;
 import businessLogicService.inventoryBLService.EntryBLService;
 
 public class EntryController implements EntryBLService {

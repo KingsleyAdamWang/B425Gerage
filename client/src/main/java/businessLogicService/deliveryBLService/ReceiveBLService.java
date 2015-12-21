@@ -1,6 +1,6 @@
 package businessLogicService.deliveryBLService;
 
-import vo.ReceiveVO;
+import vo.DeliverymanVo.ReceiveVO;
 
 public interface ReceiveBLService {
 	public String add(ReceiveVO rVO);

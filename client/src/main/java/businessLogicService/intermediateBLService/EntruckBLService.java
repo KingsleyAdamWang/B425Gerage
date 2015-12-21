@@ -1,6 +1,6 @@
 package businessLogicService.intermediateBLService;
 
-import vo.EntruckVO;
+import vo.BussinessHallVo.EntruckVO;
 
 /**
  * 

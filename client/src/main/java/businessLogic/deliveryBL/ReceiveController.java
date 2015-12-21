@@ -1,6 +1,6 @@
 package businessLogic.deliveryBL;
 
-import vo.ReceiveVO;
+import vo.DeliverymanVo.ReceiveVO;
 import businessLogicService.deliveryBLService.ReceiveBLService;
 
 public class ReceiveController implements ReceiveBLService {

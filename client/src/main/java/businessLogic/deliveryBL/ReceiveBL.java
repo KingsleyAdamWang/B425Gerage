@@ -6,8 +6,7 @@ import java.util.List;
 
 import po.ReceivePO;
 import po.ReceivePO;
-import vo.ReceiveVO;
-import vo.ReceiveVO;
+import vo.DeliverymanVo.ReceiveVO;
 import client.ClientInitException;
 import client.RMIHelper;
 import dataService.ReceiveDataService;

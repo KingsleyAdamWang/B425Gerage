@@ -1,6 +1,6 @@
 package businessLogicService.intermediateBLService;
 
-import vo.TransferVO;
+import vo.IntermediateVo.TransferVO;
 
 public interface TransferBLService {
 	public void add(String id);

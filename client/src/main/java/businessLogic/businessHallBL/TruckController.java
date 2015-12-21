@@ -2,7 +2,7 @@ package businessLogic.businessHallBL;
 
 import java.rmi.RemoteException;
 
-import vo.TruckVO;
+import vo.BussinessHallVo.TruckVO;
 import businessLogic.logBL.LogBL;
 import businessLogicService.businessHallBLService.TruckBLService;
 

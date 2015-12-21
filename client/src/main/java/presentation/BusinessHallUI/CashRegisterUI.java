@@ -18,8 +18,8 @@ import javax.swing.JTextField;
 
 import presentation.MainFrame;
 import util.DateUtil;
-import vo.IncomeVO;
-import vo.SendVO;
+import vo.DeliverymanVo.SendVO;
+import vo.FinanceVo.IncomeVO;
 import businessLogic.businessHallBL.CashRegisterController;
 import client.Main;
 import enumSet.ReceiptsState;

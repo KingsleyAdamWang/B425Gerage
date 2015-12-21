@@ -6,8 +6,8 @@ import java.util.Date;
 import java.util.List;
 
 import po.IncomePO;
-import vo.IncomeVO;
-import vo.SendVO;
+import vo.DeliverymanVo.SendVO;
+import vo.FinanceVo.IncomeVO;
 import businessLogic.deliveryBL.SendBL;
 import client.ClientInitException;
 import client.RMIHelper;

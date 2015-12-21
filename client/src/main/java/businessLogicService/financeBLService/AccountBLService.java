@@ -3,7 +3,7 @@ package businessLogicService.financeBLService;
 import java.rmi.RemoteException;
 import java.util.List;
 
-import vo.AccountVO;
+import vo.FinanceVo.AccountVO;
 
 /**
  * 

@@ -14,8 +14,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import presentation.MainFrame;
-import vo.DriverVO;
-import vo.InstitutionVO;
+import vo.BussinessHallVo.DriverVO;
+import vo.ManageVo.InstitutionVO;
 import client.Main;
 import businessLogic.businessHallBL.DriverController;
 

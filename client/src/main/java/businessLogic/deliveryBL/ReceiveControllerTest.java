@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import vo.ReceiveVO;
+import vo.DeliverymanVo.ReceiveVO;
 
 public class ReceiveControllerTest {
 

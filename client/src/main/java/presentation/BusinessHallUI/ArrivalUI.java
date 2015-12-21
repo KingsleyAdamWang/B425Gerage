@@ -20,7 +20,7 @@ import javax.swing.JTextField;
 
 import presentation.MainFrame;
 import util.DateUtil;
-import vo.ArrivalVO;
+import vo.BussinessHallVo.ArrivalVO;
 import businessLogic.businessHallBL.ArrivalController;
 import client.ClientInitException;
 import client.Main;

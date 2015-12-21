@@ -8,7 +8,7 @@ import po.ArrivalPO;
 import po.EntruckPO;
 import po.TransferPO;
 import presentation.MainFrame;
-import vo.ArrivalVO;
+import vo.BussinessHallVo.ArrivalVO;
 import businessLogic.logisticsBL.LogisticsBL;
 import businessLogic.manageBL.InstitutionBL;
 import client.ClientInitException;

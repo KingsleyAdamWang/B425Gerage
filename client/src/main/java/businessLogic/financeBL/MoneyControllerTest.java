@@ -7,8 +7,8 @@ import java.util.List;
 
 import org.junit.Test;
 
-import vo.CashRegisterVO;
-import vo.PaymentVO;
+import vo.BussinessHallVo.CashRegisterVO;
+import vo.FinanceVo.PaymentVO;
 import businessLogic.businessHallBL.MockCashRegisterVO;
 
 public class MoneyControllerTest {

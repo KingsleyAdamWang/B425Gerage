@@ -1,8 +1,9 @@
-package vo;
+package vo.BussinessHallVo;
 
 import java.util.Date;
 
 import po.DeliveryPO;
+import vo.ReceiptsVO;
 import enumSet.ReceiptsState;
 
 public class DeliveryVO extends ReceiptsVO {

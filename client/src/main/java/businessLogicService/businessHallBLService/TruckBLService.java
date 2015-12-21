@@ -1,6 +1,6 @@
 package businessLogicService.businessHallBLService;
 
-import vo.TruckVO;
+import vo.BussinessHallVo.TruckVO;
 
 public interface TruckBLService {
 	public TruckVO check(String message);

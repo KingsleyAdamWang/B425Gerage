@@ -14,7 +14,7 @@ import presentation.FinanceUI.FinanceHighUI;
 import presentation.FinanceUI.FinanceLowUI;
 import presentation.InventoryUI.CangkuUI;
 import presentation.ManageUI.ManagerUI;
-import vo.UserVO;
+import vo.AdminVo.UserVO;
 import businessLogic.logBL.LogController;
 import client.Main;
 

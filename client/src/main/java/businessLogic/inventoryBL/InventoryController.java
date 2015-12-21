@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import po.InventoryPO;
-import vo.InventoryVO;
+import vo.InventoryVo.InventoryVO;
 import businessLogicService.inventoryBLService.InventoryBLService;
 
 public class InventoryController implements InventoryBLService {

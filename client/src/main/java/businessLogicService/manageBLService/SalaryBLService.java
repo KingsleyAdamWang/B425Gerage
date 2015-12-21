@@ -1,6 +1,6 @@
 package businessLogicService.manageBLService;
 
-import vo.SalaryVO;
+import vo.ManageVo.SalaryVO;
 
 public interface SalaryBLService {
 	public SalaryVO getUserSalary(String id);

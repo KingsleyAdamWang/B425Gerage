@@ -1,6 +1,6 @@
 package businessLogic_Stub;
 
-import vo.ReceiveVO;
+import vo.DeliverymanVo.ReceiveVO;
 import businessLogicService.deliveryBLService.ReceiveBLService;
 
 public class ReceiveBLStub implements ReceiveBLService {

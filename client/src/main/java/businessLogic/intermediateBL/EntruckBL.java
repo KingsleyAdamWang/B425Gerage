@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import po.EntruckPO;
-import vo.EntruckVO;
+import vo.BussinessHallVo.EntruckVO;
 import client.ClientInitException;
 import client.RMIHelper;
 import dataService.EntruckDataService;

@@ -2,8 +2,8 @@ package businessLogic_Stub;
 
 import java.util.Date;
 
-import vo.CostVO;
 import vo.RunVO;
+import vo.FinanceVo.CostVO;
 import businessLogicService.financeBLService.FormBLService;
 
 public class FormBLStub implements FormBLService {

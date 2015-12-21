@@ -9,7 +9,7 @@ import java.util.List;
 import org.junit.Test;
 
 import po.UserPO;
-import vo.CashRegisterVO;
+import vo.BussinessHallVo.CashRegisterVO;
 import businessLogic.businessHallBL.CashRegisterController;
 import businessLogic.businessHallBL.MockCashRegisterVO;
 

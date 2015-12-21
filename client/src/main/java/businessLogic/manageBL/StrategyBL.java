@@ -6,7 +6,7 @@ import java.util.List;
 
 import po.PriceConstPO;
 import util.Distance;
-import vo.PriceConstVO;
+import vo.ManageVo.PriceConstVO;
 import client.ClientInitException;
 import client.RMIHelper;
 import dataService.PriceConstDataService;

@@ -3,8 +3,8 @@ package businessLogicService.financeBLService;
 import java.util.Date;
 import java.util.List;
 
-import vo.CashRegisterVO;
-import vo.PaymentVO;
+import vo.BussinessHallVo.CashRegisterVO;
+import vo.FinanceVo.PaymentVO;
 
 public interface MoneyBLSerivce {
 

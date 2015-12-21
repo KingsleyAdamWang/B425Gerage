@@ -16,8 +16,8 @@ import javax.swing.table.TableModel;
 
 import client.ClientInitException;
 import client.Main;
-import vo.InstitutionVO;
-import vo.UserVO;
+import vo.AdminVo.UserVO;
+import vo.ManageVo.InstitutionVO;
 import businessLogic.adminBL.AdminController;
 
 public class AdminUserUI extends JPanel {

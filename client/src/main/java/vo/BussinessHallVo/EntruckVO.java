@@ -1,10 +1,11 @@
-package vo;
+package vo.BussinessHallVo;
 
 import java.util.Date;
 import java.util.List;
 
 import po.EntruckPO;
 import util.DateUtil;
+import vo.ReceiptsVO;
 import enumSet.ReceiptsState;
 
 public class EntruckVO extends ReceiptsVO {

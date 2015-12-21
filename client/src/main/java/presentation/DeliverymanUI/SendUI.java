@@ -19,7 +19,7 @@ import javax.swing.JTextField;
 import presentation.MainFrame;
 import util.DateUtil;
 import vo.CustomerVO;
-import vo.SendVO;
+import vo.DeliverymanVo.SendVO;
 import businessLogic.deliveryBL.SendController;
 import client.ClientInitException;
 import client.Main;

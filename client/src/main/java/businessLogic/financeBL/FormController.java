@@ -3,8 +3,8 @@ package businessLogic.financeBL;
 import java.util.Date;
 import java.util.List;
 
-import vo.IncomeVO;
-import vo.PaymentVO;
+import vo.FinanceVo.IncomeVO;
+import vo.FinanceVo.PaymentVO;
 import businessLogicService.financeBLService.FormBLService;
 
 public class FormController implements FormBLService {

@@ -3,7 +3,7 @@ package businessLogic.financeBL;
 import java.rmi.RemoteException;
 import java.util.List;
 
-import vo.AccountVO;
+import vo.FinanceVo.AccountVO;
 import businessLogicService.financeBLService.AccountBLService;
 
 public class InitBillController implements AccountBLService {

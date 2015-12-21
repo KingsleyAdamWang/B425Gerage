@@ -3,7 +3,7 @@ package businessLogic_Stub;
 import java.rmi.RemoteException;
 
 import client.ClientInitException;
-import vo.ArrivalVO;
+import vo.BussinessHallVo.ArrivalVO;
 import businessLogicService.businessHallBLService.ArrivalBLService;
 
 public class ArrivalBLStub implements ArrivalBLService {

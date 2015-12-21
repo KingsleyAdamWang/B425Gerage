@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import vo.ArrivalVO;
+import vo.BussinessHallVo.ArrivalVO;
 
 public class ArrivalControllerTest {
 

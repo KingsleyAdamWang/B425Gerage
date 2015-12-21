@@ -4,9 +4,9 @@ import java.rmi.RemoteException;
 import java.util.Date;
 
 import presentation.MainFrame;
-import vo.DeliveryVO;
-import vo.LogVO;
-import vo.SendVO;
+import vo.BussinessHallVo.DeliveryVO;
+import vo.DeliverymanVo.SendVO;
+import vo.LogVo.LogVO;
 import businessLogic.logBL.LogBL;
 import businessLogicService.businessHallBLService.DeliveryBLService;
 

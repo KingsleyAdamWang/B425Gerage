@@ -3,7 +3,7 @@ package businessLogic_Stub;
 import java.rmi.RemoteException;
 import java.util.List;
 
-import vo.CashRegisterVO;
+import vo.BussinessHallVo.CashRegisterVO;
 import businessLogicService.businessHallBLService.CashRegisterBLService;
 
 public class CashRegisterBLStub implements CashRegisterBLService {

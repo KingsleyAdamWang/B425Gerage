@@ -14,8 +14,8 @@ import po.InstitutionPO;
 import po.InventoryPO;
 import po.UserPO;
 import util.CheckUtil;
-import vo.InstitutionVO;
-import vo.InventoryVO;
+import vo.InventoryVo.InventoryVO;
+import vo.ManageVo.InstitutionVO;
 
 public class InstitutionBL {
 	

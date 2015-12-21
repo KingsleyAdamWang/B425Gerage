@@ -8,8 +8,8 @@ import po.LogPO;
 import po.PaymentPO;
 import presentation.MainFrame;
 import util.DateUtil;
-import vo.LogVO;
-import vo.PaymentVO;
+import vo.FinanceVo.PaymentVO;
+import vo.LogVo.LogVO;
 import businessLogic.logBL.LogBL;
 import businessLogicService.financeBLService.PaymentBLService;
 

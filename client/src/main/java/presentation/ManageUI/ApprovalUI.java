@@ -9,7 +9,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import presentation.MainFrame;
-import businessLogic.manageBL.InstitutionController;
 
 public class ApprovalUI extends JPanel {
 	private static final long serialVersionUID = 1L;

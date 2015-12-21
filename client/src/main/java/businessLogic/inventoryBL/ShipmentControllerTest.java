@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import vo.ShipmentVO;
+import vo.InventoryVo.ShipmentVO;
 
 public class ShipmentControllerTest {
 

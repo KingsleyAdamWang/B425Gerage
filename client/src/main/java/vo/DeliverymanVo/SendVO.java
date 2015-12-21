@@ -1,8 +1,10 @@
-package vo;
+package vo.DeliverymanVo;
 
 import java.util.Date;
 
 import po.SendPO;
+import vo.CustomerVO;
+import vo.ReceiptsVO;
 import enumSet.Express;
 import enumSet.PackType;
 import enumSet.ReceiptsState;

@@ -3,7 +3,7 @@ package businessLogicService.businessHallBLService;
 import java.rmi.RemoteException;
 import java.util.List;
 
-import vo.CashRegisterVO;
+import vo.BussinessHallVo.CashRegisterVO;
 
 /**
  * 

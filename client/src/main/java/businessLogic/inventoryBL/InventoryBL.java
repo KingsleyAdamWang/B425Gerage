@@ -9,7 +9,7 @@ import client.RMIHelper;
 import dataService.InventoryDataService;
 import po.EntryPO;
 import po.InventoryPO;
-import vo.InventoryVO;
+import vo.InventoryVo.InventoryVO;
 
 public class InventoryBL {
 	InventoryDataService invDS;

@@ -9,7 +9,7 @@ import client.ClientInitException;
 import client.RMIHelper;
 import dataService.LogDataService;
 import po.LogPO;
-import vo.LogVO;
+import vo.LogVo.LogVO;
 
 public class LogBL {
 	LogDataService logDS;

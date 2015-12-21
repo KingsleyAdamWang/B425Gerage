@@ -1,6 +1,6 @@
 package businessLogic_Stub;
 
-import vo.TransferVO;
+import vo.IntermediateVo.TransferVO;
 import businessLogicService.intermediateBLService.TransferBLService;
 
 public class TransferBLStub implements TransferBLService {

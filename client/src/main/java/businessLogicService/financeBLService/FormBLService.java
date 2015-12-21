@@ -3,8 +3,8 @@ package businessLogicService.financeBLService;
 import java.util.Date;
 import java.util.List;
 
-import vo.IncomeVO;
-import vo.PaymentVO;
+import vo.FinanceVo.IncomeVO;
+import vo.FinanceVo.PaymentVO;
 
 /**
  * 报表操作的业务逻辑的相关接口

@@ -2,7 +2,7 @@ package businessLogic_Stub;
 
 import java.util.List;
 
-import vo.LogVO;
+import vo.LogVo.LogVO;
 import businessLogicService.logBLService.LogBLService;
 
 public class LogBLStub implements LogBLService {

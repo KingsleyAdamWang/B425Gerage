@@ -3,7 +3,7 @@ package businessLogic.manageBL;
 import java.rmi.RemoteException;
 import java.util.List;
 
-import vo.UserVO;
+import vo.AdminVo.UserVO;
 import businessLogicService.manageBLService.StaffBLService;
 
 public class StaffController implements StaffBLService {

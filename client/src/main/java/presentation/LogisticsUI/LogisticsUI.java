@@ -14,7 +14,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import client.ClientInitException;
-import vo.LogisticsVO;
+import vo.LogisticsVo.LogisticsVO;
 import businessLogic.logisticsBL.LogisticsController;
 
 public class LogisticsUI extends JPanel {

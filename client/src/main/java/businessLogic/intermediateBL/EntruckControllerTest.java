@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import vo.EntruckVO;
+import vo.BussinessHallVo.EntruckVO;
 import businessLogic.businessHallBL.EntruckController;
 
 public class EntruckControllerTest {

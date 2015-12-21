@@ -3,7 +3,7 @@ package businessLogicService.manageBLService;
 import java.rmi.RemoteException;
 import java.util.List;
 
-import vo.InstitutionVO;
+import vo.ManageVo.InstitutionVO;
 
 public interface InstitutionBLService {
 	public List<InstitutionVO> show();

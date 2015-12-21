@@ -2,8 +2,8 @@ package businessLogic.manageBL;
 
 import java.util.List;
 
-import vo.InstitutionVO;
-import vo.InventoryVO;
+import vo.InventoryVo.InventoryVO;
+import vo.ManageVo.InstitutionVO;
 import businessLogicService.manageBLService.InstitutionBLService;
 
 import java.rmi.RemoteException;

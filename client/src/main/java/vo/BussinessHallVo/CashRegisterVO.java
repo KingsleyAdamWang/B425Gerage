@@ -1,7 +1,9 @@
-package vo;
+package vo.BussinessHallVo;
 
 import java.util.Date;
 import java.util.List;
+
+import vo.AdminVo.UserVO;
 
 public class CashRegisterVO {
 	public Date d;

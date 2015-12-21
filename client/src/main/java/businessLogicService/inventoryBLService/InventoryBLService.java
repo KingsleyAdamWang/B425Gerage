@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import po.InventoryPO;
-import vo.InventoryVO;
+import vo.InventoryVo.InventoryVO;
 
 public interface InventoryBLService {
 	public List<InventoryPO> checkBetween(Date start,Date end);

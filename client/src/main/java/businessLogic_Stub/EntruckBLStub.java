@@ -2,7 +2,7 @@ package businessLogic_Stub;
 
 import java.rmi.RemoteException;
 
-import vo.EntruckVO;
+import vo.BussinessHallVo.EntruckVO;
 import businessLogicService.businessHallBLService.EntruckBLService;
 
 public class EntruckBLStub implements EntruckBLService {

@@ -1,4 +1,4 @@
-package vo;
+package vo.LogVo;
 
 import java.util.Date;
 

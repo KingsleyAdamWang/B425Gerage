@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import vo.EntruckVO;
+import vo.BussinessHallVo.EntruckVO;
 
 public class EntruckControllerTest {
 

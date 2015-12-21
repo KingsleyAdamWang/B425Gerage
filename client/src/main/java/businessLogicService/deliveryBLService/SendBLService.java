@@ -2,7 +2,7 @@ package businessLogicService.deliveryBLService;
 
 import java.rmi.RemoteException;
 
-import vo.SendVO;
+import vo.DeliverymanVo.SendVO;
 
 public interface SendBLService {
 	public String add(SendVO sVO) throws RemoteException ;

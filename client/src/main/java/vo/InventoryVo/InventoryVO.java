@@ -1,4 +1,4 @@
-package vo;
+package vo.InventoryVo;
 
 import po.InventoryPO;
 import util.Storage;

@@ -14,7 +14,7 @@ import javax.swing.JTextField;
 
 import presentation.MainFrame;
 import util.DateUtil;
-import vo.PaymentVO;
+import vo.FinanceVo.PaymentVO;
 import businessLogic.financeBL.PaymentController;
 import client.Main;
 import enumSet.ReceiptsState;

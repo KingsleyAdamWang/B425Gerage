@@ -2,7 +2,7 @@ package businessLogicService.manageBLService;
 
 import java.rmi.RemoteException;
 
-import vo.UserVO;
+import vo.AdminVo.UserVO;
 
 public interface StaffBLService {
 	public UserVO getUser(String id) throws RemoteException;

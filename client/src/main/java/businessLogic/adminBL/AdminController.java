@@ -10,8 +10,8 @@ import client.ClientInitException;
 import client.RMIHelper;
 import dataService.LogDataService;
 import util.DateUtil;
-import vo.InstitutionVO;
-import vo.UserVO;
+import vo.AdminVo.UserVO;
+import vo.ManageVo.InstitutionVO;
 import businessLogicService.adminBLService.AdminBLService;
 
 /**

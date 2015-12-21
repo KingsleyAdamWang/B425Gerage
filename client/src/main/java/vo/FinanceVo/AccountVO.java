@@ -1,4 +1,4 @@
-﻿package vo;
+﻿package vo.FinanceVo;
 
 import java.util.Vector;
 

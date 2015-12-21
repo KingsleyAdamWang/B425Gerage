@@ -21,7 +21,7 @@ import javax.swing.JTextField;
 
 import presentation.MainFrame;
 import util.DateUtil;
-import vo.TransferVO;
+import vo.IntermediateVo.TransferVO;
 import businessLogic.intermediateBL.TransferController;
 import client.ClientInitException;
 import client.Main;

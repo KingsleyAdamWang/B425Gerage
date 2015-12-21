@@ -6,8 +6,7 @@ import java.util.List;
 
 import po.ShipmentPO;
 import po.ShipmentPO;
-import vo.ShipmentVO;
-import vo.ShipmentVO;
+import vo.InventoryVo.ShipmentVO;
 import client.ClientInitException;
 import client.RMIHelper;
 import dataService.ShipmentDataService;

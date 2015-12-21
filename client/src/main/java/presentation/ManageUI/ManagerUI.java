@@ -14,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
 
 import presentation.MainFrame;
 import presentation.LogUI.LogUI;
-import vo.UserVO;
+import vo.AdminVo.UserVO;
 import client.Main;
 
 public class ManagerUI extends JPanel {

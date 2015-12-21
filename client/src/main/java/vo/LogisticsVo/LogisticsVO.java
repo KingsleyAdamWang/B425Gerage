@@ -1,4 +1,4 @@
-package vo;
+package vo.LogisticsVo;
 
 import java.util.ArrayList;
 import java.util.Date;

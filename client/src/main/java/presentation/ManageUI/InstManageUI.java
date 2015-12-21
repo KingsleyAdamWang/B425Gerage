@@ -21,8 +21,8 @@ import javax.swing.JTextField;
 
 import client.Main;
 import util.Storage;
-import vo.InstitutionVO;
-import vo.InventoryVO;
+import vo.InventoryVo.InventoryVO;
+import vo.ManageVo.InstitutionVO;
 import businessLogic.manageBL.InstitutionController;
 import businessLogic.manageBL.StrategyController;
 import enumSet.InsType;

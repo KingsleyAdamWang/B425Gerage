@@ -6,8 +6,8 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 import po.DeliveryPO;
-import vo.DeliveryVO;
-import vo.SendVO;
+import vo.BussinessHallVo.DeliveryVO;
+import vo.DeliverymanVo.SendVO;
 import businessLogic.deliveryBL.SendBL;
 import businessLogic.logisticsBL.LogisticsBL;
 import client.ClientInitException;

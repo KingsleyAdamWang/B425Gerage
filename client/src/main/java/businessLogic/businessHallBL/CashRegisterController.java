@@ -5,10 +5,10 @@ import java.util.Date;
 import java.util.List;
 
 import presentation.MainFrame;
-import vo.CashRegisterVO;
-import vo.IncomeVO;
-import vo.LogVO;
-import vo.SendVO;
+import vo.BussinessHallVo.CashRegisterVO;
+import vo.DeliverymanVo.SendVO;
+import vo.FinanceVo.IncomeVO;
+import vo.LogVo.LogVO;
 import businessLogic.logBL.LogBL;
 import businessLogicService.businessHallBLService.CashRegisterBLService;
 

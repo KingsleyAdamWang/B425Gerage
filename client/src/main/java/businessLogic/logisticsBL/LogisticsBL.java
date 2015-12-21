@@ -9,7 +9,7 @@ import dataService.EntruckDataService;
 import dataService.LogisticsDataService;
 import po.EntruckPO;
 import po.LogisticsPO;
-import vo.LogisticsVO;
+import vo.LogisticsVo.LogisticsVO;
 
 public class LogisticsBL {
 	private LogisticsDataService logisticsDS;

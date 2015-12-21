@@ -10,7 +10,7 @@ import dataService.UserDataService;
 import enumSet.Position;
 import po.UserPO;
 import util.CheckUtil;
-import vo.UserVO;
+import vo.AdminVo.UserVO;
 
 public class StaffBL {
 	

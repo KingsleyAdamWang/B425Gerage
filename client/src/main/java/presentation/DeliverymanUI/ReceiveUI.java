@@ -10,7 +10,7 @@ import javax.swing.JTextField;
 
 import presentation.MainFrame;
 import enumSet.ReceiptsState;
-import vo.ReceiveVO;
+import vo.DeliverymanVo.ReceiveVO;
 import businessLogic.deliveryBL.ReceiveController;
 
 public class ReceiveUI extends JPanel {

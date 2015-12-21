@@ -6,8 +6,8 @@ import java.util.List;
 
 import po.LogPO;
 import presentation.MainFrame;
-import vo.EntruckVO;
-import vo.SendVO;
+import vo.BussinessHallVo.EntruckVO;
+import vo.DeliverymanVo.SendVO;
 import businessLogicService.businessHallBLService.EntruckBLService;
 import client.ClientInitException;
 import client.RMIHelper;

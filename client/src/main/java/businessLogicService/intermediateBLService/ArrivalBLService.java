@@ -1,6 +1,6 @@
 package businessLogicService.intermediateBLService;
 
-import vo.ArrivalVO;
+import vo.BussinessHallVo.ArrivalVO;
 
 /**
  * 

@@ -16,7 +16,7 @@ import javax.swing.JTextField;
 import presentation.MainFrame;
 import client.ClientInitException;
 import client.Main;
-import vo.InstitutionVO;
+import vo.ManageVo.InstitutionVO;
 import businessLogic.adminBL.AdminController;
 
 public class AdminSearchUI extends JPanel {

@@ -1,7 +1,7 @@
 package businessLogic.intermediateBL;
 
-import vo.ArrivalVO;
-import vo.LogVO;
+import vo.BussinessHallVo.ArrivalVO;
+import vo.LogVo.LogVO;
 import businessLogic.logBL.LogBL;
 import businessLogicService.businessHallBLService.ArrivalBLService;
 

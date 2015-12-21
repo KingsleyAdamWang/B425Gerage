@@ -1,6 +1,8 @@
-package vo;
+package vo.FinanceVo;
 
 import java.util.List;
+
+import vo.BussinessHallVo.CashRegisterVO;
 
 public class CostVO {
 	List<CashRegisterVO> cash;

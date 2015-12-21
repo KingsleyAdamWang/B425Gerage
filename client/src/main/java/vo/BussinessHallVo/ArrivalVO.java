@@ -1,4 +1,4 @@
-package vo;
+package vo.BussinessHallVo;
 
 import java.util.Date;
 import java.util.Vector;

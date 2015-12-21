@@ -6,10 +6,11 @@ import java.util.Date;
 import java.util.List;
 
 
+
 //import po.PaymentPO;
 import po.PaymentPO;
 import util.DateUtil;
-import vo.PaymentVO;
+import vo.FinanceVo.PaymentVO;
 //import vo.PaymentVO;
 import client.ClientInitException;
 import client.RMIHelper;

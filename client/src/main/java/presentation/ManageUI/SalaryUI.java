@@ -14,7 +14,7 @@ import javax.swing.JTextField;
 
 import presentation.MainFrame;
 import util.Salary;
-import vo.SalaryVO;
+import vo.ManageVo.SalaryVO;
 import businessLogic.manageBL.SalaryController;
 import client.ClientInitException;
 import client.Main;

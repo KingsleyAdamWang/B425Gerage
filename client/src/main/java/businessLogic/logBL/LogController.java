@@ -4,7 +4,7 @@ import java.rmi.RemoteException;
 import java.util.Date;
 import java.util.List;
 
-import vo.LogVO;
+import vo.LogVo.LogVO;
 import businessLogicService.logBLService.LogBLService;
 
 public class LogController implements LogBLService {

@@ -6,7 +6,7 @@ import java.util.List;
 
 import po.AccountPO;
 import po.PaymentPO;
-import vo.AccountVO;
+import vo.FinanceVo.AccountVO;
 import client.ClientInitException;
 import client.RMIHelper;
 import dataService.AccountDataService;

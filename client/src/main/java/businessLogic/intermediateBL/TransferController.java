@@ -3,7 +3,7 @@ package businessLogic.intermediateBL;
 import java.rmi.RemoteException;
 import java.util.List;
 
-import vo.TransferVO;
+import vo.IntermediateVo.TransferVO;
 import businessLogicService.intermediateBLService.TransferBLService;
 
 public class TransferController implements TransferBLService{

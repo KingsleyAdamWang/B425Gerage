@@ -18,7 +18,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import presentation.MainFrame;
-import vo.AccountVO;
+import vo.FinanceVo.AccountVO;
 import businessLogic.financeBL.AccountController;
 import client.ClientInitException;
 

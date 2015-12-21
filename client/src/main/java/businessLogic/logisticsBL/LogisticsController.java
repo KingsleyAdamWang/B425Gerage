@@ -4,7 +4,7 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 import po.LogisticsPO;
-import vo.LogisticsVO;
+import vo.LogisticsVo.LogisticsVO;
 import businessLogicService.logisticsBLService.LogisticsBLService;
 import client.ClientInitException;
 import client.RMIHelper;

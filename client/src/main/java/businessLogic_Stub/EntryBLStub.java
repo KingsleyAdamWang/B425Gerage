@@ -1,6 +1,6 @@
 package businessLogic_Stub;
 
-import vo.EntryVO;
+import vo.InventoryVo.EntryVO;
 import businessLogicService.inventoryBLService.EntryBLService;
 
 public class EntryBLStub implements EntryBLService {

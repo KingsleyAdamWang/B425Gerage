@@ -5,7 +5,7 @@ import java.util.List;
 
 import po.UserPO;
 import presentation.MainFrame;
-import vo.UserVO;
+import vo.AdminVo.UserVO;
 import client.ClientInitException;
 import client.RMIHelper;
 import dataService.UserDataService;

@@ -1,6 +1,6 @@
 package businessLogic.businessHallBL;
 
-import vo.ArrivalVO;
+import vo.BussinessHallVo.ArrivalVO;
 import businessLogicService.businessHallBLService.ArrivalBLService;
 
 import java.rmi.RemoteException;

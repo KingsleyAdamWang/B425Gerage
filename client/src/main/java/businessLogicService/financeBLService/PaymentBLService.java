@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import po.PaymentPO;
-import vo.PaymentVO;
+import vo.FinanceVo.PaymentVO;
 
 public interface PaymentBLService {
 

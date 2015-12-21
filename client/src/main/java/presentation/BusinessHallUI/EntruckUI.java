@@ -21,7 +21,7 @@ import businessLogic.businessHallBL.EntruckController;
 import client.ClientInitException;
 import client.Main;
 import util.DateUtil;
-import vo.EntruckVO;
+import vo.BussinessHallVo.EntruckVO;
 import enumSet.ReceiptsState;
 
 public class EntruckUI extends JPanel {

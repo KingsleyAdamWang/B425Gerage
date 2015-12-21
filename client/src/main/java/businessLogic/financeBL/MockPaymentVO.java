@@ -1,6 +1,6 @@
 package businessLogic.financeBL;
 
-import vo.PaymentVO;
+import vo.FinanceVo.PaymentVO;
 
 public class MockPaymentVO extends PaymentVO {
 	public MockPaymentVO(double p) {

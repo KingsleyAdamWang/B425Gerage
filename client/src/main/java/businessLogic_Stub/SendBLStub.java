@@ -2,7 +2,7 @@ package businessLogic_Stub;
 
 import java.rmi.RemoteException;
 
-import vo.SendVO;
+import vo.DeliverymanVo.SendVO;
 import businessLogicService.deliveryBLService.SendBLService;
 
 public class SendBLStub implements SendBLService {

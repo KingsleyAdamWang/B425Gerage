@@ -6,7 +6,7 @@ import java.util.List;
 
 import po.LogPO;
 import presentation.MainFrame;
-import vo.SendVO;
+import vo.DeliverymanVo.SendVO;
 import businessLogicService.deliveryBLService.SendBLService;
 import client.ClientInitException;
 import client.RMIHelper;

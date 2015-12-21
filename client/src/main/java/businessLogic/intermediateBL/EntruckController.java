@@ -1,6 +1,6 @@
 package businessLogic.intermediateBL;
 
-import vo.EntruckVO;
+import vo.BussinessHallVo.EntruckVO;
 import businessLogicService.businessHallBLService.EntruckBLService;
 
 import java.rmi.RemoteException;

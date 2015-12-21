@@ -8,7 +8,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import vo.CashRegisterVO;
+import vo.BussinessHallVo.CashRegisterVO;
 
 public class CashRegisterControllerTest {
 

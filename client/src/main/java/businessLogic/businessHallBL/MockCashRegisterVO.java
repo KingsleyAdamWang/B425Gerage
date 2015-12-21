@@ -1,6 +1,6 @@
 package businessLogic.businessHallBL;
 
-import vo.CashRegisterVO;
+import vo.BussinessHallVo.CashRegisterVO;
 
 public class MockCashRegisterVO extends CashRegisterVO {
 	public MockCashRegisterVO(double f){

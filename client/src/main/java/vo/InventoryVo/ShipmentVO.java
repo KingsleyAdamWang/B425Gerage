@@ -1,8 +1,9 @@
-package vo;
+package vo.InventoryVo;
 
 import java.util.Date;
 
 import po.ShipmentPO;
+import vo.ReceiptsVO;
 import enumSet.ReceiptsState;
 import enumSet.TransportType;
 

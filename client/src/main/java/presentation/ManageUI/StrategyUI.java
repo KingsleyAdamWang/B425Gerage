@@ -28,7 +28,7 @@ import presentation.MainFrame;
 import client.Main;
 import util.Distance;
 import util.PackPrice;
-import vo.PriceConstVO;
+import vo.ManageVo.PriceConstVO;
 import businessLogic.manageBL.StrategyController;
 import enumSet.PackType;
 

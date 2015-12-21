@@ -14,7 +14,7 @@ import javax.swing.JTextField;
 import presentation.MainFrame;
 import client.Main;
 import util.DateUtil;
-import vo.EntryVO;
+import vo.InventoryVo.EntryVO;
 import businessLogic.inventoryBL.EntryController;
 import enumSet.InventoryArea;
 import enumSet.ReceiptsState;

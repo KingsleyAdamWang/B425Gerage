@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import vo.LogisticsVO;
+import vo.LogisticsVo.LogisticsVO;
 import businessLogicService.logisticsBLService.InquireBLService;
 
 public class InquireBLStub implements InquireBLService {

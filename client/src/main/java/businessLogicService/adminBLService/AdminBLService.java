@@ -3,8 +3,8 @@ package businessLogicService.adminBLService;
 import java.rmi.RemoteException;
 import java.util.List;
 
-import vo.InstitutionVO;
-import vo.UserVO;
+import vo.AdminVo.UserVO;
+import vo.ManageVo.InstitutionVO;
 
 public interface AdminBLService {
 

@@ -3,8 +3,8 @@ package businessLogic_Stub;
 import java.util.Date;
 import java.util.List;
 
-import vo.CashRegisterVO;
-import vo.PaymentVO;
+import vo.BussinessHallVo.CashRegisterVO;
+import vo.FinanceVo.PaymentVO;
 import businessLogicService.financeBLService.MoneyBLSerivce;
 
 public class MoneyBLStub implements MoneyBLSerivce {

@@ -1,9 +1,10 @@
-package vo;
+package vo.FinanceVo;
 
 import java.util.Date;
 import java.util.List;
 
 import po.IncomePO;
+import vo.ReceiptsVO;
 import enumSet.ReceiptsState;
 
 public class IncomeVO extends ReceiptsVO{

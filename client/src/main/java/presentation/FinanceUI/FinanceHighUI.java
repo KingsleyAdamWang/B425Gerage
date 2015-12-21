@@ -13,7 +13,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import presentation.MainFrame;
-import vo.UserVO;
+import vo.AdminVo.UserVO;
 import client.ClientInitException;
 import client.Main;
 

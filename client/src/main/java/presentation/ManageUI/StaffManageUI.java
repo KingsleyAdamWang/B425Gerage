@@ -19,8 +19,8 @@ import javax.swing.JTextField;
 
 import presentation.MainFrame;
 import client.Main;
-import vo.InstitutionVO;
-import vo.UserVO;
+import vo.AdminVo.UserVO;
+import vo.ManageVo.InstitutionVO;
 import businessLogic.manageBL.StaffController;
 import enumSet.Position;
 

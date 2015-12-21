@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
 import presentation.MainFrame;
 import client.ClientInitException;
 import client.Main;
-import vo.UserVO;
+import vo.AdminVo.UserVO;
 
 public class YYTUI extends JPanel {
 	private static final long serialVersionUID = 1L;
