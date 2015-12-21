@@ -46,9 +46,7 @@ public class InventoryBL {
 		return entryList;
 	}
 	
-	public String add(EntryPO po){
-		
-	}
+	
 	
 	public List<InventoryPO> check(){
 	
@@ -77,6 +75,11 @@ public class InventoryBL {
 		return null;
 	}
 	public String init(){
+		return null;
+	}
+
+	public Object add(EntryPO entryPO) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 }

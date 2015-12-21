@@ -64,14 +64,14 @@ public class AccountBL {
 
 	public String modifyAccount(AccountVO vo) throws RemoteException {
         AccountPO newAccount=vo.transToPO();
-        boolean exist=false;
-        for(AccountPO temp: accounts){
-        	if(temp.getAccountID().equals(vo.getAccountID()))
-        		exist=true;
-        		break;
-        }
-        if(exist==false)
-        	return "未找到卡号对应账户，不予修改";
+//        boolean exist=false;
+//        for(AccountPO temp: accounts){
+//        	if(temp.getAccountID().equals(vo.getAccountID()))
+//        		exist=true;
+//        		break;
+//        }
+//        if(exist==false)
+//        	return "未找到卡号对应账户，不予修改";
         
 		for(AccountPO temp: accounts){
         	 if(temp.getName().equals(vo.getName()))
@@ -79,6 +79,7 @@ public class AccountBL {
         	 
         	 if(vo.getAccountID().equals(temp.getAccountID())){
         		 accountDS.modify(newAccount);
+        		 accounts=accountDS.getAccounts();
      			return null;
         	 }
          }
