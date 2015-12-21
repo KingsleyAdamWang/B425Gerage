@@ -1,4 +1,4 @@
-package dataServiceImpl;
+package dataServiceImpl.logDataServiceImpl;
 
 import java.io.BufferedReader;
 import java.io.File;
