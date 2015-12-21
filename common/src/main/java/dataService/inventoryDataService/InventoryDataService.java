@@ -4,7 +4,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 
-import po.InventoryPO;
+import po.inventoryPO.InventoryPO;
 
 /**
  * 库存管理的数据层接口

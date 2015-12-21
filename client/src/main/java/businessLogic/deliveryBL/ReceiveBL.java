@@ -4,8 +4,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
-import po.ReceivePO;
-import po.ReceivePO;
+import po.deliveryPO.ReceivePO;
 import vo.DeliverymanVo.ReceiveVO;
 import client.ClientInitException;
 import client.RMIHelper;

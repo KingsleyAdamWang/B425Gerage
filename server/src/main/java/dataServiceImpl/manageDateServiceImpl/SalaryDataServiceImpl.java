@@ -9,7 +9,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
-import po.SalaryPO;
+import po.managePO.SalaryPO;
 import util.Salary;
 import dataService.manageDataService.SalaryDataService;
 

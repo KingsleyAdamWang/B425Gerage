@@ -2,7 +2,7 @@ package vo.FinanceVo;
 
 import java.util.Date;
 
-import po.PaymentPO;
+import po.financePO.PaymentPO;
 import vo.ReceiptsVO;
 import enumSet.ReceiptsState;
 

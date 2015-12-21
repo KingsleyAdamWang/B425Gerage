@@ -11,7 +11,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import po.LogisticsPO;
+import po.logisticsPO.LogisticsPO;
 import dataService.logisticsDataService.LogisticsDataService;
 
 public class LogisticsDataServiceImpl extends UnicastRemoteObject implements

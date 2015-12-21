@@ -10,7 +10,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import po.EntruckPO;
+import po.businessPO.EntruckPO;
 import dataService.businessHallDataService.EntruckDataService;
 import enumSet.ReceiptsState;
 

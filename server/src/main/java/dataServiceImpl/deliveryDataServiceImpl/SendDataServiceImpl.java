@@ -10,7 +10,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import po.SendPO;
+import po.deliveryPO.SendPO;
 import dataService.deliveryDataService.SendDataService;
 import enumSet.ReceiptsState;
 

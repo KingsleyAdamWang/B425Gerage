@@ -9,7 +9,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
-import po.PriceConstPO;
+import po.managePO.PriceConstPO;
 import dataService.manageDataService.PriceConstDataService;
 
 public class PriceConstDataServiceImpl extends UnicastRemoteObject implements

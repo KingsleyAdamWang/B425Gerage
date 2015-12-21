@@ -2,7 +2,7 @@ package vo.BussinessHallVo;
 
 import java.util.Date;
 
-import po.DeliveryPO;
+import po.businessPO.DeliveryPO;
 import vo.ReceiptsVO;
 import enumSet.ReceiptsState;
 

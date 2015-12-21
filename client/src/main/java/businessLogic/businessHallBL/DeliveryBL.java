@@ -5,7 +5,7 @@ package businessLogic.businessHallBL;
 import java.rmi.RemoteException;
 import java.util.List;
 
-import po.DeliveryPO;
+import po.businessPO.DeliveryPO;
 import vo.BussinessHallVo.DeliveryVO;
 import vo.DeliverymanVo.SendVO;
 import businessLogic.deliveryBL.SendBL;

@@ -5,7 +5,7 @@ import java.rmi.RemoteException;
 import java.util.Date;
 import java.util.List;
 
-import po.PaymentPO;
+import po.financePO.PaymentPO;
 
 public interface PaymentDataService extends Remote{
 

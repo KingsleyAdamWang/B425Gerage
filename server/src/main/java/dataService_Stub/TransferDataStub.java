@@ -3,7 +3,7 @@ package dataService_Stub;
 import java.rmi.RemoteException;
 import java.util.List;
 
-import po.TransferPO;
+import po.intermidatePO.TransferPO;
 import dataService.intermidateDataService.TransferDataService;
 
 public class TransferDataStub implements TransferDataService {

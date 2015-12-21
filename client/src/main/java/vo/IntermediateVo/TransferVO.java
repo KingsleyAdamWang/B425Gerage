@@ -5,7 +5,7 @@ import java.util.List;
 
 import enumSet.ReceiptsState;
 import enumSet.TransportType;
-import po.TransferPO;
+import po.intermidatePO.TransferPO;
 import vo.ReceiptsVO;
 
 public class TransferVO extends ReceiptsVO {

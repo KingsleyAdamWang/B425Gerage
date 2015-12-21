@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import po.ShipmentPO;
+import po.inventoryPO.ShipmentPO;
 import dataService.inventoryDataService.ShipmentDataService;
 import enumSet.ReceiptsState;
 

@@ -3,7 +3,7 @@ package dataService.manageDataService;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-import po.SalaryPO;
+import po.managePO.SalaryPO;
 
 /**
  * 制定工资常量的数据层接口类

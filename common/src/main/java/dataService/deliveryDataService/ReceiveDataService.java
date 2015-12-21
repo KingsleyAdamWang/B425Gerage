@@ -4,7 +4,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 
-import po.ReceivePO;
+import po.deliveryPO.ReceivePO;
 
 /**
  * 收件单的数据层的接口 接口的信息注释省略（同其他单据）

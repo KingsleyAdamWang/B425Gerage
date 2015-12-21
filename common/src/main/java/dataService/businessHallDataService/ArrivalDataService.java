@@ -4,7 +4,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 
-import po.ArrivalPO;
+import po.businessPO.ArrivalPO;
 /**
  * 到达单的data层接口
  * @author 王栋

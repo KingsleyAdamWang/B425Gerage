@@ -1,6 +1,6 @@
 package businessLogic.financeBL;
 
-import po.AccountPO;
+import po.financePO.AccountPO;
 
 public class MockAccountPO extends AccountPO {
 	/**

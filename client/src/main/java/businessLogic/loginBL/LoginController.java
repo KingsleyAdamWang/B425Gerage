@@ -3,7 +3,7 @@ package businessLogic.loginBL;
 import java.rmi.RemoteException;
 import java.util.Date;
 
-import po.LogPO;
+import po.logPO.LogPO;
 import businessLogicService.loginBLService.LoginBLService;
 import client.ClientInitException;
 import client.RMIHelper;

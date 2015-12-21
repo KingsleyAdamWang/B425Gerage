@@ -10,7 +10,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import po.InventoryPO;
+import po.inventoryPO.InventoryPO;
 import dataService.inventoryDataService.InventoryDataService;
 
 public class InventoryDataServiceImpl extends UnicastRemoteObject implements

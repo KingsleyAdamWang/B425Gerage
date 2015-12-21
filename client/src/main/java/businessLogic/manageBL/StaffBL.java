@@ -8,7 +8,7 @@ import client.ClientInitException;
 import client.RMIHelper;
 import dataService.manageDataService.UserDataService;
 import enumSet.Position;
-import po.UserPO;
+import po.adminPO.UserPO;
 import util.CheckUtil;
 import vo.AdminVo.UserVO;
 

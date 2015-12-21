@@ -2,7 +2,7 @@ package vo.DeliverymanVo;
 
 import java.util.Date;
 
-import po.ReceivePO;
+import po.deliveryPO.ReceivePO;
 import util.DateUtil;
 import vo.ReceiptsVO;
 import enumSet.ReceiptsState;

@@ -3,7 +3,7 @@ package businessLogic.inventoryBL;
 import java.rmi.RemoteException;
 import java.util.List;
 
-import po.EntryPO;
+import po.inventoryPO.EntryPO;
 import vo.InventoryVo.EntryVO;
 import businessLogicService.inventoryBLService.EntryBLService;
 

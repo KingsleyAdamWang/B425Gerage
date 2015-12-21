@@ -1,6 +1,6 @@
 package vo.ManageVo;
 
-import po.InstitutionPO;
+import po.managePO.InstitutionPO;
 import enumSet.InsType;
 
 public class InstitutionVO {

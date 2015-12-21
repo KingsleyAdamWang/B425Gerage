@@ -4,7 +4,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 
-import po.DeliveryPO;
+import po.businessPO.DeliveryPO;
 /**
  * 派件单数据层接口
  * @author 王栋

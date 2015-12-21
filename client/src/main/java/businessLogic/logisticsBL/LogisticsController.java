@@ -3,7 +3,7 @@ package businessLogic.logisticsBL;
 import java.rmi.RemoteException;
 import java.util.List;
 
-import po.LogisticsPO;
+import po.logisticsPO.LogisticsPO;
 import vo.LogisticsVo.LogisticsVO;
 import businessLogicService.logisticsBLService.LogisticsBLService;
 import client.ClientInitException;

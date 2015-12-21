@@ -3,7 +3,7 @@ package dataService_Stub;
 import java.rmi.RemoteException;
 import java.util.List;
 
-import po.LogisticsPO;
+import po.logisticsPO.LogisticsPO;
 import dataService.logisticsDataService.LogisticsDataService;
 
 public class LogisticsDataStub implements LogisticsDataService {

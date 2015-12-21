@@ -3,7 +3,7 @@ package businessLogic_Stub;
 import java.util.Date;
 import java.util.List;
 
-import po.InventoryPO;
+import po.inventoryPO.InventoryPO;
 import vo.InventoryVO;
 import businessLogicService.inventoryBLService.InventoryBLService;
 

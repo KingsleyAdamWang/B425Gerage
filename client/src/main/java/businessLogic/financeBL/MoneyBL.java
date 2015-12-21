@@ -6,9 +6,9 @@ import java.util.List;
 
 import client.ClientInitException;
 import client.RMIHelper;
-import po.CashRegisterPO;
-import po.IncomePO;
-import po.PaymentPO;
+import po.businessPO.CashRegisterPO;
+import po.financePO.IncomePO;
+import po.financePO.PaymentPO;
 import util.DateUtil;
 import dataService.financeDataService.IncomeDataService;
 import dataService.financeDataService.PaymentDataService;

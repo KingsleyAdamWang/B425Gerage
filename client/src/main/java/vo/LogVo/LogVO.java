@@ -2,7 +2,7 @@ package vo.LogVo;
 
 import java.util.Date;
 
-import po.LogPO;
+import po.logPO.LogPO;
 
 
 public class LogVO {

@@ -4,7 +4,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 
-import po.InstitutionPO;
+import po.managePO.InstitutionPO;
 
 /**
  * 机构管理的数据层接口

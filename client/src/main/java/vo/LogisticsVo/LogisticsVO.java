@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import po.LogisticsPO;
+import po.logisticsPO.LogisticsPO;
 
 public class LogisticsVO {
 	// 快递单号

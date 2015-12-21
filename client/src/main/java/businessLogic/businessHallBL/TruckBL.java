@@ -4,7 +4,7 @@ import java.rmi.RemoteException;
 import java.util.Date;
 import java.util.List;
 
-import po.TruckPO;
+import po.businessPO.TruckPO;
 import client.ClientInitException;
 import client.RMIHelper;
 import dataService.businessHallDataService.TruckDataService;

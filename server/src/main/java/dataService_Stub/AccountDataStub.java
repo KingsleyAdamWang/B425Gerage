@@ -3,7 +3,7 @@ package dataService_Stub;
 import java.rmi.RemoteException;
 import java.util.List;
 
-import po.AccountPO;
+import po.financePO.AccountPO;
 import dataService.financeDataService.AccountDataService;
 
 public class AccountDataStub implements AccountDataService {

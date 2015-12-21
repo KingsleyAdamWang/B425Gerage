@@ -4,8 +4,8 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
-import po.ArrivalPO;
-import po.TransferPO;
+import po.businessPO.ArrivalPO;
+import po.intermidatePO.TransferPO;
 import presentation.MainFrame;
 import vo.BussinessHallVo.ArrivalVO;
 import businessLogic.logisticsBL.LogisticsBL;

@@ -1,6 +1,6 @@
 package businessLogic.loginBL;
 
-import po.UserPO;
+import po.adminPO.UserPO;
 
 public class MockUserPO extends UserPO {
 	public MockUserPO(String id, String password) {

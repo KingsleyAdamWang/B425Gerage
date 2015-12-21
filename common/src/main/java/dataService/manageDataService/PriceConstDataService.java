@@ -3,7 +3,7 @@ package dataService.manageDataService;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-import po.PriceConstPO;
+import po.managePO.PriceConstPO;
 
 /**
  * 指定距离价格常量的一个数据的数据层接口

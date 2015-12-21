@@ -2,7 +2,7 @@ package vo.ManageVo;
 
 import java.util.List;
 
-import po.SalaryPO;
+import po.managePO.SalaryPO;
 import util.Salary;
 
 public class SalaryVO {

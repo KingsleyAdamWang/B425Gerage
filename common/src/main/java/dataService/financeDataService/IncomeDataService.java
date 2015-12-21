@@ -5,7 +5,7 @@ import java.rmi.RemoteException;
 import java.util.Date;
 import java.util.List;
 
-import po.IncomePO;
+import po.financePO.IncomePO;
 
 /**
  * 收款单的相关data层

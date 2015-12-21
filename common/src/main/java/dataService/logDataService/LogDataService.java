@@ -5,7 +5,7 @@ import java.rmi.RemoteException;
 import java.util.Date;
 import java.util.List;
 
-import po.LogPO;
+import po.logPO.LogPO;
 
 /**
  * log日志的数据层接口

@@ -3,7 +3,7 @@ package dataService_Stub;
 import java.rmi.RemoteException;
 import java.util.List;
 
-import po.UserPO;
+import po.adminPO.UserPO;
 import dataService.manageDataService.UserDataService;
 
 public class UserDataStub implements UserDataService {

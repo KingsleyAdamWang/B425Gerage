@@ -4,7 +4,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 
-import po.EntryPO;
+import po.inventoryPO.EntryPO;
 
 public interface EntryDataService extends Remote{
 	

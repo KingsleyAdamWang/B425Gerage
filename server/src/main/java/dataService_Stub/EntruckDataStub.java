@@ -3,7 +3,7 @@ package dataService_Stub;
 import java.rmi.RemoteException;
 import java.util.List;
 
-import po.EntruckPO;
+import po.businessPO.EntruckPO;
 import dataService.businessHallDataService.EntruckDataService;
 
 public class EntruckDataStub implements EntruckDataService {

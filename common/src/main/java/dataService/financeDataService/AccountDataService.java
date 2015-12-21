@@ -4,7 +4,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 
-import po.AccountPO;
+import po.financePO.AccountPO;
 
 /**
  * 银行账户的数据接口层

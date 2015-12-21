@@ -3,7 +3,7 @@ package vo.BussinessHallVo;
 import java.util.Date;
 import java.util.Vector;
 
-import po.ArrivalPO;
+import po.businessPO.ArrivalPO;
 import util.DateUtil;
 import enumSet.ArrivalState;
 import enumSet.ReceiptsState;

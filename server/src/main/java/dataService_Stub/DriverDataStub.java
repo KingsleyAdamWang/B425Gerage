@@ -4,7 +4,7 @@ import java.rmi.RemoteException;
 import java.sql.Driver;
 
 import dataService.businessHallDataService.DriverDataService;
-import po.DriverPO;
+import po.businessPO.DriverPO;
 
 public class DriverDataStub implements DriverDataService{
 

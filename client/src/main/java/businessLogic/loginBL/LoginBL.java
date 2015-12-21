@@ -3,7 +3,7 @@ package businessLogic.loginBL;
 import java.rmi.RemoteException;
 import java.util.List;
 
-import po.UserPO;
+import po.adminPO.UserPO;
 import presentation.MainFrame;
 import vo.AdminVo.UserVO;
 import client.ClientInitException;

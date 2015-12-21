@@ -4,8 +4,8 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
-import po.AccountPO;
-import po.PaymentPO;
+import po.financePO.AccountPO;
+import po.financePO.PaymentPO;
 import vo.FinanceVo.AccountVO;
 import client.ClientInitException;
 import client.RMIHelper;

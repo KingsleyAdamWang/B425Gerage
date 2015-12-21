@@ -2,7 +2,7 @@ package vo.ManageVo;
 
 import java.util.List;
 
-import po.PriceConstPO;
+import po.managePO.PriceConstPO;
 import util.Distance;
 import util.PackPrice;
 

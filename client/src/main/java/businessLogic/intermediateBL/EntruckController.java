@@ -6,7 +6,7 @@ import businessLogicService.businessHallBLService.EntruckBLService;
 import java.rmi.RemoteException;
 import java.util.Date;
 
-import po.LogPO;
+import po.logPO.LogPO;
 import presentation.MainFrame;
 import client.ClientInitException;
 import client.RMIHelper;

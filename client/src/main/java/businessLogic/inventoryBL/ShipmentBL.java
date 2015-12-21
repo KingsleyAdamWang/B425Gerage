@@ -4,8 +4,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
-import po.ShipmentPO;
-import po.ShipmentPO;
+import po.inventoryPO.ShipmentPO;
 import vo.InventoryVo.ShipmentVO;
 import client.ClientInitException;
 import client.RMIHelper;

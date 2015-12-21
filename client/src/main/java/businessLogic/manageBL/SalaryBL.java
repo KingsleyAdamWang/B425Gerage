@@ -2,7 +2,7 @@ package businessLogic.manageBL;
 
 import java.rmi.RemoteException;
 
-import po.SalaryPO;
+import po.managePO.SalaryPO;
 import vo.ManageVo.SalaryVO;
 import client.ClientInitException;
 import client.RMIHelper;

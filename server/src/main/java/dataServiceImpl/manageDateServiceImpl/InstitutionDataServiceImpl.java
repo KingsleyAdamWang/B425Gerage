@@ -12,7 +12,7 @@ import java.util.List;
 
 import dataService.manageDataService.InstitutionDataService;
 import enumSet.InsType;
-import po.InstitutionPO;
+import po.managePO.InstitutionPO;
 
 public class InstitutionDataServiceImpl extends UnicastRemoteObject implements InstitutionDataService {
 

@@ -4,7 +4,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 
-import po.TransferPO;
+import po.intermidatePO.TransferPO;
 
 /**
  * 中转单数据层接口

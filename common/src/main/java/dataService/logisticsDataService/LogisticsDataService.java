@@ -4,7 +4,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 
-import po.LogisticsPO;
+import po.logisticsPO.LogisticsPO;
 
 /**
  * 快递物流信息的数据层接口

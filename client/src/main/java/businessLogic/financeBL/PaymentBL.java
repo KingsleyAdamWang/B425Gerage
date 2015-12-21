@@ -9,7 +9,8 @@ import java.util.List;
 
 
 //import po.PaymentPO;
-import po.PaymentPO;
+
+import po.financePO.PaymentPO;
 import util.DateUtil;
 import vo.FinanceVo.PaymentVO;
 //import vo.PaymentVO;

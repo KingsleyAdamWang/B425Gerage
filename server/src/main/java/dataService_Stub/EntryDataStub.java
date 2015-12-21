@@ -3,7 +3,7 @@ package dataService_Stub;
 import java.rmi.RemoteException;
 import java.util.List;
 
-import po.EntryPO;
+import po.inventoryPO.EntryPO;
 import dataService.inventoryDataService.EntryDataService;
 
 public class EntryDataStub implements EntryDataService {

@@ -3,7 +3,7 @@ package dataService_Stub;
 import java.rmi.RemoteException;
 import java.util.List;
 
-import po.ReceivePO;
+import po.deliveryPO.ReceivePO;
 import dataService.deliveryDataService.ReceiveDataService;
 
 public class ReceiveDataStub implements ReceiveDataService {

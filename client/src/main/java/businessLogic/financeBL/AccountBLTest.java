@@ -6,7 +6,7 @@ import java.rmi.RemoteException;
 
 import org.junit.Test;
 
-import po.AccountPO;
+import po.financePO.AccountPO;
 import vo.FinanceVo.AccountVO;
 
 public class AccountBLTest {

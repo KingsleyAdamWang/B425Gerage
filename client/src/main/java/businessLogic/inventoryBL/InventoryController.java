@@ -3,7 +3,7 @@ package businessLogic.inventoryBL;
 import java.util.Date;
 import java.util.List;
 
-import po.InventoryPO;
+import po.inventoryPO.InventoryPO;
 import vo.InventoryVo.InventoryVO;
 import businessLogicService.inventoryBLService.InventoryBLService;
 

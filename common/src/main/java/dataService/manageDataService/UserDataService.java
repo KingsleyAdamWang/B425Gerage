@@ -4,7 +4,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 
-import po.UserPO;
+import po.adminPO.UserPO;
 /**
  * 用户的数据层接口类
  * @author 王栋

@@ -7,7 +7,7 @@ import java.rmi.RemoteException;
 import java.util.Date;
 import java.util.List;
 
-import po.LogPO;
+import po.logPO.LogPO;
 import presentation.MainFrame;
 import client.ClientInitException;
 import client.RMIHelper;

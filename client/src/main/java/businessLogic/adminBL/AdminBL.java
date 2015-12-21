@@ -4,8 +4,8 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
-import po.InstitutionPO;
-import po.UserPO;
+import po.adminPO.UserPO;
+import po.managePO.InstitutionPO;
 import presentation.MainFrame;
 import vo.AdminVo.UserVO;
 import vo.LogVo.LogVO;

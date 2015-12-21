@@ -4,7 +4,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 
-import po.DriverPO;
+import po.businessPO.DriverPO;
 
 /**
  * 司机信息管理的对应的数据层的接口

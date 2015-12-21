@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import po.DeliveryPO;
+import po.businessPO.DeliveryPO;
 import dataService.businessHallDataService.DeliveryDataService;
 import enumSet.ReceiptsState;
 

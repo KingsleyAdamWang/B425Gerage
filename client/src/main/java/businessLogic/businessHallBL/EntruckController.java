@@ -4,7 +4,7 @@ import java.rmi.RemoteException;
 import java.util.Date;
 import java.util.List;
 
-import po.LogPO;
+import po.logPO.LogPO;
 import presentation.MainFrame;
 import vo.BussinessHallVo.EntruckVO;
 import vo.DeliverymanVo.SendVO;

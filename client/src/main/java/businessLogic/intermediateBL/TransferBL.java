@@ -4,9 +4,8 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
-import po.TransferPO;
-import po.ShipmentPO;
-import po.TransferPO;
+import po.intermidatePO.TransferPO;
+import po.inventoryPO.ShipmentPO;
 import vo.IntermediateVo.TransferVO;
 import businessLogic.inventoryBL.ShipmentBL;
 import businessLogic.manageBL.StrategyBL;

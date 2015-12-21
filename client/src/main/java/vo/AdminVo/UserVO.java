@@ -1,6 +1,6 @@
 package vo.AdminVo;
 
-import po.UserPO;
+import po.adminPO.UserPO;
 import enumSet.Position;
 
 public class UserVO {

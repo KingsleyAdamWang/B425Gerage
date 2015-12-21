@@ -7,8 +7,8 @@ import java.util.List;
 import client.ClientInitException;
 import client.RMIHelper;
 import dataService.inventoryDataService.InventoryDataService;
-import po.EntryPO;
-import po.InventoryPO;
+import po.inventoryPO.EntryPO;
+import po.inventoryPO.InventoryPO;
 import vo.InventoryVo.InventoryVO;
 
 public class InventoryBL {

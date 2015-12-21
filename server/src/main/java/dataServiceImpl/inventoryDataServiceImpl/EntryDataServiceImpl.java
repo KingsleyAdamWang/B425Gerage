@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import po.EntryPO;
+import po.inventoryPO.EntryPO;
 import dataService.inventoryDataService.EntryDataService;
 import enumSet.ReceiptsState;
 

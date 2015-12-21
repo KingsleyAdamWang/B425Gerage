@@ -3,7 +3,7 @@ package vo.FinanceVo;
 import java.util.Date;
 import java.util.List;
 
-import po.IncomePO;
+import po.financePO.IncomePO;
 import vo.ReceiptsVO;
 import enumSet.ReceiptsState;
 

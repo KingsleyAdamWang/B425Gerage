@@ -2,7 +2,7 @@ package vo.BussinessHallVo;
 
 import java.util.Date;
 
-import po.TruckPO;
+import po.businessPO.TruckPO;
 import util.DateUtil;
 
 public class TruckVO {

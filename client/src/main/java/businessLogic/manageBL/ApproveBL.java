@@ -3,11 +3,11 @@ package businessLogic.manageBL;
 import java.rmi.RemoteException;
 import java.util.List;
 
-import po.IncomePO;
-import po.PaymentPO;
-import po.ReceivePO;
-import po.ShipmentPO;
-import po.TransferPO;
+import po.deliveryPO.ReceivePO;
+import po.financePO.IncomePO;
+import po.financePO.PaymentPO;
+import po.intermidatePO.TransferPO;
+import po.inventoryPO.ShipmentPO;
 import vo.BussinessHallVo.ArrivalVO;
 import vo.BussinessHallVo.CashRegisterVO;
 import vo.BussinessHallVo.DeliveryVO;

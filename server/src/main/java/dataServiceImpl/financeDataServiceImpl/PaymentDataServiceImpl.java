@@ -12,7 +12,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-import po.PaymentPO;
+import po.financePO.PaymentPO;
 import dataService.financeDataService.PaymentDataService;
 import enumSet.ReceiptsState;
 

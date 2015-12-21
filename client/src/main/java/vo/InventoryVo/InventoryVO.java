@@ -1,6 +1,6 @@
 package vo.InventoryVo;
 
-import po.InventoryPO;
+import po.inventoryPO.InventoryPO;
 import util.Storage;
 
 public class InventoryVO {

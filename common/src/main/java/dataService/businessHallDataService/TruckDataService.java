@@ -4,7 +4,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 
-import po.TruckPO;
+import po.businessPO.TruckPO;
 
 /**
  * 司机信息的数据层接口

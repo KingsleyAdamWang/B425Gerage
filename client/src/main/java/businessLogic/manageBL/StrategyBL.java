@@ -4,7 +4,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
-import po.PriceConstPO;
+import po.managePO.PriceConstPO;
 import util.Distance;
 import vo.ManageVo.PriceConstVO;
 import client.ClientInitException;

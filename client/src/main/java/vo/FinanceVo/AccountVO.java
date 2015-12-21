@@ -2,7 +2,7 @@
 
 import java.util.Vector;
 
-import po.AccountPO;
+import po.financePO.AccountPO;
 
 public class AccountVO extends Vector<String> {
 

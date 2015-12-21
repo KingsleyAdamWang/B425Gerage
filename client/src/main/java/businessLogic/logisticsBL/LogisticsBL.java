@@ -7,8 +7,8 @@ import client.ClientInitException;
 import client.RMIHelper;
 import dataService.businessHallDataService.EntruckDataService;
 import dataService.logisticsDataService.LogisticsDataService;
-import po.EntruckPO;
-import po.LogisticsPO;
+import po.businessPO.EntruckPO;
+import po.logisticsPO.LogisticsPO;
 import vo.LogisticsVo.LogisticsVO;
 
 public class LogisticsBL {
