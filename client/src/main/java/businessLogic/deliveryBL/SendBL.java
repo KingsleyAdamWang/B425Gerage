@@ -71,6 +71,15 @@ public class SendBL {
 
 		return "未找到对应快递单";
 	}
+	
+	public void modify(SendVO vo) throws RemoteException{
+		for(SendPO temp:sendList){
+			if(temp.getId().equals(vo.id)){
+				sendList.set(sendList.indexOf(temp), vo.transToPO());
+				sendDS.modify(vo.transToPO());
+			}
+		}
+	}
 
 	public double getWeight(double weight,double length,double width, double height){
 		double result=0;
@@ -120,12 +129,32 @@ public class SendBL {
 		//格式转化为2位小数
 		DecimalFormat df = new DecimalFormat("#.00");  
 		
-
 		return Double.parseDouble(df.format(result));
 	}
 	
 	public int getDays(String departure,String destination){
-		return 0;
+		List<SendPO> sendList=getSendListByCities(departure,destination);
+		if(sendList.size()==0){
+			return 0;
+		}
+		int result = 0;
+		
+		for(SendPO temp:sendList){
+			result=result+temp.getArriveDate();
+		}
+		
+		result=result/sendList.size()+1;
+		return result;
+	}
+	
+	private List<SendPO> getSendListByCities(String departure,String destination){
+		List<SendPO> result=new ArrayList<SendPO>();
+		for(SendPO temp: this.sendList){
+			if(temp.getSender().getCity().equals(departure)&&temp.getReceiver().getCity().equals(destination)){
+				result.add(temp);
+			}
+		}
+		return result;
 	}
 	
 	public List<String> getCities() throws RemoteException{
@@ -151,5 +180,6 @@ public class SendBL {
 		}
 		return sendList;
 	}
+	
 
 }

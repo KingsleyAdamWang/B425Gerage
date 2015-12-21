@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import po.deliveryPO.ReceivePO;
+import util.DateUtil;
 import vo.DeliverymanVo.ReceiveVO;
+import vo.DeliverymanVo.SendVO;
 import client.ClientInitException;
 import client.RMIHelper;
 import dataService.deliveryDataService.ReceiveDataService;
@@ -27,12 +29,17 @@ public class ReceiveBL {
 	}
 	
 	public String add(ReceiveVO vo) throws RemoteException{
+		SendBL sendBL=new SendBL();
 		receivePO=vo.transToPO();
 		for(ReceivePO temp: receiveList){
 			if(temp.equals(receivePO)){
 				return "存在相同收件单";
 			}
 		}
+		
+		SendVO sendVO=sendBL.getSend(receivePO.getId());
+		sendVO.arriveDate=(int) ((receivePO.getD().getTime()-sendVO.getD().getTime())/(3600*24*1000))+1;
+		sendBL.modify(sendVO);
 		
 		receiveList.add(receivePO);
 		receiveDS.add(receivePO);
