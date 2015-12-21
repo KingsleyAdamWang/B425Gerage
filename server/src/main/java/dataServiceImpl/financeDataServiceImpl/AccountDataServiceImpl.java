@@ -73,12 +73,9 @@ public class AccountDataServiceImpl extends UnicastRemoteObject implements
 		return true;
 	}
 
-	public boolean modify(AccountPO po, String name) throws RemoteException {
+	public boolean modify(AccountPO po) throws RemoteException {
 
-		double balance = po.getBalance();
-		String accountID = po.getAccountID();
-		accounts.remove(po);
-		accounts.add(0, new AccountPO(name, accountID, balance));
+	accounts.set(accounts.indexOf(po), po);
 
 		update();
 

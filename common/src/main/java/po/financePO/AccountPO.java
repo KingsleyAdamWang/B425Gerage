@@ -77,9 +77,9 @@ public class AccountPO implements Serializable{
 			return false;
 		AccountPO other = (AccountPO) obj;
 		if (name == null) {
-			if (other.name != null)
+			if (other.accountID != null)
 				return false;
-		} else if (!name.equals(other.name))
+		} else if (!accountID.equals(other.accountID))
 			return false;
 		return true;
 	}

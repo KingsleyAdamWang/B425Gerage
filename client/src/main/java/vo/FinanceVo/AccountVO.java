@@ -53,9 +53,9 @@ public class AccountVO extends Vector<String> {
 			return false;
 		AccountVO other = (AccountVO) obj;
 		if (this.get(0) == null) {
-			if (other.get(0) != null)
+			if (other.get(1) != null)
 				return false;
-		} else if (this.get(0).equals(other.get(0)))
+		} else if (this.get(1).equals(other.get(1)))
 			return false;
 		return true;
 	}

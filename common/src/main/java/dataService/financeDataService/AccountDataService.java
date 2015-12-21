@@ -20,7 +20,7 @@ public interface AccountDataService extends Remote{
 	 * @return /
 	 * @throws RemoteException远程异常 RMI提供
 	 */
-	public boolean modify(AccountPO po,String name)throws RemoteException;
+	public boolean modify(AccountPO po)throws RemoteException;
 	
 	/**
 	 * 增加账户操作
