@@ -66,12 +66,13 @@ public class FinanceHighUI extends JPanel {
 		this.add(scrollPane);
 		// this.add(table);
 
-		funcButton = new JButton[5];
+		funcButton = new JButton[6];
 		final String[] title = { "期初建账", "收款单管理", "付款单管理", "统计报表", "账户管理",
 				"日志查询" };
 		for (int i = 0; i < 6; i++) {
 			funcButton[i] = new JButton(title[i]);
-			funcButton[i].setBounds(300, 170 + 70 * i, 200, 50);
+			funcButton[i].setBounds(150 + (i / 3) * 300, 200 + 100 * (i % 3),
+					200, 50);
 			switch (i) {
 			case 0:
 				funcButton[i].addActionListener(new ActionListener() {
@@ -94,6 +95,12 @@ public class FinanceHighUI extends JPanel {
 			case 3:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+					}
+				});
+				break;
+			case 4:
+				funcButton[i].addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
 						try {
 							Main.frame.setView(new AccountUI(), title[3]);
 						} catch (RemoteException e1) {
@@ -102,12 +109,6 @@ public class FinanceHighUI extends JPanel {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
-					}
-				});
-				break;
-			case 4:
-				funcButton[i].addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
 					}
 				});
 				break;

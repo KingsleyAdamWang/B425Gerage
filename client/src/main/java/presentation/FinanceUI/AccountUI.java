@@ -21,6 +21,7 @@ import presentation.MainFrame;
 import vo.FinanceVo.AccountVO;
 import businessLogic.financeBL.AccountController;
 import client.ClientInitException;
+import client.Main;
 
 public class AccountUI extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -33,6 +34,7 @@ public class AccountUI extends JPanel {
 	private JButton[] funcButton;
 	private JTable table;
 	private Vector<AccountVO> vData;
+	private JScrollPane scrollPane;
 
 	// String name;
 	// String id;
@@ -66,7 +68,7 @@ public class AccountUI extends JPanel {
 		table.setRowHeight(35);
 		table.setRowSelectionAllowed(true);
 
-		JScrollPane scrollPane = new JScrollPane();
+		scrollPane = new JScrollPane();
 		scrollPane.getViewport().add(table);
 		scrollPane.setBounds(50, 50, 700, 385);
 		table.setFillsViewportHeight(true);
@@ -119,6 +121,7 @@ public class AccountUI extends JPanel {
 			case 4:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						Main.frame.returnToTop();
 					}
 				});
 				break;
@@ -133,6 +136,8 @@ public class AccountUI extends JPanel {
 		for (AccountVO vo : list) {
 			vData.add(vo);
 		}
+		scrollPane.getViewport().removeAll();
+		scrollPane.getViewport().add(table);
 		this.repaint();
 	}
 
@@ -141,6 +146,7 @@ public class AccountUI extends JPanel {
 		for (AccountVO vo : list) {
 			vData.add(vo);
 		}
+		table.repaint();
 		this.repaint();
 	}
 
@@ -299,8 +305,9 @@ class AccountDialog extends JDialog {
 				}
 				if (opr.equals("update")) {
 					try {
-						String result = ui.getController().modifyAccount(vo,
-								getName());
+						AccountVO vo2 = new AccountVO(getName(), vo
+								.getAccountID(), vo.getBalance());
+						String result = ui.getController().modifyAccount(vo2);
 						if (result != null) {
 							JOptionPane.showMessageDialog(null, result, "",
 									JOptionPane.ERROR_MESSAGE);

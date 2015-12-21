@@ -1,5 +1,10 @@
 package client;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.rmi.Naming;
 
 import dataService.businessHallDataService.ArrivalDataService;
@@ -25,14 +30,28 @@ import dataService.manageDataService.UserDataService;
 
 public class RMIHelper {
 
-	private static final String IP = "localhost";
-	private static String urlPrefix = "rmi://" + IP + ":1099" + "/";
+	private static File config;
+	private static String IP ;
+	private static String PORT;
+	private static String urlPrefix ;
 
-	// Can be read from config file
-	//
-	// private static boolean inited = false;
+	static {
+		config = new File("src/main/java/client/config.txt");
+	    try {
+			BufferedReader br = new BufferedReader(new FileReader(config));
+			IP = br.readLine();
+			PORT = br.readLine() ;
+			urlPrefix = "rmi://" + IP + ":"+PORT+ "/";
+			br.close();
 
-	// private static OrderBL orderBL;
+		} catch (IOException e) {
+			 IP = "localhost";
+			 PORT = "1099";
+			 urlPrefix = "rmi://" + IP + ":" +PORT+ "/";
+			e.printStackTrace();
+		}
+	    
+	}
 	// 定义各种 dataService 的引用 根据不同的人员以及执行的操作进行不同的初始化
 
 	private static AccountDataService accountDataService;
@@ -377,5 +396,30 @@ public class RMIHelper {
 	public static SalaryDataService getSalaryDataService() {
 		return salaryDataService;
 
+	}
+
+
+	
+	public static String getIP() {
+		return IP;
+	}
+
+	public static String getPORT() {
+		return PORT;
+	}
+
+	public static void applyConfig(String ip , String port){
+		try {
+			FileWriter fw = new FileWriter(config);
+			fw.write("");
+			fw.append(ip+"\n");
+			fw.append(port);
+			fw.flush();
+			fw.close();
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+		
 	}
 }
