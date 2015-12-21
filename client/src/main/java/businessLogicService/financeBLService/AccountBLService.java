@@ -18,7 +18,7 @@ public interface AccountBLService {
 	
 	public List<AccountVO> searchAccount(String key) throws RemoteException;
 	
-	public String modifyAccount(AccountVO vo, String newName) throws RemoteException ;
+	public String modifyAccount(AccountVO vo) throws RemoteException ;
 	
 	public List<AccountVO> getAccounts();
 }

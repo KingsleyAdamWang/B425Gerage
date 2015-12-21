@@ -34,10 +34,10 @@ public class AccountController implements AccountBLService {
 		return accountBL.deleteAccount(vo.transToPO());
 	}
 
-	public String modifyAccount(AccountVO vo, String newName)
+	public String modifyAccount(AccountVO vo)
 			throws RemoteException {
 		logDS.add(new LogPO(new Date(),MainFrame.getUser().getIdentityID(),"修改账户"));
-		return accountBL.modifyAccount(vo, newName);
+		return accountBL.modifyAccount(vo);
 	}
 
 	public List<AccountVO> searchAccount(String key) throws RemoteException {
