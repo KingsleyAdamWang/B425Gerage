@@ -87,7 +87,7 @@ public class AccountDataServiceImpl extends UnicastRemoteObject implements
 		// TODO 注释该行
 		System.out.println("添加账户成功！！");
 		// 是否重名等逻辑判断放在最后BL层实现
-		accounts.add(po);
+		accounts.add(0,po);
 		update();
 		return true;
 	}

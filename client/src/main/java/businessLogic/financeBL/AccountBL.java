@@ -6,10 +6,12 @@ import java.util.List;
 
 import po.financePO.AccountPO;
 import po.financePO.PaymentPO;
+import presentation.MainFrame;
 import vo.FinanceVo.AccountVO;
 import client.ClientInitException;
 import client.RMIHelper;
 import dataService.financeDataService.AccountDataService;
+import enumSet.Position;
 
 public class AccountBL {
 	AccountDataService accountDS;
@@ -21,7 +23,6 @@ public class AccountBL {
 			RMIHelper.initAccountDataService();
 			accountDS = RMIHelper.getAccountDataService();
 			accounts = accountDS.getAccounts();
-
 		} catch (ClientInitException e) {
 			e.printStackTrace();
 		}
@@ -29,7 +30,6 @@ public class AccountBL {
 
 	public String addAccount(String name, String accountID)
 			throws RemoteException {
-
 		AccountPO po = new AccountPO(name, accountID, 0);
 
 		if (accounts.contains(po))
@@ -54,7 +54,7 @@ public class AccountBL {
 	// 返回符合关键字key的账户
 	public List<AccountVO> searchAccount(String key) {
 		List<AccountVO> result = new ArrayList<AccountVO>();
-
+		
 		for (AccountPO temp : accounts) {
 			if (temp.getName().contains(key))
 				result.add(new AccountVO(temp));
@@ -73,10 +73,44 @@ public class AccountBL {
 		return null;
 	}
 	
-	public String pay(String AccountPO,PaymentPO paymentPO){
-		
+	public String enter(double fare,String cardNumber){
+		AccountPO po=accounts.get(0);
+		if(MainFrame.getUser().getWork()==Position.JOB_5||MainFrame.getUser().getWork()==Position.JOB_6){
+			double balance=po.getBalance()+fare;
+			po.setBalance(balance);
+			
+		}
 		return null;
 	}
+	
+	public String pay(double fare){
+		AccountPO po=new AccountPO();
+		po.isDefault=false;
+		//找到默认账户
+		for(AccountPO temp: accounts){
+			if(temp.isDefault){
+				po=temp;
+			}
+		}
+		if(!po.isDefault){
+			return "无默认账户，请先从已添加的账户中设置默认账户";
+		}
+		
+		if(MainFrame.getUser().getWork()==Position.JOB_5||MainFrame.getUser().getWork()==Position.JOB_6){
+			double balance=po.getBalance()-fare;
+			po.setBalance(balance);
+			
+		}
+		return null;
+	}
+	
+	public String changeDefaultCard(AccountVO newAccount){
+		for(AccountPO temp: accounts){
+			if(temp.get)
+		}
+		return null;
+	}
+	
 	public List<AccountVO> getAccounts() {
 		List<AccountVO> result = new ArrayList<AccountVO>();
 
