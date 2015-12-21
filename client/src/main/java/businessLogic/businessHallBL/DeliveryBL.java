@@ -3,6 +3,7 @@
 package businessLogic.businessHallBL;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.List;
 
 import po.businessPO.DeliveryPO;
@@ -13,6 +14,7 @@ import businessLogic.logisticsBL.LogisticsBL;
 import client.ClientInitException;
 import client.RMIHelper;
 import dataService.businessHallDataService.DeliveryDataService;
+import enumSet.ReceiptsState;
 
 public class DeliveryBL {
 	private DeliveryDataService deliveryDS;
@@ -67,21 +69,21 @@ public class DeliveryBL {
 		return sendBL.getSend(ID);
 	}
 
-//	public void approve(DeliveryPO po) throws RemoteException {
-//		deliveryDS.approval(po);
-//	}
-//
-//	public void approveAll() throws RemoteException {
-//		deliveryDS.approvalAll();
-//	}
-//
-//	public List<DeliveryVO> getUnapproved() {
-//		List<DeliveryVO> result=new ArrayList<DeliveryVO>();
-//		for(DeliveryPO temp: deliveryList){
-//			if(temp.getState()==ReceiptsState.unapprove){
-//				result.add(new DeliveryVO(temp));
-//			}
-//		}
-//		return result;
-//	}
+	public void approve(DeliveryPO po) throws RemoteException {
+		deliveryDS.approve(po);
+	}
+
+	public void approveAll() throws RemoteException {
+		deliveryDS.approveAll();
+	}
+
+	public List<DeliveryVO> getUnapproved() {
+		List<DeliveryVO> result=new ArrayList<DeliveryVO>();
+		for(DeliveryPO temp: deliveryList){
+			if(temp.getState()==ReceiptsState.unapprove){
+				result.add(new DeliveryVO(temp));
+			}
+		}
+		return result;
+	}
 }

@@ -64,21 +64,21 @@ public class ReceiveBL {
 		return "未找到对应收件单";
 	}
 
-//	public void approve(ReceivePO po) throws RemoteException {
-//		receiveDS.approval(po);
-//	}
-//
-//	public void approveAll() throws RemoteException {
-//		receiveDS.approvalAll();
-//	}
-//
-//	public List<ReceiveVO> getUnapproved() {
-//		List<ReceiveVO> result=new ArrayList<ReceiveVO>();
-//		for(ReceivePO temp: receiveList){
-//			if(temp.getState()==ReceiptsState.unapprove){
-//				result.add(new ReceiveVO(temp));
-//			}
-//		}
-//		return result;
-//	}
+	public void approve(ReceivePO po) throws RemoteException {
+		receiveDS.approve(po);
+	}
+
+	public void approveAll() throws RemoteException {
+		receiveDS.approveAll();
+	}
+
+	public List<ReceiveVO> getUnapproved() {
+		List<ReceiveVO> result=new ArrayList<ReceiveVO>();
+		for(ReceivePO temp: receiveList){
+			if(temp.getState()==ReceiptsState.unapprove){
+				result.add(new ReceiveVO(temp));
+			}
+		}
+		return result;
+	}
 }

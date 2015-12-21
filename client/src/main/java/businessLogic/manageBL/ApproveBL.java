@@ -3,16 +3,13 @@ package businessLogic.manageBL;
 import java.rmi.RemoteException;
 import java.util.List;
 
-import po.deliveryPO.ReceivePO;
-import po.financePO.IncomePO;
-import po.financePO.PaymentPO;
 import po.intermidatePO.TransferPO;
-import po.inventoryPO.ShipmentPO;
 import vo.BussinessHallVo.ArrivalVO;
-import vo.BussinessHallVo.CashRegisterVO;
 import vo.BussinessHallVo.DeliveryVO;
+import vo.DeliverymanVo.ReceiveVO;
 import vo.FinanceVo.IncomeVO;
 import vo.FinanceVo.PaymentVO;
+import vo.IntermediateVo.TransferVO;
 import vo.InventoryVo.EntryVO;
 import vo.InventoryVo.ShipmentVO;
 import businessLogic.businessHallBL.CashRegisterBL;
@@ -76,16 +73,16 @@ public class ApproveBL {
 		crBL.approveAll();
 	}
 	
-//	public List<DeliveryVO> getUnapprovedDelivery(){
-//		return deliveryBL.getUnapproved();
-//	}
-//	
-//	public void setApprovedDelivery(){
-//		deliveryBL.approve();
-//	}
-//	public void setAllApprovedDelivery(){
-//		deliveryBL.approveAll();
-//	}
+	public List<DeliveryVO> getUnapprovedDelivery(){
+		return deliveryBL.getUnapproved();
+	}
+	
+	public void setApprovedDelivery(DeliveryVO vo) throws RemoteException{
+		deliveryBL.approve(vo.transToPO());
+	}
+	public void setAllApprovedDelivery() throws RemoteException{
+		deliveryBL.approveAll();
+	}
 	
 	public List<EntryVO> getUnapproveEntry(){
 		return entryBL.getUnapproved();
@@ -98,16 +95,16 @@ public class ApproveBL {
 		entryBL.approveAll();
 	}
 	
-//	public List<IncomePO> getUnapproveIncome(){
-//		return moneyBL.getUnapproved();
-//	}
-//	
-//	public void setApprovedIncome(){
-//		moneyBL.approveIncome();
-//	}
-//	public void setAllApprovedIncome(){
-//		moneyBL.approveAllIncome();
-//	}
+	public List<IncomeVO> getUnapproveIncome(){
+		return moneyBL.getUnapproved();
+	}
+	
+	public void setApprovedIncome(IncomeVO vo) throws RemoteException{
+		moneyBL.approve(vo.transToPO());
+	}
+	public void setAllApprovedIncome() throws RemoteException{
+		moneyBL.approveAll();
+	}
 	
 	public List<PaymentVO> getUnapprovePayment(){
 		return paymentBL.getUnapproved();
@@ -120,15 +117,15 @@ public class ApproveBL {
 		paymentBL.approveAll();
 	}
 	
-//	public List<ReceivePO> getUnapproveReceive(){
-//		return receiveBL.getUnapproved();
-//	}
-//	public void setApprovedReceive(){
-//		receiveBL.approve();
-//	}
-//	public void setAllApprovedReceive(){
-//		receiveBL.approveAll();
-//	}
+	public List<ReceiveVO> getUnapproveReceive(){
+		return receiveBL.getUnapproved();
+	}
+	public void setApprovedReceive(ReceiveVO vo) throws RemoteException{
+		receiveBL.approve(vo.transToPO());
+	}
+	public void setAllApprovedReceive() throws RemoteException{
+		receiveBL.approveAll();
+	}
 	
 	public List<ShipmentVO> getUnapproveShipment(){
 		return shipmentBL.getUnapproved();
@@ -140,13 +137,13 @@ public class ApproveBL {
 		shipmentBL.approveAll();
 	}
 	
-//	public List<TransferPO> getUnapproveTransfer(){
-//		return transferBL.getUnapproved();
-//	}
-//	public void setApprovedTransfer(){
-//		transferBL.approve();
-//	}
-//	public void setAllApprovedTransfer(){
-//		transferBL.approveAll();
-//	}
+	public List<TransferVO> getUnapproveTransfer(){
+		return transferBL.getUnapproved();
+	}
+	public void setApprovedTransfer(TransferVO vo) throws RemoteException{
+		transferBL.approve(vo.transToPO());
+	}
+	public void setAllApprovedTransfer() throws RemoteException{
+		transferBL.approveAll();
+	}
 }

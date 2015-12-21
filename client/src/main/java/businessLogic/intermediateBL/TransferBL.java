@@ -72,21 +72,21 @@ public class TransferBL {
 		return strategyBL.getCities();
 	}
 
-//	public void approve(TransferPO po) throws RemoteException {
-//		transferDS.approval(po);
-//	}
-//
-//	public void approveAll() throws RemoteException {
-//		transferDS.approvalAll();
-//	}
-//
-//	public List<TransferVO> getUnapproved() {
-//		List<TransferVO> result=new ArrayList<TransferVO>();
-//		for(TransferPO temp: transferList){
-//			if(temp.getState()==ReceiptsState.unapprove){
-//				result.add(new TransferVO(temp));
-//			}
-//		}
-//		return result;
-//	}
+	public void approve(TransferPO po) throws RemoteException {
+		transferDS.approve(po);
+	}
+
+	public void approveAll() throws RemoteException {
+		transferDS.approveAll();
+	}
+
+	public List<TransferVO> getUnapproved() {
+		List<TransferVO> result=new ArrayList<TransferVO>();
+		for(TransferPO temp: transferList){
+			if(temp.getState()==ReceiptsState.unapprove){
+				result.add(new TransferVO(temp));
+			}
+		}
+		return result;
+	}
 }

@@ -1,17 +1,17 @@
 package businessLogic.financeBL;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import client.ClientInitException;
-import client.RMIHelper;
-import po.businessPO.CashRegisterPO;
 import po.financePO.IncomePO;
 import po.financePO.PaymentPO;
-import util.DateUtil;
+import vo.FinanceVo.IncomeVO;
+import client.ClientInitException;
+import client.RMIHelper;
 import dataService.financeDataService.IncomeDataService;
 import dataService.financeDataService.PaymentDataService;
+import enumSet.ReceiptsState;
 
 public class MoneyBL {
 //	private CashRegisterBL crBL;
@@ -61,58 +61,21 @@ public class MoneyBL {
 		return result;
 	}
 	
-//	public getPaymentByDate(){
-//		
-//	}
-	
+	public void approve(IncomePO po) throws RemoteException {
+		incomeDS.approval(po);
+	}
 
-	
-	//后面都没用
-	
-//	public double getCashTotal(List<CashRegisterPO> list){
-//		return 0;
-//	}
-//	
-//	public double getPayTotal(List<PaymentPO> list){
-//		return 0;
-//	}
-//	
-//	public List<PaymentPO> getPayList(){
-//		return null;
-//	}
-//	
-//	public List<PaymentPO> getPayList(String start,String end){
-//		return null;
-//	}
-//	
-//	public List<CashRegisterPO> getCashList(String start,String end){
-//		return null;
-//	}
-//	
-//	public List<CashRegisterPO> getCashList(String id){
-//		return null;
-//	}
-//	
-//	public List<CashRegisterPO> getCashList(Date d){
-//		return null;
-//	}
-//	
-//	public boolean addPayment(PaymentPO po){
-//		return false;
-//	}
-//
-//	public void approveIncome() {
-//		// TODO Auto-generated method stub
-//		
-//	}
-//
-//	public void approveAllIncome() {
-//		// TODO Auto-generated method stub
-//		
-//	}
-//
-//	public List<IncomePO> getUnapproved() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+	public void approveAll() throws RemoteException {
+		incomeDS.apprivalAll();
+	}
+
+	public List<IncomeVO> getUnapproved() {
+		List<IncomeVO> result=new ArrayList<IncomeVO>();
+		for(IncomePO temp: incomeList){
+			if(temp.getState()==ReceiptsState.unapprove){
+				result.add(new IncomeVO(temp));
+			}
+		}
+		return result;
+	}
 }
