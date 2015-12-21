@@ -1,4 +1,4 @@
-package dataService;
+package dataService.manageDataService;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;

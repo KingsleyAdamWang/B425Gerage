@@ -8,7 +8,7 @@ import vo.LogisticsVo.LogisticsVO;
 import businessLogicService.logisticsBLService.LogisticsBLService;
 import client.ClientInitException;
 import client.RMIHelper;
-import dataService.LogisticsDataService;
+import dataService.logisticsDataService.LogisticsDataService;
 
 /**
  * 

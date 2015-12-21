@@ -4,7 +4,7 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 import po.TransferPO;
-import dataService.TransferDataService;
+import dataService.intermidateDataService.TransferDataService;
 
 public class TransferDataStub implements TransferDataService {
 

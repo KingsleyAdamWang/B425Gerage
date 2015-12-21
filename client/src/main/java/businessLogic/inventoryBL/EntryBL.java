@@ -10,7 +10,7 @@ import po.InventoryPO;
 import vo.InventoryVo.EntryVO;
 import client.ClientInitException;
 import client.RMIHelper;
-import dataService.EntryDataService;
+import dataService.inventoryDataService.EntryDataService;
 import enumSet.ReceiptsState;
 
 public class EntryBL {

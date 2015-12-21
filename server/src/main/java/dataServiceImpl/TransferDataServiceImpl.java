@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import po.TransferPO;
-import dataService.TransferDataService;
+import dataService.intermidateDataService.TransferDataService;
 import enumSet.ReceiptsState;
 
 public class TransferDataServiceImpl extends UnicastRemoteObject implements

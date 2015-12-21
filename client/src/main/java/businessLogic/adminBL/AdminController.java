@@ -8,7 +8,7 @@ import po.LogPO;
 import presentation.MainFrame;
 import client.ClientInitException;
 import client.RMIHelper;
-import dataService.LogDataService;
+import dataService.logDataService.LogDataService;
 import util.DateUtil;
 import vo.AdminVo.UserVO;
 import vo.ManageVo.InstitutionVO;

@@ -11,7 +11,7 @@ import presentation.LoginUI.LoginFrame;
 import vo.FinanceVo.AccountVO;
 import client.ClientInitException;
 import client.RMIHelper;
-import dataService.AccountDataService;
+import dataService.financeDataService.AccountDataService;
 
 public class TestFrame extends JFrame {
 	public static void main(String[] args) throws ClientInitException,

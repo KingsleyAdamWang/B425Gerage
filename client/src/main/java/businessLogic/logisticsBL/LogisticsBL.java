@@ -5,8 +5,8 @@ import java.util.List;
 
 import client.ClientInitException;
 import client.RMIHelper;
-import dataService.EntruckDataService;
-import dataService.LogisticsDataService;
+import dataService.businessHallDataService.EntruckDataService;
+import dataService.logisticsDataService.LogisticsDataService;
 import po.EntruckPO;
 import po.LogisticsPO;
 import vo.LogisticsVo.LogisticsVO;

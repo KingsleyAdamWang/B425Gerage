@@ -9,7 +9,7 @@ import po.ReceivePO;
 import vo.DeliverymanVo.ReceiveVO;
 import client.ClientInitException;
 import client.RMIHelper;
-import dataService.ReceiveDataService;
+import dataService.deliveryDataService.ReceiveDataService;
 import enumSet.ReceiptsState;
 
 public class ReceiveBL {

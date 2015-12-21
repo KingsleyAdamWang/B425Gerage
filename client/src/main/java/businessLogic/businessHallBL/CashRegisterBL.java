@@ -11,7 +11,7 @@ import vo.FinanceVo.IncomeVO;
 import businessLogic.deliveryBL.SendBL;
 import client.ClientInitException;
 import client.RMIHelper;
-import dataService.IncomeDataService;
+import dataService.financeDataService.IncomeDataService;
 import enumSet.ReceiptsState;
 
 public class CashRegisterBL {

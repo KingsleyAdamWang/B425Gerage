@@ -7,6 +7,7 @@ import java.util.List;
 
 
 
+
 //import po.PaymentPO;
 import po.PaymentPO;
 import util.DateUtil;
@@ -14,7 +15,7 @@ import vo.FinanceVo.PaymentVO;
 //import vo.PaymentVO;
 import client.ClientInitException;
 import client.RMIHelper;
-import dataService.PaymentDataService;
+import dataService.financeDataService.PaymentDataService;
 import enumSet.ReceiptsState;
 
 public class PaymentBL {

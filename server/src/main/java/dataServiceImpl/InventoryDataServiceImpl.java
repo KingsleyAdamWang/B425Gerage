@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import po.InventoryPO;
-import dataService.InventoryDataService;
+import dataService.inventoryDataService.InventoryDataService;
 
 public class InventoryDataServiceImpl extends UnicastRemoteObject implements
 		InventoryDataService {

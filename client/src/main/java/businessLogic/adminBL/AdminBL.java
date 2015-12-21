@@ -12,8 +12,8 @@ import vo.LogVo.LogVO;
 import vo.ManageVo.InstitutionVO;
 import client.ClientInitException;
 import client.RMIHelper;
-import dataService.InstitutionDataService;
-import dataService.UserDataService;
+import dataService.manageDataService.InstitutionDataService;
+import dataService.manageDataService.UserDataService;
 
 public class AdminBL {
 

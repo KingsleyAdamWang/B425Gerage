@@ -4,7 +4,7 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 import po.UserPO;
-import dataService.UserDataService;
+import dataService.manageDataService.UserDataService;
 
 public class UserDataStub implements UserDataService {
 

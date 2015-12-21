@@ -12,7 +12,7 @@ import businessLogic.deliveryBL.SendBL;
 import businessLogic.logisticsBL.LogisticsBL;
 import client.ClientInitException;
 import client.RMIHelper;
-import dataService.DeliveryDataService;
+import dataService.businessHallDataService.DeliveryDataService;
 
 public class DeliveryBL {
 	private DeliveryDataService deliveryDS;

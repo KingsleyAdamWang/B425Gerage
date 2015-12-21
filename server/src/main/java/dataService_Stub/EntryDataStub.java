@@ -4,7 +4,7 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 import po.EntryPO;
-import dataService.EntryDataService;
+import dataService.inventoryDataService.EntryDataService;
 
 public class EntryDataStub implements EntryDataService {
 

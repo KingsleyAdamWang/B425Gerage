@@ -4,7 +4,7 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 import po.LogisticsPO;
-import dataService.LogisticsDataService;
+import dataService.logisticsDataService.LogisticsDataService;
 
 public class LogisticsDataStub implements LogisticsDataService {
 

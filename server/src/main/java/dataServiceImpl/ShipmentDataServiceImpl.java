@@ -13,7 +13,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import po.ShipmentPO;
-import dataService.ShipmentDataService;
+import dataService.inventoryDataService.ShipmentDataService;
 import enumSet.ReceiptsState;
 
 public class ShipmentDataServiceImpl extends UnicastRemoteObject implements

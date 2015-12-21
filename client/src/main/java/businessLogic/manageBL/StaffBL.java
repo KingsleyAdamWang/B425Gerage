@@ -6,7 +6,7 @@ import java.util.List;
 
 import client.ClientInitException;
 import client.RMIHelper;
-import dataService.UserDataService;
+import dataService.manageDataService.UserDataService;
 import enumSet.Position;
 import po.UserPO;
 import util.CheckUtil;

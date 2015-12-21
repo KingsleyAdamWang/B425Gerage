@@ -6,7 +6,7 @@ import java.util.List;
 
 import client.ClientInitException;
 import client.RMIHelper;
-import dataService.InventoryDataService;
+import dataService.inventoryDataService.InventoryDataService;
 import po.EntryPO;
 import po.InventoryPO;
 import vo.InventoryVo.InventoryVO;

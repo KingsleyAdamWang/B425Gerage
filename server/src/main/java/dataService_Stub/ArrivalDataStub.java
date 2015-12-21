@@ -4,7 +4,7 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 import po.ArrivalPO;
-import dataService.ArrivalDataService;
+import dataService.businessHallDataService.ArrivalDataService;
 
 public class ArrivalDataStub implements ArrivalDataService {
 

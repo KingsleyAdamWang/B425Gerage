@@ -12,7 +12,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import po.ReceivePO;
-import dataService.ReceiveDataService;
+import dataService.deliveryDataService.ReceiveDataService;
 import enumSet.ReceiptsState;
 
 public class ReceiveDataServiceImpl extends UnicastRemoteObject implements

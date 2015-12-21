@@ -4,7 +4,7 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 import po.AccountPO;
-import dataService.AccountDataService;
+import dataService.financeDataService.AccountDataService;
 
 public class AccountDataStub implements AccountDataService {
 

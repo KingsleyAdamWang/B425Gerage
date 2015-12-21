@@ -3,7 +3,7 @@ package dataService_Stub;
 import java.rmi.RemoteException;
 import java.sql.Driver;
 
-import dataService.DriverDataService;
+import dataService.businessHallDataService.DriverDataService;
 import po.DriverPO;
 
 public class DriverDataStub implements DriverDataService{

@@ -9,7 +9,7 @@ import util.CheckUtil;
 import vo.BussinessHallVo.DriverVO;
 import client.ClientInitException;
 import client.RMIHelper;
-import dataService.DriverDataService;
+import dataService.businessHallDataService.DriverDataService;
 
 public class DriverBL {
 	DriverDataService driverDS;

@@ -7,7 +7,7 @@ import po.LogPO;
 import businessLogicService.loginBLService.LoginBLService;
 import client.ClientInitException;
 import client.RMIHelper;
-import dataService.LogDataService;
+import dataService.logDataService.LogDataService;
 
 public class LoginController implements LoginBLService {
 	private LoginBL loginBL;

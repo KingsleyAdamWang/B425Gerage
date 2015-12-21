@@ -4,7 +4,7 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 import po.ShipmentPO;
-import dataService.ShipmentDataService;
+import dataService.inventoryDataService.ShipmentDataService;
 
 public class ShipmentDataStub implements ShipmentDataService {
 

@@ -13,7 +13,7 @@ import java.util.List;
 
 import po.LogPO;
 import util.DateUtil;
-import dataService.LogDataService;
+import dataService.logDataService.LogDataService;
 
 public class LogDataServiceImpl extends UnicastRemoteObject implements
 		LogDataService {

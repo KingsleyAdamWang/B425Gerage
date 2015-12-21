@@ -4,7 +4,7 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 import po.EntruckPO;
-import dataService.EntruckDataService;
+import dataService.businessHallDataService.EntruckDataService;
 
 public class EntruckDataStub implements EntruckDataService {
 

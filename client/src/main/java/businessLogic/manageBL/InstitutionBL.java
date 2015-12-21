@@ -6,9 +6,9 @@ import java.util.List;
 
 import client.ClientInitException;
 import client.RMIHelper;
-import dataService.InstitutionDataService;
-import dataService.InventoryDataService;
-import dataService.UserDataService;
+import dataService.inventoryDataService.InventoryDataService;
+import dataService.manageDataService.InstitutionDataService;
+import dataService.manageDataService.UserDataService;
 import enumSet.InsType;
 import po.InstitutionPO;
 import po.InventoryPO;

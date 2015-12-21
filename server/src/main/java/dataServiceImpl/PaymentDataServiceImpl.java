@@ -13,7 +13,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import po.PaymentPO;
-import dataService.PaymentDataService;
+import dataService.financeDataService.PaymentDataService;
 import enumSet.ReceiptsState;
 
 public class PaymentDataServiceImpl extends UnicastRemoteObject implements

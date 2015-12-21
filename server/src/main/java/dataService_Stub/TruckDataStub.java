@@ -3,7 +3,7 @@ package dataService_Stub;
 import java.rmi.RemoteException;
 
 import po.TruckPO;
-import dataService.TruckDataService;
+import dataService.businessHallDataService.TruckDataService;
 
 public class TruckDataStub implements TruckDataService {
 

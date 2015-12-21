@@ -6,7 +6,7 @@ import po.SalaryPO;
 import vo.ManageVo.SalaryVO;
 import client.ClientInitException;
 import client.RMIHelper;
-import dataService.SalaryDataService;
+import dataService.manageDataService.SalaryDataService;
 
 public class SalaryBL {
 	private SalaryDataService salaryDS;

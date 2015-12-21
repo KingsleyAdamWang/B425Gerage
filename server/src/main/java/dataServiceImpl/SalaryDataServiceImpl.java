@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 import po.SalaryPO;
 import util.Salary;
-import dataService.SalaryDataService;
+import dataService.manageDataService.SalaryDataService;
 
 public class SalaryDataServiceImpl extends UnicastRemoteObject implements SalaryDataService{
 

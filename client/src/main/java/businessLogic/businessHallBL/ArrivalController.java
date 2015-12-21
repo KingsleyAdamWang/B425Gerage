@@ -11,7 +11,7 @@ import po.LogPO;
 import presentation.MainFrame;
 import client.ClientInitException;
 import client.RMIHelper;
-import dataService.LogDataService;
+import dataService.logDataService.LogDataService;
 
 public class ArrivalController implements ArrivalBLService {
 	private ArrivalBL arrivalBL;

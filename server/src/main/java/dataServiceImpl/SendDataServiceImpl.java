@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import po.SendPO;
-import dataService.SendDataService;
+import dataService.deliveryDataService.SendDataService;
 import enumSet.ReceiptsState;
 
 public class SendDataServiceImpl extends UnicastRemoteObject implements

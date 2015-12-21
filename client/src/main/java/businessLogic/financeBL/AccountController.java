@@ -10,7 +10,7 @@ import vo.FinanceVo.AccountVO;
 import businessLogicService.financeBLService.AccountBLService;
 import client.ClientInitException;
 import client.RMIHelper;
-import dataService.LogDataService;
+import dataService.logDataService.LogDataService;
 
 public class AccountController implements AccountBLService {
 

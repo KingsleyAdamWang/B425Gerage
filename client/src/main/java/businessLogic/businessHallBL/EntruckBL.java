@@ -15,7 +15,7 @@ import businessLogic.manageBL.InstitutionBL;
 import businessLogic.manageBL.StrategyBL;
 import client.ClientInitException;
 import client.RMIHelper;
-import dataService.EntruckDataService;
+import dataService.businessHallDataService.EntruckDataService;
 import enumSet.InsType;
 
 public class EntruckBL {

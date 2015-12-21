@@ -8,7 +8,7 @@ import po.EntruckPO;
 import vo.BussinessHallVo.EntruckVO;
 import client.ClientInitException;
 import client.RMIHelper;
-import dataService.EntruckDataService;
+import dataService.businessHallDataService.EntruckDataService;
 
 public class EntruckBL {
 	private EntruckDataService entruckDS;

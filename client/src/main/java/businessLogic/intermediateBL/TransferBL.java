@@ -12,7 +12,7 @@ import businessLogic.inventoryBL.ShipmentBL;
 import businessLogic.manageBL.StrategyBL;
 import client.ClientInitException;
 import client.RMIHelper;
-import dataService.TransferDataService;
+import dataService.intermidateDataService.TransferDataService;
 import enumSet.ReceiptsState;
 
 public class TransferBL {

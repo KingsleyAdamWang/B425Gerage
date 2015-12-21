@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import po.LogisticsPO;
-import dataService.LogisticsDataService;
+import dataService.logisticsDataService.LogisticsDataService;
 
 public class LogisticsDataServiceImpl extends UnicastRemoteObject implements
 		LogisticsDataService {

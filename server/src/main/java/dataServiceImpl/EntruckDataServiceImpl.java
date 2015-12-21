@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import po.EntruckPO;
-import dataService.EntruckDataService;
+import dataService.businessHallDataService.EntruckDataService;
 import enumSet.ReceiptsState;
 
 public class EntruckDataServiceImpl extends UnicastRemoteObject implements

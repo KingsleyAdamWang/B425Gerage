@@ -2,26 +2,26 @@ package client;
 
 import java.rmi.Naming;
 
-import dataService.AccountDataService;
-import dataService.ArrivalDataService;
-import dataService.DeliveryDataService;
-import dataService.DriverDataService;
-import dataService.EntruckDataService;
-import dataService.EntryDataService;
-import dataService.IncomeDataService;
-import dataService.InstitutionDataService;
-import dataService.InventoryDataService;
-import dataService.LogDataService;
-import dataService.LogisticsDataService;
-import dataService.PaymentDataService;
-import dataService.PriceConstDataService;
-import dataService.ReceiveDataService;
-import dataService.SalaryDataService;
-import dataService.SendDataService;
-import dataService.ShipmentDataService;
-import dataService.TransferDataService;
-import dataService.TruckDataService;
-import dataService.UserDataService;
+import dataService.businessHallDataService.ArrivalDataService;
+import dataService.businessHallDataService.DeliveryDataService;
+import dataService.businessHallDataService.DriverDataService;
+import dataService.businessHallDataService.EntruckDataService;
+import dataService.businessHallDataService.TruckDataService;
+import dataService.deliveryDataService.ReceiveDataService;
+import dataService.deliveryDataService.SendDataService;
+import dataService.financeDataService.AccountDataService;
+import dataService.financeDataService.IncomeDataService;
+import dataService.financeDataService.PaymentDataService;
+import dataService.intermidateDataService.TransferDataService;
+import dataService.inventoryDataService.EntryDataService;
+import dataService.inventoryDataService.InventoryDataService;
+import dataService.inventoryDataService.ShipmentDataService;
+import dataService.logDataService.LogDataService;
+import dataService.logisticsDataService.LogisticsDataService;
+import dataService.manageDataService.InstitutionDataService;
+import dataService.manageDataService.PriceConstDataService;
+import dataService.manageDataService.SalaryDataService;
+import dataService.manageDataService.UserDataService;
 
 public class RMIHelper {
 

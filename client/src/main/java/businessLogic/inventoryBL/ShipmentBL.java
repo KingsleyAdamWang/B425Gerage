@@ -9,7 +9,7 @@ import po.ShipmentPO;
 import vo.InventoryVo.ShipmentVO;
 import client.ClientInitException;
 import client.RMIHelper;
-import dataService.ShipmentDataService;
+import dataService.inventoryDataService.ShipmentDataService;
 import enumSet.ReceiptsState;
 
 public class ShipmentBL {

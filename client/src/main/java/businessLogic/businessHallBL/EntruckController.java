@@ -11,7 +11,7 @@ import vo.DeliverymanVo.SendVO;
 import businessLogicService.businessHallBLService.EntruckBLService;
 import client.ClientInitException;
 import client.RMIHelper;
-import dataService.LogDataService;
+import dataService.logDataService.LogDataService;
 import enumSet.TransportType;
 
 public class EntruckController implements EntruckBLService {

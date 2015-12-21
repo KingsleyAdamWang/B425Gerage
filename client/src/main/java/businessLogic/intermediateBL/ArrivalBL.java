@@ -13,9 +13,9 @@ import businessLogic.logisticsBL.LogisticsBL;
 import businessLogic.manageBL.InstitutionBL;
 import client.ClientInitException;
 import client.RMIHelper;
-import dataService.ArrivalDataService;
-import dataService.EntruckDataService;
-import dataService.TransferDataService;
+import dataService.businessHallDataService.ArrivalDataService;
+import dataService.businessHallDataService.EntruckDataService;
+import dataService.intermidateDataService.TransferDataService;
 import enumSet.ReceiptsState;
 
 public class ArrivalBL {

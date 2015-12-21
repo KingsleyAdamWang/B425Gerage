@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import po.UserPO;
-import dataService.UserDataService;
+import dataService.manageDataService.UserDataService;
 import enumSet.Position;
 
 public class UserDataServiceImpl extends UnicastRemoteObject implements

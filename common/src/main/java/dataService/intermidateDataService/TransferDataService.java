@@ -1,4 +1,4 @@
-package dataService;
+package dataService.intermidateDataService;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;

@@ -10,7 +10,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import dataService.InstitutionDataService;
+import dataService.manageDataService.InstitutionDataService;
 import enumSet.InsType;
 import po.InstitutionPO;
 

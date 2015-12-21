@@ -7,7 +7,7 @@ import java.util.List;
 import po.TruckPO;
 import client.ClientInitException;
 import client.RMIHelper;
-import dataService.TruckDataService;
+import dataService.businessHallDataService.TruckDataService;
 
 public class TruckBL {
 	private TruckDataService truckDS;

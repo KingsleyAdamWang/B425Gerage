@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import po.ArrivalPO;
-import dataService.ArrivalDataService;
+import dataService.businessHallDataService.ArrivalDataService;
 import enumSet.ReceiptsState;
 
 /**

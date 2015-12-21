@@ -25,7 +25,7 @@ import vo.FinanceVo.PaymentVO;
 import businessLogic.businessHallBL.CashRegisterBL;
 import client.ClientInitException;
 import client.RMIHelper;
-import dataService.LogDataService;
+import dataService.logDataService.LogDataService;
 
 public class FormBL {
 

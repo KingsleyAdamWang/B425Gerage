@@ -13,7 +13,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import po.IncomePO;
-import dataService.IncomeDataService;
+import dataService.financeDataService.IncomeDataService;
 import enumSet.ReceiptsState;
 
 public class IncomeDataServiceImpl extends UnicastRemoteObject implements

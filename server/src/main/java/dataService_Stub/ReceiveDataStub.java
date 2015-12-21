@@ -4,7 +4,7 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 import po.ReceivePO;
-import dataService.ReceiveDataService;
+import dataService.deliveryDataService.ReceiveDataService;
 
 public class ReceiveDataStub implements ReceiveDataService {
 

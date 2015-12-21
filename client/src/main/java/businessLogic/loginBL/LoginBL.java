@@ -8,7 +8,7 @@ import presentation.MainFrame;
 import vo.AdminVo.UserVO;
 import client.ClientInitException;
 import client.RMIHelper;
-import dataService.UserDataService;
+import dataService.manageDataService.UserDataService;
 
 public class LoginBL {
 	private UserDataService UserDS;

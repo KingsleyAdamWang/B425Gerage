@@ -10,7 +10,7 @@ import vo.DeliverymanVo.SendVO;
 import businessLogicService.deliveryBLService.SendBLService;
 import client.ClientInitException;
 import client.RMIHelper;
-import dataService.LogDataService;
+import dataService.logDataService.LogDataService;
 import enumSet.Express;
 import enumSet.PackType;
 

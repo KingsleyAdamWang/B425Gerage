@@ -15,8 +15,8 @@ import vo.DeliverymanVo.SendVO;
 import businessLogic.manageBL.StrategyBL;
 import client.ClientInitException;
 import client.RMIHelper;
-import dataService.PriceConstDataService;
-import dataService.SendDataService;
+import dataService.deliveryDataService.SendDataService;
+import dataService.manageDataService.PriceConstDataService;
 import enumSet.Express;
 import enumSet.PackType;
 

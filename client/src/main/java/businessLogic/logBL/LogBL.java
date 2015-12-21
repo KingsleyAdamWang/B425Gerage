@@ -7,7 +7,7 @@ import java.util.List;
 
 import client.ClientInitException;
 import client.RMIHelper;
-import dataService.LogDataService;
+import dataService.logDataService.LogDataService;
 import po.LogPO;
 import vo.LogVo.LogVO;
 
