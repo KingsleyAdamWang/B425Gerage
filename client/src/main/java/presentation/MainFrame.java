@@ -7,9 +7,16 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 
-import client.Main;
+import presentation.AdminUI.AdminUI;
+import presentation.BusinessHallUI.YYTUI;
+import presentation.DeliverymanUI.KuaidiyuanUI;
+import presentation.FinanceUI.FinanceHighUI;
+import presentation.FinanceUI.FinanceLowUI;
+import presentation.InventoryUI.CangkuUI;
+import presentation.ManageUI.ManagerUI;
 import vo.UserVO;
 import businessLogic.logBL.LogController;
+import client.Main;
 
 /**
  * //一个界面跳转的管理frame的 uimanager 主要就是负责呈现各种人员对应的工作的Jpanel
@@ -78,7 +85,7 @@ public class MainFrame extends JFrame {
 		} else if (str.equals("中转中心仓库管理员")) {
 			Main.frame.setView(new CangkuUI());
 		} else if (str.equals("财务人员（高）")) {
-			Main.frame.setView(new FinanceUI());
+			Main.frame.setView(new FinanceHighUI());
 		} else if (str.equals("财务人员（低）")) {
 			Main.frame.setView(new FinanceLowUI());
 		}

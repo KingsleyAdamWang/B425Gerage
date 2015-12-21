@@ -3,8 +3,8 @@ package client;
 import java.awt.Toolkit;
 import java.rmi.RemoteException;
 
-import presentation.LoginFrame;
 import presentation.MainFrame;
+import presentation.LoginUI.LoginFrame;
 import businessLogic.loginBL.LoginController;
 import businessLogicService.loginBLService.LoginBLService;
 
