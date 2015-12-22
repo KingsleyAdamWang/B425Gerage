@@ -9,13 +9,5 @@ import vo.DocumentVO;
  *
  */
 public interface ApproveBLService {
-	public List<DocumentVO> getApproveList();
-	
-	public boolean passDocument(String id);
-	
-	public boolean updateDoccument(DocumentVO vo);
-	
-	public boolean pass(DocumentVO vo);
-	
-	public boolean fail(DocumentVO vo);
+
 }

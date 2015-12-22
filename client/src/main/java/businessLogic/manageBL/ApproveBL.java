@@ -66,10 +66,10 @@ public class ApproveBL {
 		return crBL.getUnapproved();
 	}
 	
-	public void setApproved(IncomeVO vo) throws RemoteException{
+	public void setApprovedIncome(IncomeVO vo) throws RemoteException{
 		crBL.approve(vo.transToPO());
 	}
-	public void setAllApproved() throws RemoteException{
+	public void setAllApprovedIncome() throws RemoteException{
 		crBL.approveAll();
 	}
 	
@@ -95,16 +95,16 @@ public class ApproveBL {
 		entryBL.approveAll();
 	}
 	
-	public List<IncomeVO> getUnapproveIncome(){
-		return moneyBL.getUnapproved();
-	}
+//	public List<IncomeVO> getUnapproveIncome(){
+//		return moneyBL.getUnapproved();
+//	}
 	
-	public void setApprovedIncome(IncomeVO vo) throws RemoteException{
-		moneyBL.approve(vo.transToPO());
-	}
-	public void setAllApprovedIncome() throws RemoteException{
-		moneyBL.approveAll();
-	}
+//	public void setApprovedIncome(IncomeVO vo) throws RemoteException{
+//		moneyBL.approve(vo.transToPO());
+//	}
+//	public void setAllApprovedIncome() throws RemoteException{
+//		moneyBL.approveAll();
+//	}
 	
 	public List<PaymentVO> getUnapprovePayment(){
 		return paymentBL.getUnapproved();

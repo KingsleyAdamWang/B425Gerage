@@ -40,18 +40,4 @@ public class TruckController implements TruckBLService {
 		return null;
 	}
 
-	public void add(String message) {
-
-	}
-
-	public void delete(String id) {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void end() {
-		// TODO Auto-generated method stub
-
-	}
-
 }

@@ -3,11 +3,12 @@ package businessLogicService.businessHallBLService;
 import vo.BussinessHallVo.TruckVO;
 
 public interface TruckBLService {
-	public TruckVO check(String message);
+	public TruckVO find(String id);
 
-	public void add(String message);
+	public String add(TruckVO vo);
 
-	public void delete(String id);
+	public String delete(TruckVO vo);
 
-	public void end();
+	public String modify(TruckVO vo);
+	
 }
