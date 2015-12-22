@@ -1,11 +1,17 @@
 package businessLogicService.intermediateBLService;
 
+import java.rmi.RemoteException;
+import java.util.List;
+
 import vo.IntermediateVo.TransferVO;
 
 public interface TransferBLService {
-	public void add(String id);
+	public  String add(TransferVO vo) throws RemoteException;
 
-	public void end();
+	public String delete(TransferVO vo) throws RemoteException;
 
-	public boolean submit(TransferVO vo);
+	public List<String> getList(String transferID) throws RemoteException;
+	
+	public List<String> getCities() throws RemoteException;
+	
 }

@@ -3,6 +3,7 @@ package businessLogicService.businessHallBLService;
 import java.rmi.RemoteException;
 
 import vo.BussinessHallVo.DeliveryVO;
+import vo.DeliverymanVo.SendVO;
 
 /**
  * 
@@ -19,6 +20,9 @@ public interface DeliveryBLService {
 	
 	public DeliveryVO search(String id) throws RemoteException;
 	
+	public String delete(DeliveryVO dVO) throws RemoteException;
+	
+	public SendVO getSendMessage(String id) throws RemoteException;
 	/**
 	 * 提交派件单操作
 	 * @param vo 传入一个派件单的vo对象
@@ -26,5 +30,4 @@ public interface DeliveryBLService {
 	 */
 	public String submit(DeliveryVO dVO) ;
 	
-	public String delete(DeliveryVO dVO) throws RemoteException;
 }

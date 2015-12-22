@@ -18,4 +18,7 @@ public interface ArrivalBLService {
 
 	public String delete(ArrivalVO arrivalVO) throws RemoteException ;
 	
+	public String modify(ArrivalVO arrivalVO) throws RemoteException;
+	
+	public String getInstitutionName() throws RemoteException;
 }
