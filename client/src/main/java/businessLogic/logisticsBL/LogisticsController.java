@@ -29,15 +29,10 @@ public class LogisticsController implements LogisticsBLService {
 	public String update(String ID,String message) throws RemoteException{
 		return logisticsBL.update(ID,message);
 	}
-	
-	public List<LogisticsVO> getLogisticsList(String id) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	public LogisticsVO getLogisticsMessage(String id) {
-		// TODO Auto-generated method stub
-		return null;
+	
+		return logisticsBL.getLogisticsMessage(id);
 	}
 
 

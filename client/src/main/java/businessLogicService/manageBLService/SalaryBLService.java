@@ -1,10 +1,11 @@
 package businessLogicService.manageBLService;
 
+import java.rmi.RemoteException;
+
 import vo.ManageVo.SalaryVO;
 
 public interface SalaryBLService {
-	public SalaryVO getUserSalary(String id);
+	public SalaryVO getSalary() throws RemoteException;
 	
-	public boolean updateUserSalary(String id,SalaryVO vo);
-	
+	public String modify(SalaryVO vo) throws RemoteException;
 }

@@ -25,10 +25,6 @@ public class LogisticsBL {
 		}
 	}
 	
-	public String add(LogisticsVO vo){
-		return null;
-	}
-	
 	//当快递员收货之后填写寄件单后调用这个方法
 	public String add(LogisticsPO po){
 		for(LogisticsPO temp: logisticsList){
@@ -56,7 +52,12 @@ public class LogisticsBL {
 		return "未找到对应快递单";
 	}
 	
-	public LogisticsPO getLogisticsMessage(String id){
+	public LogisticsVO getLogisticsMessage(String id){
+		for(LogisticsPO temp: logisticsList){
+			if(temp.getId().equals(id)){
+				return new LogisticsVO(temp); 
+			}
+		}
 		return null;
 	}
 }

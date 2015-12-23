@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 import vo.IntermediateVo.TransferVO;
+import vo.ManageVo.InstitutionVO;
 import businessLogicService.intermediateBLService.TransferBLService;
 
 public class TransferController implements TransferBLService{
@@ -28,17 +29,8 @@ public class TransferController implements TransferBLService{
 		return transferBL.getCities();
 	}
 	
-	public boolean submit(TransferVO vo) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	public void add(String id) {
-		// TODO Auto-generated method stub
-		
-	}
-	public void end() {
-		// TODO Auto-generated method stub
-		
+	public List<String> getInstitutionName(InstitutionVO vo) throws RemoteException{
+		return transferBL.getInstituitonName(vo.transToPO());
 	}
 
 }

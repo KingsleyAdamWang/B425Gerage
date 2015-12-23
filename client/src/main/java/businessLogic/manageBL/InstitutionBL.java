@@ -32,6 +32,10 @@ public class InstitutionBL {
 			e.printStackTrace();
 		}
 	}
+	
+	public List<InstitutionPO> getInsList(){
+		return insList;
+	}
 
 	public List<InstitutionVO> show(){
 		List<InstitutionVO> result =new ArrayList<InstitutionVO>();

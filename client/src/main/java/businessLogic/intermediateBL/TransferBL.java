@@ -6,12 +6,15 @@ import java.util.List;
 
 import po.intermidatePO.TransferPO;
 import po.inventoryPO.ShipmentPO;
+import po.managePO.InstitutionPO;
 import vo.IntermediateVo.TransferVO;
 import businessLogic.inventoryBL.ShipmentBL;
+import businessLogic.manageBL.InstitutionBL;
 import businessLogic.manageBL.StrategyBL;
 import client.ClientInitException;
 import client.RMIHelper;
 import dataService.intermidateDataService.TransferDataService;
+import enumSet.InsType;
 import enumSet.ReceiptsState;
 
 public class TransferBL {
@@ -70,6 +73,26 @@ public class TransferBL {
 	public List<String> getCities() throws RemoteException{
 		StrategyBL strategyBL=new StrategyBL();
 		return strategyBL.getCities();
+	}
+	
+	public List<String> getInstituitonName(InstitutionPO po) throws RemoteException{
+		List<String> result=new ArrayList<String>();
+		InstitutionBL insBL=new InstitutionBL();
+		List<InstitutionPO> insList=insBL.getInsList();
+//		for(InstitutionPO temp: insList){
+//			if(temp.getCity()==po.getCity()){
+//				if(temp.getInstitutionID()!=po.getInstitutionID()){
+//					result.add(temp.getName());
+//				}
+//			}
+//		}
+		for(InstitutionPO temp:insList){
+			if((temp.getName()!=po.getName())&&(temp.getType()==InsType.intermediate)){
+				result.add(temp.getName());
+			}
+		}
+		
+		return result;
 	}
 
 	public void approve(TransferPO po) throws RemoteException {

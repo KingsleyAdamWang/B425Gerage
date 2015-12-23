@@ -1,12 +1,14 @@
 package businessLogicService.logisticsBLService;
 
 import java.rmi.RemoteException;
-import java.util.List;
 
+import po.logisticsPO.LogisticsPO;
 import vo.LogisticsVo.LogisticsVO;
 
 public interface LogisticsBLService {
-	public List<LogisticsVO> getLogisticsList(String id) throws RemoteException;
+	public String add(LogisticsPO po);
+	
+	public String update(String ID,String message) throws RemoteException;
 	
 	public LogisticsVO getLogisticsMessage(String id);
 }
