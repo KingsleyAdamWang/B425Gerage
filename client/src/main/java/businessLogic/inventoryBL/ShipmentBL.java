@@ -31,7 +31,7 @@ public class ShipmentBL {
 	
 	public String add(ShipmentVO vo) throws RemoteException{
 		shipmentPO = vo.transToPO();
-		
+		InventoryBL invBL=new InventoryBL();
 		for(ShipmentPO temp: shipmentList){
 			if(temp.equals(shipmentPO)){
 				return "存在相同出库单号";
@@ -42,7 +42,7 @@ public class ShipmentBL {
 		
 		shipmentList.add(shipmentPO);
 		shipmentDS.add(shipmentPO);
-		return null;
+		return invBL.setFree(shipmentPO);
 	}
 	
 	public String delete(ShipmentVO vo) throws RemoteException{

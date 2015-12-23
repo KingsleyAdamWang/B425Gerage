@@ -37,15 +37,12 @@ public class EntryBL {
 				return "存在相同入库单号";
 			}
 		}
-		if(inventoryBL.add(entryPO)!=null){
-			return inventoryBL.add(entryPO);
-		}
 		
 		entryPO.setState(ReceiptsState.unapprove);
 		
 		entryList.add(entryPO);
 		entryDS.add(entryPO);
-		return null;
+		return inventoryBL.setBusy(entryPO);
 	}
 	
 	public String delete(EntryVO vo) throws RemoteException{
