@@ -7,8 +7,9 @@ import java.util.List;
 import po.intermidatePO.TransferPO;
 import po.inventoryPO.ShipmentPO;
 import po.managePO.InstitutionPO;
-import vo.DeliverymanVo.SendVO;
 import vo.IntermediateVo.TransferVO;
+import vo.InventoryVo.EntryVO;
+import vo.InventoryVo.ShipmentVO;
 import vo.ManageVo.InstitutionVO;
 import vo.ManageVo.PriceConstVO;
 import businessLogic.deliveryBL.SendBL;
@@ -55,6 +56,9 @@ public class TransferBL {
 		EntryBL entryBL=new EntryBL();
 		ShipmentBL shipmengBL=new ShipmentBL();
 		List<String> idList=po.getList();
+		List<EntryVO> entryVOList=new ArrayList<EntryVO>();
+		List<ShipmentVO> shipmentVOList=new ArrayList<ShipmentVO>();
+		
 	}
 
 	public String delete(TransferVO vo) throws RemoteException {
@@ -111,6 +115,11 @@ public class TransferBL {
 		}
 
 		return result;
+	}
+	public InstitutionVO getCurrentInstitution(String userID) throws RemoteException{
+		StaffBL staffBL=new StaffBL();
+		InstitutionBL institutionBL=new InstitutionBL();
+		return new InstitutionVO(institutionBL.searchInstitution(staffBL.getUser(userID).getInstitutionID()));
 	}
 
 	public double getFare(TransferPO transferPO) throws RemoteException {

@@ -133,7 +133,7 @@ public class InventoryBL {
 	
 
 	
-	public String adjust( InventoryPO to) throws RemoteException{
+	public String adjust( EntryPO po) throws RemoteException{
 		InventoryPO from=find(to.getInstitutionID());
 		
 		for(InventoryPO temp:invList){

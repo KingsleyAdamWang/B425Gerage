@@ -32,5 +32,9 @@ public class TransferController implements TransferBLService{
 	public List<InstitutionVO> getInstitutionList(String userID) throws RemoteException{
 		return transferBL.getInstituitonList(userID);
 	}
+	
+	public InstitutionVO getCurrentInstitution(String userID) throws RemoteException{
+		return transferBL.getCurrentInstitution(userID);
+	}
 
 }
