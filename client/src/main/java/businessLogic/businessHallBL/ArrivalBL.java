@@ -63,7 +63,7 @@ public class ArrivalBL {
 		// 第一次的TransferID就是装车单，这些TransferID需要人工填入
 		List<String> goodsID = getIDList(po.getTransferId());
 		businessLogic.manageBL.InstitutionBL insBL = new businessLogic.manageBL.InstitutionBL();
-		String insName = insBL.searchInstitution(po.getInstitutionID())
+		String insName = insBL.getInstitutionVO(po.getInstitutionID())
 				.getName();
 		updateLogistics(goodsID, insName);
 		return null;
@@ -126,7 +126,7 @@ public class ArrivalBL {
 		String result = null;
 
 		InstitutionBL institutionBL = new InstitutionBL();
-		result = institutionBL.searchInstitution(
+		result = institutionBL.getInstitutionVO(
 				MainFrame.getUser().getInstitutionID()).getName();
 		return result;
 	}

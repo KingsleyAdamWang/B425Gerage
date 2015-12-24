@@ -9,6 +9,7 @@ import po.managePO.InstitutionPO;
 import vo.InventoryVo.ShipmentVO;
 import vo.ManageVo.InstitutionVO;
 import businessLogic.manageBL.InstitutionBL;
+import businessLogic.manageBL.StaffBL;
 import client.ClientInitException;
 import client.RMIHelper;
 import dataService.inventoryDataService.ShipmentDataService;
@@ -84,23 +85,28 @@ public class ShipmentBL {
 		return new ShipmentVO(shipmentDS.find(ID));
 	}
 	
-	public List<InstitutionVO> getInstitutionList(InstitutionPO po) throws RemoteException{
-		List<InstitutionVO> result=new ArrayList<InstitutionVO>();
-		InstitutionBL insBL=new InstitutionBL();
-		List<InstitutionPO> insList=insBL.getInsList();
-		for(InstitutionPO temp:insList){
-			if(temp.getName()!=po.getName()&&temp.getType()==InsType.intermediate){
+	public List<InstitutionVO> getInstitutionList(String userID)
+			throws RemoteException {
+		List<InstitutionVO> result = new ArrayList<InstitutionVO>();
+		InstitutionBL insBL = new InstitutionBL();
+		StaffBL staffBL=new StaffBL();
+		String institutionID=(staffBL.getUser(userID).getInstitutionID());
+		InstitutionPO institutionPO=insBL.searchInstitution(institutionID);
+		List<InstitutionPO> insList = insBL.getInsList();
+		for (InstitutionPO temp : insList) {
+			if (temp.getCity() == institutionPO.getCity()&&temp.getInstitutionID() != institutionPO.getInstitutionID()) {
+					result.add(new InstitutionVO(temp));
+			}
+		}
+		for (InstitutionPO temp : insList) {
+			if ((temp.getName() != institutionPO.getName())
+					&& (temp.getType() == InsType.intermediate)) {
 				result.add(new InstitutionVO(temp));
 			}
 		}
-		for(InstitutionPO temp:insList){
-			if(temp.getName()!=po.getName()&&temp.getCity()==po.getCity()){
-				result.add(new InstitutionVO(temp));
-			}
-		}
-		
+
 		return result;
-	} 
+	}
 
 	public void approve(ShipmentPO po) throws RemoteException {
 		shipmentDS.approval(po);

@@ -42,7 +42,7 @@ public class InstitutionController implements InstitutionBLService {
 	}
 	
 	public InstitutionVO searchInstitution(String institutionID){
-		return insBL.searchInstitution(institutionID);
+		return insBL.getInstitutionVO(institutionID);
 	}
 	
 	public InventoryVO searchInventory(String inventoryID) throws RemoteException{

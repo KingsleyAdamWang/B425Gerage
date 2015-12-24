@@ -35,7 +35,7 @@ public class shipmentController implements ShipmentBLService {
 		return shipmentBL.find(id);
 	}
 	
-	public List<InstitutionVO> getInstitutionList(InstitutionVO vo) throws RemoteException{
-		return shipmentBL.getInstitutionList(vo.transToPO());
+	public List<InstitutionVO> getInstitutionList(String userID) throws RemoteException{
+		return shipmentBL.getInstitutionList(userID);
 	}
 }

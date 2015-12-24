@@ -206,7 +206,17 @@ public class InstitutionBL {
 		return "未找到对应PO";
 	}
 	
-	public InstitutionVO searchInstitution(String id){
+	public InstitutionPO searchInstitution(String id){
+		for(InstitutionPO temp : insList){
+			if(temp.getInstitutionID().equals(id)){
+				return temp;
+			}
+		}
+		//未查找到对应VO
+		return null;
+	}
+	
+	public InstitutionVO getInstitutionVO(String id){
 		for(InstitutionPO temp : insList){
 			if(temp.getInstitutionID().equals(id)){
 				return new InstitutionVO(temp);

@@ -63,7 +63,7 @@ public class ArrivalBL {
 			goodsID=getIDListFromTransfer(po.getTransferId());
 		}
 		businessLogic.manageBL.InstitutionBL insBL=new businessLogic.manageBL.InstitutionBL();
-		String insName=insBL.searchInstitution(po.getInstitutionID()).getName();
+		String insName=insBL.getInstitutionVO(po.getInstitutionID()).getName();
 		updateLogisticsFromB(goodsID,insName);
 		return null;
 	}
@@ -137,7 +137,7 @@ public class ArrivalBL {
 		String result=null;
 		
 		InstitutionBL institutionBL=new InstitutionBL();
-		result=institutionBL.searchInstitution(MainFrame.getUser().getInstitutionID()).getName();
+		result=institutionBL.getInstitutionVO(MainFrame.getUser().getInstitutionID()).getName();
 		return result;
 	}
 	

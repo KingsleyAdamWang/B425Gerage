@@ -104,7 +104,7 @@ public class EntruckBL {
 
 	private InstitutionVO getInsByID(String id) throws RemoteException {
 		InstitutionBL institutionBL = new InstitutionBL();
-		return institutionBL.searchInstitution(id);
+		return institutionBL.getInstitutionVO(id);
 	}
 
 	public List<String> getDriverNames(String id, String name)
@@ -160,7 +160,7 @@ public class EntruckBL {
 		double weight = 0;
 		double distance = 30;
 		SendBL sendBL = new SendBL();
-		List<SendVO> sendVOList = new ArrayList<SendVO>();
+//		List<SendVO> sendVOList = new ArrayList<SendVO>();
 		for (String temp : sendList) {
 			if (sendBL.getSend(temp) != null) {
 				weight = weight + sendBL.getSend(temp).weight;
