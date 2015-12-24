@@ -13,6 +13,7 @@ import client.ClientInitException;
 import client.RMIHelper;
 import dataService.inventoryDataService.ShipmentDataService;
 import enumSet.InsType;
+import enumSet.InventoryArea;
 import enumSet.ReceiptsState;
 
 public class ShipmentBL {
@@ -77,6 +78,7 @@ public class ShipmentBL {
 //		return result;
 		return shipmentDS.getListByIns(institutionID);
 	}
+	
 	
 	public ShipmentVO find(String ID) throws RemoteException{
 		return new ShipmentVO(shipmentDS.find(ID));

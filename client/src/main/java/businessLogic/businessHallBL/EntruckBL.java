@@ -10,6 +10,7 @@ import po.managePO.InstitutionPO;
 import vo.BussinessHallVo.EntruckVO;
 import vo.DeliverymanVo.SendVO;
 import vo.ManageVo.InstitutionVO;
+import vo.ManageVo.PriceConstVO;
 import businessLogic.deliveryBL.SendBL;
 import businessLogic.manageBL.InstitutionBL;
 import businessLogic.manageBL.StrategyBL;
@@ -152,8 +153,10 @@ public class EntruckBL {
 	}
 
 	public double getFare(List<String> sendList) throws RemoteException {
+		StrategyBL strategyBL=new StrategyBL();
+		PriceConstVO priceVO=strategyBL.getVO();
 		double fare = 0;
-		double tCoeff = 0;
+		double tCoeff = priceVO.getCarCost();
 		double weight = 0;
 		double distance = 30;
 		SendBL sendBL = new SendBL();
@@ -175,7 +178,7 @@ public class EntruckBL {
 		// }
 		// }
 
-		fare = 30 * 2 * weight;
+		fare = 30 * tCoeff * weight/1000;
 		return fare;
 	}
 

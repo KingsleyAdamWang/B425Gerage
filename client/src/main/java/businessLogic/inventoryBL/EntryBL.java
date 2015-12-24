@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import po.inventoryPO.EntryPO;
-import po.inventoryPO.InventoryPO;
 import vo.InventoryVo.EntryVO;
 import client.ClientInitException;
 import client.RMIHelper;
 import dataService.inventoryDataService.EntryDataService;
+import enumSet.InventoryArea;
 import enumSet.ReceiptsState;
 
 public class EntryBL {
@@ -64,6 +64,17 @@ public class EntryBL {
 	
 	public List<EntryPO> getEntryList(String institutionID) throws RemoteException{
 		return entryDS.getEntryList(institutionID);
+	}
+	
+	public List<EntryPO> getEntryList(String institutionID,InventoryArea area) throws RemoteException{
+		List<EntryPO> entryList=getEntryList(institutionID);
+		for(EntryPO temp:entryList){
+			if(temp.getArea()!=area){
+				entryList.remove(temp);
+			}
+		}
+		
+		return entryList;
 	}
 	
 	public EntryPO find(String ID) throws RemoteException{
