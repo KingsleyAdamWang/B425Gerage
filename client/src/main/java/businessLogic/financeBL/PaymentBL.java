@@ -5,16 +5,22 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+
+
+
 //import po.PaymentPO;
 import po.financePO.PaymentPO;
+import po.managePO.SalaryPO;
 import util.DateUtil;
 import vo.AdminVo.UserVO;
 import vo.FinanceVo.PaymentVO;
+import businessLogic.manageBL.SalaryBL;
 import businessLogic.manageBL.StaffBL;
 //import vo.PaymentVO;
 import client.ClientInitException;
 import client.RMIHelper;
 import dataService.financeDataService.PaymentDataService;
+import enumSet.Position;
 import enumSet.ReceiptsState;
 
 public class PaymentBL {
@@ -74,15 +80,32 @@ public class PaymentBL {
 		int inventory=0;
 		int financeH=0;
 		int financeL=0;
-		int manager=0;
+		int mananger=0;
 		int admin=0;
+		
 		for(UserVO temp:userList){
-			switch(temp.getWork()){
-			case()
+			Position position=temp.getWork();
+			
+			switch(position.getPositionString()){
+			case("快递员"):delivery++;break;
+			case("营业厅业务人员"):businessHall++;break;
+			case("中转中心业务人员"):intermidate++;break;
+			case("中转中心仓库管理员"):inventory++;break;
+			case("财务人员（高）"):financeH++;break;
+			case("财务人员（低）"):financeL++;break;
+			case("总经理"):mananger++;break;
 			}
 		}
-		
-		
+		SalaryBL salaryBL=new SalaryBL();
+		SalaryPO salaryPO= salaryBL.getSalaryPO();
+		result=delivery*salaryBL.getSalaryByWork("快递员")+
+				businessHall*salaryBL.getSalaryByWork("营业厅业务人员")+
+				intermidate*salaryBL.getSalaryByWork("中转中心业务人员")+
+				inventory*salaryBL.getSalaryByWork("中转中心仓库管理员")+
+				financeH*salaryBL.getSalaryByWork("财务人员（高）")+
+				financeL*salaryBL.getSalaryByWork("财务人员（低）")+
+				mananger*salaryBL.getSalaryByWork("总经理");
+	
 		return result;
 	}
 

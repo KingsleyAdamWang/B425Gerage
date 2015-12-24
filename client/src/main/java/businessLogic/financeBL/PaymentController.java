@@ -43,5 +43,9 @@ public class PaymentController implements PaymentBLService{
 				MainFrame.getUser().getIdentityID(), "查找时间段之间的付款单")));
 		return paymentBL.betweenDate(start, end);
 	}
+	
+	public double getSalaryTotal() throws RemoteException{
+		return paymentBL.getSalaryTotal();
+	}
 
 }
