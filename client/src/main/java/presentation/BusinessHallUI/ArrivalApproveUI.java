@@ -8,6 +8,7 @@ import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -16,6 +17,7 @@ import presentation.MainFrame;
 import presentation.ManageUI.ApproveChooseUI;
 import vo.BussinessHallVo.ArrivalVO;
 import businessLogic.manageBL.ApproveBL;
+import client.ClientInitException;
 import client.Main;
 
 public class ArrivalApproveUI extends JPanel {
@@ -80,19 +82,49 @@ public class ArrivalApproveUI extends JPanel {
 			case 0:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						Main.frame.setView(new ArrivalModifyUI());
+						int index = table.getSelectedRow();
+						if (index == -1 || (vData.isEmpty() && index == 0)) {
+							JOptionPane.showMessageDialog(null, "请选择一个单据", "",
+									JOptionPane.ERROR_MESSAGE);
+							return;
+						}
+						try {
+							Main.frame.setView(new ArrivalModifyUI(list
+									.get(index)));
+						} catch (RemoteException | ClientInitException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 					}
 				});
 				break;
 			case 1:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						int index = table.getSelectedRow();
+						if (index == -1 || (vData.isEmpty() && index == 0)) {
+							JOptionPane.showMessageDialog(null, "请选择一个单据", "",
+									JOptionPane.ERROR_MESSAGE);
+							return;
+						}
+						try {
+							ac.setApprovedArrival(list.get(index));
+						} catch (RemoteException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 					}
 				});
 				break;
 			case 2:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						try {
+							ac.setAllApprovedArrival();
+						} catch (RemoteException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 					}
 				});
 				break;

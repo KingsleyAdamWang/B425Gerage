@@ -20,7 +20,7 @@ public class LoginBL {
 			RMIHelper.initUserDataService();
 			UserDS = RMIHelper.getUserDataService();
 			list = UserDS.getUsers();
-
+			System.out.println(list.size());
 		} catch (ClientInitException e) {
 			e.printStackTrace();
 		}

@@ -86,6 +86,12 @@ public class YYTUI extends JPanel {
 			case 1:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						try {
+							Main.frame.setView(new DeliveryUI(), "填写派件单");
+						} catch (RemoteException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 					}
 				});
 				break;

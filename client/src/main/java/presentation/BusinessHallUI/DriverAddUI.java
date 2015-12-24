@@ -119,7 +119,8 @@ public class DriverAddUI extends JPanel {
 		String telNumber = field[5].getText();
 		String institutionID = field[0].getText();
 		Date driveLicence = DateUtil.stringToDate(field[7].getText());
-		return new DriverVO(id,name,IDnumber,birth,sex,telNumber,institutionID,driveLicence);
+		return new DriverVO(id, name, IDnumber, birth, sex, telNumber,
+				institutionID, driveLicence);
 	}
 
 	public static void main(String[] args) {

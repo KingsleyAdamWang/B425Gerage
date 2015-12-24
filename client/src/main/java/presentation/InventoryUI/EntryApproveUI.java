@@ -8,10 +8,12 @@ import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import presentation.IntermediateUI.TransferModifyUI;
 import presentation.ManageUI.ApproveChooseUI;
 import util.DateUtil;
 import vo.BussinessHallVo.DeliveryVO;
@@ -72,18 +74,43 @@ public class EntryApproveUI extends JPanel {
 			case 0:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						int index = table.getSelectedRow();
+						if (index == -1 || (vData.isEmpty() && index == 0)) {
+							JOptionPane.showMessageDialog(null, "请选择一个单据", "",
+									JOptionPane.ERROR_MESSAGE);
+							return;
+						}
+						Main.frame.setView(new EntryModifyUI(list.get(index)));
 					}
 				});
 				break;
 			case 1:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						int index = table.getSelectedRow();
+						if (index == -1 || (vData.isEmpty() && index == 0)) {
+							JOptionPane.showMessageDialog(null, "请选择一个单据", "",
+									JOptionPane.ERROR_MESSAGE);
+							return;
+						}
+						try {
+							ac.setApprovedEntry(list.get(index));
+						} catch (RemoteException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 					}
 				});
 				break;
 			case 2:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						try {
+							ac.setAllApprovedEntry();
+						} catch (RemoteException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 					}
 				});
 				break;

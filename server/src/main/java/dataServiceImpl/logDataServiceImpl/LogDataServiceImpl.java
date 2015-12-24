@@ -34,7 +34,6 @@ public class LogDataServiceImpl extends UnicastRemoteObject implements
 			String temp;
 			while ((temp = br.readLine()) != null)
 				logList.add(new LogPO(temp));
-
 			br.close();
 		} catch (IOException e) {
 
@@ -60,7 +59,8 @@ public class LogDataServiceImpl extends UnicastRemoteObject implements
 
 	}
 
-	public List<LogPO> getLogList() {
+	public List<LogPO> getLogList() throws RemoteException{
+		System.out.println(logList.size()+"!!");
 		return logList;
 	}
 
@@ -73,8 +73,8 @@ public class LogDataServiceImpl extends UnicastRemoteObject implements
 			for(LogPO potemp: logList){
 			fw.append(potemp.toString());
 			fw.flush();
-			fw.close();
 			}
+			fw.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

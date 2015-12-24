@@ -41,8 +41,9 @@ public class LogUI extends JPanel {
 
 	public LogUI() throws RemoteException {
 		this.lc = new LogController();
-		this.initComponents();
+		vData = new Vector<Vector<String>>();
 		this.initList();
+		this.initComponents();
 		this.validate();
 	}
 
@@ -54,7 +55,6 @@ public class LogUI extends JPanel {
 		for (int i = 0; i < 3; i++) {
 			vColumns.add(info[i]);
 		}
-		vData = new Vector<Vector<String>>();
 
 		table = new JTable(vData, vColumns) {
 			private static final long serialVersionUID = 1L;
@@ -151,6 +151,8 @@ public class LogUI extends JPanel {
 
 		sp.getViewport().removeAll();
 		sp.getViewport().add(table);
+		table.repaint();
+		sp.repaint();
 		this.repaint();
 	}
 
@@ -164,6 +166,8 @@ public class LogUI extends JPanel {
 
 		sp.getViewport().removeAll();
 		sp.getViewport().add(table);
+		table.repaint();
+		sp.repaint();
 		this.repaint();
 	}
 

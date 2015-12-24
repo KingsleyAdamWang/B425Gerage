@@ -15,6 +15,6 @@ public interface LogBLService {
 	
 	public String add(LogVO vo) throws RemoteException;
 	
-	public List<LogVO> getLogList(); 
+//	public List<LogVO> getLogList(); 
 
 }

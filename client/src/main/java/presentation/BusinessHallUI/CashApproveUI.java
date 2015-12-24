@@ -1,4 +1,4 @@
-package presentation.DeliverymanUI;
+package presentation.BusinessHallUI;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,25 +13,36 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-import presentation.BusinessHallUI.ArrivalModifyUI;
+import presentation.MainFrame;
 import presentation.ManageUI.ApproveChooseUI;
-import vo.DeliverymanVo.ReceiveVO;
-import businessLogic.manageBL.ApproveController;
+import util.DateUtil;
+import vo.BussinessHallVo.ArrivalVO;
+import vo.FinanceVo.IncomeVO;
+import businessLogic.manageBL.ApproveBL;
 import client.ClientInitException;
 import client.Main;
 
-public class ReceiveApproveUI extends JPanel {
+public class CashApproveUI extends JPanel {
 	private static final long serialVersionUID = 1L;
 
-	private ApproveController ac;
+	// 一会儿删↓
+	static MainFrame f;
+	// 一会儿删↑
+
+	private ApproveBL ac;
 	private JButton[] funcButton;
 	private JTable table;
 	private Vector<Vector<String>> vData;
 	private JScrollPane scrollPane;
-	private List<ReceiveVO> list;
+	private List<IncomeVO> list;
 
-	public ReceiveApproveUI() throws RemoteException {
-		ac = new ApproveController();
+	public CashApproveUI() {
+		try {
+			ac = new ApproveBL();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		this.initComponents();
 		this.initList();
 		this.validate();
@@ -40,7 +51,7 @@ public class ReceiveApproveUI extends JPanel {
 	private void initComponents() {
 		this.setLayout(null);
 
-		String[] info = { "单据编号", "填写人编号", "填写日期" };
+		String[] info = { "快递员编号", "收款金额", "收款日期" };
 		Vector<String> vColumns = new Vector<String>();
 		for (int i = 0; i < 3; i++) {
 			vColumns.add(info[i]);
@@ -80,8 +91,7 @@ public class ReceiveApproveUI extends JPanel {
 							return;
 						}
 						try {
-							Main.frame.setView(new ReceiveModifyUI(list
-									.get(index)));
+							Main.frame.setView(new CashModifyUI(list.get(index)));
 						} catch (RemoteException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
@@ -99,7 +109,7 @@ public class ReceiveApproveUI extends JPanel {
 							return;
 						}
 						try {
-							ac.setApprovedReceive(list.get(index));
+							ac.setApprovedIncome(list.get(index));
 						} catch (RemoteException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
@@ -111,7 +121,7 @@ public class ReceiveApproveUI extends JPanel {
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						try {
-							ac.setAllApprovedReceive();
+							ac.setAllApprovedIncome();
 						} catch (RemoteException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
@@ -131,19 +141,19 @@ public class ReceiveApproveUI extends JPanel {
 		}
 	}
 
-	private Vector<String> toVector(ReceiveVO vo) {
+	private Vector<String> toVector(IncomeVO vo) {
 		Vector<String> str = new Vector<String>();
-		str.add(vo.id);
-		str.add(vo.userID);
-		str.add(vo.d);
+		str.add(vo.kdyID);
+		str.add(vo.income + "");
+		str.add(DateUtil.dateToString(vo.date));
 		return str;
 	}
 
 	private void initList() {
 		vData.clear();
-		list = ac.getUnapproveReceive();
+		list = ac.getUnapprovedIncome();
 
-		for (ReceiveVO vo : list) {
+		for (IncomeVO vo : list) {
 			vData.add(toVector(vo));
 		}
 		scrollPane.getViewport().removeAll();

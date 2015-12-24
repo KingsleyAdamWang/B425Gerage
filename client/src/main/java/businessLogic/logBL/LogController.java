@@ -29,8 +29,8 @@ public class LogController implements LogBLService {
 		return logBL.add(vo);
 	}
 	
-	public List<LogVO> getLogList(){
-		return null;
-	}
+//	public List<LogVO> getLogList(){
+//		return null;
+//	}
 
 }

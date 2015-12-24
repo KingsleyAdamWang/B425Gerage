@@ -409,6 +409,9 @@ public class RMIHelper {
 	}
 
 	public static void applyConfig(String ip , String port){
+		IP= ip;
+		PORT = port;
+		urlPrefix = "rmi://" + IP + ":"+PORT+ "/";
 		try {
 			FileWriter fw = new FileWriter(config);
 			fw.write("");

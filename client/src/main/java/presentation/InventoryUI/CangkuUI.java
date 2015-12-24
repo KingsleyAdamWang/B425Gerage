@@ -76,18 +76,26 @@ public class CangkuUI extends JPanel {
 			case 0:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						Main.frame.setView(new KucunChooseUI(), "库存管理");
 					}
 				});
 				break;
 			case 1:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						Main.frame.setView(new EntryUI(), "填写入库单");
 					}
 				});
 				break;
 			case 2:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						try {
+							Main.frame.setView(new ShipmentUI(), "填写出库单");
+						} catch (RemoteException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 					}
 				});
 				break;

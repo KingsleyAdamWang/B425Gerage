@@ -33,6 +33,7 @@ public class EntryUI extends JPanel {
 	private JLabel[] label;
 	private JTextField[] field;
 	private JComboBox<String> box;
+	private JComboBox<String> destination;
 	private JButton submitBtn;
 	private JButton returnBtn;
 

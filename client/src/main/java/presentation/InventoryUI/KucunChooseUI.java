@@ -32,7 +32,7 @@ public class KucunChooseUI extends JPanel {
 		button = new JButton[4];
 		for (int i = 0; i < 4; i++) {
 			button[i] = new JButton(title[i]);
-			button[i].setBounds(300, 70 + 70 * i, 200, 50);
+			button[i].setBounds(300, 100 + 100 * i, 200, 50);
 			switch (i) {
 			case 0:
 				button[i].addActionListener(new ActionListener() {

@@ -2,15 +2,19 @@ package presentation.BusinessHallUI;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import presentation.MainFrame;
-import client.Main;
+import util.DateUtil;
+import vo.BussinessHallVo.TruckVO;
 import businessLogic.businessHallBL.TruckController;
+import client.Main;
 
 public class TruckUI extends JPanel {
 	// 一会儿删↓
@@ -19,7 +23,8 @@ public class TruckUI extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private TruckController tc;
-	private final String[] labelName = { "机构编号", "车辆编号", "车牌号", "开始服役时间","服役年限" };
+	private final String[] labelName = { "机构编号", "车辆编号", "车牌号", "开始服役时间",
+			"服役年限" };
 	private JLabel[] label;
 	private JTextField[] field;
 	private JButton submitBtn;
@@ -46,16 +51,25 @@ public class TruckUI extends JPanel {
 		}
 		field[0].setText(MainFrame.getUser().getIdentityID());
 		field[0].setEditable(false);
-		
-		submitBtn = new JButton("提交");
+
+		submitBtn = new JButton("添加");
 		submitBtn.setBounds(200, 350, 100, 30);
 		this.add(submitBtn);
 		returnBtn = new JButton("返回");
 		returnBtn.setBounds(500, 350, 100, 30);
 		this.add(returnBtn);
-		
+
 		submitBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String result;
+				result = tc.add(getVO());
+				if (result != null) {
+					JOptionPane.showMessageDialog(null, result, "",
+							JOptionPane.ERROR_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(null, "添加成功", "",
+							JOptionPane.INFORMATION_MESSAGE);
+				}
 			}
 		});
 
@@ -65,7 +79,12 @@ public class TruckUI extends JPanel {
 			}
 		});
 	}
-	
+
+	private TruckVO getVO() {
+		return new TruckVO(field[0].getText(), field[1].getText(),
+				field[2].getText(), DateUtil.stringToDate(field[3].getText()));
+	}
+
 	public static void main(String[] args) {
 		f = new MainFrame();
 		TruckUI view = new TruckUI();

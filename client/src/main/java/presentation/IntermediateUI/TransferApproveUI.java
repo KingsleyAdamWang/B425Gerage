@@ -8,15 +8,18 @@ import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import presentation.BusinessHallUI.ArrivalModifyUI;
 import presentation.ManageUI.ApproveChooseUI;
 import util.DateUtil;
 import vo.BussinessHallVo.DeliveryVO;
 import vo.IntermediateVo.TransferVO;
 import businessLogic.manageBL.ApproveController;
+import client.ClientInitException;
 import client.Main;
 
 public class TransferApproveUI extends JPanel {
@@ -72,18 +75,49 @@ public class TransferApproveUI extends JPanel {
 			case 0:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						int index = table.getSelectedRow();
+						if (index == -1 || (vData.isEmpty() && index == 0)) {
+							JOptionPane.showMessageDialog(null, "请选择一个单据", "",
+									JOptionPane.ERROR_MESSAGE);
+							return;
+						}
+						try {
+							Main.frame.setView(new TransferModifyUI(list
+									.get(index)));
+						} catch (RemoteException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 					}
 				});
 				break;
 			case 1:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						int index = table.getSelectedRow();
+						if (index == -1 || (vData.isEmpty() && index == 0)) {
+							JOptionPane.showMessageDialog(null, "请选择一个单据", "",
+									JOptionPane.ERROR_MESSAGE);
+							return;
+						}
+						try {
+							ac.setApprovedTransfer(list.get(index));
+						} catch (RemoteException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 					}
 				});
 				break;
 			case 2:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						try {
+							ac.setAllApprovedTransfer();
+						} catch (RemoteException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 					}
 				});
 				break;
