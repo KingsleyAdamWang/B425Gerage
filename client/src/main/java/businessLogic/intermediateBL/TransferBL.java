@@ -115,7 +115,7 @@ public class TransferBL {
 		double weight = 0;
 		double distance =0;
 		SendBL sendBL = new SendBL();
-		List<SendVO> sendVOList = new ArrayList<SendVO>();
+//		List<SendVO> sendVOList = new ArrayList<SendVO>();
 		for (String temp : sendList) {
 			if (sendBL.getSend(temp) != null) {
 				weight = weight + sendBL.getSend(temp).weight;
@@ -123,14 +123,16 @@ public class TransferBL {
 		}
 
 		if (transferPO.getType()==TransportType.PLANE) {
-			tCoeff = 20;
+			tCoeff = priceVO.getPlaneCost();
 		} else {
 			if (transferPO.getType()==TransportType.TRAIN) {
-				tCoeff = 0.2;
+				tCoeff = priceVO.getTrainCost();
 			} else {
-				tCoeff = 2;
+				tCoeff = priceVO.getCarCost();
 			}
 		}
+		
+		distance=strategyBL.getDistance(transferPO.getDeparture(), transferPO.getDestination());
 		fare = distance * tCoeff * weight/1000;
 		return fare;
 	}
