@@ -68,9 +68,18 @@ public class PaymentBL {
 		double result=0;
 		StaffBL staffBL=new StaffBL();
 		List<UserVO> userList =staffBL.getUsers();
-		int 
+		int delivery=0;
+		int businessHall=0;
+		int intermidate=0;
+		int inventory=0;
+		int financeH=0;
+		int financeL=0;
+		int manager=0;
+		int admin=0;
 		for(UserVO temp:userList){
-			
+			switch(temp.getWork()){
+			case()
+			}
 		}
 		
 		

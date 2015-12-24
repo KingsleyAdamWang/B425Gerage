@@ -11,7 +11,7 @@ import enumSet.InventoryArea;
 public class InventoryController implements InventoryBLService {
 	private InventoryBL invBL;
 	
-	InventoryController() throws RemoteException{
+	public InventoryController() throws RemoteException{
 		invBL=new InventoryBL();
 	}
 
