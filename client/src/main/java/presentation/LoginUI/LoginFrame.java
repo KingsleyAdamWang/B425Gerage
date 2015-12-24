@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.rmi.RemoteException;
 
 import javax.swing.ImageIcon;
@@ -82,9 +84,13 @@ public class LoginFrame {
 
 		jTextField = new JTextField(20);
 		jPasswordField = new JPasswordField(20);
+////
+//		Reader   reader   =new   InputStreamReader( 
+//		        getClass().getResourceAsStream("/picture/Environment.ini")); 
+		iconB=new   ImageIcon(getClass().getResource("/picture/setting_black.png")); 
 
-		iconB = new ImageIcon("src/main/java/picture/setting_black.png");
-		iconG = new ImageIcon("src/main/java/picture/setting_gray.png");
+		//iconB = new ImageIcon("src/main/java/picture/setting_black.png");
+		iconG = new ImageIcon(getClass().getResource("/picture/setting_gray.png"));
 		// icon = new
 		// ImageIcon("C:\\Users\\Kradness\\Documents\\B425Gerage\\client\\src\\main\\java\\picture\\setting.png");
 		setting = new JLabel(iconG);

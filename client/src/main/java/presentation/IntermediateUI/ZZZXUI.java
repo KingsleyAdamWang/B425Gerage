@@ -1,4 +1,4 @@
-package presentation.FinanceUI;
+package presentation.IntermediateUI;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,18 +13,23 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import presentation.MainFrame;
+import presentation.BusinessHallUI.ArrivalUI;
+import presentation.BusinessHallUI.CashRegisterUI;
+import presentation.BusinessHallUI.DriverAddUI;
+import presentation.BusinessHallUI.EntruckUI;
+import presentation.BusinessHallUI.TruckUI;
 import vo.AdminVo.UserVO;
 import client.ClientInitException;
 import client.Main;
 
-public class FinanceHighUI extends JPanel {
+public class ZZZXUI extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	private JButton[] funcButton;
 	private JTable table;
 	private DefaultTableModel infoListModel;
 
-	public FinanceHighUI() {
+	public ZZZXUI() {
 		this.initComponents();
 		this.validate();
 	}
@@ -51,31 +56,35 @@ public class FinanceHighUI extends JPanel {
 			}
 		};
 		table.setBorder(BorderFactory.createEtchedBorder());
-		// table.setRowHeight(0, 35);
 		table.setRowHeight(30);
 		table.setCellSelectionEnabled(false);
-		// table.setBounds(50, 50, 700, 70);
-		// for (int i = 0; i < 5; i++) {
-		// table.setValueAt(info[i], 0, i);
-		// }
 
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.getViewport().add(table);
 		scrollPane.setBounds(50, 50, 700, 58);
 		table.setFillsViewportHeight(true);
 		this.add(scrollPane);
-		// this.add(table);
 
 		funcButton = new JButton[6];
-		final String[] title = { "期初建账", "收款单管理", "付款单管理", "统计报表", "账户管理",
-				"日志查询" };
+		final String[] title = { "填写到达单", "填写派件单", "填写装车单", "填写收款单", "车辆信息管理",
+				"司机信息管理" };
 		for (int i = 0; i < 6; i++) {
 			funcButton[i] = new JButton(title[i]);
-			funcButton[i].setBounds(300, 200 + 100 * (i % 3), 200, 50);
+			funcButton[i].setBounds(150 + (i % 2) * 300, 200 + 100 * (i / 2),
+					200, 50);
 			switch (i) {
 			case 0:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						try {
+							Main.frame.setView(new ArrivalUI(), "填写到达单");
+						} catch (RemoteException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (ClientInitException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 					}
 				});
 				break;
@@ -88,26 +97,41 @@ public class FinanceHighUI extends JPanel {
 			case 2:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						try {
+							Main.frame.setView(new EntruckUI(), "填写装车单");
+						} catch (RemoteException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (ClientInitException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 					}
 				});
 				break;
 			case 3:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						try {
+							Main.frame.setView(new CashRegisterUI(), "填写到达单");
+						} catch (RemoteException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 					}
 				});
 				break;
 			case 4:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						try {
-							Main.frame.setView(new AccountUI(), title[3]);
-						} catch (RemoteException e1) {
-							e1.printStackTrace();
-						} catch (ClientInitException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
+						Main.frame.setView(new TruckUI(), "车辆信息管理");
+					}
+				});
+				break;
+			case 5:
+				funcButton[i].addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						Main.frame.setView(new DriverAddUI(), "司机信息管理");
 					}
 				});
 				break;

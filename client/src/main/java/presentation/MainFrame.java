@@ -12,6 +12,7 @@ import presentation.BusinessHallUI.YYTUI;
 import presentation.DeliverymanUI.KuaidiyuanUI;
 import presentation.FinanceUI.FinanceHighUI;
 import presentation.FinanceUI.FinanceLowUI;
+import presentation.IntermediateUI.ZZZXUI;
 import presentation.InventoryUI.CangkuUI;
 import presentation.ManageUI.ManagerUI;
 import vo.AdminVo.UserVO;
@@ -81,7 +82,7 @@ public class MainFrame extends JFrame {
 		} else if (str.equals("营业厅业务人员")) {
 			Main.frame.setView(new YYTUI());
 		} else if (str.equals("中转中心业务人员")) {
-			Main.frame.setView(new YYTUI());
+			Main.frame.setView(new ZZZXUI());
 		} else if (str.equals("中转中心仓库管理员")) {
 			Main.frame.setView(new CangkuUI());
 		} else if (str.equals("财务人员（高）")) {

@@ -1,4 +1,4 @@
-package presentation.BusinessHallUI;
+package presentation.InventoryUI;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,31 +14,28 @@ import javax.swing.JTable;
 
 import presentation.MainFrame;
 import presentation.ManageUI.ApproveChooseUI;
-import vo.BussinessHallVo.ArrivalVO;
-import businessLogic.manageBL.ApproveBL;
+import util.DateUtil;
+import vo.DeliverymanVo.SendVO;
+import vo.InventoryVo.EntryVO;
+import businessLogic.inventoryBL.InventoryController;
+import businessLogic.manageBL.ApproveController;
 import client.Main;
+import enumSet.InventoryArea;
 
-public class ArrivalApproveUI extends JPanel {
+public class KucunguanliUI extends JPanel {
 	private static final long serialVersionUID = 1L;
 
-	// 一会儿删↓
-	static MainFrame f;
-	// 一会儿删↑
-
-	private ApproveBL ac;
+	private InventoryController ic;
 	private JButton[] funcButton;
 	private JTable table;
 	private Vector<Vector<String>> vData;
 	private JScrollPane scrollPane;
-	private List<ArrivalVO> list;
+	private List<EntryVO> list;
+	private InventoryArea area;
 
-	public ArrivalApproveUI() {
-		try {
-			ac = new ApproveBL();
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public KucunguanliUI(String s) throws RemoteException {
+		ic = new InventoryController();
+		area = InventoryArea.getInventoryArea(s);
 		this.initComponents();
 		this.initList();
 		this.validate();
@@ -47,9 +44,9 @@ public class ArrivalApproveUI extends JPanel {
 	private void initComponents() {
 		this.setLayout(null);
 
-		String[] info = { "单据编号", "填写人编号", "填写日期" };
+		String[] info = { "快递编号", "入库时间", "排号", "架号", "位号" };
 		Vector<String> vColumns = new Vector<String>();
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < 5; i++) {
 			vColumns.add(info[i]);
 		}
 		vData = new Vector<Vector<String>>();
@@ -72,15 +69,14 @@ public class ArrivalApproveUI extends JPanel {
 		this.add(scrollPane);
 
 		funcButton = new JButton[4];
-		final String[] title = { "查看信息", "通过审批", "一键审批", "返回" };
-		for (int i = 0; i < 4; i++) {
+		final String[] title = { "库存调整", "返回" };
+		for (int i = 0; i < 2; i++) {
 			funcButton[i] = new JButton(title[i]);
-			funcButton[i].setBounds(50 + 200 * i, 450, 100, 25);
+			funcButton[i].setBounds(250 + 200 * i, 450, 100, 25);
 			switch (i) {
 			case 0:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						Main.frame.setView(new ArrivalModifyUI());
 					}
 				});
 				break;
@@ -90,37 +86,26 @@ public class ArrivalApproveUI extends JPanel {
 					}
 				});
 				break;
-			case 2:
-				funcButton[i].addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-					}
-				});
-				break;
-			case 3:
-				funcButton[i].addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						Main.frame.setView(new ApproveChooseUI(), "审批单据");
-					}
-				});
-				break;
 			}
 			this.add(funcButton[i]);
 		}
 	}
 
-	private Vector<String> toVector(ArrivalVO vo) {
+	private Vector<String> toVector(EntryVO vo) {
 		Vector<String> str = new Vector<String>();
-		str.add(vo.getTransferId());
-		str.add(vo.getUserID());
-		str.add(vo.getDate());
+		str.add(vo.id);
+		str.add(DateUtil.dateToString(vo.date));
+		str.add(vo.row + "");
+		str.add(vo.shelf + "");
+		str.add(vo.place + "");
 		return str;
 	}
 
-	private void initList() {
+	private void initList() throws RemoteException {
 		vData.clear();
-		list = ac.getUnapprovedArrival();
+		list = ic.getEntryList(MainFrame.getUser().getInstitutionID(), area);
 
-		for (ArrivalVO vo : list) {
+		for (EntryVO vo : list) {
 			vData.add(toVector(vo));
 		}
 		scrollPane.getViewport().removeAll();

@@ -22,6 +22,7 @@ import javax.swing.JTextField;
 import presentation.MainFrame;
 import util.DateUtil;
 import vo.IntermediateVo.TransferVO;
+import vo.ManageVo.InstitutionVO;
 import businessLogic.intermediateBL.TransferController;
 import client.ClientInitException;
 import client.Main;
@@ -63,10 +64,11 @@ public class TransferUI extends JPanel {
 		label = new JLabel[9];
 		field = new JTextField[8];
 		box = new JComboBox<String>(typeName);
-		List<String> cityList = tc.getCities();
+		List<InstitutionVO> cityList = tc.getInstitutionList(MainFrame.getUser().getIdentityID());
+//		List<InstitutionVO> cityList = tc.getInstitutionList("020012");
 		String[] cities = new String[cityList.size()];
 		for (int i = 0; i < cityList.size(); i++) {
-			cities[i] = cityList.get(i);
+			cities[i] = cityList.get(i).getName();
 		}
 		depBox = new JComboBox<String>(cities);
 		desBox = new JComboBox<String>(cities);
