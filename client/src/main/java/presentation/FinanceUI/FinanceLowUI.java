@@ -7,6 +7,7 @@ import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -76,18 +77,24 @@ public class FinanceLowUI extends JPanel {
 			case 0:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						JOptionPane.showMessageDialog(null, "施工中...", "",
+								JOptionPane.ERROR_MESSAGE);
 					}
 				});
 				break;
 			case 1:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						JOptionPane.showMessageDialog(null, "施工中...", "",
+								JOptionPane.ERROR_MESSAGE);
 					}
 				});
 				break;
 			case 2:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						JOptionPane.showMessageDialog(null, "施工中...", "",
+								JOptionPane.ERROR_MESSAGE);
 					}
 				});
 				break;

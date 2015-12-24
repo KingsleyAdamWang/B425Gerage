@@ -7,6 +7,7 @@ import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -14,6 +15,7 @@ import javax.swing.table.DefaultTableModel;
 
 import presentation.MainFrame;
 import presentation.BusinessHallUI.DriverAddUI;
+import presentation.LogUI.LogUI;
 import vo.AdminVo.UserVO;
 import client.ClientInitException;
 import client.Main;
@@ -77,24 +79,32 @@ public class FinanceHighUI extends JPanel {
 			case 0:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						JOptionPane.showMessageDialog(null, "施工中...", "",
+								JOptionPane.ERROR_MESSAGE);
 					}
 				});
 				break;
 			case 1:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						JOptionPane.showMessageDialog(null, "施工中...", "",
+								JOptionPane.ERROR_MESSAGE);
 					}
 				});
 				break;
 			case 2:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						JOptionPane.showMessageDialog(null, "施工中...", "",
+								JOptionPane.ERROR_MESSAGE);
 					}
 				});
 				break;
 			case 3:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						JOptionPane.showMessageDialog(null, "施工中...", "",
+								JOptionPane.ERROR_MESSAGE);
 					}
 				});
 				break;
@@ -107,6 +117,17 @@ public class FinanceHighUI extends JPanel {
 							e1.printStackTrace();
 						} catch (ClientInitException e1) {
 							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					}
+				});
+				break;
+			case 5:
+				funcButton[i].addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						try {
+							Main.frame.setView(new LogUI(), title[5]);
+						} catch (RemoteException e1) {
 							e1.printStackTrace();
 						}
 					}

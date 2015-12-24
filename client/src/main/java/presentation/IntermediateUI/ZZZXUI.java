@@ -65,13 +65,11 @@ public class ZZZXUI extends JPanel {
 		table.setFillsViewportHeight(true);
 		this.add(scrollPane);
 
-		funcButton = new JButton[6];
-		final String[] title = { "填写到达单", "填写派件单", "填写装车单", "填写收款单", "车辆信息管理",
-				"司机信息管理" };
-		for (int i = 0; i < 6; i++) {
+		funcButton = new JButton[3];
+		final String[] title = { "填写到达单", "填写装车单", "填写中转单" };
+		for (int i = 0; i < 3; i++) {
 			funcButton[i] = new JButton(title[i]);
-			funcButton[i].setBounds(150 + (i % 2) * 300, 200 + 100 * (i / 2),
-					200, 50);
+			funcButton[i].setBounds(300, 200 + 100 * i, 200, 50);
 			switch (i) {
 			case 0:
 				funcButton[i].addActionListener(new ActionListener() {
@@ -91,12 +89,6 @@ public class ZZZXUI extends JPanel {
 			case 1:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-					}
-				});
-				break;
-			case 2:
-				funcButton[i].addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
 						try {
 							Main.frame.setView(new EntruckUI(), "填写装车单");
 						} catch (RemoteException e1) {
@@ -105,33 +97,20 @@ public class ZZZXUI extends JPanel {
 						} catch (ClientInitException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
+
 						}
 					}
 				});
 				break;
-			case 3:
+			case 2:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						try {
-							Main.frame.setView(new CashRegisterUI(), "填写到达单");
+							Main.frame.setView(new TransferUI(), "填写中转单");
 						} catch (RemoteException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
-					}
-				});
-				break;
-			case 4:
-				funcButton[i].addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						Main.frame.setView(new TruckUI(), "车辆信息管理");
-					}
-				});
-				break;
-			case 5:
-				funcButton[i].addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						Main.frame.setView(new DriverAddUI(), "司机信息管理");
 					}
 				});
 				break;
