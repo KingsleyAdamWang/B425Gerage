@@ -1,32 +1,27 @@
 package businessLogic.inventoryBL;
 
-import java.util.Date;
-import java.util.List;
+import java.rmi.RemoteException;
 
 import po.inventoryPO.InventoryPO;
 import vo.InventoryVo.InventoryVO;
 import businessLogicService.inventoryBLService.InventoryBLService;
 
 public class InventoryController implements InventoryBLService {
-
-	public List<InventoryPO> checkBetween(Date start,Date end){
-		return null;
-	}
+	private InventoryBL invBL;
 	
-	public List<InventoryPO> check(){
-		return null;
-	}
-	
-	public List<InventoryPO> getMessage(){
-		return null;
-	}
-	
-	public String adjust(InventoryVO from, InventoryVO to){
-		return null;
-	}
-	
-	public String init(){
-		return null;
+	InventoryController() throws RemoteException{
+		invBL=new InventoryBL();
 	}
 
+	public InventoryVO getInventoryVO(String institutionID){
+		return invBL.getInventoryVO(institutionID);
+	}
+	
+	public String adjust(InventoryVO vo) throws RemoteException{
+		return invBL.adjust(vo.transToPO());
+	}
+	
+	public InventoryVO find(String institutionID){
+		return new InventoryVO(invBL.find(institutionID)); 
+	}
 }

@@ -1,5 +1,6 @@
 package businessLogicService.inventoryBLService;
 
+import java.rmi.RemoteException;
 import java.util.Date;
 import java.util.List;
 
@@ -7,13 +8,11 @@ import po.inventoryPO.InventoryPO;
 import vo.InventoryVo.InventoryVO;
 
 public interface InventoryBLService {
-	public List<InventoryPO> checkBetween(Date start,Date end);
-
-	public List<InventoryPO> check();
+	public InventoryVO getInventoryVO(String institutionID);
 	
-	public List<InventoryPO> getMessage();
+	public String adjust(InventoryVO vo) throws RemoteException;
 	
-	public String adjust(InventoryVO from, InventoryVO to);
+	public InventoryVO find(String institutionID);
 	
-	public String init();
+	
 }

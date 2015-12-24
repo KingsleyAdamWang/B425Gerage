@@ -7,6 +7,7 @@ import java.util.List;
 import po.inventoryPO.ShipmentPO;
 import po.managePO.InstitutionPO;
 import vo.InventoryVo.ShipmentVO;
+import vo.ManageVo.InstitutionVO;
 import businessLogic.manageBL.InstitutionBL;
 import client.ClientInitException;
 import client.RMIHelper;
@@ -81,18 +82,18 @@ public class ShipmentBL {
 		return new ShipmentVO(shipmentDS.find(ID));
 	}
 	
-	public List<String> getInstitutionName(InstitutionPO po) throws RemoteException{
-		List<String> result=new ArrayList<String>();
+	public List<InstitutionVO> getInstitutionList(InstitutionPO po) throws RemoteException{
+		List<InstitutionVO> result=new ArrayList<InstitutionVO>();
 		InstitutionBL insBL=new InstitutionBL();
 		List<InstitutionPO> insList=insBL.getInsList();
 		for(InstitutionPO temp:insList){
 			if(temp.getName()!=po.getName()&&temp.getType()==InsType.intermediate){
-				result.add(temp.getName());
+				result.add(new InstitutionVO(temp));
 			}
 		}
 		for(InstitutionPO temp:insList){
 			if(temp.getName()!=po.getName()&&temp.getCity()==po.getCity()){
-				result.add(temp.getName());
+				result.add(new InstitutionVO(temp));
 			}
 		}
 		
