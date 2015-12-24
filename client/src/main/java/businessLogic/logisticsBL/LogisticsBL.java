@@ -1,6 +1,7 @@
 package businessLogic.logisticsBL;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.List;
 
 import client.ClientInitException;
@@ -58,6 +59,12 @@ public class LogisticsBL {
 				return new LogisticsVO(temp); 
 			}
 		}
-		return null;
+		List<String> messages=new ArrayList<String>();
+		messages.add("无法查询到该单号对应的物流信息");
+		messages.add("可能原因为：");
+		messages.add("单号填写错误，请检查单号");
+		messages.add("快件接收后还未录入物流系统，请耐心等待");
+		return new LogisticsVO(id,"未知",messages);
 	}
+	
 }
