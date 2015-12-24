@@ -1,6 +1,7 @@
 package businessLogic.inventoryBL;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import vo.InventoryVo.InventoryVO;
 import client.ClientInitException;
 import client.RMIHelper;
 import dataService.inventoryDataService.InventoryDataService;
+import enumSet.InventoryArea;
 
 public class InventoryBL {
 	InventoryDataService invDS;
@@ -149,6 +151,16 @@ public class InventoryBL {
 			}
 		}
 		return null;
+	}
+	
+	public List<EntryVO> getEntryByInstitutionArea(String institutionID,InventoryArea area) throws RemoteException{
+		EntryBL entryBL=new EntryBL();
+		List<EntryVO> result=new ArrayList<EntryVO>();
+		List<EntryPO> entryList= entryBL.getEntryList(institutionID, area);
+		for(EntryPO po:entryList){
+			result.add(new EntryVO(po));
+		}
+		return result;
 	}
 	
 }

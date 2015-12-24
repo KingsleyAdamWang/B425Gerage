@@ -5,14 +5,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
-
-
 //import po.PaymentPO;
-
 import po.financePO.PaymentPO;
 import util.DateUtil;
+import vo.AdminVo.UserVO;
 import vo.FinanceVo.PaymentVO;
+import businessLogic.manageBL.StaffBL;
 //import vo.PaymentVO;
 import client.ClientInitException;
 import client.RMIHelper;
@@ -64,6 +62,19 @@ public class PaymentBL {
 			}
 		}
 		return payments;
+	}
+	
+	public double getSalaryTotal() throws RemoteException{
+		double result=0;
+		StaffBL staffBL=new StaffBL();
+		List<UserVO> userList =staffBL.getUsers();
+		int 
+		for(UserVO temp:userList){
+			
+		}
+		
+		
+		return result;
 	}
 
 	public void approve(PaymentPO po) throws RemoteException {
