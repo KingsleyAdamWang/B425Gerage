@@ -1,11 +1,9 @@
 package businessLogic.inventoryBL;
 
 import java.rmi.RemoteException;
-import java.util.List;
 
-import po.inventoryPO.InventoryPO;
+import vo.InventoryVo.EntryVO;
 import vo.InventoryVo.InventoryVO;
-import vo.ManageVo.InstitutionVO;
 import businessLogicService.inventoryBLService.InventoryBLService;
 
 public class InventoryController implements InventoryBLService {
@@ -19,7 +17,7 @@ public class InventoryController implements InventoryBLService {
 		return invBL.getInventoryVO(institutionID);
 	}
 	
-	public String adjust(InventoryVO vo) throws RemoteException{
+	public String adjust(EntryVO vo) throws RemoteException{
 		return invBL.adjust(vo.transToPO());
 	}
 	

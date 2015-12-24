@@ -9,10 +9,4 @@ import vo.InventoryVo.EntryVO;
  */
 public interface EntryBLService {
 	
-	/**
-	 * 入库单提交
-	 * @param vo
-	 * @return
-	 */
-	public boolean submitEntry(EntryVO eVO);
 }

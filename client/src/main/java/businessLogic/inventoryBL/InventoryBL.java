@@ -8,6 +8,7 @@ import po.inventoryPO.EntryPO;
 import po.inventoryPO.InventoryPO;
 import po.inventoryPO.ShipmentPO;
 import util.Storage;
+import vo.InventoryVo.EntryVO;
 import vo.InventoryVo.InventoryVO;
 import client.ClientInitException;
 import client.RMIHelper;
@@ -134,14 +135,10 @@ public class InventoryBL {
 
 	
 	public String adjust( EntryPO po) throws RemoteException{
-		InventoryPO from=find(to.getInstitutionID());
+		EntryBL entryBL=new EntryBL();
+		entryBL.delete( new EntryVO(po));
 		
-		for(InventoryPO temp:invList){
-			if(temp.equals(from)){
-				invList.set(invList.indexOf(temp), to);
-				invDS.modify(to);
-			}
-		}
+		entryBL.add(new EntryVO(po));
 		return null;
 	}
 	

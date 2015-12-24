@@ -4,11 +4,16 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
+import businessLogic.manageBL.InstitutionBL;
+import businessLogic.manageBL.StaffBL;
 import po.inventoryPO.EntryPO;
+import po.managePO.InstitutionPO;
 import vo.InventoryVo.EntryVO;
+import vo.ManageVo.InstitutionVO;
 import client.ClientInitException;
 import client.RMIHelper;
 import dataService.inventoryDataService.EntryDataService;
+import enumSet.InsType;
 import enumSet.InventoryArea;
 import enumSet.ReceiptsState;
 
@@ -56,6 +61,29 @@ public class EntryBL {
 		}
 		
 		return "未找到入库单";
+	}
+	
+	public List<InstitutionVO> getInstitutionList(String userID)
+			throws RemoteException {
+		List<InstitutionVO> result = new ArrayList<InstitutionVO>();
+		InstitutionBL insBL = new InstitutionBL();
+		StaffBL staffBL=new StaffBL();
+		String institutionID=(staffBL.getUser(userID).getInstitutionID());
+		InstitutionPO institutionPO=insBL.searchInstitution(institutionID);
+		List<InstitutionPO> insList = insBL.getInsList();
+		for (InstitutionPO temp : insList) {//同城的非本机构
+			if (temp.getCity() == institutionPO.getCity()&&temp.getInstitutionID() != institutionPO.getInstitutionID()) {
+					result.add(new InstitutionVO(temp));
+			}
+		}
+		for (InstitutionPO temp : insList) {//非同城的中转中心
+			if ((temp.getName() != institutionPO.getName())
+					&& (temp.getType() == InsType.intermediate)) {
+				result.add(new InstitutionVO(temp));
+			}
+		}
+
+		return result;
 	}
 	
 	public List<EntryPO> getEntryList(){

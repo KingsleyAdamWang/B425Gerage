@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import po.intermidatePO.TransferPO;
+import po.inventoryPO.EntryPO;
 import po.inventoryPO.ShipmentPO;
 import po.managePO.InstitutionPO;
 import vo.IntermediateVo.TransferVO;
@@ -54,10 +55,18 @@ public class TransferBL {
 	
 	private void deleteEntryShipment(TransferPO po) throws RemoteException{
 		EntryBL entryBL=new EntryBL();
-		ShipmentBL shipmengBL=new ShipmentBL();
+		ShipmentBL shipmentBL=new ShipmentBL();
 		List<String> idList=po.getList();
-		List<EntryVO> entryVOList=new ArrayList<EntryVO>();
-		List<ShipmentVO> shipmentVOList=new ArrayList<ShipmentVO>();
+		List<EntryPO> entryPOList=new ArrayList<EntryPO>();
+		List<ShipmentPO> shipmentPOList=new ArrayList<ShipmentPO>();
+		entryPOList=entryBL.getEntryList(po.getInstitutionID());
+		shipmentPOList=shipmentBL.getShipmentList(po.getInstitutionID());
+		for(EntryPO temp: entryPOList){
+			entryBL.delete(new EntryVO(temp));
+		}
+		for(ShipmentPO temp: shipmentPOList){
+			shipmentBL.delete(new ShipmentVO(temp));
+		}
 		
 	}
 

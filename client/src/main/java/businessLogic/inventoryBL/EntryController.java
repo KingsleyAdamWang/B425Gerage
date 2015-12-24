@@ -5,6 +5,7 @@ import java.util.List;
 
 import po.inventoryPO.EntryPO;
 import vo.InventoryVo.EntryVO;
+import vo.ManageVo.InstitutionVO;
 import businessLogicService.inventoryBLService.EntryBLService;
 
 public class EntryController implements EntryBLService {
@@ -30,11 +31,8 @@ public class EntryController implements EntryBLService {
 		return entryBL.getEntryList(institutionID);
 	}
 
-	
-	
-	public boolean submitEntry(EntryVO eVO) {
-		// TODO Auto-generated method stub
-		return false;
+	public List<InstitutionVO> getInstitutionList(String userID) throws RemoteException{
+		return entryBL.getInstitutionList(userID);
 	}
 	
 
