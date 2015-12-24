@@ -7,6 +7,7 @@ import java.util.List;
 import po.inventoryPO.EntryPO;
 import po.inventoryPO.InventoryPO;
 import po.inventoryPO.ShipmentPO;
+import util.Storage;
 import vo.InventoryVo.InventoryVO;
 import client.ClientInitException;
 import client.RMIHelper;
@@ -59,23 +60,54 @@ public class InventoryBL {
 //		busyUnit=entryPO.get
 //		return false;
 //	}
+	public boolean positionExist(EntryPO entryPO){
+		InventoryPO inventoryPO=find(entryPO.getInstitutionID());
+		Storage storage;
+		switch (entryPO.getArea()) {
+		case AREA_FOR_PLANE:
+			storage=inventoryPO.getPlane();
+			break;
+		case AREA_FOR_TRAIN:
+			storage=inventoryPO.getTrain();
+			break;
+		case AREA_FOR_CAR:
+			storage=inventoryPO.getCar();
+			break;
+		default:
+			storage=inventoryPO.getAuto();
+			break;
+		}
+		
+		if(entryPO.getRow()>storage.getRow()||entryPO.getShelf()>storage.getShelf()||entryPO.getPlace()>storage.getPlace()){
+			return false;
+		}
+		return true;
+	}
 	
 	public String setBusy(EntryPO entryPO) throws RemoteException{
+		if(!positionExist(entryPO)){
+			return "该位置不存在，请检查位置信息";
+		}
 		InventoryPO inventoryPO=find(entryPO.getInstitutionID());
 		int oldIndex=invList.indexOf(inventoryPO);
 		int Unit=0;
 		Unit=(entryPO.getPlace()-1)*(entryPO.getRow())+(entryPO.getRow()-1)*entryPO.getPlace()+entryPO.getPlace();
+		
 		if(inventoryPO.isBusy(entryPO.getArea(), Unit)){
 			return "该位已被占用";
 		}else{
 			inventoryPO.setIsBusy(entryPO.getArea(), Unit, true);
 			invList.set(oldIndex, inventoryPO);
 			modify(inventoryPO);
+			if(inventoryPO.alert(entryPO.getArea(), 0.9)){
+				return "库存报警，请尽快调整库存";
+			}
 			return null;
 		}
 	}
 	
 	public String setFree(ShipmentPO shipmentPO) throws RemoteException{
+		
 		InventoryPO inventoryPO=find(shipmentPO.getInstitutionID());
 		int oldIndex=invList.indexOf(inventoryPO);
 		EntryBL entryBL=new EntryBL();
