@@ -62,7 +62,8 @@ public class AccountDataServiceImpl extends UnicastRemoteObject implements
 			System.out.println(accounts.size());
 			for (AccountPO po : accounts) {
 				// 将列表中的数据再一次的更新到Account.txt文件中去
-				fw.append(po.getName() + " " + po.getBalance() + "\n");
+				fw.append(po.getName() + " " + po.getAccountID() + " "
+						+ po.getBalance() + "\n");
 				fw.flush();
 			}
 			fw.close();
@@ -75,23 +76,21 @@ public class AccountDataServiceImpl extends UnicastRemoteObject implements
 
 	public boolean modify(AccountPO po) throws RemoteException {
 
-	accounts.set(accounts.indexOf(po), po);
+		accounts.set(accounts.indexOf(po), po);
 
 		update();
 
 		return true;
 	}
 
-	
 	public boolean add(AccountPO po) throws RemoteException {
 		// TODO 注释该行
 		System.out.println("添加账户成功！！");
 		// 是否重名等逻辑判断放在最后BL层实现
-		accounts.add(0,po);
+		accounts.add(0, po);
 		update();
 		return true;
 	}
-
 
 	public boolean delete(AccountPO po) throws RemoteException {
 
@@ -103,7 +102,6 @@ public class AccountDataServiceImpl extends UnicastRemoteObject implements
 		return true;
 	}
 
-	
 	public List<AccountPO> search(String key) throws RemoteException {
 		// TODO
 		List<AccountPO> list = new ArrayList<AccountPO>();

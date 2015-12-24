@@ -1,4 +1,4 @@
-package presentation.IntermediateUI;
+package presentation.BusinessHallUI;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -6,7 +6,6 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Vector;
 
@@ -21,38 +20,38 @@ import javax.swing.JTextField;
 
 import presentation.MainFrame;
 import util.DateUtil;
-import vo.IntermediateVo.TransferVO;
-import businessLogic.intermediateBL.TransferController;
+import vo.BussinessHallVo.ArrivalVO;
+import businessLogic.businessHallBL.ArrivalController;
 import client.ClientInitException;
 import client.Main;
+import enumSet.ArrivalState;
 import enumSet.ReceiptsState;
-import enumSet.TransportType;
 
-public class TransferUI extends JPanel {
+public class ArrivalModifyUI extends JPanel {
 	// 一会儿删↓
 	static MainFrame f;
 	// 一会儿删↑
 
 	private static final long serialVersionUID = 1L;
 
-	private TransferController tc;
-	private final String[] labelName = { "中转单号", "到达日期", "起始地点", "目标地点",
-			"运输类型", "运费", "检装员", "押运员", "包含订单编号" };
-	private final String[] typeName = { "汽车", "火车", "飞机" };
+	private ArrivalController ac;
+	private final String[] labelName = { "中转单/装车单号", "出发地", "到达日期", "到达状态",
+			"包含订单编号" };
+	private final String[] typeName = { "完整", "损坏", "丢失" };
 	private JLabel[] label;
 	private JTextField[] field;
 	private JComboBox<String> box;
-	private JComboBox<String> depBox;
-	private JComboBox<String> desBox;
 	private JButton submitBtn;
 	private JButton returnBtn;
 	private JList<String> jl;
 	private JScrollPane sp;
 	private Vector<String> vData;
-	private List<String> list;
+	private ArrivalVO vo;
 
-	public TransferUI() throws RemoteException {
-		tc = new TransferController();
+	public ArrivalModifyUI(ArrivalVO vo) throws RemoteException,
+			ClientInitException {
+		this.vo = vo;
+		ac = new ArrivalController();
 		this.initComponents();
 		this.validate();
 	}
@@ -60,60 +59,32 @@ public class TransferUI extends JPanel {
 	private void initComponents() throws RemoteException {
 		this.setLayout(null);
 
-		label = new JLabel[9];
-		field = new JTextField[8];
+		label = new JLabel[5];
+		field = new JTextField[3];
 		box = new JComboBox<String>(typeName);
-		List<String> cityList = tc.getCities();
-		String[] cities = new String[cityList.size()];
-		for (int i = 0; i < cityList.size(); i++) {
-			cities[i] = cityList.get(i);
-		}
-		depBox = new JComboBox<String>(cities);
-		desBox = new JComboBox<String>(cities);
-		for (int i = 0; i < 9; i++) {
+		for (int i = 0; i < 5; i++) {
 			label[i] = new JLabel(labelName[i] + ":");
 			label[i].setBounds(20 + 400 * (i % 2), 40 + 40 * (i / 2), 100, 20);
 			this.add(label[i]);
-			if (i != 2 && i != 3 && i != 4 && i != 8) {
+			if (i < 3) {
 				field[i] = new JTextField();
-				field[i].setBounds(105 + 400 * (i % 2), 40 + 40 * (i / 2), 250,
+				field[i].setBounds(120 + 380 * (i % 2), 40 + 40 * (i / 2), 250,
 						30);
 				this.add(field[i]);
-			} else if (i == 4) {
-				box.setBounds(105 + 400 * (i % 2), 40 + 40 * (i / 2), 250, 30);
-				this.add(box);
 			} else if (i == 3) {
-				desBox.setBounds(105 + 400 * (i % 2), 40 + 40 * (i / 2), 250,
-						30);
-				this.add(desBox);
-			} else if (i == 2) {
-				depBox.setBounds(105 + 400 * (i % 2), 40 + 40 * (i / 2), 250,
-						30);
-				this.add(depBox);
+				box.setBounds(100 + 400 * (i % 2), 40 + 40 * (i / 2), 250, 30);
+				this.add(box);
 			}
 		}
-		field[1].setText(DateUtil.dateToString());
+		field[1].setText(ac.getInstitutionName());
+		field[2].setText(DateUtil.dateToString());
 
 		vData = new Vector<String>();
 		jl = new JList<String>(vData);
 		sp = new JScrollPane();
 		sp.getViewport().add(jl);
-		sp.setBounds(105, 200, 500, 300);
+		sp.setBounds(120, 120, 500, 300);
 		this.add(sp);
-
-		box.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent e) {
-				int index = box.getSelectedIndex();
-				if (index == 0)
-					label[7].setText("押运员:");
-				if (index == 1)
-					label[7].setText("车厢号:");
-				if (index == 2)
-					label[7].setText("货柜号:");
-			}
-
-		});
 
 		field[0].addFocusListener(new FocusListener() {
 
@@ -127,11 +98,11 @@ public class TransferUI extends JPanel {
 
 		});
 
-		submitBtn = new JButton("提交");
-		submitBtn.setBounds(200, 520, 100, 30);
+		submitBtn = new JButton("保存修改");
+		submitBtn.setBounds(200, 450, 100, 30);
 		this.add(submitBtn);
 		returnBtn = new JButton("返回");
-		returnBtn.setBounds(500, 520, 100, 30);
+		returnBtn.setBounds(500, 450, 100, 30);
 		this.add(returnBtn);
 
 		submitBtn.addActionListener(new ActionListener() {
@@ -143,7 +114,7 @@ public class TransferUI extends JPanel {
 				}
 				String result;
 				try {
-					result = tc.add(getVO());
+					result = ac.add(getVO());
 					if (result != null) {
 						JOptionPane.showMessageDialog(null, result, "",
 								JOptionPane.ERROR_MESSAGE);
@@ -163,13 +134,19 @@ public class TransferUI extends JPanel {
 				Main.frame.returnToTop();
 			}
 		});
+
+		field[0].setText(vo.getTransferId());
+		field[1].setText(vo.getDeparture());
+		field[2].setText(vo.getDate());
+		setVData(field[0].getText());
+		initList();
 	}
 
 	private void setVData(String id) {
 		List<String> l = new ArrayList<String>();
 		Vector<String> v = new Vector<String>();
 		try {
-			l = tc.getList(id);
+			l = ac.search(id);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -184,33 +161,20 @@ public class TransferUI extends JPanel {
 	}
 
 	private boolean hasEmpty() {
-		if (field[0].getText().equals(""))
-			return true;
-		if (field[1].getText().equals(""))
-			return true;
-		for (int i = 5; i < 9; i++) {
+		for (int i = 0; i < 4; i++) {
 			if (field[i].getText().equals(""))
 				return true;
 		}
 		return false;
 	}
 
-	private TransferVO getVO() {
-		Date d = DateUtil.stringToDate(field[1].getText());
-		String institutionID = MainFrame.getUser().getInstitutionID();
-		String transferID = field[0].getText();
-		double fare = Double.parseDouble(field[5].getText());
-		TransportType type = TransportType.getTransportType((String) box
-				.getSelectedItem());
-		String name = field[6].getText();
-		String temp = field[7].getText();
-		String departure = (String) depBox.getSelectedItem();
-		String destination = (String) desBox.getSelectedItem();
-		TransferVO vo = new TransferVO(ReceiptsState.getReceiptsState("未审批"),
-				MainFrame.getUser().getIdentityID(), d, institutionID,
-				transferID, departure, destination, list, fare, type, name,
-				temp);
-		return vo;
+	private ArrivalVO getVO() {
+		// String tmp =
+		return new ArrivalVO(ReceiptsState.getReceiptsState("未审批"), MainFrame
+				.getUser().getIdentityID(), DateUtil.stringToDate(field[2]
+				.getText()), MainFrame.getUser().getInstitutionID(),
+				field[0].getText(), field[1].getText(),
+				ArrivalState.getArrivalState(typeName[box.getSelectedIndex()]));
 	}
 
 	private void initList() {
@@ -222,7 +186,7 @@ public class TransferUI extends JPanel {
 	public static void main(String[] args) throws RemoteException,
 			ClientInitException {
 		f = new MainFrame();
-		TransferUI view = new TransferUI();
+		ArrivalUI view = new ArrivalUI();
 		f.setView(view);
 	}
 }

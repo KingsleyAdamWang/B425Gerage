@@ -22,7 +22,7 @@ import businessLogic.businessHallBL.DeliveryController;
 import client.Main;
 import enumSet.ReceiptsState;
 
-public class DeliveryUI extends JPanel {
+public class DeliveryModifyUI extends JPanel {
 	// 一会儿删↓
 	static MainFrame f;
 	// 一会儿删↑
@@ -36,8 +36,10 @@ public class DeliveryUI extends JPanel {
 	private JTextArea area;
 	private JButton submitBtn;
 	private JButton returnBtn;
+	private DeliveryVO vo;
 
-	public DeliveryUI() throws RemoteException {
+	public DeliveryModifyUI(DeliveryVO vo) throws RemoteException {
+		this.vo = vo;
 		dc = new DeliveryController();
 		this.initComponents();
 		this.validate();
@@ -82,7 +84,7 @@ public class DeliveryUI extends JPanel {
 
 		});
 
-		submitBtn = new JButton("提交");
+		submitBtn = new JButton("保存修改");
 		returnBtn = new JButton("返回");
 		submitBtn.setBounds(250, 520, 80, 30);
 		returnBtn.setBounds(450, 520, 80, 30);
@@ -118,6 +120,10 @@ public class DeliveryUI extends JPanel {
 				Main.frame.returnToTop();
 			}
 		});
+
+		field[0].setText(vo.id);
+		field[1].setText(vo.name);
+		field[2].setText(DateUtil.dateToString(vo.d));
 	}
 
 	private boolean hasEmpty() {

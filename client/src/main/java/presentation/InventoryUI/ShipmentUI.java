@@ -2,6 +2,7 @@ package presentation.InventoryUI;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -9,8 +10,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import enumSet.ReceiptsState;
 import presentation.MainFrame;
 import util.DateUtil;
+import vo.InventoryVo.ShipmentVO;
 import businessLogic.inventoryBL.shipmentController;
 
 public class ShipmentUI extends JPanel {
@@ -30,7 +33,7 @@ public class ShipmentUI extends JPanel {
 	private JButton submitBtn;
 	private JButton returnBtn;
 
-	public ShipmentUI() {
+	public ShipmentUI() throws RemoteException {
 		sc = new shipmentController();
 		this.initComponents();
 		this.validate();
@@ -71,13 +74,18 @@ public class ShipmentUI extends JPanel {
 
 		returnBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setVData(field[0].getText());
-				initList();
 			}
 		});
 	}
 
-	public static void main(String[] args) {
+	private ShipmentVO getVO() {
+		ShipmentVO vo;
+		String id = field[0].getText();
+		vo = new ShipmentVO(ReceiptsState.getReceiptsState("未审批"),MainFrame.getUser().getIdentityID(),);
+		return vo;
+	}
+
+	public static void main(String[] args) throws RemoteException {
 		f = new MainFrame();
 		ShipmentUI view = new ShipmentUI();
 		f.setView(view);

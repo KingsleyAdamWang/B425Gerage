@@ -9,14 +9,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import client.Main;
 import presentation.MainFrame;
-import enumSet.ReceiptsState;
 import util.DateUtil;
 import vo.DeliverymanVo.ReceiveVO;
 import businessLogic.deliveryBL.ReceiveController;
+import enumSet.ReceiptsState;
 
-public class ReceiveUI extends JPanel {
+public class ReceiveModifyUI extends JPanel {
 	// 一会儿删↓
 	static MainFrame f;
 	// 一会儿删↑
@@ -29,8 +28,10 @@ public class ReceiveUI extends JPanel {
 	private JTextField[] field;
 	private JButton submitBtn;
 	private JButton returnBtn;
+	private ReceiveVO vo;
 
-	public ReceiveUI() throws RemoteException {
+	public ReceiveModifyUI(ReceiveVO vo) throws RemoteException {
+		this.vo = vo;
 		rc = new ReceiveController();
 		this.initComponents();
 		this.validate();
@@ -51,7 +52,7 @@ public class ReceiveUI extends JPanel {
 		}
 		field[3].setText(DateUtil.dateToString());
 
-		submitBtn = new JButton("提交");
+		submitBtn = new JButton("保存修改");
 		submitBtn.setBounds(200, 450, 100, 30);
 		this.add(submitBtn);
 		returnBtn = new JButton("返回");
@@ -65,9 +66,13 @@ public class ReceiveUI extends JPanel {
 
 		returnBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Main.frame.returnToTop();
 			}
 		});
+
+		field[0].setText(vo.id);
+		field[1].setText(vo.name);
+		field[2].setText(vo.telNum);
+		field[3].setText(vo.d);
 	}
 
 	private boolean hasEmpty() {

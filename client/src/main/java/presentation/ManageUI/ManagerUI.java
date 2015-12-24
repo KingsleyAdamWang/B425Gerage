@@ -95,7 +95,7 @@ public class ManagerUI extends JPanel {
 			case 2:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						Main.frame.setView(new ApprovalUI(), "审批单据");
+						Main.frame.setView(new ApproveUI(), "审批单据");
 					}
 				});
 				break;

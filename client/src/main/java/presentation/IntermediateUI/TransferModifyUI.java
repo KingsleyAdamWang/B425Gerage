@@ -28,7 +28,7 @@ import client.Main;
 import enumSet.ReceiptsState;
 import enumSet.TransportType;
 
-public class TransferUI extends JPanel {
+public class TransferModifyUI extends JPanel {
 	// 一会儿删↓
 	static MainFrame f;
 	// 一会儿删↑
@@ -36,7 +36,7 @@ public class TransferUI extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	private TransferController tc;
-	private final String[] labelName = { "中转单号", "到达日期", "起始地点", "目标地点",
+	private final String[] labelName = { "中转单号", "到达日期", "起始城市", "目标城市",
 			"运输类型", "运费", "检装员", "押运员", "包含订单编号" };
 	private final String[] typeName = { "汽车", "火车", "飞机" };
 	private JLabel[] label;
@@ -50,8 +50,10 @@ public class TransferUI extends JPanel {
 	private JScrollPane sp;
 	private Vector<String> vData;
 	private List<String> list;
+	private TransferVO vo;
 
-	public TransferUI() throws RemoteException {
+	public TransferModifyUI(TransferVO vo) throws RemoteException {
+		this.vo = vo;
 		tc = new TransferController();
 		this.initComponents();
 		this.validate();
@@ -92,7 +94,6 @@ public class TransferUI extends JPanel {
 				this.add(depBox);
 			}
 		}
-		field[1].setText(DateUtil.dateToString());
 
 		vData = new Vector<String>();
 		jl = new JList<String>(vData);
@@ -106,11 +107,11 @@ public class TransferUI extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				int index = box.getSelectedIndex();
 				if (index == 0)
-					label[7].setText("押运员:");
+					label[7].setText("押运员");
 				if (index == 1)
-					label[7].setText("车厢号:");
+					label[7].setText("车厢号");
 				if (index == 2)
-					label[7].setText("货柜号:");
+					label[7].setText("货柜号");
 			}
 
 		});
@@ -127,7 +128,7 @@ public class TransferUI extends JPanel {
 
 		});
 
-		submitBtn = new JButton("提交");
+		submitBtn = new JButton("保存修改");
 		submitBtn.setBounds(200, 520, 100, 30);
 		this.add(submitBtn);
 		returnBtn = new JButton("返回");
@@ -163,6 +164,12 @@ public class TransferUI extends JPanel {
 				Main.frame.returnToTop();
 			}
 		});
+
+		field[0].setText(vo.transferID);
+		field[1].setText(DateUtil.dateToString(vo.d));
+		field[5].setText(vo.fare + "");
+		field[6].setText(vo.name);
+		field[7].setText(vo.temp);
 	}
 
 	private void setVData(String id) {

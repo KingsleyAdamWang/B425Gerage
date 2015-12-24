@@ -49,7 +49,7 @@ public class EntruckVO extends ReceiptsVO {
 	/**
 	 * 本次运费
 	 */
-	double fare;
+	public double fare;
 
 	/**
 	 * 构造函数
