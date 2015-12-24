@@ -1,6 +1,7 @@
 package businessLogic.businessHallBL;
 
 import java.rmi.RemoteException;
+import java.util.List;
 
 import vo.BussinessHallVo.DriverVO;
 import businessLogic.logBL.LogBL;
@@ -34,5 +35,12 @@ public class DriverController implements DriverBLService {
 	
 	public String modify(DriverVO vo){
 		return driverBL.modify(vo.transtoPO());
+	}
+	public List<DriverVO> getDriversByIns(String institutionID){
+		return getDriversByIns(institutionID);
+	}
+	
+	public List<String> getDriverNamesByIns(String institutionID){
+		return driverBL.getDriverNamesByIns(institutionID);
 	}
 }

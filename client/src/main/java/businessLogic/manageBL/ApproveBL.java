@@ -61,6 +61,9 @@ public class ApproveBL {
 	public void setAllApprovedArrival() throws RemoteException{
 		arrivalBL_B.approveAll();
 	}
+	public void modifyArrival(ArrivalVO arrivalVO) throws RemoteException{
+		arrivalBL_B.modify(arrivalVO);
+	}
 	
 	public List<IncomeVO> getUnapprovedIncome(){
 		return crBL.getUnapproved();
@@ -72,7 +75,9 @@ public class ApproveBL {
 	public void setAllApprovedIncome() throws RemoteException{
 		crBL.approveAll();
 	}
-	
+	public void modifyIncome(){
+		crBL.
+	}
 	public List<DeliveryVO> getUnapprovedDelivery(){
 		return deliveryBL.getUnapproved();
 	}

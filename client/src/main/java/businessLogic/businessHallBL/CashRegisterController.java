@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 import java.util.Date;
 import java.util.List;
 
+import po.financePO.IncomePO;
 import presentation.MainFrame;
 import vo.BussinessHallVo.CashRegisterVO;
 import vo.DeliverymanVo.SendVO;
@@ -34,34 +35,22 @@ public class CashRegisterController implements CashRegisterBLService {
 	public double getAmmounts(List<SendVO> sendList){
 		return crBL.getAmmounts(sendList);
 	}
+	
+	public List<IncomePO> getIncomeBetweemDate(Date start ,Date end){
+		return crBL.getIncomeBetweemDate(start, end);
+	}
 
-
-	public String search(String id) {//根据单号查找收款单
+	@Override
+	public String search(String id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-
+	@Override
 	public String delete(CashRegisterVO crVO) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-
-	public String submit(CashRegisterVO crVO) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	public double total(List<CashRegisterVO> lists) {//根据收款单列表得到收款总额
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public String add(CashRegisterVO crVO) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }
