@@ -12,6 +12,7 @@ import vo.IntermediateVo.TransferVO;
 import vo.ManageVo.InstitutionVO;
 import vo.ManageVo.PriceConstVO;
 import businessLogic.deliveryBL.SendBL;
+import businessLogic.inventoryBL.EntryBL;
 import businessLogic.inventoryBL.ShipmentBL;
 import businessLogic.manageBL.InstitutionBL;
 import businessLogic.manageBL.StaffBL;
@@ -48,6 +49,12 @@ public class TransferBL {
 		transferList.add(po);
 		transferDS.add(po);
 		return null;
+	}
+	
+	private void deleteEntryShipment(TransferPO po) throws RemoteException{
+		EntryBL entryBL=new EntryBL();
+		ShipmentBL shipmengBL=new ShipmentBL();
+		List<String> idList=po.getList();
 	}
 
 	public String delete(TransferVO vo) throws RemoteException {

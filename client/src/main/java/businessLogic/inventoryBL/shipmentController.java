@@ -38,4 +38,8 @@ public class shipmentController implements ShipmentBLService {
 	public List<InstitutionVO> getInstitutionList(String userID) throws RemoteException{
 		return shipmentBL.getInstitutionList(userID);
 	}
+	
+	public  List<ShipmentVO> getUnapproved() {
+		return shipmentBL.getUnapproved();
+	}
 }
