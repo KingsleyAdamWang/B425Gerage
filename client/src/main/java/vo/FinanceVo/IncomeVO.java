@@ -7,11 +7,12 @@ import po.financePO.IncomePO;
 import vo.ReceiptsVO;
 import enumSet.ReceiptsState;
 
-public class IncomeVO extends ReceiptsVO{
-	public  Date date;
-	public  double income;
-	public  String kdyID;
-	public  List<String> idList;
+public class IncomeVO extends ReceiptsVO {
+	public Date date;
+	public double income;
+	public String kdyID;
+	public List<String> idList;
+	public String institutionID;
 
 	/**
 	 * 构造函数
@@ -23,23 +24,25 @@ public class IncomeVO extends ReceiptsVO{
 	 * @param kdyID
 	 * @param idList
 	 */
-	public IncomeVO(ReceiptsState state, String userID, Date date,
-			double income, String kdyID, List<String> idList) {
+	public IncomeVO(ReceiptsState state, String userID, String institutionID,
+			Date date, double income, String kdyID, List<String> idList) {
 		super(state, userID);
+		this.institutionID = institutionID;
 		this.date = date;
 		this.income = income;
 		this.kdyID = kdyID;
 		this.idList = idList;
 	}
-	
+
 	/**
 	 * po转为vo对象
+	 * 
 	 * @param po
 	 */
-	public IncomeVO(IncomePO po){
+	public IncomeVO(IncomePO po) {
 		super(po.getState(), po.getUserID());
-
-		this.date=po.getDate();
+		this.institutionID = po.getInstitutionID();
+		this.date = po.getDate();
 		this.income = po.getIncome();
 		this.kdyID = po.getKdyID();
 		this.idList = po.getIdList();
@@ -47,10 +50,12 @@ public class IncomeVO extends ReceiptsVO{
 
 	/**
 	 * 由vo转为po
+	 * 
 	 * @return
 	 */
-	public IncomePO transToPO(){
-		return new IncomePO(state, kdyID, date, income, kdyID, idList);
+	public IncomePO transToPO() {
+		return new IncomePO(state, userID, institutionID, date, income, kdyID,
+				idList);
 	}
 
 	@Override

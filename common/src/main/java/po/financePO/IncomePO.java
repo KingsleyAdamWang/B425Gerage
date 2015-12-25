@@ -17,6 +17,7 @@ public class IncomePO extends ReceiptsPO implements Serializable {
 	private double income;
 	private String kdyID;
 	private List<String> idList;
+	private String institutionID;
 
 	/**
 	 * 构造函数
@@ -28,9 +29,10 @@ public class IncomePO extends ReceiptsPO implements Serializable {
 	 * @param kdyID
 	 * @param idList
 	 */
-	public IncomePO(ReceiptsState state, String userID, Date date,
+	public IncomePO(ReceiptsState state, String userID, String institutionID,Date date,
 			double income, String kdyID, List<String> idList) {
-		super(state, userID);
+		super(state, userID); 
+		this.institutionID = institutionID;
 		this.date = date;
 		this.income = income;
 		this.kdyID = kdyID;
@@ -45,12 +47,13 @@ public class IncomePO extends ReceiptsPO implements Serializable {
 	public IncomePO(String data) {
 		idList = new ArrayList<String>();
 		String temp[] = data.split(" ");
-		if (temp.length == 5) {
+		if (temp.length == 6) {
 			this.state = ReceiptsState.getReceiptsState(temp[0]);
 			this.userID = temp[1];
-			this.date = DateUtil.stringToDate(temp[2]);
-			this.income = Double.parseDouble(temp[3]);
-			for (String str : temp[4].split(";"))
+			this.institutionID = temp[2];
+			this.date = DateUtil.stringToDate(temp[3]);
+			this.income = Double.parseDouble(temp[4]);
+			for (String str : temp[5].split(";"))
 				idList.add(str);
 		}
 	}
@@ -63,7 +66,7 @@ public class IncomePO extends ReceiptsPO implements Serializable {
 		String temp = "";
 		for (String str : idList)
 			temp += (str + ";");
-		return this.state.getReceiptsStateString() + " " + this.userID + " "
+		return this.state.getReceiptsStateString() + " " + this.userID + " "+institutionID+" "
 				+ DateUtil.dateToString(this.date) + " " + this.kdyID + " "
 				+ this.income + " " + temp + "\n";
 	}
@@ -87,6 +90,10 @@ public class IncomePO extends ReceiptsPO implements Serializable {
 
 	public List<String> getIdList() {
 		return idList;
+	}
+
+	public String getInstitutionID() {
+		return institutionID;
 	}
 
 	@Override
