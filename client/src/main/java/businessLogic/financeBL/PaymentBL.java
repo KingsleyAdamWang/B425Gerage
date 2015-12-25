@@ -70,6 +70,14 @@ public class PaymentBL {
 		return payments;
 	}
 	
+	public double getAmmount(List<PaymentPO> paymentList){
+		double ammount=0;
+		for(PaymentPO temp:paymentList){
+			ammount=ammount+temp.getAmmounts();
+		}
+		return ammount;
+	}
+	
 	public double getSalaryTotal() throws RemoteException{
 		double result=0;
 		StaffBL staffBL=new StaffBL();

@@ -6,12 +6,16 @@ import java.util.Date;
 import java.util.List;
 
 import po.financePO.IncomePO;
+import po.managePO.InstitutionPO;
 import vo.DeliverymanVo.SendVO;
 import vo.FinanceVo.IncomeVO;
+import vo.ManageVo.InstitutionVO;
 import businessLogic.deliveryBL.SendBL;
+import businessLogic.manageBL.InstitutionBL;
 import client.ClientInitException;
 import client.RMIHelper;
 import dataService.financeDataService.IncomeDataService;
+import enumSet.InsType;
 import enumSet.ReceiptsState;
 
 public class CashRegisterBL {
@@ -72,7 +76,7 @@ public class CashRegisterBL {
 	public List<IncomePO> getIncomePOByPerson(String staffID){
 		List<IncomePO> result=new ArrayList<IncomePO>();
 		for(IncomePO temp: incomeList){
-			if(temp.getKdyID()==staffID){
+			if(temp.getKdyID().equals(staffID)){
 				result.add(temp);
 			}
 		}	
@@ -98,6 +102,40 @@ public class CashRegisterBL {
 		}
 		
 		return result;
+	}
+	
+	public List<IncomeVO> getIncomeByIns(String institutionID){
+		List<IncomeVO> incomeList=new ArrayList<IncomeVO>();
+		for(IncomePO temp:this.incomeList){
+			if(temp.getInstitutionID().equals(institutionID)){
+				incomeList.add(new IncomeVO(temp));
+			}
+		}
+		return null;
+	}
+	
+	public List<InstitutionVO> getBusinessHallList() throws RemoteException{
+		InstitutionBL insBL=new InstitutionBL();
+		List<InstitutionPO> insList=insBL.getInsList();
+		List<InstitutionVO> result=new ArrayList<InstitutionVO>();
+		for(InstitutionPO temp: insList){
+			if(temp.getType()!=InsType.businessHall){
+				insList.remove(temp);
+			}
+		}
+		
+		for(InstitutionPO temp: insList){
+			result.add(new InstitutionVO(temp));
+		}
+		return result;
+	}
+	
+	public double getAmmount(List<IncomeVO> incomeList){
+		double ammount=0;
+		for(IncomeVO temp: incomeList){
+			ammount=ammount+temp.income;
+		}
+		return ammount;
 	}
 
 	public void approve(IncomePO po) throws RemoteException {
