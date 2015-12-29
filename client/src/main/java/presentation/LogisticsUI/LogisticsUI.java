@@ -13,13 +13,17 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import presentation.MainFrame;
+import presentation.LoginUI.LoginFrame;
 import client.ClientInitException;
+import client.Main;
 import vo.LogisticsVo.LogisticsVO;
 import businessLogic.logisticsBL.LogisticsController;
 
 public class LogisticsUI extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JButton inquireButton;
+	private JButton returnButton;
 	private JLabel label;
 	private JTextField jTextField;
 	private JTextArea area;
@@ -35,12 +39,14 @@ public class LogisticsUI extends JPanel {
 	private void initComponents() {
 		label = new JLabel("快递单号");
 		inquireButton = new JButton("查询");
+		returnButton = new JButton("返回");
 		jTextField = new JTextField(50);
 		area = new JTextArea(6, 20);
 		JPanel panel = new JPanel();
 		panel.add(label);
 		panel.add(jTextField);
 		panel.add(inquireButton);
+		panel.add(returnButton);
 		this.add(panel);
 		area.setEditable(false);
 		this.add(area);
@@ -76,6 +82,16 @@ public class LogisticsUI extends JPanel {
 						// str += vo.getMessages();
 						area.setText(area.getText() + "\n" + tmp);
 					}
+				}
+			}
+		});
+		returnButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (MainFrame.getUser() == null) {
+					Main.frame.setVisible(false);
+					LoginFrame loginFrame = new LoginFrame();
+				} else {
+					Main.frame.returnToTop();
 				}
 			}
 		});

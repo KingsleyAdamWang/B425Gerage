@@ -105,7 +105,7 @@ public class DriverAddUI extends JPanel {
 
 		returnBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Main.frame.setView(new DriverAddUI(), "司机信息管理");
+				Main.frame.setView(new DriverUI(), "司机信息管理");
 			}
 		});
 	}

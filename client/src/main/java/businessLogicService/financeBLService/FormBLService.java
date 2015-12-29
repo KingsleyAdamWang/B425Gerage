@@ -21,10 +21,14 @@ public interface FormBLService {
 
 	public List<PaymentVO> getPayments(Date start, Date end);
 
-	public String isValid(String start, String end);
+//	public String isValid(String start, String end);
 
 	public void exportCostForm();
 
 	public void exportRunForm(Date start, Date end);
+	
+	public double getTotalIncome();
+	
+	public double getTotalPay();
 
 }

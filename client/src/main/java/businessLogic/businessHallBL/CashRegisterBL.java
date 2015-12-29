@@ -98,7 +98,7 @@ public class CashRegisterBL {
 		return result;
 	}
 	
-	public List<IncomePO> getIncomeBetweemDate(Date start ,Date end){
+	public List<IncomePO> getIncomeBetweenDate(Date start ,Date end){
 		List<IncomePO> result=new ArrayList<IncomePO>();
 		for(IncomePO temp: incomeList){
 			if(temp.getDate().getTime()>=start.getTime()&&temp.getDate().getTime()<=end.getTime()){

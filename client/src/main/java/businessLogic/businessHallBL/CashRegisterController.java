@@ -37,7 +37,7 @@ public class CashRegisterController implements CashRegisterBLService {
 	}
 	
 	public List<IncomePO> getIncomeBetweemDate(Date start ,Date end){
-		return crBL.getIncomeBetweemDate(start, end);
+		return crBL.getIncomeBetweenDate(start, end);
 	}
 	
 	public double getIncomeAmmount(List<IncomeVO> incomeList){

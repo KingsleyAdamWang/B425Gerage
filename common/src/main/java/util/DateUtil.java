@@ -41,7 +41,50 @@ public class DateUtil {
 		Date date = Calendar.getInstance().getTime();
 		return sdf2.format(date);
 	}
+	/**
+	 * 判断输入的起止时间的日期的逻辑和格式等是否符合规范
+	 * 
+	 * @param start
+	 * @param end
+	 * @return
+	 */
+	public static String isValid(String start, String end) {
+		Date begin, ends;
+		try {
+			begin = DateUtil.stringToDate(start);
+			ends = DateUtil.stringToDate(end);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "输入的时间格式不正确！";
+		}
+		if (DateUtil.stringToDate(DateUtil.dateToString()).getTime()<begin.getTime()) {
+			return "起始日期超出系统当前日期！";
+		}
+		if (DateUtil.stringToDate(DateUtil.dateToString()).getTime()<ends.getTime()) {
+			return "截止日期超出系统当前日期！";
+		}
+		if (begin.getTime() > ends.getTime()) {
+			return "起止时间的输入不符合时逻辑！";
+		}
+		return null;
+
+	}
 	
+	public static String isValid(String date) {
+		Date day;
+		try {
+			day = DateUtil.stringToDate(date);
+//			ends = DateUtil.stringToDate(end);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "输入的时间格式不正确！";
+		}
+		if (DateUtil.stringToDate(DateUtil.dateToString()).getTime()<day.getTime()) {
+			return "日期超出系统当前日期！";
+		}
+		return null;
+
+	}
 	
 	public static String dateToStringDetail(Date d){
 		return sdf2.format(d);

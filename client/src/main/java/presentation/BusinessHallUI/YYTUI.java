@@ -13,9 +13,9 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import presentation.MainFrame;
+import vo.AdminVo.UserVO;
 import client.ClientInitException;
 import client.Main;
-import vo.AdminVo.UserVO;
 
 public class YYTUI extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -114,7 +114,7 @@ public class YYTUI extends JPanel {
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						try {
-							Main.frame.setView(new CashRegisterUI(), "填写到达单");
+							Main.frame.setView(new CashRegisterUI(), "填写收款单");
 						} catch (RemoteException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
@@ -132,7 +132,7 @@ public class YYTUI extends JPanel {
 			case 5:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						Main.frame.setView(new DriverAddUI(), "司机信息管理");
+						Main.frame.setView(new DriverUI(), "司机信息管理");
 					}
 				});
 				break;

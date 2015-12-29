@@ -108,6 +108,11 @@ public class CashRegisterUI extends JPanel {
 		submitBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
+					if (hasEmpty()) {
+						JOptionPane.showMessageDialog(null, "尚未填写完整", "",
+								JOptionPane.ERROR_MESSAGE);
+						return;
+					}
 					String result = cc.add(getVO());
 					if (result != null) {
 						JOptionPane.showMessageDialog(null, result, "",
@@ -130,6 +135,14 @@ public class CashRegisterUI extends JPanel {
 		});
 	}
 
+	private boolean hasEmpty() {
+		for (int i = 0; i < 3; i++) {
+			if (field[i].getText().equals(""))
+				return true;
+		}
+		return false;
+	}
+
 	private void setList() {
 		list = new JList<String>(vData);
 		sp.getViewport().add(list);
@@ -138,8 +151,8 @@ public class CashRegisterUI extends JPanel {
 	}
 
 	private void initList() {
-		vData=new Vector<String>();
-		idList=new ArrayList<String>();
+		vData = new Vector<String>();
+		idList = new ArrayList<String>();
 		for (int i = 0; i < voList.size(); i++) {
 			String s = "";
 			SendVO vo = voList.get(i);
@@ -157,7 +170,8 @@ public class CashRegisterUI extends JPanel {
 		String id = field[0].getText();
 		Date d = DateUtil.stringToDate(field[2].getText());
 		return new IncomeVO(ReceiptsState.getReceiptsState("未审批"), MainFrame
-				.getUser().getIdentityID(), d, income, id, idList);
+				.getUser().getIdentityID(), MainFrame.getUser()
+				.getInstitutionID(), d, income, id, idList);
 	}
 
 	public static void main(String[] args) throws RemoteException {

@@ -121,7 +121,7 @@ public class FormBL {
 	public void getIncomes(Date start, Date end) {
 		try {
 			CashRegisterBL cashBL = new CashRegisterBL();
-			incomes = cashBL.getIncomeBetweemDate(start, end);
+			incomes = cashBL.getIncomeBetweenDate(start, end);
 
 		} catch (RemoteException e) {
 
@@ -146,28 +146,7 @@ public class FormBL {
 		}
 	}
 
-	/**
-	 * 判断输入的起止时间的日期的逻辑和格式等是否符合规范
-	 * 
-	 * @param start
-	 * @param end
-	 * @return
-	 */
-	public String isValid(String start, String end) {
-		Date begin, ends;
-		try {
-			begin = DateUtil.stringToDate(start);
-			ends = DateUtil.stringToDate(end);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return "输入的时间格式不正确！";
-		}
-		if (begin.getTime() > ends.getTime()) {
-			return "起止时间的输入不符合时逻辑！";
-		}
-		return null;
 
-	}
 
 	/**
 	 * 将符合条件的收款返回一个VO list
@@ -320,7 +299,7 @@ public class FormBL {
 		return workbook;
 	}
 	
-	private double incomeTotal(){
+	public double incomeTotal(){
 		double result= 0 ;
 		for(IncomePO po : incomes){
 			result+=po.getIncome();
@@ -328,7 +307,7 @@ public class FormBL {
 		return result;
 	}
 	
-	private double payTotal(){
+	public double payTotal(){
 		double result =0;
 		for(PaymentPO po : payments){
 			result+=po.getAmmounts();

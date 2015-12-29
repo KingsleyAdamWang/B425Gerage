@@ -70,7 +70,7 @@ public class AdminUI extends JPanel {
 		final String[] title = { "账户密码管理" };
 		for (int i = 0; i < 1; i++) {
 			funcButton[i] = new JButton(title[i]);
-			funcButton[i].setBounds(300, 170 + 70 * i, 200, 50);
+			funcButton[i].setBounds(300, 300 + 70 * i, 200, 50);
 			switch (i) {
 			case 0:
 				funcButton[i].addActionListener(new ActionListener() {

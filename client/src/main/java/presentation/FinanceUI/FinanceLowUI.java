@@ -7,16 +7,14 @@ import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import presentation.MainFrame;
-import presentation.FinanceUI.AccountUI;
+import presentation.LogUI.LogUI;
 import vo.AdminVo.UserVO;
-import client.ClientInitException;
 import client.Main;
 
 public class FinanceLowUI extends JPanel {
@@ -69,52 +67,60 @@ public class FinanceLowUI extends JPanel {
 		// this.add(table);
 
 		funcButton = new JButton[5];
-		final String[] title = { "收款单管理", "付款单管理", "统计报表", "日志查询" };
-		for (int i = 0; i < 4; i++) {
+		final String[] title = { "查看收款单", "填写付款单", "经营情况表", "成本收益表", "日志查询" };
+		for (int i = 0; i < 5; i++) {
 			funcButton[i] = new JButton(title[i]);
-			funcButton[i].setBounds(300, 170 + 70 * i, 200, 50);
+			funcButton[i].setBounds(150 + (i % 2) * 300, 200 + 100 * (i / 2),
+					200, 50);
 			switch (i) {
 			case 0:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						JOptionPane.showMessageDialog(null, "施工中...", "",
-								JOptionPane.ERROR_MESSAGE);
-					}
-				});
-				break;
-			case 1:
-				funcButton[i].addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						JOptionPane.showMessageDialog(null, "施工中...", "",
-								JOptionPane.ERROR_MESSAGE);
-					}
-				});
-				break;
-			case 2:
-				funcButton[i].addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						JOptionPane.showMessageDialog(null, "施工中...", "",
-								JOptionPane.ERROR_MESSAGE);
-					}
-				});
-				break;
-			case 3:
-				funcButton[i].addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
 						try {
-							Main.frame.setView(new AccountUI(), title[3]);
+							Main.frame.setView(new IncomeManageUI(), "查看收款单");
 						} catch (RemoteException e1) {
-							e1.printStackTrace();
-						} catch (ClientInitException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}
 				});
 				break;
+			case 1:
+				funcButton[i].addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						try {
+							Main.frame.setView(new PaymentUI(), "填写付款单");
+						} catch (RemoteException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					}
+
+				});
+				break;
+			case 2:
+				funcButton[i].addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						Main.frame.setView(new RunFormUI(), "经营情况表");
+					}
+				});
+				break;
+			case 3:
+				funcButton[i].addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						Main.frame.setView(new ProfitFormUI(), "成本收益表");
+					}
+				});
+				break;
 			case 4:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						try {
+							Main.frame.setView(new LogUI(), "日志查询");
+						} catch (RemoteException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 					}
 				});
 				break;

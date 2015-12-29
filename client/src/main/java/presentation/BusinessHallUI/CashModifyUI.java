@@ -151,7 +151,8 @@ public class CashModifyUI extends JPanel {
 		String id = field[0].getText();
 		Date d = DateUtil.stringToDate(field[2].getText());
 		return new IncomeVO(ReceiptsState.getReceiptsState("未审批"), MainFrame
-				.getUser().getIdentityID(), d, income, id, idList);
+				.getUser().getIdentityID(), MainFrame.getUser()
+				.getInstitutionID(), d, income, id, idList);
 	}
 
 	public static void main(String[] args) throws RemoteException {

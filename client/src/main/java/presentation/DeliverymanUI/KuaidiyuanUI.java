@@ -13,16 +13,13 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import presentation.MainFrame;
+import presentation.LogisticsUI.LogisticsUI;
 import vo.AdminVo.UserVO;
 import client.ClientInitException;
 import client.Main;
 
 public class KuaidiyuanUI extends JPanel {
 	private static final long serialVersionUID = 1L;
-
-	// 一会儿删↓
-	static MainFrame f;
-	// 一会儿删↑
 
 	private JButton[] funcButton;
 	private JTable table;
@@ -64,11 +61,11 @@ public class KuaidiyuanUI extends JPanel {
 		table.setFillsViewportHeight(true);
 		this.add(scrollPane);
 
-		funcButton = new JButton[1];
-		final String[] title = { "填写寄件单" };
-		for (int i = 0; i < 1; i++) {
+		funcButton = new JButton[3];
+		final String[] title = { "填写寄件单", "填写收件单", "物流信息查询" };
+		for (int i = 0; i < 3; i++) {
 			funcButton[i] = new JButton(title[i]);
-			funcButton[i].setBounds(300, 300, 200, 50);
+			funcButton[i].setBounds(300, 200 + 100 * i, 200, 50);
 			switch (i) {
 			case 0:
 				funcButton[i].addActionListener(new ActionListener() {
@@ -85,14 +82,35 @@ public class KuaidiyuanUI extends JPanel {
 					}
 				});
 				break;
+			case 1:
+				funcButton[i].addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						try {
+							Main.frame.setView(new ReceiveUI(), "填写收件单");
+						} catch (RemoteException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					}
+				});
+				break;
+			case 2:
+				funcButton[i].addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						try {
+							Main.frame.setView(new LogisticsUI(), "物流信息查询");
+						} catch (RemoteException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (ClientInitException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					}
+				});
+				break;
 			}
 			this.add(funcButton[i]);
 		}
-	}
-
-	public static void main(String[] args) {
-		f = new MainFrame();
-		KuaidiyuanUI view = new KuaidiyuanUI();
-		f.setView(view);
 	}
 }

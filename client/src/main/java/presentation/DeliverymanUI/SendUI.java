@@ -2,10 +2,11 @@ package presentation.DeliverymanUI;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.rmi.RemoteException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -28,13 +29,7 @@ import enumSet.PackType;
 import enumSet.ReceiptsState;
 
 public class SendUI extends JPanel {
-	// 一会儿删↓
-	static MainFrame f;
-	// 一会儿删↑
-
 	private static final long serialVersionUID = 1L;
-
-	private static final int PADDING = 10;
 
 	private SendController sc;
 	private final String[] labelName = { "姓名", "城市", "邮编", "地址", "单位", "电话" };
@@ -42,8 +37,8 @@ public class SendUI extends JPanel {
 	private JLabel[] labelR;
 	private JTextField[] textFieldS;
 	private JTextField[] textFieldR;
-	private final String[] labelName2 = { "原件数", "内件品名", "实际重量", "体积", "运送方式",
-			"包装方式", "快递单号", "寄件日期", "预计天数" };
+	private final String[] labelName2 = { "原件数", "内件品名", "实际重量(kg)", "体积(m^3)",
+			"运送方式", "包装方式", "快递单号", "寄件日期", "预计天数", "运费报价" };
 	private JLabel[] labelO;
 	private JTextField[] textFieldO;
 	private String[] cities;
@@ -94,9 +89,9 @@ public class SendUI extends JPanel {
 		js.setBounds(0, 290, 800, 10);
 		this.add(js);
 
-		labelO = new JLabel[9];
-		textFieldO = new JTextField[9];
-		for (int i = 0; i < 9; i++) {
+		labelO = new JLabel[10];
+		textFieldO = new JTextField[10];
+		for (int i = 0; i < 10; i++) {
 			labelO[i] = new JLabel(labelName2[i] + ":");
 			labelO[i]
 					.setBounds(20 + 400 * (i % 2), 310 + 40 * (i / 2), 100, 20);
@@ -145,13 +140,6 @@ public class SendUI extends JPanel {
 					return;
 				}
 				try {
-					String dep = cities[cityComboS.getSelectedIndex()];
-					String des = cities[cityComboR.getSelectedIndex()];
-					double wei = Double.parseDouble(textFieldO[2].getText());
-					double vol = Double.parseDouble(textFieldO[3].getText());
-
-					fare = sc.getFare(dep, des, getPackType(), getExpress(),
-							wei, vol, 1, 1);
 					String result = sc.add(getSendVO());
 					if (result != null) {
 						JOptionPane.showMessageDialog(null, result, "",
@@ -159,16 +147,17 @@ public class SendUI extends JPanel {
 					} else {
 						JOptionPane.showMessageDialog(null, "提交成功", "",
 								JOptionPane.INFORMATION_MESSAGE);
+						Main.frame.setView(new SendUI(), "填写寄件单");
 					}
 				} catch (RemoteException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
+				} catch (NumberFormatException e1) {
+					JOptionPane.showMessageDialog(null, "输入数字格式有误", "",
+							JOptionPane.ERROR_MESSAGE);
 				} catch (ClientInitException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
-				} catch (NumberFormatException e1) {
-					JOptionPane.showMessageDialog(null, "输入信息有误", "",
-							JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -182,12 +171,52 @@ public class SendUI extends JPanel {
 		cityComboR.addItemListener(new ItemListener() {
 			public void itemStateChanged(final ItemEvent e) {
 				setDays();
+				try {
+					setFare();
+				} catch (RemoteException | ClientInitException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 
 		cityComboS.addItemListener(new ItemListener() {
 			public void itemStateChanged(final ItemEvent e) {
 				setDays();
+				try {
+					setFare();
+				} catch (RemoteException | ClientInitException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+
+		textFieldO[2].addFocusListener(new FocusListener() {
+			public void focusGained(FocusEvent e) {
+			}
+
+			public void focusLost(FocusEvent e) {
+				try {
+					setFare();
+				} catch (RemoteException | ClientInitException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+
+		textFieldO[3].addFocusListener(new FocusListener() {
+			public void focusGained(FocusEvent e) {
+			}
+
+			public void focusLost(FocusEvent e) {
+				try {
+					setFare();
+				} catch (RemoteException | ClientInitException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 	}
@@ -236,7 +265,8 @@ public class SendUI extends JPanel {
 				textFieldO[1].getText(), Double.parseDouble(textFieldO[2]
 						.getText()),
 				Double.parseDouble(textFieldO[3].getText()), this.getExpress(),
-				this.getPackType(), fare, 0);
+				this.getPackType(), fare, Integer.parseInt(textFieldO[8]
+						.getText()));
 	}
 
 	private boolean hasEmpty() {
@@ -263,10 +293,16 @@ public class SendUI extends JPanel {
 		textFieldO[8].setText(sc.getDays(s1, s2) + "");
 	}
 
-	public static void main(String[] args) throws RemoteException,
-			ClientInitException {
-		f = new MainFrame();
-		SendUI view = new SendUI();
-		f.setView(view);
+	private void setFare() throws RemoteException, ClientInitException {
+		String dep = cities[cityComboS.getSelectedIndex()];
+		String des = cities[cityComboR.getSelectedIndex()];
+		if (textFieldO[2].getText().equals("")
+				|| textFieldO[3].getText().equals(""))
+			return;
+		double wei = Double.parseDouble(textFieldO[2].getText());
+		double vol = Double.parseDouble(textFieldO[3].getText());
+		fare = sc
+				.getFare(dep, des, getPackType(), getExpress(), wei, vol, 1, 1);
+		textFieldO[9].setText(fare + "");
 	}
 }

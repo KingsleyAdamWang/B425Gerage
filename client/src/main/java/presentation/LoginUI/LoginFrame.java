@@ -25,6 +25,7 @@ import presentation.BusinessHallUI.YYTUI;
 import presentation.DeliverymanUI.KuaidiyuanUI;
 import presentation.FinanceUI.FinanceHighUI;
 import presentation.FinanceUI.FinanceLowUI;
+import presentation.IntermediateUI.ZZZXUI;
 import presentation.InventoryUI.CangkuUI;
 import presentation.LogisticsUI.LogisticsUI;
 import presentation.ManageUI.ManagerUI;
@@ -84,13 +85,15 @@ public class LoginFrame {
 
 		jTextField = new JTextField(20);
 		jPasswordField = new JPasswordField(20);
-////
-//		Reader   reader   =new   InputStreamReader( 
-//		        getClass().getResourceAsStream("/picture/Environment.ini")); 
-		iconB=new   ImageIcon(getClass().getResource("/picture/setting_black.png")); 
+		// //
+		// Reader reader =new InputStreamReader(
+		// getClass().getResourceAsStream("/picture/Environment.ini"));
+		iconB = new ImageIcon(getClass().getResource(
+				"/picture/setting_black.png"));
 
-		//iconB = new ImageIcon("src/main/java/picture/setting_black.png");
-		iconG = new ImageIcon(getClass().getResource("/picture/setting_gray.png"));
+		// iconB = new ImageIcon("src/main/java/picture/setting_black.png");
+		iconG = new ImageIcon(getClass().getResource(
+				"/picture/setting_gray.png"));
 		// icon = new
 		// ImageIcon("C:\\Users\\Kradness\\Documents\\B425Gerage\\client\\src\\main\\java\\picture\\setting.png");
 		setting = new JLabel(iconG);
@@ -271,7 +274,7 @@ public class LoginFrame {
 			} else if (str.equals("营业厅业务人员")) {
 				Main.frame.setView(new YYTUI());
 			} else if (str.equals("中转中心业务人员")) {
-				Main.frame.setView(new YYTUI());
+				Main.frame.setView(new ZZZXUI());
 			} else if (str.equals("中转中心仓库管理员")) {
 				Main.frame.setView(new CangkuUI());
 			} else if (str.equals("财务人员（高）")) {

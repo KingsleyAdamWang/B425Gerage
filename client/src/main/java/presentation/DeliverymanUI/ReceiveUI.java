@@ -6,6 +6,7 @@ import java.rmi.RemoteException;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -60,6 +61,27 @@ public class ReceiveUI extends JPanel {
 
 		submitBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if (hasEmpty()) {
+					JOptionPane.showMessageDialog(null, "尚未填写完整", "",
+							JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+				try {
+					String result = rc.add(getReceiveVO());
+					if (result != null) {
+						JOptionPane.showMessageDialog(null, result, "",
+								JOptionPane.ERROR_MESSAGE);
+					} else {
+						JOptionPane.showMessageDialog(null, "提交成功", "",
+								JOptionPane.INFORMATION_MESSAGE);
+					}
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (NumberFormatException e1) {
+					JOptionPane.showMessageDialog(null, "输入数字格式有误", "",
+							JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 

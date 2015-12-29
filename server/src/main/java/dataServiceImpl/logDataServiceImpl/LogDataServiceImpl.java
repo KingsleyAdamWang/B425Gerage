@@ -60,7 +60,6 @@ public class LogDataServiceImpl extends UnicastRemoteObject implements
 	}
 
 	public List<LogPO> getLogList() throws RemoteException{
-		System.out.println(logList.size()+"!!");
 		return logList;
 	}
 

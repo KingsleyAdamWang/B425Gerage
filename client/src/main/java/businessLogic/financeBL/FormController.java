@@ -45,9 +45,21 @@ public class FormController implements FormBLService {
 		return formBL.getPaymentList();
 	}
 
-	public String isValid(String start, String end) {
-
-		return formBL.isValid(start, end);
+	@Override
+	public double getTotalIncome() {
+		
+		return formBL.incomeTotal();
 	}
+
+	@Override
+	public double getTotalPay() {
+		
+		return formBL.payTotal();
+	}
+
+	// public String isValid(String start, String end) {
+	//
+	// return formBL.isValid(start, end);
+	// }
 
 }

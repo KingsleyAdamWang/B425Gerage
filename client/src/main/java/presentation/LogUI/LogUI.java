@@ -26,10 +26,6 @@ import client.Main;
 public class LogUI extends JPanel {
 	private static final long serialVersionUID = 1L;
 
-	// 一会儿删↓
-	static MainFrame f;
-	// 一会儿删↑
-
 	private LogController lc;
 	private JButton searchDateBtn;
 	private JButton searchUserBtn;
@@ -188,17 +184,5 @@ public class LogUI extends JPanel {
 		tmp.add(vo.getIdentityID());
 		tmp.add(vo.getMessage());
 		return tmp;
-	}
-
-	public static void main(String[] args) throws ClientInitException {
-		f = new MainFrame();
-		LogUI view;
-		try {
-			view = new LogUI();
-			f.setView(view);
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 }
