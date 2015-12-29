@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import po.logisticsPO.LogisticsPO;
+import util.DateUtil;
 import dataService.logisticsDataService.LogisticsDataService;
 
 public class LogisticsDataServiceImpl extends UnicastRemoteObject implements
@@ -73,7 +74,7 @@ public class LogisticsDataServiceImpl extends UnicastRemoteObject implements
 	 * @throws RemoteException
 	 */
 	public boolean modify(String id, String message) throws RemoteException {
-
+		message=DateUtil.dateToStringDetail()+"_"+message;
 		// 更新物流信息
 		for (LogisticsPO po : logisticsList) {
 			if (po.getId().equals(id)) {
