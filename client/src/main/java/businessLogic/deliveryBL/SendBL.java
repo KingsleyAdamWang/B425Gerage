@@ -7,11 +7,13 @@ import java.util.Date;
 import java.util.List;
 
 import po.deliveryPO.SendPO;
+import po.logisticsPO.LogisticsPO;
 import po.managePO.PriceConstPO;
 import util.CheckUtil;
 import util.DateUtil;
 import util.PackPrice;
 import vo.DeliverymanVo.SendVO;
+import businessLogic.logisticsBL.LogisticsBL;
 import businessLogic.manageBL.StrategyBL;
 import client.ClientInitException;
 import client.RMIHelper;
@@ -55,7 +57,9 @@ public class SendBL {
 		
 		sendList.add(po);
 		sendDS.add(po);
-
+		LogisticsBL logisticsBL=new LogisticsBL();
+		logisticsBL.add(new LogisticsPO(po.getId(),po.getName()));
+		logisticsBL.update(po.getId(), "揽件成功");
 		return null;
 	}
 
