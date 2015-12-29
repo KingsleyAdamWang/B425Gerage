@@ -33,11 +33,15 @@ public class CashRegisterController implements CashRegisterBLService {
 	}
 	
 	public double getAmmounts(List<SendVO> sendList){
-		return crBL.getAmmounts(sendList);
+		return crBL.getSendAmmounts(sendList);
 	}
 	
 	public List<IncomePO> getIncomeBetweemDate(Date start ,Date end){
 		return crBL.getIncomeBetweemDate(start, end);
+	}
+	
+	public double getIncomeAmmount(List<IncomeVO> incomeList){
+		return crBL.getIncomeAmmount(incomeList);
 	}
 
 	@Override

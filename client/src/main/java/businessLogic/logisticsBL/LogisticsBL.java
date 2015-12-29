@@ -27,13 +27,14 @@ public class LogisticsBL {
 	}
 	
 	//当快递员收货之后填写寄件单后调用这个方法
-	public String add(LogisticsPO po){
+	public String add(LogisticsPO po) throws RemoteException{
 		for(LogisticsPO temp: logisticsList){
 			if(temp.getId().equals(po.getId())){
 				return "存在相同单号";
 			}
 		}
 		logisticsList.add(po);
+		logisticsDS.add(po);
 		return null;
 	}
 	
@@ -47,6 +48,7 @@ public class LogisticsBL {
 		for(LogisticsPO temp: logisticsList){
 			if(temp.getId().equals(ID)){
 				temp.addMessages(message);
+				logisticsDS.modify(ID, message);
 				return null;
 			}
 		}
@@ -59,7 +61,7 @@ public class LogisticsBL {
 				return new LogisticsVO(temp); 
 			}
 		}
-		List<String> messages=new ArrayList<String>();
+		List<String> messages=new ArrayList<String>(4);
 		messages.add("无法查询到该单号对应的物流信息");
 		messages.add("可能原因为：");
 		messages.add("单号填写错误，请检查单号");

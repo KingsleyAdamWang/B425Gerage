@@ -48,6 +48,21 @@ public class CashRegisterBL {
 		return null;
 	}
 	
+	public String modify(IncomePO income) throws RemoteException{
+		int index=-1;
+		for(IncomePO temp: incomeList){
+			if(temp.equals(income)){
+				index=incomeList.indexOf(temp);
+			}
+		}
+		if(index==-1){
+			return "未找到对应收款单";
+		}
+		incomeList.set(index, income);
+		incomeDS.modify(income);
+		return null;
+	} 
+	
 //	public String find(){
 //		
 //	}
@@ -130,7 +145,7 @@ public class CashRegisterBL {
 		return result;
 	}
 	
-	public double getAmmount(List<IncomeVO> incomeList){
+	public double getIncomeAmmount(List<IncomeVO> incomeList){
 		double ammount=0;
 		for(IncomeVO temp: incomeList){
 			ammount=ammount+temp.income;
@@ -161,7 +176,7 @@ public class CashRegisterBL {
 		return sendBL.getSendByStaff(d,staffID);
 	}
 	
-	public double getAmmounts(List<SendVO> sendList){
+	public double getSendAmmounts(List<SendVO> sendList){
 		double result = 0;
 		for(SendVO temp: sendList){
 			result=result+temp.getFare();

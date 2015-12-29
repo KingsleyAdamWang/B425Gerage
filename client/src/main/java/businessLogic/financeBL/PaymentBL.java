@@ -70,10 +70,10 @@ public class PaymentBL {
 		return payments;
 	}
 	
-	public double getAmmount(List<PaymentPO> paymentList){
+	public double getAmmount(List<PaymentVO> paymentList){
 		double ammount=0;
-		for(PaymentPO temp:paymentList){
-			ammount=ammount+temp.getAmmounts();
+		for(PaymentVO temp:paymentList){
+			ammount=ammount+temp.payment;
 		}
 		return ammount;
 	}

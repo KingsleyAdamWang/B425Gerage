@@ -4,12 +4,13 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
-import businessLogic.manageBL.InstitutionBL;
-import businessLogic.manageBL.StaffBL;
 import po.inventoryPO.EntryPO;
 import po.managePO.InstitutionPO;
 import vo.InventoryVo.EntryVO;
+import vo.InventoryVo.ShipmentVO;
 import vo.ManageVo.InstitutionVO;
+import businessLogic.manageBL.InstitutionBL;
+import businessLogic.manageBL.StaffBL;
 import client.ClientInitException;
 import client.RMIHelper;
 import dataService.inventoryDataService.EntryDataService;
@@ -52,11 +53,13 @@ public class EntryBL {
 	
 	public String delete(EntryVO vo) throws RemoteException{
 		entryPO=vo.transToPO();
+		ShipmentBL shipmentBL=new ShipmentBL();
+		ShipmentVO shipmentVO=shipmentBL.find(entryPO.getId());
 		for(EntryPO temp: entryList){
 			if(temp.equals(entryPO)){
 				entryList.remove(entryPO);
 				entryDS.delete(entryPO);
-				return null;
+				return inventoryBL.setFree(shipmentVO.transToPO());
 			}
 		}
 		

@@ -47,5 +47,8 @@ public class PaymentController implements PaymentBLService{
 	public double getSalaryTotal() throws RemoteException{
 		return paymentBL.getSalaryTotal();
 	}
-
+	
+	public double getAmmount(List<PaymentVO> paymentList){
+		return paymentBL.getAmmount(paymentList);
+	}
 }
