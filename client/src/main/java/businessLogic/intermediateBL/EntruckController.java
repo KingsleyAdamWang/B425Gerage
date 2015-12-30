@@ -5,6 +5,7 @@ import businessLogicService.businessHallBLService.EntruckBLService;
 
 import java.rmi.RemoteException;
 import java.util.Date;
+import java.util.List;
 
 import po.logPO.LogPO;
 import presentation.MainFrame;
@@ -48,6 +49,24 @@ public class EntruckController implements EntruckBLService {
 	public String submit(EntruckVO eVO){
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<String> getInstitutionNames() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public double getDistance(String id, String name) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public double getFare(List<String> sendList) throws RemoteException {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

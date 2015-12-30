@@ -40,4 +40,10 @@ public class ArrivalController implements ArrivalBLService {
 		return arrivalBL.getInstitutionName();
 	}
 
+	@Override
+	public String modify(ArrivalVO arrivalVO) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
