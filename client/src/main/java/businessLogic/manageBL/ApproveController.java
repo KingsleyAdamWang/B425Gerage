@@ -5,6 +5,7 @@ import java.util.List;
 
 import vo.BussinessHallVo.ArrivalVO;
 import vo.BussinessHallVo.DeliveryVO;
+import vo.BussinessHallVo.EntruckVO;
 import vo.DeliverymanVo.ReceiveVO;
 import vo.DeliverymanVo.SendVO;
 import vo.FinanceVo.IncomeVO;
@@ -77,6 +78,20 @@ public class ApproveController implements ApproveBLService {
 	public void modifyDelivery(DeliveryVO vo) throws RemoteException{
 		approveBL.modifyDelivery(vo);
 	}
+	
+	//装车单
+	public List<EntruckVO> getUnapproveEntruck(){
+		return approveBL.getUnapproveEntruck();
+	}
+	public void setApprovedEntruck(EntruckVO vo) throws RemoteException{
+		approveBL.setApprovedEntruck(vo);
+	}
+	public void setAllApprovedEntruck() throws RemoteException{
+		approveBL.setAllApprovedEntruck();
+	}
+	public void modifyEntruck(EntruckVO vo) throws RemoteException{
+		approveBL.modifyEntruck(vo);
+	}	
 	
 	//入库单
 	public List<EntryVO> getUnapproveEntry(){

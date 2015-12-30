@@ -5,10 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import po.businessPO.EntruckPO;
+import po.inventoryPO.EntryPO;
 import vo.BussinessHallVo.EntruckVO;
+import vo.InventoryVo.EntryVO;
 import client.ClientInitException;
 import client.RMIHelper;
 import dataService.businessHallDataService.EntruckDataService;
+import enumSet.ReceiptsState;
 
 public class EntruckBL {
 	private EntruckDataService entruckDS;
@@ -85,4 +88,21 @@ public class EntruckBL {
 		return po.getIDlist();
 	}
 	
+	public void approve(EntruckPO po) throws RemoteException {
+		entruckDS.approval(po);
+	}
+
+	public void approveAll() throws RemoteException {
+		entruckDS.approvalAll();
+	}
+
+	public List<EntruckVO> getUnapproved() {
+		List<EntruckVO> result=new ArrayList<EntruckVO>();
+		for(EntruckPO temp: entruckList){
+			if(temp.getState()==ReceiptsState.unapprove){
+				result.add(new EntruckVO(temp));
+			}
+		}
+		return result;
+	}
 }

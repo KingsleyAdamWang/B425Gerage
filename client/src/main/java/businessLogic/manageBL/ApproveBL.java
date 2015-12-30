@@ -5,6 +5,7 @@ import java.util.List;
 
 import vo.BussinessHallVo.ArrivalVO;
 import vo.BussinessHallVo.DeliveryVO;
+import vo.BussinessHallVo.EntruckVO;
 import vo.DeliverymanVo.ReceiveVO;
 import vo.DeliverymanVo.SendVO;
 import vo.FinanceVo.IncomeVO;
@@ -14,6 +15,7 @@ import vo.InventoryVo.EntryVO;
 import vo.InventoryVo.ShipmentVO;
 import businessLogic.businessHallBL.CashRegisterBL;
 import businessLogic.businessHallBL.DeliveryBL;
+import businessLogic.businessHallBL.EntruckBL;
 import businessLogic.deliveryBL.ReceiveBL;
 import businessLogic.deliveryBL.SendBL;
 import businessLogic.financeBL.MoneyBL;
@@ -28,6 +30,7 @@ public class ApproveBL {
 	private businessLogic.intermediateBL.ArrivalBL arrivalBL_I;
 	private CashRegisterBL crBL;
 	private DeliveryBL deliveryBL;
+	private EntruckBL entruckBL;
 	private EntryBL entryBL;
 	private MoneyBL moneyBL;//IncomePO &PaymentPO
 	private ReceiveBL receiveBL;
@@ -41,6 +44,7 @@ public class ApproveBL {
 		arrivalBL_I=new businessLogic.intermediateBL.ArrivalBL();
 		crBL= new CashRegisterBL();
 		deliveryBL=new DeliveryBL();
+		entruckBL=new EntruckBL();
 		entryBL=new EntryBL();
 		moneyBL=new MoneyBL();
 		receiveBL=new ReceiveBL();
@@ -112,6 +116,22 @@ public class ApproveBL {
 	public void modifyDelivery(DeliveryVO vo) throws RemoteException{
 		deliveryBL.modify(vo);
 	}
+	
+	//装车单
+	public List<EntruckVO> getUnapproveEntruck(){
+		return entruckBL.getUnapproved();
+	}
+	
+	public void setApprovedEntruck(EntruckVO vo) throws RemoteException{
+		entruckBL.approve(vo.transToPO());
+	}
+	public void setAllApprovedEntruck() throws RemoteException{
+		entruckBL.approveAll();
+	}
+	public void modifyEntruck(EntruckVO vo) throws RemoteException{
+		entruckBL.modify(vo);
+	}
+	
 	
 	//入库单
 	public List<EntryVO> getUnapproveEntry(){
