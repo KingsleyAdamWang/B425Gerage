@@ -1,25 +1,34 @@
 package businessLogic.inventoryBL;
 
 import java.rmi.RemoteException;
+import java.util.Date;
 import java.util.List;
 
-import po.inventoryPO.ShipmentPO;
+import presentation.MainFrame;
 import vo.InventoryVo.ShipmentVO;
+import vo.LogVo.LogVO;
 import vo.ManageVo.InstitutionVO;
+import businessLogic.logBL.LogBL;
 import businessLogicService.inventoryBLService.ShipmentBLService;
 
 public class shipmentController implements ShipmentBLService {
 	private ShipmentBL shipmentBL;
+	private LogBL logBL;
 	
 	public shipmentController() throws RemoteException{
 		shipmentBL=new ShipmentBL();
+		logBL=new LogBL();
 	}
 	
 	public String add(ShipmentVO vo) throws RemoteException{
+		logBL.add(new LogVO(new Date(), MainFrame.getUser().getIdentityID(),
+				"新增出库单"));
 		return shipmentBL.add(vo);
 	}
 	
 	public String delete(ShipmentVO vo) throws RemoteException{
+		logBL.add(new LogVO(new Date(), MainFrame.getUser().getIdentityID(),
+				"删除出库单"));
 		return shipmentBL.delete(vo);
 	}
 	

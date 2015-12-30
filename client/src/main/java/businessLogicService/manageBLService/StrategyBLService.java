@@ -6,7 +6,7 @@ import java.util.List;
 import vo.ManageVo.PriceConstVO;
 
 public interface StrategyBLService {
-	public PriceConstVO getVO();
+	public PriceConstVO getVO() throws RemoteException;
 	
 	public String modify(PriceConstVO vo) throws RemoteException;
 	

@@ -33,6 +33,14 @@ public class CashRegisterBL {
 		}
 	}
 	
+	public List<IncomeVO> getIncomeVOList(){
+		List<IncomeVO> result=new ArrayList<IncomeVO>();
+		for(IncomePO temp :incomeList){
+			result.add(new IncomeVO(temp));
+		}
+		return result;
+	}
+	
 	public String add(IncomeVO vo) throws RemoteException{
 		IncomePO po=vo.transToPO();
 		
@@ -98,11 +106,11 @@ public class CashRegisterBL {
 		return result;
 	}
 	
-	public List<IncomePO> getIncomeBetweenDate(Date start ,Date end){
-		List<IncomePO> result=new ArrayList<IncomePO>();
+	public List<IncomeVO> getIncomeBetweenDate(Date start ,Date end){
+		List<IncomeVO> result=new ArrayList<IncomeVO>();
 		for(IncomePO temp: incomeList){
 			if(temp.getDate().getTime()>=start.getTime()&&temp.getDate().getTime()<=end.getTime()){
-				result.add(temp);
+				result.add(new IncomeVO(temp));
 			}
 		}
 		return result;

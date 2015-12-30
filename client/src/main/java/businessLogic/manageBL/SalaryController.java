@@ -24,7 +24,7 @@ public class SalaryController implements SalaryBLService {
 	}
 	
 	public String modify(SalaryVO vo) throws RemoteException{
-		logBL.add(new LogVO(new Date(),MainFrame.getUser().getIdentityID(),"更改工资信息"));
+		logBL.add(new LogVO(new Date(),MainFrame.getUser().getIdentityID(),"修改工资信息"));
 		return salaryBL.modify(vo);
 	}
 	

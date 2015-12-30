@@ -6,7 +6,7 @@ import po.logisticsPO.LogisticsPO;
 import vo.LogisticsVo.LogisticsVO;
 
 public interface LogisticsBLService {
-	public String add(LogisticsPO po);
+	public String add(LogisticsPO po) throws RemoteException;
 	
 	public String update(String ID,String message) throws RemoteException;
 	

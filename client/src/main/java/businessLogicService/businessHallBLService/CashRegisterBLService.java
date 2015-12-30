@@ -18,7 +18,7 @@ public interface CashRegisterBLService {
 	
 	public List<SendVO> getSendByStaffID(Date d,String staffID) throws RemoteException;
 	
-	public double getAmmounts(List<SendVO> sendList);
+	public double getAmmounts(List<SendVO> sendList) throws RemoteException;
 	
 	
 	public String search(String id);

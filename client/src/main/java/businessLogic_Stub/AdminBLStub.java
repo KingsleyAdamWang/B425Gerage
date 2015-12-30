@@ -8,6 +8,11 @@ import vo.UserVO;
 import businessLogicService.adminBLService.AdminBLService;
 
 public class AdminBLStub implements AdminBLService {
+	
+	public void main(){
+		
+	}
+	
 
 
 	public void add(String message) {

@@ -1,5 +1,6 @@
 package businessLogicService.manageBLService;
 
+import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.List;
 
@@ -7,7 +8,7 @@ import vo.InventoryVo.InventoryVO;
 import vo.ManageVo.InstitutionVO;
 
 public interface InstitutionBLService {
-	public List<InstitutionVO> show();
+	public List<InstitutionVO> show() throws IOException;
 
 	public String addIns(InstitutionVO insVO) throws RemoteException;
 	

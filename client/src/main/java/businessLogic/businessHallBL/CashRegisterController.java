@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import po.financePO.IncomePO;
+import po.logPO.LogPO;
 import presentation.MainFrame;
 import vo.BussinessHallVo.CashRegisterVO;
 import vo.DeliverymanVo.SendVO;
@@ -32,16 +33,24 @@ public class CashRegisterController implements CashRegisterBLService {
 		return crBL.getSendByStaffID(d, staffID);
 	}
 	
-	public double getAmmounts(List<SendVO> sendList){
+	public double getAmmounts(List<SendVO> sendList) throws RemoteException{
 		return crBL.getSendAmmounts(sendList);
 	}
 	
-	public List<IncomePO> getIncomeBetweemDate(Date start ,Date end){
+	public List<IncomeVO> getIncomeBetweemDate(Date start ,Date end){
 		return crBL.getIncomeBetweenDate(start, end);
 	}
 	
 	public double getIncomeAmmount(List<IncomeVO> incomeList){
 		return crBL.getIncomeAmmount(incomeList);
+	}
+	
+	public List<IncomeVO> getIncomeByIns(String institutionID){
+		return crBL.getIncomeByIns(institutionID);
+	}
+	
+	public List<IncomeVO> getIncomeList(){
+		return crBL.getIncomeVOList();
 	}
 
 	@Override

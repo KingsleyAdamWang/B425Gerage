@@ -39,7 +39,6 @@ public class AdminBL {
 		} catch (ClientInitException e) {
 			e.printStackTrace();
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -97,7 +96,6 @@ public class AdminBL {
 		} catch (ClientInitException e) {
 			e.printStackTrace();
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -124,7 +122,6 @@ public class AdminBL {
 					try {
 						UserDS.modify(po, newPassWord);
 					} catch (RemoteException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 					
@@ -137,5 +134,10 @@ public class AdminBL {
 		}
 
 	}
+	
+	//stub1
+//	public String modifyStub(){
+//		
+//	}
 
 }

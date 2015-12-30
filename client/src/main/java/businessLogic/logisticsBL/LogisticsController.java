@@ -22,7 +22,7 @@ public class LogisticsController implements LogisticsBLService {
 		logisticsBL=new LogisticsBL();
 	}
 	
-	public String add(LogisticsPO po){
+	public String add(LogisticsPO po) throws RemoteException{
 		return logisticsBL.add(po);
 	}
 	
