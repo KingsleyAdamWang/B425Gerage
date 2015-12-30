@@ -64,6 +64,18 @@ public class DeliveryBL {
 		return "未找到对应派件单";
 	}
 	
+	public String modify(DeliveryVO vo) throws RemoteException{
+		DeliveryPO po=vo.transToPO();
+		for(DeliveryPO temp: deliveryList){
+			if(temp.equals(po)){
+				deliveryList.set(deliveryList.indexOf(temp),po);
+				deliveryDS.modify(po);
+				return null;
+			}
+		}
+		return "未找到对应派件单";
+	}
+	
 	public SendVO getSendMessage(String ID) throws RemoteException{
 		SendBL sendBL=new SendBL();
 		return sendBL.getSend(ID);

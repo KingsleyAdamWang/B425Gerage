@@ -66,6 +66,19 @@ public class EntryBL {
 		return "未找到入库单";
 	}
 	
+	public String modify(EntryVO vo) throws RemoteException{
+		entryPO=vo.transToPO();
+		for(EntryPO temp: entryList){
+			if(temp.equals(entryPO)){
+				entryList.set(entryList.indexOf(temp),entryPO);
+				entryDS.modify(entryPO);
+				return null;
+			}
+		}
+		
+		return "未找到入库单";
+	}
+	
 	public List<InstitutionVO> getInstitutionList(String userID)
 			throws RemoteException {
 		List<InstitutionVO> result = new ArrayList<InstitutionVO>();

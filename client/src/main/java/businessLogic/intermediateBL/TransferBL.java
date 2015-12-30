@@ -69,6 +69,19 @@ public class TransferBL {
 		}
 		
 	}
+	public String modify(TransferVO vo) throws RemoteException {
+		TransferPO transferPO=vo.transToPO();
+		for(TransferPO temp: transferList){
+			if(temp.equals(transferPO)){
+				transferList.set(transferList.indexOf(temp),transferPO);
+				transferDS.modify(transferPO);
+				return null;
+			}
+		}
+		
+		return "未找到中转单";
+		
+	}
 
 	public String delete(TransferVO vo) throws RemoteException {
 		TransferPO po = vo.transToPO();
@@ -179,4 +192,6 @@ public class TransferBL {
 		}
 		return result;
 	}
+
+	
 }

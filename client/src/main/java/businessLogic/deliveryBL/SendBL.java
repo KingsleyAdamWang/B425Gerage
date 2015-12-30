@@ -7,12 +7,14 @@ import java.util.Date;
 import java.util.List;
 
 import po.deliveryPO.SendPO;
+import po.inventoryPO.EntryPO;
 import po.logisticsPO.LogisticsPO;
 import po.managePO.PriceConstPO;
 import util.CheckUtil;
 import util.DateUtil;
 import util.PackPrice;
 import vo.DeliverymanVo.SendVO;
+import vo.InventoryVo.EntryVO;
 import businessLogic.logisticsBL.LogisticsBL;
 import businessLogic.manageBL.StrategyBL;
 import client.ClientInitException;
@@ -21,6 +23,7 @@ import dataService.deliveryDataService.SendDataService;
 import dataService.manageDataService.PriceConstDataService;
 import enumSet.Express;
 import enumSet.PackType;
+import enumSet.ReceiptsState;
 
 public class SendBL {
 	SendDataService sendDS;
@@ -183,6 +186,24 @@ public class SendBL {
 			}
 		}
 		return sendList;
+	}
+	
+	public void approve(SendPO po) throws RemoteException {
+		sendDS.approval(po);
+	}
+
+	public void approveAll() throws RemoteException {
+		sendDS.approvalAll();
+	}
+
+	public List<SendVO> getUnapproved() {
+		List<SendVO> result=new ArrayList<SendVO>();
+		for(SendPO temp: sendList){
+			if(temp.getState()==ReceiptsState.unapprove){
+				result.add(new SendVO(temp));
+			}
+		}
+		return result;
 	}
 	
 

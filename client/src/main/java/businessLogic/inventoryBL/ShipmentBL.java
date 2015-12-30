@@ -60,6 +60,18 @@ public class ShipmentBL {
 		
 		return "未找到出库单";
 	}
+	public String modify(ShipmentVO vo) throws RemoteException {
+		ShipmentPO shipmentPO=vo.transToPO();
+		for(ShipmentPO temp: shipmentList){
+			if(temp.equals(shipmentPO)){
+				shipmentList.set(shipmentList.indexOf(temp),shipmentPO);
+				shipmentDS.modify(shipmentPO);
+				return null;
+			}
+		}
+		
+		return "未找到出库单";
+		}
 	
 	public List<ShipmentPO> getShipmentList(){
 //		List<ShipmentVO> result=new ArrayList<ShipmentVO>();
@@ -125,4 +137,6 @@ public class ShipmentBL {
 		}
 		return result;
 	}
+
+	
 }

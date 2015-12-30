@@ -6,6 +6,7 @@ import java.util.List;
 import vo.BussinessHallVo.ArrivalVO;
 import vo.BussinessHallVo.DeliveryVO;
 import vo.DeliverymanVo.ReceiveVO;
+import vo.DeliverymanVo.SendVO;
 import vo.FinanceVo.IncomeVO;
 import vo.FinanceVo.PaymentVO;
 import vo.IntermediateVo.TransferVO;
@@ -20,8 +21,21 @@ public class ApproveController implements ApproveBLService {
 		approveBL = new ApproveBL();
 	}
 
+	//寄件单
+	public List<SendVO> getUnapproveSend(){
+		return approveBL.getUnapproveSend();
+	}
+	public void setApprovedSend(SendVO vo) throws RemoteException{
+		approveBL.setApprovedSend(vo);
+	}
+	public void setAllApprovedSend() throws RemoteException{
+		approveBL.setAllApprovedSend();
+	}
+	public void modifySend(SendVO vo) throws RemoteException{
+		approveBL.modifySend(vo);
+	}
+	//到达单
 	public List<ArrivalVO> getUnapprovedArrival() {
-
 		return approveBL.getUnapprovedArrival();
 	}
 	public void setApprovedArrival(ArrivalVO vo) throws RemoteException{
@@ -30,7 +44,11 @@ public class ApproveController implements ApproveBLService {
 	public void setAllApprovedArrival() throws RemoteException{
 		approveBL.setAllApprovedArrival();
 	}
+	public void modifyArrival(ArrivalVO arrivalVO) throws RemoteException{
+		approveBL.modifyArrival(arrivalVO);
+	}
 	
+	//收款单
 	public List<IncomeVO> getUnapprovedIncome(){
 		return approveBL.getUnapprovedIncome();
 	}
@@ -41,7 +59,11 @@ public class ApproveController implements ApproveBLService {
 	public void setAllApprovedIncome() throws RemoteException{
 		approveBL.setAllApprovedIncome();
 	}
+	public void modifyIncome(IncomeVO vo) throws RemoteException{
+		approveBL.modifyIncome(vo);
+	}
 	
+	//派件单
 	public List<DeliveryVO> getUnapprovedDelivery(){
 		return approveBL.getUnapprovedDelivery();
 	}
@@ -52,7 +74,11 @@ public class ApproveController implements ApproveBLService {
 	public void setAllApprovedDelivery() throws RemoteException{
 		approveBL.setAllApprovedDelivery();
 	}
+	public void modifyDelivery(DeliveryVO vo) throws RemoteException{
+		approveBL.modifyDelivery(vo);
+	}
 	
+	//入库单
 	public List<EntryVO> getUnapproveEntry(){
 		return approveBL.getUnapproveEntry();
 	}
@@ -62,6 +88,9 @@ public class ApproveController implements ApproveBLService {
 	}
 	public void setAllApprovedEntry() throws RemoteException{
 		approveBL.setAllApprovedEntry();
+	}
+	public void modifyEntry(EntryVO vo) throws RemoteException{
+		approveBL.modifyEntry(vo);
 	}
 	
 //	public List<IncomeVO> getUnapproveIncome(){
@@ -75,6 +104,7 @@ public class ApproveController implements ApproveBLService {
 //		moneyBL.approveAll();
 //	}
 	
+	//付款单
 	public List<PaymentVO> getUnapprovePayment(){
 		return approveBL.getUnapprovePayment();
 	}
@@ -85,7 +115,11 @@ public class ApproveController implements ApproveBLService {
 	public void setAllApprovedPayment() throws RemoteException{
 		approveBL.setAllApprovedPayment();
 	}
+	public void modifyPayment(PaymentVO vo) throws RemoteException{
+		approveBL.modifyPayment(vo);
+	}
 	
+	//收件单
 	public List<ReceiveVO> getUnapproveReceive(){
 		return approveBL.getUnapproveReceive();
 	}
@@ -95,7 +129,11 @@ public class ApproveController implements ApproveBLService {
 	public void setAllApprovedReceive() throws RemoteException{
 		approveBL.setAllApprovedReceive();
 	}
+	public void modifyReceive(ReceiveVO vo) throws RemoteException{
+		approveBL.modifyReceive(vo);
+	}
 	
+	//出库单
 	public List<ShipmentVO> getUnapproveShipment(){
 		return approveBL.getUnapproveShipment();
 	}
@@ -105,7 +143,11 @@ public class ApproveController implements ApproveBLService {
 	public void setAllApprovedShipment() throws RemoteException{
 		approveBL.setAllApprovedShipment();
 	}
+	public void modifyShipment(ShipmentVO vo) throws RemoteException{
+		approveBL.modifyShipment(vo);
+	}
 	
+	//中转单
 	public List<TransferVO> getUnapproveTransfer(){
 		return approveBL.getUnapproveTransfer();
 	}
@@ -115,5 +157,7 @@ public class ApproveController implements ApproveBLService {
 	public void setAllApprovedTransfer() throws RemoteException{
 		approveBL.setAllApprovedTransfer();
 	}
-
+	public void modifyTransfer(TransferVO vo) throws RemoteException{
+		approveBL.modifyTransfer(vo);
+	}
 }

@@ -8,8 +8,10 @@ import java.util.List;
 
 
 
+
 //import po.PaymentPO;
 import po.financePO.PaymentPO;
+import po.inventoryPO.EntryPO;
 import po.managePO.SalaryPO;
 import util.DateUtil;
 import vo.AdminVo.UserVO;
@@ -52,6 +54,19 @@ public class PaymentBL {
 		paymentList.add(po);
 		paymentDS.add(po);
 		
+	}
+	
+public String modify(PaymentVO vo) throws RemoteException {
+	PaymentPO paymentPO=vo.transToPO();
+	for(PaymentPO temp: paymentList){
+		if(temp.equals(paymentPO)){
+			paymentList.set(paymentList.indexOf(temp),paymentPO);
+			paymentDS.modify(paymentPO);
+			return null;
+		}
+	}
+	
+	return "未找到付款单";
 	}
 	
 	public List<PaymentPO> findByDate(Date d) throws RemoteException{
@@ -134,4 +149,6 @@ public class PaymentBL {
 		}
 		return result;
 	}
+
+	
 }
