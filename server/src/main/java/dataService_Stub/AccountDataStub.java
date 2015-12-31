@@ -1,6 +1,7 @@
 package dataService_Stub;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.List;
 
 import po.financePO.AccountPO;
@@ -8,56 +9,52 @@ import dataService.financeDataService.AccountDataService;
 
 public class AccountDataStub implements AccountDataService {
 
+	List<AccountPO> tempList ;
 	
+	public AccountDataStub(){
+		init();
+	}
 	
-
-
-	public void update(AccountPO po) throws RemoteException {
-		// TODO Auto-generated method stub
-
+	private void init(){
+		tempList = new ArrayList<AccountPO>();
+		tempList.add(new AccountPO("甜甜快递","123456789106556",665699.36));
+		tempList.add(new AccountPO("云云快递","546468684646464",4646546.53));
+		tempList.add(new AccountPO("天天快递","646464646464648",5454546.26));
+		
+	}
+	@Override
+	public boolean modify(AccountPO po) throws RemoteException {
+		tempList.set(tempList.indexOf(po), po);
+		System.out.println("modify success!");
+		return true;
 	}
 
-
-	public AccountPO check(String id) throws RemoteException {
-		AccountPO po = new AccountPO(id,"535655", 500);
-		return po;
-	}
-
-
-	public boolean init() throws RemoteException {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-
-	public boolean modify(AccountPO po, String name) throws RemoteException {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-
+	@Override
 	public boolean add(AccountPO po) throws RemoteException {
-		// TODO Auto-generated method stub
-		return false;
+		tempList.add(po);
+		System.out.println("add success!");
+		return true;
 	}
 
-
+	@Override
 	public boolean delete(AccountPO po) throws RemoteException {
-		// TODO Auto-generated method stub
-		return false;
+		tempList.remove(po);
+		System.out.println("delete success!");
+		return true;
 	}
 
-
+	@Override
 	public List<AccountPO> search(String key) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		List<AccountPO> result = new ArrayList<AccountPO>();
+		for(AccountPO po: tempList  )
+			if(po.getName().contains(key))
+				result.add(po);
+		return result;
 	}
 
-
+	@Override
 	public List<AccountPO> getAccounts() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+
+		return tempList;
 	}
-
-
 }

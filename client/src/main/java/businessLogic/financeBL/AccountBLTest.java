@@ -8,9 +8,14 @@ import org.junit.Test;
 
 import po.financePO.AccountPO;
 import vo.FinanceVo.AccountVO;
+import businessLogicService.financeBLService.AccountBLService;
 
-public class AccountBLTest {
-
+public class AccountBLTest{
+	AccountPO accountPO;
+	
+	public AccountBLTest(){
+		
+	}
 	@Test
 	public void testAddAccount() throws RemoteException {
 		AccountBL bl = new AccountBL();
@@ -26,7 +31,11 @@ public class AccountBLTest {
 		bl.accounts.add(po1);
 		bl.accounts.add(po2);
 		AccountVO vo = new AccountVO(po2);
-		assertEquals("账户名重复！修改失败！", bl.modifyAccount(vo, "王栋"));
+		assertEquals("账户名重复！修改失败！", bl.modifyAccount(vo));
+	}
+	
+	public void testDeleteAccount(DeleteAccount){
+		
 	}
 
 }
