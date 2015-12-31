@@ -7,8 +7,8 @@ import vo.FinanceVo.AccountVO;
 import businessLogicService.financeBLService.AccountBLService;
 
 public class InitBillController implements AccountBLService {
-	public void initBill(String name){
-		
+	public void initBill(String name) {
+
 	}
 
 	public String addAccount(String name, String accountID)
@@ -36,5 +36,5 @@ public class InitBillController implements AccountBLService {
 	public List<AccountVO> getAccounts() {
 		// TODO Auto-generated method stub
 		return null;
-	}	
+	}
 }

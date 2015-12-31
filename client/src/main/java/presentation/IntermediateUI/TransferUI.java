@@ -1,5 +1,6 @@
 package presentation.IntermediateUI;
 
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -24,16 +25,11 @@ import util.DateUtil;
 import vo.IntermediateVo.TransferVO;
 import vo.ManageVo.InstitutionVO;
 import businessLogic.intermediateBL.TransferController;
-import client.ClientInitException;
 import client.Main;
 import enumSet.ReceiptsState;
 import enumSet.TransportType;
 
 public class TransferUI extends JPanel {
-	// 一会儿删↓
-	static MainFrame f;
-	// 一会儿删↑
-
 	private static final long serialVersionUID = 1L;
 
 	private TransferController tc;
@@ -56,6 +52,10 @@ public class TransferUI extends JPanel {
 		tc = new TransferController();
 		this.initComponents();
 		this.validate();
+	}
+	
+	protected void paintComponent(Graphics g) {
+		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
 	}
 
 	private void initComponents() throws RemoteException {
@@ -139,7 +139,7 @@ public class TransferUI extends JPanel {
 		submitBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (hasEmpty()) {
-					JOptionPane.showMessageDialog(null, "尚未填写完整", "",
+					JOptionPane.showMessageDialog(null, "信息未填写完整", "",
 							JOptionPane.ERROR_MESSAGE);
 					return;
 				}
@@ -154,7 +154,6 @@ public class TransferUI extends JPanel {
 								JOptionPane.INFORMATION_MESSAGE);
 					}
 				} catch (RemoteException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -173,7 +172,6 @@ public class TransferUI extends JPanel {
 		try {
 			l = tc.getList(id);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (NullPointerException ex) {
 			return;
@@ -219,12 +217,5 @@ public class TransferUI extends JPanel {
 		jl.repaint();
 		sp.repaint();
 		this.repaint();
-	}
-
-	public static void main(String[] args) throws RemoteException,
-			ClientInitException {
-		f = new MainFrame();
-		TransferUI view = new TransferUI();
-		f.setView(view);
 	}
 }

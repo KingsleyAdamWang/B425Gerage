@@ -23,11 +23,11 @@ public class AdminController implements AdminBLService {
 
 	private AdminBL adminBL;
 	private LogDataService logDS;
-	
+
 	public AdminController() throws ClientInitException {
 		adminBL = new AdminBL();
 		RMIHelper.initLogDataService();
-		logDS=RMIHelper.getLogDataService();
+		logDS = RMIHelper.getLogDataService();
 	}
 
 	/*
@@ -38,7 +38,7 @@ public class AdminController implements AdminBLService {
 	 * )
 	 */
 	public List<UserVO> search(String key) {
-		
+
 		return adminBL.search(key);
 	}
 
@@ -49,8 +49,10 @@ public class AdminController implements AdminBLService {
 	 * businessLogicService.adminBLService.AdminBLService#modify(java.lang.String
 	 * , java.lang.String)
 	 */
-	public String modify(String identityID, String newPassWord) throws RemoteException {
-		logDS.add(new LogPO(new Date(), MainFrame.getUser().getIdentityID(), "人员管理 修改人员"));
+	public String modify(String identityID, String newPassWord)
+			throws RemoteException {
+		logDS.add(new LogPO(new Date(), MainFrame.getUser().getIdentityID(),
+				"人员管理 修改人员"));
 		return adminBL.modify(identityID, newPassWord);
 	}
 

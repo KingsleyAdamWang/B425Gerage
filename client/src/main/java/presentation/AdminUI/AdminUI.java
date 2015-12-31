@@ -1,8 +1,8 @@
 package presentation.AdminUI;
 
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.rmi.RemoteException;
 import java.util.Vector;
 
 import javax.swing.BorderFactory;
@@ -27,6 +27,10 @@ public class AdminUI extends JPanel {
 	public AdminUI() {
 		this.initComponents();
 		this.validate();
+	}
+
+	protected void paintComponent(Graphics g) {
+		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
 	}
 
 	private void initComponents() {
@@ -78,7 +82,6 @@ public class AdminUI extends JPanel {
 						try {
 							Main.frame.setView(new AdminSearchUI(), "账户密码管理");
 						} catch (ClientInitException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}

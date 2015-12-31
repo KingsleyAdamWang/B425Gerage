@@ -1,7 +1,9 @@
 package presentation.ManageUI;
 
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.List;
 import java.util.Vector;
@@ -18,18 +20,14 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import presentation.MainFrame;
-import client.Main;
 import vo.AdminVo.UserVO;
 import vo.ManageVo.InstitutionVO;
 import businessLogic.manageBL.StaffController;
+import client.Main;
 import enumSet.Position;
 
 public class StaffManageUI extends JPanel {
 	private static final long serialVersionUID = 1L;
-
-	// 一会儿删↓
-	static MainFrame f;
-	// 一会儿删↑
 
 	private StaffController sc;
 	private JButton[] funcButton;
@@ -43,6 +41,10 @@ public class StaffManageUI extends JPanel {
 		this.initComponents();
 		this.initList();
 		this.validate();
+	}
+	
+	protected void paintComponent(Graphics g) {
+		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
 	}
 
 	private void initComponents() {
@@ -105,7 +107,8 @@ public class StaffManageUI extends JPanel {
 						try {
 							Main.frame.setView(new InstManageUI(), "人员机构管理");
 						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (IOException e1) {
 							e1.printStackTrace();
 						}
 					}
@@ -125,7 +128,6 @@ public class StaffManageUI extends JPanel {
 				vData.add(toVector(vo));
 			}
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		this.repaint();
@@ -167,7 +169,6 @@ public class StaffManageUI extends JPanel {
 			sc.deleteUser(toVO(vData.get(index)).getIdentityID());
 			initList();
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return;
@@ -214,7 +215,7 @@ class StaffDialog extends JDialog {
 	private JLabel nameLabel;
 	private JLabel idLabel;
 	private JLabel jobLabel;
-	private JComboBox jobBox;
+	private JComboBox<String> jobBox;
 	private Vector<String> v;
 
 	public StaffDialog() {
@@ -318,7 +319,6 @@ class StaffDialog extends JDialog {
 						}
 						ui.initList();
 					} catch (RemoteException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}
@@ -342,7 +342,6 @@ class StaffDialog extends JDialog {
 						}
 						ui.initList();
 					} catch (RemoteException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}

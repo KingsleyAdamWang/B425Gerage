@@ -1,5 +1,6 @@
 package presentation.FinanceUI;
 
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
@@ -27,6 +28,10 @@ public class FinanceLowUI extends JPanel {
 	public FinanceLowUI() {
 		this.initComponents();
 		this.validate();
+	}
+	
+	protected void paintComponent(Graphics g) {
+		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
 	}
 
 	private void initComponents() {
@@ -79,7 +84,6 @@ public class FinanceLowUI extends JPanel {
 						try {
 							Main.frame.setView(new IncomeManageUI(), "查看收款单");
 						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}
@@ -91,7 +95,6 @@ public class FinanceLowUI extends JPanel {
 						try {
 							Main.frame.setView(new PaymentUI(), "填写付款单");
 						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}
@@ -118,7 +121,6 @@ public class FinanceLowUI extends JPanel {
 						try {
 							Main.frame.setView(new LogUI(), "日志查询");
 						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}

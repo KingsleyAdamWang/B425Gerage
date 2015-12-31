@@ -1,5 +1,6 @@
 package presentation.AdminUI;
 
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -14,10 +15,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import presentation.MainFrame;
-import client.ClientInitException;
-import client.Main;
 import vo.ManageVo.InstitutionVO;
 import businessLogic.adminBL.AdminController;
+import client.ClientInitException;
+import client.Main;
 
 public class AdminSearchUI extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -45,6 +46,10 @@ public class AdminSearchUI extends JPanel {
 		this.initComponents();
 		this.validate();
 	}
+	
+	protected void paintComponent(Graphics g) {
+		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
+	}
 
 	private void initComponents() {
 		this.setLayout(null);
@@ -54,6 +59,8 @@ public class AdminSearchUI extends JPanel {
 		keyBtn = new JRadioButton("按关键字查找");
 		insBtn.setBounds(200, 30, 150, 50);
 		keyBtn.setBounds(450, 30, 150, 50);
+		insBtn.setOpaque(false);
+		keyBtn.setOpaque(false);
 		insBtn.setSelected(true);
 		group.add(insBtn);
 		group.add(keyBtn);
@@ -97,7 +104,6 @@ public class AdminSearchUI extends JPanel {
 					}
 					Main.frame.setView(view, "账户密码管理");
 				} catch (ClientInitException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}

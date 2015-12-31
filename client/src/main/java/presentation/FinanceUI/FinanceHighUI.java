@@ -1,5 +1,6 @@
 package presentation.FinanceUI;
 
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
@@ -14,7 +15,6 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import presentation.MainFrame;
-import presentation.BusinessHallUI.DriverAddUI;
 import presentation.LogUI.LogUI;
 import vo.AdminVo.UserVO;
 import client.ClientInitException;
@@ -30,6 +30,10 @@ public class FinanceHighUI extends JPanel {
 	public FinanceHighUI() {
 		this.initComponents();
 		this.validate();
+	}
+	
+	protected void paintComponent(Graphics g) {
+		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
 	}
 
 	private void initComponents() {
@@ -91,7 +95,6 @@ public class FinanceHighUI extends JPanel {
 						try {
 							Main.frame.setView(new AccountUI(), "账户管理");
 						} catch (RemoteException | ClientInitException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}
@@ -103,7 +106,6 @@ public class FinanceHighUI extends JPanel {
 						try {
 							Main.frame.setView(new IncomeManageUI(), "查看收款单");
 						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}
@@ -115,7 +117,6 @@ public class FinanceHighUI extends JPanel {
 						try {
 							Main.frame.setView(new PaymentUI(), "填写付款单");
 						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}
@@ -141,7 +142,6 @@ public class FinanceHighUI extends JPanel {
 						try {
 							Main.frame.setView(new LogUI(), "日志查询");
 						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}

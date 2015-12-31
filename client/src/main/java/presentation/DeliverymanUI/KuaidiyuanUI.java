@@ -1,5 +1,6 @@
 package presentation.DeliverymanUI;
 
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
@@ -28,6 +29,10 @@ public class KuaidiyuanUI extends JPanel {
 	public KuaidiyuanUI() {
 		this.initComponents();
 		this.validate();
+	}
+	
+	protected void paintComponent(Graphics g) {
+		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
 	}
 
 	private void initComponents() {
@@ -73,10 +78,8 @@ public class KuaidiyuanUI extends JPanel {
 						try {
 							Main.frame.setView(new SendUI(), "填写寄件单");
 						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						} catch (ClientInitException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}
@@ -88,7 +91,6 @@ public class KuaidiyuanUI extends JPanel {
 						try {
 							Main.frame.setView(new ReceiveUI(), "填写收件单");
 						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}
@@ -100,10 +102,8 @@ public class KuaidiyuanUI extends JPanel {
 						try {
 							Main.frame.setView(new LogisticsUI(), "物流信息查询");
 						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						} catch (ClientInitException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}

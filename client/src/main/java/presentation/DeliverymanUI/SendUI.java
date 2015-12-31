@@ -1,5 +1,6 @@
 package presentation.DeliverymanUI;
 
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -58,6 +59,10 @@ public class SendUI extends JPanel {
 		sc = new SendController();
 		this.initComponents();
 		this.validate();
+	}
+	
+	protected void paintComponent(Graphics g) {
+		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
 	}
 
 	private void initComponents() throws RemoteException {
@@ -135,7 +140,7 @@ public class SendUI extends JPanel {
 		yesButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (hasEmpty()) {
-					JOptionPane.showMessageDialog(null, "尚未填写完整", "",
+					JOptionPane.showMessageDialog(null, "信息未填写完整", "",
 							JOptionPane.ERROR_MESSAGE);
 					return;
 				}
@@ -150,13 +155,11 @@ public class SendUI extends JPanel {
 						Main.frame.setView(new SendUI(), "填写寄件单");
 					}
 				} catch (RemoteException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (NumberFormatException e1) {
 					JOptionPane.showMessageDialog(null, "输入数字格式有误", "",
 							JOptionPane.ERROR_MESSAGE);
 				} catch (ClientInitException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -174,7 +177,6 @@ public class SendUI extends JPanel {
 				try {
 					setFare();
 				} catch (RemoteException | ClientInitException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -186,7 +188,6 @@ public class SendUI extends JPanel {
 				try {
 					setFare();
 				} catch (RemoteException | ClientInitException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -200,7 +201,6 @@ public class SendUI extends JPanel {
 				try {
 					setFare();
 				} catch (RemoteException | ClientInitException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -214,7 +214,6 @@ public class SendUI extends JPanel {
 				try {
 					setFare();
 				} catch (RemoteException | ClientInitException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}

@@ -1,9 +1,10 @@
 package presentation.ManageUI;
 
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.rmi.RemoteException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
@@ -19,12 +20,13 @@ import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
-import client.Main;
+import presentation.MainFrame;
 import util.Storage;
 import vo.InventoryVo.InventoryVO;
 import vo.ManageVo.InstitutionVO;
 import businessLogic.manageBL.InstitutionController;
 import businessLogic.manageBL.StrategyController;
+import client.Main;
 import enumSet.InsType;
 
 public class InstManageUI extends JPanel {
@@ -36,12 +38,16 @@ public class InstManageUI extends JPanel {
 	private Vector<Vector<String>> vData;
 	private JScrollPane scrollPane;
 
-	public InstManageUI() throws RemoteException {
+	public InstManageUI() throws IOException {
 		vData = new Vector<Vector<String>>();
 		this.ic = new InstitutionController();
 		this.initComponents();
 		this.initList();
 		this.validate();
+	}
+
+	protected void paintComponent(Graphics g) {
+		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
 	}
 
 	private void initComponents() {
@@ -95,7 +101,8 @@ public class InstManageUI extends JPanel {
 						try {
 							deleteInst();
 						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (IOException e1) {
 							e1.printStackTrace();
 						}
 					}
@@ -123,7 +130,6 @@ public class InstManageUI extends JPanel {
 									(new StaffManageUI(toVO(vData.get(index)))),
 									"人员机构管理");
 						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}
@@ -145,7 +151,7 @@ public class InstManageUI extends JPanel {
 		return this.ic;
 	}
 
-	protected void initList() {
+	protected void initList() throws IOException {
 		vData.clear();
 
 		for (InstitutionVO vo : ic.show()) {
@@ -173,7 +179,7 @@ public class InstManageUI extends JPanel {
 		return;
 	}
 
-	private void deleteInst() throws RemoteException {
+	private void deleteInst() throws IOException {
 		int index = table.getSelectedRow();
 		if (index == -1 || (vData.isEmpty() && index == 0)) {
 			JOptionPane.showMessageDialog(null, "请选择一个机构", "",
@@ -316,7 +322,6 @@ class InstManageDialog extends JDialog {
 			try {
 				cities = (new StrategyController()).getCities();
 			} catch (RemoteException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			String[] tmpArray = new String[cities.size()];
@@ -354,7 +359,6 @@ class InstManageDialog extends JDialog {
 			try {
 				cities = (new StrategyController()).getCities();
 			} catch (RemoteException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			String[] tmpArray = new String[cities.size()];
@@ -425,7 +429,6 @@ class InstManageDialog extends JDialog {
 					invenField[10].setText(tmp.getAuto().getShelf() + "");
 					invenField[11].setText(tmp.getAuto().getPlace() + "");
 				} catch (RemoteException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -465,10 +468,13 @@ class InstManageDialog extends JDialog {
 						}
 
 					} catch (RemoteException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-					ui.initList();
+					try {
+						ui.initList();
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
 				}
 				if (opr.equals("update")) {
 					if (type != "中转中心") {
@@ -484,7 +490,6 @@ class InstManageDialog extends JDialog {
 										JOptionPane.INFORMATION_MESSAGE);
 							}
 						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					} else {
@@ -511,11 +516,14 @@ class InstManageDialog extends JDialog {
 								}
 							}
 						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}
-					ui.initList();
+					try {
+						ui.initList();
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
 				}
 				setVisible(false);
 			}

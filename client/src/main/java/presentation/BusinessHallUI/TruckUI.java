@@ -1,5 +1,6 @@
 package presentation.BusinessHallUI;
 
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
@@ -35,6 +36,10 @@ public class TruckUI extends JPanel {
 		this.initComponents();
 		this.validate();
 	}
+	
+	protected void paintComponent(Graphics g) {
+		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
+	}
 
 	private void initComponents() {
 		this.setLayout(null);
@@ -62,13 +67,17 @@ public class TruckUI extends JPanel {
 		submitBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String result;
-				result = tc.add(getVO());
-				if (result != null) {
-					JOptionPane.showMessageDialog(null, result, "",
-							JOptionPane.ERROR_MESSAGE);
-				} else {
-					JOptionPane.showMessageDialog(null, "添加成功", "",
-							JOptionPane.INFORMATION_MESSAGE);
+				try {
+					result = tc.add(getVO());
+					if (result != null) {
+						JOptionPane.showMessageDialog(null, result, "",
+								JOptionPane.ERROR_MESSAGE);
+					} else {
+						JOptionPane.showMessageDialog(null, "添加成功", "",
+								JOptionPane.INFORMATION_MESSAGE);
+					}
+				} catch (RemoteException e1) {
+					e1.printStackTrace();
 				}
 			}
 		});

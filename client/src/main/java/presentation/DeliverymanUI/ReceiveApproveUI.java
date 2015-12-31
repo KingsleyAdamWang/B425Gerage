@@ -1,5 +1,6 @@
 package presentation.DeliverymanUI;
 
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
@@ -13,11 +14,11 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-import presentation.BusinessHallUI.ArrivalModifyUI;
+import presentation.MainFrame;
+import presentation.BusinessHallUI.EntruckApproveUI;
 import presentation.ManageUI.ApproveChooseUI;
 import vo.DeliverymanVo.ReceiveVO;
 import businessLogic.manageBL.ApproveController;
-import client.ClientInitException;
 import client.Main;
 
 public class ReceiveApproveUI extends JPanel {
@@ -35,6 +36,10 @@ public class ReceiveApproveUI extends JPanel {
 		this.initComponents();
 		this.initList();
 		this.validate();
+	}
+	
+	protected void paintComponent(Graphics g) {
+		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
 	}
 
 	private void initComponents() {
@@ -83,7 +88,6 @@ public class ReceiveApproveUI extends JPanel {
 							Main.frame.setView(new ReceiveModifyUI(list
 									.get(index)));
 						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}
@@ -100,8 +104,10 @@ public class ReceiveApproveUI extends JPanel {
 						}
 						try {
 							ac.setApprovedReceive(list.get(index));
+							JOptionPane.showMessageDialog(null, "审批完成", "",
+									JOptionPane.INFORMATION_MESSAGE);
+							Main.frame.setView(new ReceiveApproveUI());
 						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}
@@ -110,11 +116,18 @@ public class ReceiveApproveUI extends JPanel {
 			case 2:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						try {
-							ac.setAllApprovedReceive();
-						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
+						int n = JOptionPane.showConfirmDialog(null,
+								"确定通过所有单据的审批?", "", JOptionPane.YES_NO_OPTION);
+						if (n == 0) {
+							try {
+								ApproveController ac = new ApproveController();
+								ac.setAllApprovedReceive();
+								JOptionPane.showMessageDialog(null, "审批完成", "",
+										JOptionPane.INFORMATION_MESSAGE);
+								Main.frame.setView(new ReceiveApproveUI());
+							} catch (RemoteException e1) {
+								e1.printStackTrace();
+							}
 						}
 					}
 				});

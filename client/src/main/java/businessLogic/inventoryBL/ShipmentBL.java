@@ -21,7 +21,7 @@ public class ShipmentBL {
 	private ShipmentDataService shipmentDS;
 	private List<ShipmentPO> shipmentList;
 	private ShipmentPO shipmentPO;
-	
+
 	public ShipmentBL() throws RemoteException {
 		try {
 			RMIHelper.initShipmentDataService();
@@ -31,87 +31,90 @@ public class ShipmentBL {
 			e.printStackTrace();
 		}
 	}
-	
-	public String add(ShipmentVO vo) throws RemoteException{
+
+	public String add(ShipmentVO vo) throws RemoteException {
 		shipmentPO = vo.transToPO();
-		InventoryBL invBL=new InventoryBL();
-		for(ShipmentPO temp: shipmentList){
-			if(temp.equals(shipmentPO)){
+		InventoryBL invBL = new InventoryBL();
+		for (ShipmentPO temp : shipmentList) {
+			if (temp.equals(shipmentPO)) {
 				return "存在相同出库单号";
 			}
 		}
-		
+
 		shipmentPO.setState(ReceiptsState.unapprove);
-		
+
 		shipmentList.add(shipmentPO);
 		shipmentDS.add(shipmentPO);
 		return invBL.setFree(shipmentPO);
 	}
-	
-	public String delete(ShipmentVO vo) throws RemoteException{
-		shipmentPO=vo.transToPO();
-		for(ShipmentPO temp: shipmentList){
-			if(temp.equals(shipmentPO)){
+
+	public String delete(ShipmentVO vo) throws RemoteException {
+		shipmentPO = vo.transToPO();
+		for (ShipmentPO temp : shipmentList) {
+			if (temp.equals(shipmentPO)) {
 				shipmentList.remove(shipmentPO);
 				shipmentDS.delete(shipmentPO);
 				return null;
 			}
 		}
-		
+
 		return "未找到出库单";
 	}
+
 	public String modify(ShipmentVO vo) throws RemoteException {
-		ShipmentPO shipmentPO=vo.transToPO();
-		for(ShipmentPO temp: shipmentList){
-			if(temp.equals(shipmentPO)){
-				shipmentList.set(shipmentList.indexOf(temp),shipmentPO);
+		ShipmentPO shipmentPO = vo.transToPO();
+		for (ShipmentPO temp : shipmentList) {
+			if (temp.equals(shipmentPO)) {
+				shipmentList.set(shipmentList.indexOf(temp), shipmentPO);
 				shipmentDS.modify(shipmentPO);
 				return null;
 			}
 		}
-		
+
 		return "未找到出库单";
-		}
-	
-	public List<ShipmentPO> getShipmentList(){
-//		List<ShipmentVO> result=new ArrayList<ShipmentVO>();
-//		for(ShipmentPO temp:shipmentList){
-//			result.add(new ShipmentVO(temp));
-//		}
-//		return result;
+	}
+
+	public List<ShipmentPO> getShipmentList() {
+		// List<ShipmentVO> result=new ArrayList<ShipmentVO>();
+		// for(ShipmentPO temp:shipmentList){
+		// result.add(new ShipmentVO(temp));
+		// }
+		// return result;
 		return shipmentList;
 	}
-	
-	public List<ShipmentPO> getShipmentList(String institutionID) throws RemoteException{
-//		List<ShipmentPO> shipmentList=shipmentDS.getListByIns(institutionID);
-//		List<ShipmentVO> result=new ArrayList<ShipmentVO>();
-//		for(ShipmentPO temp:shipmentList){
-//			result.add(new ShipmentVO(temp));
-//		}
-//		return result;
+
+	public List<ShipmentPO> getShipmentList(String institutionID)
+			throws RemoteException {
+		// List<ShipmentPO> shipmentList=shipmentDS.getListByIns(institutionID);
+		// List<ShipmentVO> result=new ArrayList<ShipmentVO>();
+		// for(ShipmentPO temp:shipmentList){
+		// result.add(new ShipmentVO(temp));
+		// }
+		// return result;
 		return shipmentDS.getListByIns(institutionID);
 	}
-	
-	
-	public ShipmentVO find(String ID) throws RemoteException{
+
+	public ShipmentVO find(String ID) throws RemoteException {
 		return new ShipmentVO(shipmentDS.find(ID));
 	}
-	
+
 	public List<InstitutionVO> getInstitutionList(String userID)
 			throws RemoteException {
 		List<InstitutionVO> result = new ArrayList<InstitutionVO>();
 		InstitutionBL insBL = new InstitutionBL();
-		StaffBL staffBL=new StaffBL();
-		String institutionID=(staffBL.getUser(userID).getInstitutionID());
-		InstitutionPO institutionPO=insBL.searchInstitution(institutionID);
+		StaffBL staffBL = new StaffBL();
+		String institutionID = (staffBL.getUser(userID).getInstitutionID());
+		InstitutionPO institutionPO = insBL.searchInstitution(institutionID);
 		List<InstitutionPO> insList = insBL.getInsList();
 		for (InstitutionPO temp : insList) {
-			if (temp.getCity() == institutionPO.getCity()&&temp.getInstitutionID() != institutionPO.getInstitutionID()) {
-					result.add(new InstitutionVO(temp));
+			if (temp.getCity().equals(institutionPO.getCity())
+					&& !temp.getInstitutionID().equals(
+							institutionPO.getInstitutionID())) {
+				result.add(new InstitutionVO(temp));
 			}
 		}
 		for (InstitutionPO temp : insList) {
-			if ((temp.getName() != institutionPO.getName())
+			if ((!temp.getName().equals(institutionPO.getName()))
 					&& (temp.getType() == InsType.intermediate)) {
 				result.add(new InstitutionVO(temp));
 			}
@@ -129,14 +132,13 @@ public class ShipmentBL {
 	}
 
 	public List<ShipmentVO> getUnapproved() {
-		List<ShipmentVO> result=new ArrayList<ShipmentVO>();
-		for(ShipmentPO temp: shipmentList){
-			if(temp.getState()==ReceiptsState.unapprove){
+		List<ShipmentVO> result = new ArrayList<ShipmentVO>();
+		for (ShipmentPO temp : shipmentList) {
+			if (temp.getState() == ReceiptsState.unapprove) {
 				result.add(new ShipmentVO(temp));
 			}
 		}
 		return result;
 	}
 
-	
 }

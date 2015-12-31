@@ -1,5 +1,6 @@
 package presentation.BusinessHallUI;
 
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -19,14 +20,11 @@ import vo.CustomerVO;
 import vo.BussinessHallVo.DeliveryVO;
 import vo.DeliverymanVo.SendVO;
 import businessLogic.businessHallBL.DeliveryController;
+import businessLogic.manageBL.ApproveController;
 import client.Main;
 import enumSet.ReceiptsState;
 
 public class DeliveryModifyUI extends JPanel {
-	// 一会儿删↓
-	static MainFrame f;
-	// 一会儿删↑
-
 	private static final long serialVersionUID = 1L;
 
 	private DeliveryController dc;
@@ -43,6 +41,10 @@ public class DeliveryModifyUI extends JPanel {
 		dc = new DeliveryController();
 		this.initComponents();
 		this.validate();
+	}
+
+	protected void paintComponent(Graphics g) {
+		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
 	}
 
 	private void initComponents() {
@@ -77,7 +79,6 @@ public class DeliveryModifyUI extends JPanel {
 				try {
 					setArea(field[0].getText());
 				} catch (RemoteException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -98,18 +99,11 @@ public class DeliveryModifyUI extends JPanel {
 							JOptionPane.ERROR_MESSAGE);
 					return;
 				}
-				String result;
 				try {
-					result = dc.add(getDeliveryVO());
-					if (result != null) {
-						JOptionPane.showMessageDialog(null, result, "",
-								JOptionPane.ERROR_MESSAGE);
-					} else {
-						JOptionPane.showMessageDialog(null, "提交成功", "",
-								JOptionPane.INFORMATION_MESSAGE);
-					}
+					new ApproveController().modifyDelivery(getDeliveryVO());
+					JOptionPane.showMessageDialog(null, "修改成功", "",
+							JOptionPane.INFORMATION_MESSAGE);
 				} catch (RemoteException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -117,13 +111,22 @@ public class DeliveryModifyUI extends JPanel {
 
 		returnBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Main.frame.returnToTop();
+				try {
+					Main.frame.setView(new DeliveryApproveUI());
+				} catch (RemoteException e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 
 		field[0].setText(vo.id);
 		field[1].setText(vo.name);
 		field[2].setText(DateUtil.dateToString(vo.d));
+		try {
+			setArea(vo.id);
+		} catch (RemoteException e1) {
+			e1.printStackTrace();
+		}
 	}
 
 	private boolean hasEmpty() {
@@ -157,11 +160,5 @@ public class DeliveryModifyUI extends JPanel {
 			s += r.telephone;
 			area.setText(s);
 		}
-	}
-
-	public static void main(String[] args) throws RemoteException {
-		f = new MainFrame();
-		DeliveryUI view = new DeliveryUI();
-		f.setView(view);
 	}
 }

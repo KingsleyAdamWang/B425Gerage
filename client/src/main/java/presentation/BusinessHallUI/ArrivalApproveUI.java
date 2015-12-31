@@ -1,5 +1,6 @@
 package presentation.BusinessHallUI;
 
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
@@ -14,18 +15,16 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import presentation.MainFrame;
+import presentation.DeliverymanUI.SendApproveUI;
 import presentation.ManageUI.ApproveChooseUI;
 import vo.BussinessHallVo.ArrivalVO;
 import businessLogic.manageBL.ApproveBL;
+import businessLogic.manageBL.ApproveController;
 import client.ClientInitException;
 import client.Main;
 
 public class ArrivalApproveUI extends JPanel {
 	private static final long serialVersionUID = 1L;
-
-	// 一会儿删↓
-	static MainFrame f;
-	// 一会儿删↑
 
 	private ApproveBL ac;
 	private JButton[] funcButton;
@@ -38,12 +37,15 @@ public class ArrivalApproveUI extends JPanel {
 		try {
 			ac = new ApproveBL();
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		this.initComponents();
 		this.initList();
 		this.validate();
+	}
+
+	protected void paintComponent(Graphics g) {
+		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
 	}
 
 	private void initComponents() {
@@ -92,7 +94,6 @@ public class ArrivalApproveUI extends JPanel {
 							Main.frame.setView(new ArrivalModifyUI(list
 									.get(index)));
 						} catch (RemoteException | ClientInitException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}
@@ -109,8 +110,10 @@ public class ArrivalApproveUI extends JPanel {
 						}
 						try {
 							ac.setApprovedArrival(list.get(index));
+							JOptionPane.showMessageDialog(null, "审批完成", "",
+									JOptionPane.INFORMATION_MESSAGE);
+							Main.frame.setView(new ArrivalApproveUI());
 						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}
@@ -119,11 +122,18 @@ public class ArrivalApproveUI extends JPanel {
 			case 2:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						try {
-							ac.setAllApprovedArrival();
-						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
+						int n = JOptionPane.showConfirmDialog(null,
+								"确定通过所有单据的审批?", "", JOptionPane.YES_NO_OPTION);
+						if (n == 0) {
+							try {
+								ApproveController ac = new ApproveController();
+								ac.setAllApprovedArrival();
+								JOptionPane.showMessageDialog(null, "审批完成", "",
+										JOptionPane.INFORMATION_MESSAGE);
+								Main.frame.setView(new ArrivalApproveUI());
+							} catch (RemoteException e1) {
+								e1.printStackTrace();
+							}
 						}
 					}
 				});

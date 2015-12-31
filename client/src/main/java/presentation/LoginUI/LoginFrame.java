@@ -5,8 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.InputStreamReader;
-import java.io.Reader;
 import java.rmi.RemoteException;
 
 import javax.swing.ImageIcon;
@@ -176,10 +174,8 @@ public class LoginFrame {
 				try {
 					guestLogin();
 				} catch (RemoteException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (ClientInitException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -239,10 +235,8 @@ public class LoginFrame {
 		try {
 			this.lc = new LoginController();
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ClientInitException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -258,7 +252,6 @@ public class LoginFrame {
 		try {
 			result = lc.login(username, password);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if (result) {
@@ -295,19 +288,12 @@ public class LoginFrame {
 		try {
 			this.lc = new LoginController();
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ClientInitException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		// MainFrame frame = new MainFrame();
 		Main.frame.setView(new LogisticsUI(), "物流信息查询");
 		frame.setVisible(false);
 	}
-
-	public static void main(String[] args) {
-		LoginFrame loginFrame = new LoginFrame();
-	}
-
 }

@@ -1,7 +1,10 @@
 package presentation.FinanceUI;
 
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowFocusListener;
 import java.rmi.RemoteException;
 import java.util.Date;
 import java.util.List;
@@ -11,29 +14,20 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
-import po.financePO.IncomePO;
 import presentation.MainFrame;
-import presentation.LogUI.LogUI;
 import presentation.ManageUI.ManagerUI;
 import util.DateUtil;
 import vo.FinanceVo.IncomeVO;
-import vo.LogVo.LogVO;
 import businessLogic.businessHallBL.CashRegisterController;
-import client.ClientInitException;
 import client.Main;
 
 public class IncomeManageUI extends JPanel {
 	private static final long serialVersionUID = 1L;
-
-	// 一会儿删↓
-	static MainFrame f;
-	// 一会儿删↑
 
 	private CashRegisterController cc;
 	private JButton searchDateBtn;
@@ -50,6 +44,10 @@ public class IncomeManageUI extends JPanel {
 		this.initList();
 		this.initComponents();
 		this.validate();
+	}
+
+	protected void paintComponent(Graphics g) {
+		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
 	}
 
 	private void initComponents() {
@@ -127,7 +125,7 @@ public class IncomeManageUI extends JPanel {
 	}
 
 	private void initList() {
-		list = cc.getAllLogList();
+		list = cc.getIncomeList();
 		vData = getShowList();
 		// table.validate();
 		// scrollPane.getViewport().removeAll();
@@ -186,18 +184,6 @@ public class IncomeManageUI extends JPanel {
 		tmp.add(vo.kdyID);
 		return tmp;
 	}
-
-	public static void main(String[] args) throws ClientInitException {
-		f = new MainFrame();
-		LogUI view;
-		try {
-			view = new LogUI();
-			f.setView(view);
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 }
 
 class IncomeDateDialog extends JDialog {
@@ -223,9 +209,9 @@ class IncomeDateDialog extends JDialog {
 
 	private void initComponents() {
 		label1 = new JLabel("起始日期：");
-		label1.setBounds(25, 25, 50, 15);
-		label2 = new JLabel("结束日期:");
-		label2.setBounds(25, 75, 50, 15);
+		label1.setBounds(25, 25, 100, 15);
+		label2 = new JLabel("截止日期:");
+		label2.setBounds(25, 75, 100, 15);
 		field1 = new JTextField();
 		field1.setBounds(100, 20, 175, 25);
 		field1.setText(DateUtil.dateToString());
@@ -241,7 +227,7 @@ class IncomeDateDialog extends JDialog {
 		btn1.setBounds(50, 120, 75, 30);
 		this.getContentPane().add(btn1);
 		btn2 = new JButton("返回");
-		btn2.setBounds(50, 120, 75, 30);
+		btn2.setBounds(180, 120, 75, 30);
 		this.getContentPane().add(btn2);
 		btn1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -252,7 +238,16 @@ class IncomeDateDialog extends JDialog {
 		});
 		btn2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
+				dispose();
+			}
+		});
+		
+		this.addWindowFocusListener(new WindowFocusListener() {
+			public void windowGainedFocus(WindowEvent e) {
+			}
+
+			public void windowLostFocus(WindowEvent e) {
+				dispose();
 			}
 		});
 	}

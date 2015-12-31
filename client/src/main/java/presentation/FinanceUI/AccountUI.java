@@ -1,5 +1,6 @@
 package presentation.FinanceUI;
 
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
@@ -26,10 +27,6 @@ import client.Main;
 public class AccountUI extends JPanel {
 	private static final long serialVersionUID = 1L;
 
-	// 一会儿删↓
-	static MainFrame f;
-	// 一会儿删↑
-
 	private AccountController ac;
 	private JButton[] funcButton;
 	private JTable table;
@@ -45,6 +42,10 @@ public class AccountUI extends JPanel {
 		this.initComponents();
 		this.initList();
 		this.validate();
+	}
+
+	protected void paintComponent(Graphics g) {
+		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
 	}
 
 	private void initComponents() {
@@ -86,7 +87,6 @@ public class AccountUI extends JPanel {
 						try {
 							addAccount();
 						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}
@@ -98,7 +98,6 @@ public class AccountUI extends JPanel {
 						try {
 							deleteAccount();
 						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}
@@ -190,18 +189,6 @@ public class AccountUI extends JPanel {
 
 	public AccountController getController() {
 		return this.ac;
-	}
-
-	public static void main(String[] args) throws ClientInitException {
-		f = new MainFrame();
-		AccountUI view;
-		try {
-			view = new AccountUI();
-			f.setView(view);
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 }
 
@@ -299,7 +286,6 @@ class AccountDialog extends JDialog {
 						}
 						ui.initList();
 					} catch (RemoteException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}
@@ -317,7 +303,6 @@ class AccountDialog extends JDialog {
 						}
 						ui.initList();
 					} catch (RemoteException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}
@@ -326,12 +311,11 @@ class AccountDialog extends JDialog {
 					try {
 						list = ui.getController().searchAccount(getName());
 					} catch (RemoteException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 					ui.initList(list);
 				}
-				setVisible(false);
+				dispose();
 			}
 		});
 		okBtn.setBounds(50, 120, 75, 30);
@@ -340,7 +324,7 @@ class AccountDialog extends JDialog {
 		returnBtn = new JButton("返回");
 		returnBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
+				dispose();
 			}
 		});
 		returnBtn.setBounds(175, 120, 75, 30);

@@ -1,5 +1,6 @@
 package presentation.FinanceUI;
 
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
@@ -20,10 +21,6 @@ import client.Main;
 import enumSet.ReceiptsState;
 
 public class PaymentUI extends JPanel {
-	// 一会儿删↓
-	static MainFrame f;
-	// 一会儿删↑
-
 	private static final long serialVersionUID = 1L;
 
 	private PaymentController pc;
@@ -40,6 +37,10 @@ public class PaymentUI extends JPanel {
 		pc = new PaymentController();
 		this.initComponents();
 		this.validate();
+	}
+	
+	protected void paintComponent(Graphics g) {
+		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
 	}
 
 	private void initComponents() {
@@ -72,12 +73,16 @@ public class PaymentUI extends JPanel {
 
 		submitBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if (hasEmpty()) {
+					JOptionPane.showMessageDialog(null, "信息未填写完整", "",
+							JOptionPane.ERROR_MESSAGE);
+					return;
+				}
 				try {
 					pc.addPayment(getVO());
 					JOptionPane.showMessageDialog(null, "提交成功", "",
 							JOptionPane.INFORMATION_MESSAGE);
 				} catch (RemoteException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -106,9 +111,13 @@ public class PaymentUI extends JPanel {
 		return vo;
 	}
 
-	public static void main(String[] args) throws RemoteException {
-		f = new MainFrame();
-		PaymentUI view = new PaymentUI();
-		f.setView(view);
+	private boolean hasEmpty() {
+		for (int i = 0; i < 7; i++) {
+			if (i != 5)
+				if (field[i].getText().equals("")) {
+					return true;
+				}
+		}
+		return false;
 	}
 }

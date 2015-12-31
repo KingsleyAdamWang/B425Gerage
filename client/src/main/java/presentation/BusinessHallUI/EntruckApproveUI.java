@@ -1,5 +1,6 @@
 package presentation.BusinessHallUI;
 
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
@@ -8,15 +9,16 @@ import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import presentation.MainFrame;
 import presentation.ManageUI.ApproveChooseUI;
-import util.DateUtil;
-import vo.BussinessHallVo.DeliveryVO;
 import vo.BussinessHallVo.EntruckVO;
 import businessLogic.manageBL.ApproveController;
+import client.ClientInitException;
 import client.Main;
 
 public class EntruckApproveUI extends JPanel {
@@ -34,6 +36,10 @@ public class EntruckApproveUI extends JPanel {
 		this.initComponents();
 		this.initList();
 		this.validate();
+	}
+
+	protected void paintComponent(Graphics g) {
+		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
 	}
 
 	private void initComponents() {
@@ -72,18 +78,59 @@ public class EntruckApproveUI extends JPanel {
 			case 0:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						int index = table.getSelectedRow();
+						if (index == -1 || (vData.isEmpty() && index == 0)) {
+							JOptionPane.showMessageDialog(null, "请选择一个单据", "",
+									JOptionPane.ERROR_MESSAGE);
+							return;
+						}
+						try {
+							Main.frame.setView(new EntruckModifyUI(list
+									.get(index)));
+						} catch (RemoteException e1) {
+							e1.printStackTrace();
+						} catch (ClientInitException e1) {
+							e1.printStackTrace();
+						}
 					}
 				});
 				break;
 			case 1:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						int index = table.getSelectedRow();
+						if (index == -1 || (vData.isEmpty() && index == 0)) {
+							JOptionPane.showMessageDialog(null, "请选择一个单据", "",
+									JOptionPane.ERROR_MESSAGE);
+							return;
+						}
+						try {
+							ac.setApprovedEntruck(list.get(index));
+							JOptionPane.showMessageDialog(null, "审批完成", "",
+									JOptionPane.INFORMATION_MESSAGE);
+							Main.frame.setView(new EntruckApproveUI());
+						} catch (RemoteException e1) {
+							e1.printStackTrace();
+						}
 					}
 				});
 				break;
 			case 2:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						int n = JOptionPane.showConfirmDialog(null,
+								"确定通过所有单据的审批?", "", JOptionPane.YES_NO_OPTION);
+						if (n == 0) {
+							try {
+								ApproveController ac = new ApproveController();
+								ac.setAllApprovedEntruck();
+								JOptionPane.showMessageDialog(null, "审批完成", "",
+										JOptionPane.INFORMATION_MESSAGE);
+								Main.frame.setView(new EntruckApproveUI());
+							} catch (RemoteException e1) {
+								e1.printStackTrace();
+							}
+						}
 					}
 				});
 				break;
@@ -104,12 +151,16 @@ public class EntruckApproveUI extends JPanel {
 		str.add(vo.qyID);
 		str.add(vo.userID);
 		str.add(vo.d);
+		System.out.println(vo.checkName);
+		System.out.println(vo.d);
+		System.out.println(vo.deliverMan);
+		System.out.println(vo.destination);
 		return str;
 	}
 
 	private void initList() {
 		vData.clear();
-		list = ac.getUnapprovedEntruck();
+		list = ac.getUnapproveEntruck();
 
 		for (EntruckVO vo : list) {
 			vData.add(toVector(vo));

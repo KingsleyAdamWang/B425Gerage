@@ -3,7 +3,9 @@ package presentation;
 import java.awt.Toolkit;
 import java.rmi.RemoteException;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 
@@ -20,7 +22,7 @@ import businessLogic.logBL.LogController;
 import client.Main;
 
 /**
- * //一个界面跳转的管理frame的 uimanager 主要就是负责呈现各种人员对应的工作的Jpanel
+ * 一个界面跳转的管理frame的 uimanager 主要就是负责呈现各种人员对应的工作的Jpanel
  *
  */
 public class MainFrame extends JFrame {
@@ -29,14 +31,14 @@ public class MainFrame extends JFrame {
 	private final int frameHeight = 600;
 	// 卧槽 我好喜欢 这个 user 爱死了 简直了 @！！
 	private static UserVO user;
-	private static LogController logController;
+	public static ImageIcon background;
+	public static JLabel label;
 
 	// 构造函数 设置框架的风格为windows风格 //个人认为好丑呀
 	public MainFrame() {
 		try {
-			logController = new LogController();
+			new LogController();
 		} catch (RemoteException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
@@ -55,15 +57,29 @@ public class MainFrame extends JFrame {
 		this.setResizable(false);
 		// this.setVisible(true);
 		this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+		background = new ImageIcon(getClass().getResource(
+				"/picture/background.png"));
+		label = new JLabel(background);
+		label.setBounds(0, 0, background.getIconWidth(),
+				background.getIconHeight());
+		// this.getLayeredPane().add(label);
 	}
 
 	public void setView(JPanel panel) {
 		this.setVisible(true);
-		// 清空所有mainFrame上面的组件 这样真的好咩 万一要返回还要再新建一个面板加进去？
 		this.getContentPane().removeAll();
+
+		// this.getLayeredPane().add(label);
+		// JPanel jp = (JPanel) this.getContentPane();
+		// jp.setOpaque(false);
+		// panel.setOpaque(false);
+		// jp.add(panel);
+
 		this.getContentPane().add(panel);
-		this.getContentPane().validate();
+		this.validate();
 		this.repaint();
+		this.getContentPane().repaint();
 	}
 
 	public void setView(JPanel panel, String s) {

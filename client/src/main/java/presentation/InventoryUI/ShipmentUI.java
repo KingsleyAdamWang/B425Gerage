@@ -1,5 +1,6 @@
 package presentation.InventoryUI;
 
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
@@ -19,16 +20,12 @@ import presentation.MainFrame;
 import util.DateUtil;
 import vo.InventoryVo.ShipmentVO;
 import vo.ManageVo.InstitutionVO;
-import businessLogic.inventoryBL.shipmentController;
+import businessLogic.inventoryBL.ShipmentController;
 
 public class ShipmentUI extends JPanel {
-	// 一会儿删↓
-	static MainFrame f;
-	// 一会儿删↑
-
 	private static final long serialVersionUID = 1L;
 
-	private shipmentController sc;
+	private ShipmentController sc;
 	private final String[] labelName = { "机构编号", "中转单编号", "快递单号", "目的地",
 			"出库日期", "运输类型" };
 	private final String[] type = { "汽车", "火车", "飞机" };
@@ -40,9 +37,13 @@ public class ShipmentUI extends JPanel {
 	private JButton returnBtn;
 
 	public ShipmentUI() throws RemoteException {
-		sc = new shipmentController();
+		sc = new ShipmentController();
 		this.initComponents();
 		this.validate();
+	}
+	
+	protected void paintComponent(Graphics g) {
+		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
 	}
 
 	private void initComponents() throws RemoteException {
@@ -53,7 +54,7 @@ public class ShipmentUI extends JPanel {
 		box = new JComboBox<String>(type);
 		List<InstitutionVO> cityList = sc.getInstitutionList(MainFrame
 				.getUser().getIdentityID());
-//		 List<InstitutionVO> cityList = sc.getInstitutionList("020010");
+		// List<InstitutionVO> cityList = sc.getInstitutionList("020010");
 		String[] cities = new String[cityList.size()];
 		for (int i = 0; i < cityList.size(); i++) {
 			cities[i] = cityList.get(i).getName();
@@ -86,6 +87,11 @@ public class ShipmentUI extends JPanel {
 
 		submitBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if (hasEmpty()) {
+					JOptionPane.showMessageDialog(null, "信息未填写完整", "",
+							JOptionPane.ERROR_MESSAGE);
+					return;
+				}
 				try {
 					String result = sc.add(getVO());
 					if (result != null) {
@@ -96,7 +102,6 @@ public class ShipmentUI extends JPanel {
 								JOptionPane.INFORMATION_MESSAGE);
 					}
 				} catch (RemoteException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -123,9 +128,13 @@ public class ShipmentUI extends JPanel {
 		return vo;
 	}
 
-	public static void main(String[] args) throws RemoteException {
-		f = new MainFrame();
-		ShipmentUI view = new ShipmentUI();
-		f.setView(view);
+	private boolean hasEmpty() {
+		for (int i = 0; i < 6; i++) {
+			if (i != 5 && i != 3) {
+				if (field[i].getText().equals(""))
+					return true;
+			}
+		}
+		return false;
 	}
 }

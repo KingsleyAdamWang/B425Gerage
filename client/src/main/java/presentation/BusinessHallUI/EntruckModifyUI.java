@@ -1,5 +1,6 @@
 package presentation.BusinessHallUI;
 
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
@@ -8,7 +9,6 @@ import java.util.List;
 import java.util.Vector;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -20,15 +20,12 @@ import presentation.MainFrame;
 import util.DateUtil;
 import vo.BussinessHallVo.EntruckVO;
 import businessLogic.businessHallBL.EntruckController;
+import businessLogic.manageBL.ApproveController;
 import client.ClientInitException;
 import client.Main;
 import enumSet.ReceiptsState;
 
 public class EntruckModifyUI extends JPanel {
-	// 一会儿删↓
-	static MainFrame f;
-	// 一会儿删↑
-
 	private static final long serialVersionUID = 1L;
 
 	private EntruckController ec;
@@ -45,8 +42,6 @@ public class EntruckModifyUI extends JPanel {
 	private JButton submitBtn;
 	private JButton returnBtn;
 	private Vector<String> vData;
-	private List<String> instName;
-	private JComboBox<String> box;
 	private EntruckVO vo;
 
 	public EntruckModifyUI(EntruckVO vo) throws RemoteException,
@@ -55,6 +50,10 @@ public class EntruckModifyUI extends JPanel {
 		ec = new EntruckController();
 		this.initComponents();
 		this.validate();
+	}
+	
+	protected void paintComponent(Graphics g) {
+		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
 	}
 
 	private void initComponents() {
@@ -67,26 +66,9 @@ public class EntruckModifyUI extends JPanel {
 			label[i] = new JLabel(labelName[i] + ":");
 			label[i].setBounds(20 + 400 * (i % 2), 30 + 40 * (i / 2), 100, 20);
 			this.add(label[i]);
-			if (i != 4) {
-				field[i] = new JTextField();
-				field[i].setBounds(105 + 400 * (i % 2), 30 + 40 * (i / 2), 250,
-						30);
-				this.add(field[i]);
-			} else {
-				try {
-					instName = ec.getInstitutionNames();
-				} catch (RemoteException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				String[] tmp = new String[instName.size()];
-				for (int j = 0; j < instName.size(); j++) {
-					tmp[j] = instName.get(j);
-				}
-				box = new JComboBox<String>(tmp);
-				box.setBounds(105 + 400 * (i % 2), 30 + 40 * (i / 2), 250, 30);
-				this.add(box);
-			}
+			field[i] = new JTextField();
+			field[i].setBounds(105 + 400 * (i % 2), 30 + 40 * (i / 2), 250, 30);
+			this.add(field[i]);
 		}
 
 		// JSeparator js = new JSeparator();
@@ -160,7 +142,6 @@ public class EntruckModifyUI extends JPanel {
 				try {
 					setFare();
 				} catch (RemoteException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -169,24 +150,27 @@ public class EntruckModifyUI extends JPanel {
 		submitBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (hasEmpty()) {
-					JOptionPane.showMessageDialog(null, "装车单信息未填写完整", "",
+					JOptionPane.showMessageDialog(null, "信息未填写完整", "",
 							JOptionPane.ERROR_MESSAGE);
 					return;
 				}
-				String result = ec.submit(getVO());
-				if (result != null) {
-					JOptionPane.showMessageDialog(null, result, "",
-							JOptionPane.ERROR_MESSAGE);
-				} else {
-					JOptionPane.showMessageDialog(null, "提交成功", "",
+				try {
+					new ApproveController().modifyEntruck(getVO());
+					JOptionPane.showMessageDialog(null, "修改成功", "",
 							JOptionPane.INFORMATION_MESSAGE);
+				} catch (RemoteException e1) {
+					e1.printStackTrace();
 				}
 			}
 		});
 
 		returnBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Main.frame.returnToTop();
+				try {
+					Main.frame.setView(new EntruckApproveUI());
+				} catch (RemoteException e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 
@@ -197,6 +181,7 @@ public class EntruckModifyUI extends JPanel {
 		field[1].setText(vo.qyID);
 		field[2].setText(vo.truckID);
 		field[3].setText(vo.d);
+		field[4].setText(vo.destination);
 		field[5].setText(vo.fare + "");
 		field[6].setText(vo.checkName);
 		field[7].setText(vo.deliverMan);
@@ -241,12 +226,5 @@ public class EntruckModifyUI extends JPanel {
 				return true;
 		}
 		return false;
-	}
-
-	public static void main(String[] args) throws RemoteException,
-			ClientInitException {
-		f = new MainFrame();
-		EntruckUI view = new EntruckUI();
-		f.setView(view);
 	}
 }

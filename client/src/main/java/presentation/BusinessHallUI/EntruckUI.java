@@ -1,5 +1,6 @@
 package presentation.BusinessHallUI;
 
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
@@ -25,10 +26,6 @@ import vo.BussinessHallVo.EntruckVO;
 import enumSet.ReceiptsState;
 
 public class EntruckUI extends JPanel {
-	// 一会儿删↓
-	static MainFrame f;
-	// 一会儿删↑
-
 	private static final long serialVersionUID = 1L;
 
 	private EntruckController ec;
@@ -53,6 +50,10 @@ public class EntruckUI extends JPanel {
 		this.initComponents();
 		this.validate();
 	}
+	
+	protected void paintComponent(Graphics g) {
+		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
+	}
 
 	private void initComponents() {
 		this.setLayout(null);
@@ -73,7 +74,6 @@ public class EntruckUI extends JPanel {
 				try {
 					instName = ec.getInstitutionNames();
 				} catch (RemoteException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				String[] tmp = new String[instName.size()];
@@ -157,7 +157,6 @@ public class EntruckUI extends JPanel {
 				try {
 					setFare();
 				} catch (RemoteException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -166,17 +165,22 @@ public class EntruckUI extends JPanel {
 		submitBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (hasEmpty()) {
-					JOptionPane.showMessageDialog(null, "装车单信息未填写完整", "",
+					JOptionPane.showMessageDialog(null, "信息未填写完整", "",
 							JOptionPane.ERROR_MESSAGE);
 					return;
 				}
-				String result = ec.submit(getVO());
-				if (result != null) {
-					JOptionPane.showMessageDialog(null, result, "",
-							JOptionPane.ERROR_MESSAGE);
-				} else {
-					JOptionPane.showMessageDialog(null, "提交成功", "",
-							JOptionPane.INFORMATION_MESSAGE);
+				String result;
+				try {
+					result = ec.add(getVO());
+					if (result != null) {
+						JOptionPane.showMessageDialog(null, result, "",
+								JOptionPane.ERROR_MESSAGE);
+					} else {
+						JOptionPane.showMessageDialog(null, "提交成功", "",
+								JOptionPane.INFORMATION_MESSAGE);
+					}
+				} catch (RemoteException e1) {
+					e1.printStackTrace();
 				}
 			}
 		});
@@ -211,32 +215,26 @@ public class EntruckUI extends JPanel {
 	private EntruckVO getVO() {
 		String date = field[3].getText();
 		String qyID = field[1].getText();
-		String destination = field[4].getText();
+		String destination = box.getItemAt(box.getSelectedIndex());
 		String truckID = field[2].getText();
 		String checkName = field[6].getText();
 		String deliverMan = field[7].getText();
-		String fare = field[5].getText();
+		double fare = Double.parseDouble(field[5].getText());
 		List<String> idList = new ArrayList<String>();
 		for (int i = 0; i < vData.size(); i++) {
 			idList.add(vData.get(i));
 		}
 		return new EntruckVO(ReceiptsState.getReceiptsState("未审批"), MainFrame
 				.getUser().getIdentityID(), date, qyID, destination, truckID,
-				checkName, deliverMan, idList, 0);
+				checkName, deliverMan, idList, fare);
 	}
 
 	private boolean hasEmpty() {
 		for (int i = 0; i < 6; i++) {
-			if (field[i].getText().equals(""))
-				return true;
+			if (i != 4)
+				if (field[i].getText().equals(""))
+					return true;
 		}
 		return false;
-	}
-
-	public static void main(String[] args) throws RemoteException,
-			ClientInitException {
-		f = new MainFrame();
-		EntruckUI view = new EntruckUI();
-		f.setView(view);
 	}
 }

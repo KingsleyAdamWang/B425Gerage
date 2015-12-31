@@ -1,5 +1,6 @@
 package presentation.BusinessHallUI;
 
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -22,16 +23,13 @@ import presentation.MainFrame;
 import util.DateUtil;
 import vo.BussinessHallVo.ArrivalVO;
 import businessLogic.businessHallBL.ArrivalController;
+import businessLogic.manageBL.ApproveController;
 import client.ClientInitException;
 import client.Main;
 import enumSet.ArrivalState;
 import enumSet.ReceiptsState;
 
 public class ArrivalModifyUI extends JPanel {
-	// 一会儿删↓
-	static MainFrame f;
-	// 一会儿删↑
-
 	private static final long serialVersionUID = 1L;
 
 	private ArrivalController ac;
@@ -54,6 +52,10 @@ public class ArrivalModifyUI extends JPanel {
 		ac = new ArrivalController();
 		this.initComponents();
 		this.validate();
+	}
+
+	protected void paintComponent(Graphics g) {
+		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
 	}
 
 	private void initComponents() throws RemoteException {
@@ -108,36 +110,35 @@ public class ArrivalModifyUI extends JPanel {
 		submitBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (hasEmpty()) {
-					JOptionPane.showMessageDialog(null, "尚未填写完整", "",
+					JOptionPane.showMessageDialog(null, "信息未填写完整", "",
 							JOptionPane.ERROR_MESSAGE);
 					return;
 				}
-				String result;
 				try {
-					result = ac.add(getVO());
-					if (result != null) {
-						JOptionPane.showMessageDialog(null, result, "",
-								JOptionPane.ERROR_MESSAGE);
-					} else {
-						JOptionPane.showMessageDialog(null, "提交成功", "",
-								JOptionPane.INFORMATION_MESSAGE);
-					}
-				} catch (RemoteException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					new ApproveController().modifyArrival(getVO());
+					JOptionPane.showMessageDialog(null, "修改成功", "",
+							JOptionPane.INFORMATION_MESSAGE);
+				} catch (RemoteException e2) {
+					e2.printStackTrace();
 				}
 			}
 		});
 
 		returnBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Main.frame.returnToTop();
+				Main.frame.setView(new ArrivalApproveUI());
 			}
 		});
 
 		field[0].setText(vo.getTransferId());
 		field[1].setText(vo.getDeparture());
 		field[2].setText(vo.getDate());
+		for (int i = 0; i < 3; i++) {
+			if (typeName[i].equals(vo.getCondition())) {
+				box.setSelectedIndex(i);
+				break;
+			}
+		}
 		setVData(field[0].getText());
 		initList();
 	}
@@ -148,7 +149,6 @@ public class ArrivalModifyUI extends JPanel {
 		try {
 			l = ac.search(id);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (NullPointerException ex) {
 			return;
@@ -169,7 +169,6 @@ public class ArrivalModifyUI extends JPanel {
 	}
 
 	private ArrivalVO getVO() {
-		// String tmp =
 		return new ArrivalVO(ReceiptsState.getReceiptsState("未审批"), MainFrame
 				.getUser().getIdentityID(), DateUtil.stringToDate(field[2]
 				.getText()), MainFrame.getUser().getInstitutionID(),
@@ -181,12 +180,5 @@ public class ArrivalModifyUI extends JPanel {
 		jl.repaint();
 		sp.repaint();
 		this.repaint();
-	}
-
-	public static void main(String[] args) throws RemoteException,
-			ClientInitException {
-		f = new MainFrame();
-		ArrivalUI view = new ArrivalUI();
-		f.setView(view);
 	}
 }

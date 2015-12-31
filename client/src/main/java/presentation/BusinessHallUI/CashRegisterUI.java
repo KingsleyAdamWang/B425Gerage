@@ -1,5 +1,6 @@
 package presentation.BusinessHallUI;
 
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
@@ -25,10 +26,6 @@ import client.Main;
 import enumSet.ReceiptsState;
 
 public class CashRegisterUI extends JPanel {
-	// 一会儿删↓
-	static MainFrame f;
-	// 一会儿删↑
-
 	private static final long serialVersionUID = 1L;
 
 	private final String[] labelName = { "快递员编号", "收款金额", "收款日期" };
@@ -49,6 +46,10 @@ public class CashRegisterUI extends JPanel {
 		cc = new CashRegisterController();
 		this.initComponents();
 		this.validate();
+	}
+	
+	protected void paintComponent(Graphics g) {
+		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
 	}
 
 	private void initComponents() {
@@ -95,12 +96,15 @@ public class CashRegisterUI extends JPanel {
 							DateUtil.stringToDate(field[2].getText()),
 							field[0].getText());
 				} catch (RemoteException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				initList();
 				setList();
-				income = cc.getAmmounts(voList);
+				try {
+					income = cc.getAmmounts(voList);
+				} catch (RemoteException e1) {
+					e1.printStackTrace();
+				}
 				field[1].setText(income + "");
 			}
 		});
@@ -109,7 +113,7 @@ public class CashRegisterUI extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					if (hasEmpty()) {
-						JOptionPane.showMessageDialog(null, "尚未填写完整", "",
+						JOptionPane.showMessageDialog(null, "信息未填写完整", "",
 								JOptionPane.ERROR_MESSAGE);
 						return;
 					}
@@ -122,7 +126,6 @@ public class CashRegisterUI extends JPanel {
 								JOptionPane.INFORMATION_MESSAGE);
 					}
 				} catch (RemoteException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -172,11 +175,5 @@ public class CashRegisterUI extends JPanel {
 		return new IncomeVO(ReceiptsState.getReceiptsState("未审批"), MainFrame
 				.getUser().getIdentityID(), MainFrame.getUser()
 				.getInstitutionID(), d, income, id, idList);
-	}
-
-	public static void main(String[] args) throws RemoteException {
-		f = new MainFrame();
-		CashRegisterUI view = new CashRegisterUI();
-		f.setView(view);
 	}
 }

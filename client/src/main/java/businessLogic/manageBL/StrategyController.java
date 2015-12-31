@@ -13,10 +13,10 @@ import businessLogicService.manageBLService.StrategyBLService;
 public class StrategyController implements StrategyBLService {
 	private StrategyBL strategyBL;
 	private LogBL logBL;
-	
+
 	public StrategyController() throws RemoteException {
 		strategyBL = new StrategyBL();
-		logBL=new LogBL();
+		logBL = new LogBL();
 	}
 
 	public PriceConstVO getVO() throws RemoteException {
@@ -32,7 +32,7 @@ public class StrategyController implements StrategyBLService {
 	}
 
 	public List<String> getCities() {
-		
+
 		return strategyBL.getCities();
 	}
 

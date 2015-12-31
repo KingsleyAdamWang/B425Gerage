@@ -13,14 +13,14 @@ import businessLogicService.manageBLService.StaffBLService;
 public class StaffController implements StaffBLService {
 	private StaffBL staffBL;
 	private LogBL logBL;
-	
-	public StaffController() throws RemoteException{
-		staffBL= new StaffBL();
-		logBL=new LogBL();
+
+	public StaffController() throws RemoteException {
+		staffBL = new StaffBL();
+		logBL = new LogBL();
 	}
 
 	public UserVO getUser(String userID) throws RemoteException {
-		
+
 		return staffBL.getUser(userID);
 	}
 
@@ -41,13 +41,14 @@ public class StaffController implements StaffBLService {
 				"删除人员信息"));
 		return staffBL.delete(userID);
 	}
-	
-	public List<UserVO> getUsers(){
-		
+
+	public List<UserVO> getUsers() {
+
 		return staffBL.getUsers();
 	}
-	
-	public List<UserVO> getUsersOfIns(String InstitutionID) throws RemoteException{
+
+	public List<UserVO> getUsersOfIns(String InstitutionID)
+			throws RemoteException {
 		return staffBL.getUsersOfIns(InstitutionID);
 	}
 

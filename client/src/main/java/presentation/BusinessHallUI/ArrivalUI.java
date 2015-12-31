@@ -1,5 +1,6 @@
 package presentation.BusinessHallUI;
 
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -28,10 +29,6 @@ import enumSet.ArrivalState;
 import enumSet.ReceiptsState;
 
 public class ArrivalUI extends JPanel {
-	// 一会儿删↓
-	static MainFrame f;
-	// 一会儿删↑
-
 	private static final long serialVersionUID = 1L;
 
 	private ArrivalController ac;
@@ -51,6 +48,10 @@ public class ArrivalUI extends JPanel {
 		ac = new ArrivalController();
 		this.initComponents();
 		this.validate();
+	}
+	
+	protected void paintComponent(Graphics g) {
+		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
 	}
 
 	private void initComponents() throws RemoteException {
@@ -105,7 +106,7 @@ public class ArrivalUI extends JPanel {
 		submitBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (hasEmpty()) {
-					JOptionPane.showMessageDialog(null, "尚未填写完整", "",
+					JOptionPane.showMessageDialog(null, "信息未填写完整", "",
 							JOptionPane.ERROR_MESSAGE);
 					return;
 				}
@@ -120,7 +121,6 @@ public class ArrivalUI extends JPanel {
 								JOptionPane.INFORMATION_MESSAGE);
 					}
 				} catch (RemoteException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -138,14 +138,13 @@ public class ArrivalUI extends JPanel {
 		Vector<String> v = new Vector<String>();
 		try {
 			l = ac.search(id);
+			for (int i = 0; i < l.size(); i++) {
+				v.add(l.get(i));
+			}
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (NullPointerException ex) {
 			return;
-		}
-		for (int i = 0; i < l.size(); i++) {
-			v.add(l.get(i));
 		}
 		vData = v;
 		return;
@@ -160,7 +159,6 @@ public class ArrivalUI extends JPanel {
 	}
 
 	private ArrivalVO getVO() {
-		// String tmp =
 		return new ArrivalVO(ReceiptsState.getReceiptsState("未审批"), MainFrame
 				.getUser().getIdentityID(), DateUtil.stringToDate(field[2]
 				.getText()), MainFrame.getUser().getInstitutionID(),
@@ -172,12 +170,5 @@ public class ArrivalUI extends JPanel {
 		jl.repaint();
 		sp.repaint();
 		this.repaint();
-	}
-
-	public static void main(String[] args) throws RemoteException,
-			ClientInitException {
-		f = new MainFrame();
-		ArrivalUI view = new ArrivalUI();
-		f.setView(view);
 	}
 }

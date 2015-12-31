@@ -1,5 +1,6 @@
 package presentation.FinanceUI;
 
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
@@ -30,10 +31,6 @@ import client.Main;
 public class PaymentManageUI extends JPanel {
 	private static final long serialVersionUID = 1L;
 
-	// 一会儿删↓
-	static MainFrame f;
-	// 一会儿删↑
-
 	private PaymentController pc;
 	private JButton searchDateBtn;
 	private JButton searchUserBtn;
@@ -49,6 +46,10 @@ public class PaymentManageUI extends JPanel {
 		this.initList();
 		this.initComponents();
 		this.validate();
+	}
+	
+	protected void paintComponent(Graphics g) {
+		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
 	}
 
 	private void initComponents() {
@@ -90,7 +91,7 @@ public class PaymentManageUI extends JPanel {
 
 		searchDateBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				IncomeDateDialog d = new IncomeDateDialog(getThis());
+				PaymentDateDialog d = new PaymentDateDialog(getThis());
 			}
 		});
 
@@ -190,20 +191,7 @@ public class PaymentManageUI extends JPanel {
 		return tmp;
 	}
 
-	public static void main(String[] args) throws ClientInitException {
-		f = new MainFrame();
-		LogUI view;
-		try {
-			view = new LogUI();
-			f.setView(view);
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-}
-
-class IncomeDateDialog extends JDialog {
+class PaymentDateDialog extends JDialog {
 	private static final long serialVersionUID = 1L;
 	private JLabel label1;
 	private JLabel label2;
@@ -213,7 +201,7 @@ class IncomeDateDialog extends JDialog {
 	private JButton btn2;
 	private IncomeManageUI ui;
 
-	public IncomeDateDialog(IncomeManageUI ui) {
+	public PaymentDateDialog(IncomeManageUI ui) {
 		this.ui = ui;
 		this.setVisible(true);
 		this.setResizable(false);

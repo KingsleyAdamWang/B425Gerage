@@ -1,5 +1,6 @@
 package presentation.FinanceUI;
 
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
@@ -15,18 +16,14 @@ import javax.swing.JTextField;
 import presentation.MainFrame;
 import util.DateUtil;
 import vo.FinanceVo.PaymentVO;
-import businessLogic.financeBL.PaymentController;
+import businessLogic.manageBL.ApproveController;
 import client.Main;
 import enumSet.ReceiptsState;
 
 public class PaymentModifyUI extends JPanel {
-	// 一会儿删↓
-	static MainFrame f;
-	// 一会儿删↑
-
 	private static final long serialVersionUID = 1L;
 
-	private PaymentController pc;
+	// private PaymentController pc;
 	private final String[] labelName = { "付款单号", "付款账号", "付款金额", "付款日期",
 			"付款人姓名", "付款类型", "次数", "备注" };
 	private final String[] type = { "工资", "运费", "租金", "其他" };
@@ -39,9 +36,13 @@ public class PaymentModifyUI extends JPanel {
 
 	public PaymentModifyUI(PaymentVO vo) throws RemoteException {
 		this.vo = vo;
-		pc = new PaymentController();
+		// pc = new PaymentController();
 		this.initComponents();
 		this.validate();
+	}
+
+	protected void paintComponent(Graphics g) {
+		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
 	}
 
 	private void initComponents() {
@@ -74,12 +75,16 @@ public class PaymentModifyUI extends JPanel {
 
 		submitBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if (hasEmpty()) {
+					JOptionPane.showMessageDialog(null, "信息未填写完整", "",
+							JOptionPane.ERROR_MESSAGE);
+					return;
+				}
 				try {
-					pc.addPayment(getVO());
-					JOptionPane.showMessageDialog(null, "提交成功", "",
+					new ApproveController().modifyPayment(getVO());
+					JOptionPane.showMessageDialog(null, "修改成功", "",
 							JOptionPane.INFORMATION_MESSAGE);
 				} catch (RemoteException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -87,7 +92,11 @@ public class PaymentModifyUI extends JPanel {
 
 		returnBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Main.frame.returnToTop();
+				try {
+					Main.frame.setView(new PaymentApproveUI());
+				} catch (RemoteException e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 
@@ -98,6 +107,12 @@ public class PaymentModifyUI extends JPanel {
 		field[4].setText(vo.payName);
 		field[6].setText(vo.times + "");
 		field[7].setText(vo.comment);
+		for (int i = 0; i < type.length; i++) {
+			if (type[i].equals(vo.type)) {
+				box.setSelectedIndex(i);
+				break;
+			}
+		}
 	}
 
 	private PaymentVO getVO() {
@@ -116,9 +131,13 @@ public class PaymentModifyUI extends JPanel {
 		return vo;
 	}
 
-	public static void main(String[] args) throws RemoteException {
-		f = new MainFrame();
-		PaymentUI view = new PaymentUI();
-		f.setView(view);
+	private boolean hasEmpty() {
+		for (int i = 0; i < 7; i++) {
+			if (i != 5)
+				if (field[i].getText().equals("")) {
+					return true;
+				}
+		}
+		return false;
 	}
 }

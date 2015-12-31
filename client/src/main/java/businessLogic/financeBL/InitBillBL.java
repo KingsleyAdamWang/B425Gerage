@@ -1,7 +1,7 @@
 package businessLogic.financeBL;
 
 public class InitBillBL {
-	public boolean initBill(String name){
+	public boolean initBill(String name) {
 		return false;
 	}
 }

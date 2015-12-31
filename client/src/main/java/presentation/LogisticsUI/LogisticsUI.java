@@ -1,5 +1,6 @@
 package presentation.LogisticsUI;
 
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
@@ -15,10 +16,10 @@ import javax.swing.JTextField;
 
 import presentation.MainFrame;
 import presentation.LoginUI.LoginFrame;
-import client.ClientInitException;
-import client.Main;
 import vo.LogisticsVo.LogisticsVO;
 import businessLogic.logisticsBL.LogisticsController;
+import client.ClientInitException;
+import client.Main;
 
 public class LogisticsUI extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -34,6 +35,10 @@ public class LogisticsUI extends JPanel {
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.initComponents();
 		this.validate();
+	}
+	
+	protected void paintComponent(Graphics g) {
+		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
 	}
 
 	private void initComponents() {
@@ -60,27 +65,12 @@ public class LogisticsUI extends JPanel {
 				} else {
 					String s = jTextField.getText();
 					LogisticsVO vo = lc.getLogisticsMessage(s);
+					String temp = "快递单号:" + vo.id + "\t" + "快递名称:" + vo.name;
+					area.setText(temp);
 					List<String> msg = vo.getMessages();
 					for (String tmp : msg) {
-						// String str = "";
-						// str += vo.getDate().toString();
-						// DateFormat df = new SimpleDateFormat(
-						// "yyyy-MM-dd HH:mm:ss");
-						// str = df.format(vo.getDate());
-						// if (vo.getAddress() != null) {
-						// str += " 到达";
-						// str += vo.getAddress();
-						// } else if (vo.getNumber() != null) {
-						// str += " 派件中，派件员：";
-						// str += vo.getName();
-						// str += "，联系电话：";
-						// str += vo.getNumber();
-						// } else {
-						// str += " 已收件，收件员：";
-						// str += vo.getName();
-						// }
-						// str += vo.getMessages();
-						area.setText(area.getText() + "\n" + tmp);
+						String[] x = tmp.split("_");
+						area.setText(area.getText() + "\n" + x[0] + "\t" + x[1]);
 					}
 				}
 			}

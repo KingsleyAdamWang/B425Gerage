@@ -17,23 +17,22 @@ import dataService.logisticsDataService.LogisticsDataService;
  */
 public class LogisticsController implements LogisticsBLService {
 	private LogisticsBL logisticsBL;
-	
-	public LogisticsController() throws ClientInitException, RemoteException{
-		logisticsBL=new LogisticsBL();
+
+	public LogisticsController() throws ClientInitException, RemoteException {
+		logisticsBL = new LogisticsBL();
 	}
-	
-	public String add(LogisticsPO po) throws RemoteException{
+
+	public String add(LogisticsPO po) throws RemoteException {
 		return logisticsBL.add(po);
 	}
-	
-	public String update(String ID,String message) throws RemoteException{
-		return logisticsBL.update(ID,message);
+
+	public String update(String ID, String message) throws RemoteException {
+		return logisticsBL.update(ID, message);
 	}
 
 	public LogisticsVO getLogisticsMessage(String id) {
-	
+
 		return logisticsBL.getLogisticsMessage(id);
 	}
-
 
 }

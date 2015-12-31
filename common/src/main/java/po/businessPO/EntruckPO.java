@@ -94,15 +94,16 @@ public class EntruckPO extends ReceiptsPO implements Serializable {
 		state = ReceiptsState.getReceiptsState(temp[0]);
 		userID = temp[1];
 		d = DateUtil.stringToDate(temp[2]);
-		destination = temp[3];
-		truckID = temp[4];
-		checkName=temp[5];
-		deliverMan = temp[6];
-		fare = Double.parseDouble(temp[8]);
-		String[] temp2 = temp[7].split(";");
+		qyID = temp[3];
+		destination = temp[4];
+		truckID = temp[5];
+		checkName=temp[6];
+		deliverMan = temp[7];
+		fare = Double.parseDouble(temp[9]);
+		String[] temp2 = temp[8].split(";");
 		for(String str : temp2)
 			IDlist.add(str);
-		
+
 	}
 
 	public String toString() {

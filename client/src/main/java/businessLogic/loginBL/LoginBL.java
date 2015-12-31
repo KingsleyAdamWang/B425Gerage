@@ -37,9 +37,9 @@ public class LoginBL {
 				} else {
 					return false;// 找到用户id单密码不匹配
 				}
-			}	
+			}
 		}
-		
+
 		return false;// 未找到用户id
 	}
 }

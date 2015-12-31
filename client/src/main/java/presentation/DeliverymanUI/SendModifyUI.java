@@ -1,5 +1,6 @@
 package presentation.DeliverymanUI;
 
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -20,6 +21,7 @@ import util.DateUtil;
 import vo.CustomerVO;
 import vo.DeliverymanVo.SendVO;
 import businessLogic.deliveryBL.SendController;
+import businessLogic.manageBL.ApproveController;
 import client.ClientInitException;
 import client.Main;
 import enumSet.Express;
@@ -27,13 +29,7 @@ import enumSet.PackType;
 import enumSet.ReceiptsState;
 
 public class SendModifyUI extends JPanel {
-	// 一会儿删↓
-	static MainFrame f;
-	// 一会儿删↑
-
 	private static final long serialVersionUID = 1L;
-
-	private static final int PADDING = 10;
 
 	private SendController sc;
 	private final String[] labelName = { "姓名", "城市", "邮编", "地址", "单位", "电话" };
@@ -65,6 +61,10 @@ public class SendModifyUI extends JPanel {
 		sc = new SendController();
 		this.initComponents();
 		this.validate();
+	}
+
+	protected void paintComponent(Graphics g) {
+		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
 	}
 
 	private void initComponents() throws RemoteException {
@@ -142,42 +142,27 @@ public class SendModifyUI extends JPanel {
 		yesButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (hasEmpty()) {
-					JOptionPane.showMessageDialog(null, "尚未填写完整", "",
+					JOptionPane.showMessageDialog(null, "信息未填写完整", "",
 							JOptionPane.ERROR_MESSAGE);
 					return;
 				}
 				try {
-					String dep = cities[cityComboS.getSelectedIndex()];
-					String des = cities[cityComboR.getSelectedIndex()];
-					double wei = Double.parseDouble(textFieldO[2].getText());
-					double vol = Double.parseDouble(textFieldO[3].getText());
-
-					fare = sc.getFare(dep, des, getPackType(), getExpress(),
-							wei, vol, 1, 1);
-					String result = sc.add(getSendVO());
-					if (result != null) {
-						JOptionPane.showMessageDialog(null, result, "",
-								JOptionPane.ERROR_MESSAGE);
-					} else {
-						JOptionPane.showMessageDialog(null, "提交成功", "",
-								JOptionPane.INFORMATION_MESSAGE);
-					}
+					new ApproveController().modifySend(getSendVO());
+					JOptionPane.showMessageDialog(null, "修改成功", "",
+							JOptionPane.INFORMATION_MESSAGE);
 				} catch (RemoteException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
-				} catch (ClientInitException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (NumberFormatException e1) {
-					JOptionPane.showMessageDialog(null, "输入信息有误", "",
-							JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
 
 		noButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Main.frame.returnToTop();
+				try {
+					Main.frame.setView(new SendApproveUI());
+				} catch (RemoteException e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 
@@ -200,11 +185,11 @@ public class SendModifyUI extends JPanel {
 		textFieldS[3].setText(sender.address);
 		textFieldS[4].setText(sender.company);
 		textFieldS[5].setText(sender.telephone);
-		textFieldS[0].setText(receiver.name);
-		textFieldS[2].setText(receiver.postCode);
-		textFieldS[3].setText(receiver.address);
-		textFieldS[4].setText(receiver.company);
-		textFieldS[5].setText(receiver.telephone);
+		textFieldR[0].setText(receiver.name);
+		textFieldR[2].setText(receiver.postCode);
+		textFieldR[3].setText(receiver.address);
+		textFieldR[4].setText(receiver.company);
+		textFieldR[5].setText(receiver.telephone);
 		textFieldO[0].setText(vo.goodsNum + "");
 		textFieldO[1].setText(vo.name);
 		textFieldO[2].setText(vo.weight + "");
@@ -212,6 +197,31 @@ public class SendModifyUI extends JPanel {
 		textFieldO[6].setText(vo.id);
 		textFieldO[7].setText(DateUtil.dateToString(vo.d));
 		textFieldO[8].setText(vo.arriveDate + "");
+
+		for (int i = 0; i < cities.length; i++) {
+			if (cities[i].equals(vo.sender.city)) {
+				cityComboS.setSelectedIndex(i);
+				break;
+			}
+		}
+		for (int i = 0; i < cities.length; i++) {
+			if (cities[i].equals(vo.receiver.city)) {
+				cityComboR.setSelectedIndex(i);
+				break;
+			}
+		}
+		for (int i = 0; i < exType.length; i++) {
+			if (exType[i].equals(vo.expressType.getExpressString())) {
+				expressType.setSelectedIndex(i);
+				break;
+			}
+		}
+		for (int i = 0; i < pkType.length; i++) {
+			if (pkType[i].equals(vo.packType.getPackTypeString())) {
+				packType.setSelectedIndex(i);
+				break;
+			}
+		}
 	}
 
 	private void initCities() throws RemoteException {
@@ -283,12 +293,5 @@ public class SendModifyUI extends JPanel {
 		String s2 = (String) cityComboS.getSelectedItem();
 		String s1 = (String) cityComboR.getSelectedItem();
 		textFieldO[8].setText(sc.getDays(s1, s2) + "");
-	}
-
-	public static void main(String[] args) throws RemoteException,
-			ClientInitException {
-		f = new MainFrame();
-		SendUI view = new SendUI();
-		f.setView(view);
 	}
 }

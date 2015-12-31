@@ -14,14 +14,14 @@ import dataService.financeDataService.PaymentDataService;
 import enumSet.ReceiptsState;
 
 public class MoneyBL {
-//	private CashRegisterBL crBL;
-//	private PaymentBL paymentBL;
+	// private CashRegisterBL crBL;
+	// private PaymentBL paymentBL;
 	private IncomeDataService incomeDS;
 	private List<IncomePO> incomeList;
 	private PaymentDataService paymentDS;
 	private List<PaymentPO> paymentList;
-	
-	public MoneyBL() throws RemoteException{
+
+	public MoneyBL() throws RemoteException {
 		try {
 			RMIHelper.initIncomeDataService();
 			incomeDS = RMIHelper.getIncomeDataService();
@@ -34,33 +34,35 @@ public class MoneyBL {
 			e.printStackTrace();
 		}
 	}
-	
-	public double getIncomeBetween(Date start,Date end){
-		double result=0;
-//		start	=DateUtil.stringToDate(DateUtil.dateToString(start));
-//		end		=DateUtil.stringToDate(DateUtil.dateToString(end));
-		for(IncomePO temp : incomeList){
-			if(temp.getDate().getTime()>=start.getTime()&&temp.getDate().getTime()<=end.getTime()){
-				result=result+temp.getIncome();
+
+	public double getIncomeBetween(Date start, Date end) {
+		double result = 0;
+		// start =DateUtil.stringToDate(DateUtil.dateToString(start));
+		// end =DateUtil.stringToDate(DateUtil.dateToString(end));
+		for (IncomePO temp : incomeList) {
+			if (temp.getDate().getTime() >= start.getTime()
+					&& temp.getDate().getTime() <= end.getTime()) {
+				result = result + temp.getIncome();
 			}
 		}
-		
+
 		return result;
 	}
-	
-	public double getPaymentBetween(Date start,Date end){
-		double result=0;
-//		start	=DateUtil.stringToDate(DateUtil.dateToString(start));
-//		end		=DateUtil.stringToDate(DateUtil.dateToString(end));
-		for(PaymentPO temp : paymentList){
-			if(temp.getD().getTime()>=start.getTime()&&temp.getD().getTime()<=end.getTime()){
-				result=result+temp.getAmmounts();
+
+	public double getPaymentBetween(Date start, Date end) {
+		double result = 0;
+		// start =DateUtil.stringToDate(DateUtil.dateToString(start));
+		// end =DateUtil.stringToDate(DateUtil.dateToString(end));
+		for (PaymentPO temp : paymentList) {
+			if (temp.getD().getTime() >= start.getTime()
+					&& temp.getD().getTime() <= end.getTime()) {
+				result = result + temp.getAmmounts();
 			}
 		}
-		
+
 		return result;
 	}
-	
+
 	public void approve(IncomePO po) throws RemoteException {
 		incomeDS.approval(po);
 	}
@@ -70,9 +72,9 @@ public class MoneyBL {
 	}
 
 	public List<IncomeVO> getUnapproved() {
-		List<IncomeVO> result=new ArrayList<IncomeVO>();
-		for(IncomePO temp: incomeList){
-			if(temp.getState()==ReceiptsState.unapprove){
+		List<IncomeVO> result = new ArrayList<IncomeVO>();
+		for (IncomePO temp : incomeList) {
+			if (temp.getState() == ReceiptsState.unapprove) {
 				result.add(new IncomeVO(temp));
 			}
 		}

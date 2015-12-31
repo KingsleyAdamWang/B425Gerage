@@ -1,5 +1,6 @@
 package presentation.BusinessHallUI;
 
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
@@ -21,14 +22,11 @@ import util.DateUtil;
 import vo.DeliverymanVo.SendVO;
 import vo.FinanceVo.IncomeVO;
 import businessLogic.businessHallBL.CashRegisterController;
+import businessLogic.manageBL.ApproveController;
 import client.Main;
 import enumSet.ReceiptsState;
 
 public class CashModifyUI extends JPanel {
-	// 一会儿删↓
-	static MainFrame f;
-	// 一会儿删↑
-
 	private static final long serialVersionUID = 1L;
 
 	private final String[] labelName = { "快递员编号", "收款金额", "收款日期" };
@@ -51,6 +49,10 @@ public class CashModifyUI extends JPanel {
 		cc = new CashRegisterController();
 		this.initComponents();
 		this.validate();
+	}
+
+	protected void paintComponent(Graphics g) {
+		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
 	}
 
 	private void initComponents() {
@@ -92,22 +94,30 @@ public class CashModifyUI extends JPanel {
 
 		sendBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				try {
+					voList = cc.getSendByStaffID(
+							DateUtil.stringToDate(field[1].getText()),
+							field[0].getText());
+				} catch (RemoteException e1) {
+					e1.printStackTrace();
+				}
+				initList();
+				setList();
 			}
 		});
 
 		submitBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if (hasEmpty()) {
+					JOptionPane.showMessageDialog(null, "信息未填写完整", "",
+							JOptionPane.ERROR_MESSAGE);
+					return;
+				}
 				try {
-					String result = cc.add(getVO());
-					if (result != null) {
-						JOptionPane.showMessageDialog(null, result, "",
-								JOptionPane.ERROR_MESSAGE);
-					} else {
-						JOptionPane.showMessageDialog(null, "提交成功", "",
-								JOptionPane.INFORMATION_MESSAGE);
-					}
+					new ApproveController().modifyIncome(getVO());
+					JOptionPane.showMessageDialog(null, "修改成功", "",
+							JOptionPane.INFORMATION_MESSAGE);
 				} catch (RemoteException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -115,7 +125,7 @@ public class CashModifyUI extends JPanel {
 
 		returnBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Main.frame.returnToTop();
+				Main.frame.setView(new CashApproveUI());
 			}
 		});
 
@@ -147,17 +157,19 @@ public class CashModifyUI extends JPanel {
 		}
 	}
 
+	private boolean hasEmpty() {
+		for (int i = 0; i < 3; i++) {
+			if (field[i].getText().equals(""))
+				return true;
+		}
+		return false;
+	}
+
 	private IncomeVO getVO() {
 		String id = field[0].getText();
 		Date d = DateUtil.stringToDate(field[2].getText());
 		return new IncomeVO(ReceiptsState.getReceiptsState("未审批"), MainFrame
 				.getUser().getIdentityID(), MainFrame.getUser()
 				.getInstitutionID(), d, income, id, idList);
-	}
-
-	public static void main(String[] args) throws RemoteException {
-		f = new MainFrame();
-		CashRegisterUI view = new CashRegisterUI();
-		f.setView(view);
 	}
 }

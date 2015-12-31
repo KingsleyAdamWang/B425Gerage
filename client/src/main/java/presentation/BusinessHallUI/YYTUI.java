@@ -1,5 +1,6 @@
 package presentation.BusinessHallUI;
 
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
@@ -27,6 +28,10 @@ public class YYTUI extends JPanel {
 	public YYTUI() {
 		this.initComponents();
 		this.validate();
+	}
+	
+	protected void paintComponent(Graphics g) {
+		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
 	}
 
 	private void initComponents() {
@@ -74,10 +79,8 @@ public class YYTUI extends JPanel {
 						try {
 							Main.frame.setView(new ArrivalUI(), "填写到达单");
 						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						} catch (ClientInitException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}
@@ -89,7 +92,6 @@ public class YYTUI extends JPanel {
 						try {
 							Main.frame.setView(new DeliveryUI(), "填写派件单");
 						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}
@@ -101,10 +103,8 @@ public class YYTUI extends JPanel {
 						try {
 							Main.frame.setView(new EntruckUI(), "填写装车单");
 						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						} catch (ClientInitException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}
@@ -116,7 +116,6 @@ public class YYTUI extends JPanel {
 						try {
 							Main.frame.setView(new CashRegisterUI(), "填写收款单");
 						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}

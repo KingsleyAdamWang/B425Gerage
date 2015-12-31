@@ -33,9 +33,9 @@ public class AdminBL {
 			RMIHelper.initUserDataService();
 			UserDS = RMIHelper.getUserDataService();
 			userList = UserDS.getUsers();
-//			System.out.println(userList.size());
+			// System.out.println(userList.size());
 			tempList = new ArrayList<UserPO>();
-			
+
 		} catch (ClientInitException e) {
 			e.printStackTrace();
 		} catch (RemoteException e) {
@@ -50,13 +50,14 @@ public class AdminBL {
 	public List<UserVO> search(String key) {
 
 		tempList.clear();
-		
+
 		for (UserPO po : userList) {
 			if (po.getIdentityID().contains(key)
 					|| po.getInstitutionID().contains(key)
 					|| po.getWork().getPositionString().contains(key)
-					|| po.getName().contains(key)){
-				tempList.add(po);}
+					|| po.getName().contains(key)) {
+				tempList.add(po);
+			}
 		}
 		// tempList = result;
 		return transToVOList(tempList);
@@ -64,9 +65,9 @@ public class AdminBL {
 
 	private List<UserVO> transToVOList(List<UserPO> temp) {
 		List<UserVO> voList = new ArrayList<UserVO>(temp.size());
-        for(UserPO po: temp)
-        	voList.add(new UserVO(po));
-        return  voList;
+		for (UserPO po : temp)
+			voList.add(new UserVO(po));
+		return voList;
 	}
 
 	/**
@@ -99,8 +100,9 @@ public class AdminBL {
 			e.printStackTrace();
 		}
 
-		List<InstitutionVO> result = new ArrayList<InstitutionVO>(insList.size());
-		for(InstitutionPO po : insList)
+		List<InstitutionVO> result = new ArrayList<InstitutionVO>(
+				insList.size());
+		for (InstitutionPO po : insList)
 			result.add(new InstitutionVO(po));
 		return result;
 	}
@@ -124,9 +126,11 @@ public class AdminBL {
 					} catch (RemoteException e) {
 						e.printStackTrace();
 					}
-					
-					//操作成功录入操作日志，还没写
-//					LogVO logVO=new LogVO(null,MainFrame.getUser().getIdentityID(), "人员管理 增加");
+
+					// 操作成功录入操作日志，还没写
+					// LogVO logVO=new
+					// LogVO(null,MainFrame.getUser().getIdentityID(),
+					// "人员管理 增加");
 
 					return null;
 				}
@@ -134,10 +138,10 @@ public class AdminBL {
 		}
 
 	}
-	
-	//stub1
-//	public String modifyStub(){
-//		
-//	}
+
+	// stub1
+	// public String modifyStub(){
+	//
+	// }
 
 }

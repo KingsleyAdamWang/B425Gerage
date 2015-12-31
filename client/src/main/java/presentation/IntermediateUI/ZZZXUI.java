@@ -1,5 +1,6 @@
 package presentation.IntermediateUI;
 
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
@@ -14,10 +15,7 @@ import javax.swing.table.DefaultTableModel;
 
 import presentation.MainFrame;
 import presentation.BusinessHallUI.ArrivalUI;
-import presentation.BusinessHallUI.CashRegisterUI;
-import presentation.BusinessHallUI.DriverAddUI;
 import presentation.BusinessHallUI.EntruckUI;
-import presentation.BusinessHallUI.TruckUI;
 import vo.AdminVo.UserVO;
 import client.ClientInitException;
 import client.Main;
@@ -32,6 +30,10 @@ public class ZZZXUI extends JPanel {
 	public ZZZXUI() {
 		this.initComponents();
 		this.validate();
+	}
+	
+	protected void paintComponent(Graphics g) {
+		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
 	}
 
 	private void initComponents() {
@@ -77,10 +79,8 @@ public class ZZZXUI extends JPanel {
 						try {
 							Main.frame.setView(new ArrivalUI(), "填写到达单");
 						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						} catch (ClientInitException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}
@@ -92,10 +92,8 @@ public class ZZZXUI extends JPanel {
 						try {
 							Main.frame.setView(new EntruckUI(), "填写装车单");
 						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						} catch (ClientInitException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 
 						}
@@ -108,7 +106,6 @@ public class ZZZXUI extends JPanel {
 						try {
 							Main.frame.setView(new TransferUI(), "填写中转单");
 						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}

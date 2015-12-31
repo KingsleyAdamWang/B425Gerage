@@ -1,5 +1,6 @@
 package presentation.InventoryUI;
 
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
@@ -17,18 +18,15 @@ import presentation.MainFrame;
 import util.DateUtil;
 import vo.InventoryVo.ShipmentVO;
 import vo.ManageVo.InstitutionVO;
-import businessLogic.inventoryBL.shipmentController;
+import businessLogic.inventoryBL.ShipmentController;
+import businessLogic.manageBL.ApproveController;
 import client.Main;
 import enumSet.ReceiptsState;
 
 public class ShipmentModifyUI extends JPanel {
-	// 一会儿删↓
-	static MainFrame f;
-	// 一会儿删↑
-
 	private static final long serialVersionUID = 1L;
 
-	private shipmentController sc;
+	private ShipmentController sc;
 	private final String[] labelName = { "机构编号", "中转单编号", "快递单号", "目的地",
 			"出库日期", "运输类型" };
 	private final String[] type = { "汽车", "火车", "飞机" };
@@ -38,11 +36,18 @@ public class ShipmentModifyUI extends JPanel {
 	private JComboBox<String> destination;
 	private JButton submitBtn;
 	private JButton returnBtn;
+	private String[] cities;
+	private ShipmentVO vo;
 
-	public ShipmentModifyUI() throws RemoteException {
-		sc = new shipmentController();
+	public ShipmentModifyUI(ShipmentVO vo) throws RemoteException {
+		this.vo = vo;
+		sc = new ShipmentController();
 		this.initComponents();
 		this.validate();
+	}
+
+	protected void paintComponent(Graphics g) {
+		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
 	}
 
 	private void initComponents() throws RemoteException {
@@ -54,7 +59,7 @@ public class ShipmentModifyUI extends JPanel {
 		List<InstitutionVO> cityList = sc.getInstitutionList(MainFrame
 				.getUser().getIdentityID());
 		// List<InstitutionVO> cityList = sc.getInstitutionList("020010");
-		String[] cities = new String[cityList.size()];
+		cities = new String[cityList.size()];
 		for (int i = 0; i < cityList.size(); i++) {
 			cities[i] = cityList.get(i).getName();
 		}
@@ -86,17 +91,16 @@ public class ShipmentModifyUI extends JPanel {
 
 		submitBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if (hasEmpty()) {
+					JOptionPane.showMessageDialog(null, "信息未填写完整", "",
+							JOptionPane.ERROR_MESSAGE);
+					return;
+				}
 				try {
-					String result = sc.add(getVO());
-					if (result != null) {
-						JOptionPane.showMessageDialog(null, result, "",
-								JOptionPane.ERROR_MESSAGE);
-					} else {
-						JOptionPane.showMessageDialog(null, "提交成功", "",
-								JOptionPane.INFORMATION_MESSAGE);
-					}
+					new ApproveController().modifyShipment(getVO());
+					JOptionPane.showMessageDialog(null, "修改成功", "",
+							JOptionPane.INFORMATION_MESSAGE);
 				} catch (RemoteException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -104,9 +108,40 @@ public class ShipmentModifyUI extends JPanel {
 
 		returnBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Main.frame.returnToTop();
+				try {
+					Main.frame.setView(new ShipmentApproveUI());
+				} catch (RemoteException e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
+
+		field[0].setText(vo.institutionID);
+		field[1].setText(vo.transferID);
+		field[2].setText(vo.id);
+		field[4].setText(DateUtil.dateToString(vo.date));
+		for (int i = 0; i < cities.length; i++) {
+			if (cities[i].equals(vo.destination)) {
+				destination.setSelectedIndex(i);
+				break;
+			}
+		}
+		for (int i = 0; i < type.length; i++) {
+			if (type[i].equals(vo.type)) {
+				box.setSelectedIndex(i);
+				break;
+			}
+		}
+	}
+
+	private boolean hasEmpty() {
+		for (int i = 0; i < 6; i++) {
+			if (i != 5 && i != 3) {
+				if (field[i].getText().equals(""))
+					return true;
+			}
+		}
+		return false;
 	}
 
 	private ShipmentVO getVO() {
@@ -121,11 +156,5 @@ public class ShipmentModifyUI extends JPanel {
 				.getUser().getIdentityID(), id, date, institutionID, des, type,
 				transferID);
 		return vo;
-	}
-
-	public static void main(String[] args) throws RemoteException {
-		f = new MainFrame();
-		ShipmentUI view = new ShipmentUI();
-		f.setView(view);
 	}
 }

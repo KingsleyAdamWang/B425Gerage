@@ -36,7 +36,7 @@ public class EntruckBL {
 
 	public EntruckVO search(String EntruckID) throws RemoteException {
 		for (EntruckPO temp : entruckList) {
-			if (temp.getQyID() == EntruckID) {
+			if (temp.getQyID().equals(EntruckID)) {
 				return new EntruckVO(temp);
 			}
 		}
@@ -154,14 +154,14 @@ public class EntruckBL {
 	}
 
 	public double getFare(List<String> sendList) throws RemoteException {
-		StrategyBL strategyBL=new StrategyBL();
-		PriceConstVO priceVO=strategyBL.getVO();
+		StrategyBL strategyBL = new StrategyBL();
+		PriceConstVO priceVO = strategyBL.getVO();
 		double fare = 0;
 		double tCoeff = priceVO.getCarCost();
 		double weight = 0;
 		double distance = 30;
 		SendBL sendBL = new SendBL();
-//		List<SendVO> sendVOList = new ArrayList<SendVO>();
+		// List<SendVO> sendVOList = new ArrayList<SendVO>();
 		for (String temp : sendList) {
 			if (sendBL.getSend(temp) != null) {
 				weight = weight + sendBL.getSend(temp).weight;
@@ -179,7 +179,7 @@ public class EntruckBL {
 		// }
 		// }
 
-		fare = 30 * tCoeff * weight/1000;
+		fare = 30 * tCoeff * weight / 1000;
 		return fare;
 	}
 
@@ -189,7 +189,7 @@ public class EntruckBL {
 
 		return po.getIDlist();
 	}
-	
+
 	public void approve(EntruckPO po) throws RemoteException {
 		entruckDS.approval(po);
 	}
@@ -199,9 +199,9 @@ public class EntruckBL {
 	}
 
 	public List<EntruckVO> getUnapproved() {
-		List<EntruckVO> result=new ArrayList<EntruckVO>();
-		for(EntruckPO temp: entruckList){
-			if(temp.getState()==ReceiptsState.unapprove){
+		List<EntruckVO> result = new ArrayList<EntruckVO>();
+		for (EntruckPO temp : entruckList) {
+			if (temp.getState() == ReceiptsState.unapprove) {
 				result.add(new EntruckVO(temp));
 			}
 		}

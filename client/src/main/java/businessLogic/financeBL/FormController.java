@@ -47,13 +47,13 @@ public class FormController implements FormBLService {
 
 	@Override
 	public double getTotalIncome() {
-		
+
 		return formBL.incomeTotal();
 	}
 
 	@Override
 	public double getTotalPay() {
-		
+
 		return formBL.payTotal();
 	}
 

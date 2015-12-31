@@ -1,7 +1,9 @@
 package presentation.ManageUI;
 
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.Vector;
 
@@ -28,6 +30,10 @@ public class ManagerUI extends JPanel {
 	public ManagerUI() {
 		this.initComponents();
 		this.validate();
+	}
+	
+	protected void paintComponent(Graphics g) {
+		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
 	}
 
 	private void initComponents() {
@@ -81,7 +87,8 @@ public class ManagerUI extends JPanel {
 						try {
 							Main.frame.setView(new InstManageUI(), "人员机构管理");
 						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (IOException e1) {
 							e1.printStackTrace();
 						}
 					}
@@ -98,7 +105,7 @@ public class ManagerUI extends JPanel {
 			case 2:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						Main.frame.setView(new ApproveUI(), "审批单据");
+						Main.frame.setView(new ApproveChooseUI(), "审批单据");
 					}
 				});
 				break;
@@ -108,7 +115,6 @@ public class ManagerUI extends JPanel {
 						try {
 							Main.frame.setView(new SalaryUI(), "薪水策略制定");
 						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}
@@ -120,7 +126,6 @@ public class ManagerUI extends JPanel {
 						try {
 							Main.frame.setView(new StrategyUI(), "业务策略制定");
 						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}
@@ -132,7 +137,6 @@ public class ManagerUI extends JPanel {
 						try {
 							Main.frame.setView(new LogUI(), "日志查询");
 						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}
@@ -143,9 +147,9 @@ public class ManagerUI extends JPanel {
 		}
 	}
 
-//	public static void main(String[] args) {
-//		f = new MainFrame();
-//		ManagerUI view = new ManagerUI();
-//		f.setView(view);
-//	}
+	// public static void main(String[] args) {
+	// f = new MainFrame();
+	// ManagerUI view = new ManagerUI();
+	// f.setView(view);
+	// }
 }

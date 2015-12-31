@@ -1,6 +1,7 @@
 package presentation.FinanceUI;
 
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
@@ -17,6 +18,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
+import presentation.MainFrame;
 import util.DateUtil;
 import vo.FinanceVo.IncomeVO;
 import vo.FinanceVo.PaymentVO;
@@ -52,6 +54,10 @@ public class RunFormUI extends JPanel {
 		this.initList();
 		this.initComponents();
 		this.validate();
+	}
+	
+	protected void paintComponent(Graphics g) {
+		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
 	}
 
 	private void initComponents() {
@@ -332,7 +338,7 @@ class RunFormDialog extends JDialog {
 		});
 		btn2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
+				dispose();
 			}
 		});
 	}

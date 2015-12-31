@@ -21,7 +21,8 @@ import enumSet.ReceiptsState;
 public class CashRegisterBL {
 	private IncomeDataService incomeDS;
 	private List<IncomePO> incomeList;
-//	private IncomePO incomePO;
+
+	// private IncomePO incomePO;
 	public CashRegisterBL() throws RemoteException {
 		try {
 			RMIHelper.initIncomeDataService();
@@ -32,131 +33,130 @@ public class CashRegisterBL {
 			e.printStackTrace();
 		}
 	}
-	
-	public List<IncomeVO> getIncomeVOList(){
-		List<IncomeVO> result=new ArrayList<IncomeVO>();
-		for(IncomePO temp :incomeList){
+
+	public List<IncomeVO> getIncomeVOList() {
+		List<IncomeVO> result = new ArrayList<IncomeVO>();
+		for (IncomePO temp : incomeList) {
 			result.add(new IncomeVO(temp));
 		}
 		return result;
 	}
-	
-	public String add(IncomeVO vo) throws RemoteException{
-		IncomePO po=vo.transToPO();
-		
+
+	public String add(IncomeVO vo) throws RemoteException {
+		IncomePO po = vo.transToPO();
+
 		po.setState(ReceiptsState.unapprove);
-		
-		if(po.getIdList().size()==0){
+
+		if (po.getIdList().size() == 0) {
 			return "无寄件单，无法建立相关收款单";
 		}
-		
+
 		incomeList.add(po);
 		incomeDS.add(po);
-		
+
 		return null;
 	}
-	
-	public String modify(IncomePO income) throws RemoteException{
-		int index=-1;
-		for(IncomePO temp: incomeList){
-			if(temp.equals(income)){
-				index=incomeList.indexOf(temp);
+
+	public String modify(IncomePO income) throws RemoteException {
+		int index = -1;
+		for (IncomePO temp : incomeList) {
+			if (temp.equals(income)) {
+				index = incomeList.indexOf(temp);
 			}
 		}
-		if(index==-1){
+		if (index == -1) {
 			return "未找到对应收款单";
 		}
 		incomeList.set(index, income);
 		incomeDS.modify(income);
 		return null;
-	} 
-	
-//	public String find(){
-//		
-//	}
-//不想删掉收款单	
-	/*public String delete(IncomeVO vo){
-		IncomePO po=vo.transToPO();
-		
-		incomeList.remove(po);
-		incomeDS.;
-		return null;
-	}*/
-	
-	public double getFare(){
+	}
+
+	// public String find(){
+	//
+	// }
+	// 不想删掉收款单
+	/*
+	 * public String delete(IncomeVO vo){ IncomePO po=vo.transToPO();
+	 * 
+	 * incomeList.remove(po); incomeDS.; return null; }
+	 */
+
+	public double getFare() {
 		double result = 0;
-		
-		for(IncomePO temp: incomeList){
-			result=result+temp.getIncome();
+
+		for (IncomePO temp : incomeList) {
+			result = result + temp.getIncome();
 		}
 		return result;
 	}
-	
-	public List<IncomePO> getIncomeList(){
+
+	public List<IncomePO> getIncomeList() {
 		return incomeList;
 	}
-	
-	public List<IncomePO> getIncomePOByPerson(String staffID){
-		List<IncomePO> result=new ArrayList<IncomePO>();
-		for(IncomePO temp: incomeList){
-			if(temp.getKdyID().equals(staffID)){
+
+	public List<IncomePO> getIncomePOByPerson(String staffID) {
+		List<IncomePO> result = new ArrayList<IncomePO>();
+		for (IncomePO temp : incomeList) {
+			if (temp.getKdyID().equals(staffID)) {
 				result.add(temp);
 			}
-		}	
+		}
 		return result;
 	}
-	
-	public List<IncomeVO> getIncomeBetweenDate(Date start ,Date end){
-		List<IncomeVO> result=new ArrayList<IncomeVO>();
-		for(IncomePO temp: incomeList){
-			if(temp.getDate().getTime()>=start.getTime()&&temp.getDate().getTime()<=end.getTime()){
+
+	public List<IncomeVO> getIncomeBetweenDate(Date start, Date end) {
+		List<IncomeVO> result = new ArrayList<IncomeVO>();
+		for (IncomePO temp : incomeList) {
+			if (temp.getDate().getTime() >= start.getTime()
+					&& temp.getDate().getTime() <= end.getTime()) {
 				result.add(new IncomeVO(temp));
 			}
 		}
 		return result;
 	}
-	
-	public List<IncomePO> getIncomeListByDate(Date d){
-		List<IncomePO> result=new ArrayList<IncomePO>();
-		for(IncomePO temp: result){
-			if(temp.getDate().equals(d)){
+
+	public List<IncomePO> getIncomeListByDate(Date d) {
+		List<IncomePO> result = new ArrayList<IncomePO>();
+		for (IncomePO temp : result) {
+			if (temp.getDate().equals(d)) {
 				result.add(temp);
 			}
 		}
-		
+
 		return result;
 	}
-	
-	public List<IncomeVO> getIncomeByIns(String institutionID){
-		List<IncomeVO> incomeList=new ArrayList<IncomeVO>();
-		for(IncomePO temp:this.incomeList){
-			if(temp.getInstitutionID().equals(institutionID)){
+
+	public List<IncomeVO> getIncomeByIns(String institutionID) {
+		List<IncomeVO> incomeList = new ArrayList<IncomeVO>();
+		for (IncomePO temp : this.incomeList) {
+			if (temp.getInstitutionID().equals(institutionID)) {
 				incomeList.add(new IncomeVO(temp));
 			}
 		}
 		return null;
 	}
-	
-	public List<InstitutionVO> getBusinessHallList() throws RemoteException{
-		InstitutionBL insBL=new InstitutionBL();
-		List<InstitutionPO> insList=insBL.getInsList();
-		List<InstitutionVO> result=new ArrayList<InstitutionVO>();
-		for(InstitutionPO temp: insList){
-			if(temp.getType()!=InsType.businessHall){
+
+	public List<InstitutionVO> getBusinessHallList() throws RemoteException {
+		InstitutionBL insBL = new InstitutionBL();
+		List<InstitutionPO> insList = insBL.getInsList();
+		List<InstitutionVO> result = new ArrayList<InstitutionVO>();
+		for (InstitutionPO temp : insList) {
+			if (temp.getType() != InsType.businessHall) {
 				insList.remove(temp);
 			}
 		}
-		
-		for(InstitutionPO temp: insList){
+
+		for (InstitutionPO temp : insList) {
 			result.add(new InstitutionVO(temp));
 		}
 		return result;
 	}
-	
-	public double getIncomeAmmount(List<IncomeVO> incomeList){
-		double ammount=0;
-		for(IncomeVO temp: incomeList){
-			ammount=ammount+temp.income;
+
+	public double getIncomeAmmount(List<IncomeVO> incomeList) {
+		double ammount = 0;
+		for (IncomeVO temp : incomeList) {
+			ammount = ammount + temp.income;
 		}
 		return ammount;
 	}
@@ -170,26 +170,27 @@ public class CashRegisterBL {
 	}
 
 	public List<IncomeVO> getUnapproved() {
-		List<IncomeVO> result=new ArrayList<IncomeVO>();
-		for(IncomePO temp: incomeList){
-			if(temp.getState()==ReceiptsState.unapprove){
+		List<IncomeVO> result = new ArrayList<IncomeVO>();
+		for (IncomePO temp : incomeList) {
+			if (temp.getState() == ReceiptsState.unapprove) {
 				result.add(new IncomeVO(temp));
 			}
 		}
 		return result;
 	}
-	
-	public List<SendVO> getSendByStaffID(Date d,String staffID) throws RemoteException{
-		SendBL sendBL=new SendBL();
-		return sendBL.getSendByStaff(d,staffID);
+
+	public List<SendVO> getSendByStaffID(Date d, String staffID)
+			throws RemoteException {
+		SendBL sendBL = new SendBL();
+		return sendBL.getSendByStaff(d, staffID);
 	}
-	
-	public double getSendAmmounts(List<SendVO> sendList){
+
+	public double getSendAmmounts(List<SendVO> sendList) {
 		double result = 0;
-		for(SendVO temp: sendList){
-			result=result+temp.getFare();
+		for (SendVO temp : sendList) {
+			result = result + temp.getFare();
 		}
-		
+
 		return result;
 	}
 }

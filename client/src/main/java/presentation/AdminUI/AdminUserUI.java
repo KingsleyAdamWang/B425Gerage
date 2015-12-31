@@ -1,5 +1,6 @@
 package presentation.AdminUI;
 
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
@@ -12,13 +13,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.table.TableModel;
 
+import presentation.MainFrame;
+import vo.AdminVo.UserVO;
+import businessLogic.adminBL.AdminController;
 import client.ClientInitException;
 import client.Main;
-import vo.AdminVo.UserVO;
-import vo.ManageVo.InstitutionVO;
-import businessLogic.adminBL.AdminController;
 
 public class AdminUserUI extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -37,6 +37,10 @@ public class AdminUserUI extends JPanel {
 		// this.initComponents();
 		// this.initList();
 		// this.validate();
+	}	
+	
+	protected void paintComponent(Graphics g) {
+		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
 	}
 
 	public AdminUserUI(String s, int i) throws ClientInitException {
@@ -105,7 +109,6 @@ public class AdminUserUI extends JPanel {
 						try {
 							tmp = ac.modify(vo.getIdentityID(), tmp);
 						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 						if (tmp != null) {
@@ -125,7 +128,6 @@ public class AdminUserUI extends JPanel {
 						try {
 							Main.frame.setView(new AdminSearchUI(),"账户密码管理");
 						} catch (ClientInitException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}

@@ -1,5 +1,6 @@
 package presentation.FinanceUI;
 
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
@@ -13,10 +14,10 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-import presentation.DeliverymanUI.ReceiveModifyUI;
+import presentation.MainFrame;
+import presentation.DeliverymanUI.ReceiveApproveUI;
 import presentation.ManageUI.ApproveChooseUI;
 import util.DateUtil;
-import vo.BussinessHallVo.DeliveryVO;
 import vo.FinanceVo.PaymentVO;
 import businessLogic.manageBL.ApproveController;
 import client.Main;
@@ -36,6 +37,10 @@ public class PaymentApproveUI extends JPanel {
 		this.initComponents();
 		this.initList();
 		this.validate();
+	}
+	
+	protected void paintComponent(Graphics g) {
+		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
 	}
 
 	private void initComponents() {
@@ -84,7 +89,6 @@ public class PaymentApproveUI extends JPanel {
 							Main.frame.setView(new PaymentModifyUI(list
 									.get(index)));
 						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}
@@ -101,8 +105,10 @@ public class PaymentApproveUI extends JPanel {
 						}
 						try {
 							ac.setApprovedPayment(list.get(index));
+							JOptionPane.showMessageDialog(null, "审批完成", "",
+									JOptionPane.INFORMATION_MESSAGE);
+							Main.frame.setView(new PaymentApproveUI());
 						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}
@@ -111,11 +117,18 @@ public class PaymentApproveUI extends JPanel {
 			case 2:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						try {
-							ac.setAllApprovedPayment();
-						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
+						int n = JOptionPane.showConfirmDialog(null,
+								"确定通过所有单据的审批?", "", JOptionPane.YES_NO_OPTION);
+						if (n == 0) {
+							try {
+								ApproveController ac = new ApproveController();
+								ac.setAllApprovedPayment();
+								JOptionPane.showMessageDialog(null, "审批完成", "",
+										JOptionPane.INFORMATION_MESSAGE);
+								Main.frame.setView(new PaymentApproveUI());
+							} catch (RemoteException e1) {
+								e1.printStackTrace();
+							}
 						}
 					}
 				});

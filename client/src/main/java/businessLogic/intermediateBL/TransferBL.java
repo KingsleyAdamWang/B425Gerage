@@ -52,35 +52,36 @@ public class TransferBL {
 		transferDS.add(po);
 		return null;
 	}
-	
-	private void deleteEntryShipment(TransferPO po) throws RemoteException{
-		EntryBL entryBL=new EntryBL();
-		ShipmentBL shipmentBL=new ShipmentBL();
-		List<String> idList=po.getList();
-		List<EntryPO> entryPOList=new ArrayList<EntryPO>();
-		List<ShipmentPO> shipmentPOList=new ArrayList<ShipmentPO>();
-		entryPOList=entryBL.getEntryList(po.getInstitutionID());
-		shipmentPOList=shipmentBL.getShipmentList(po.getInstitutionID());
-		for(EntryPO temp: entryPOList){
+
+	private void deleteEntryShipment(TransferPO po) throws RemoteException {
+		EntryBL entryBL = new EntryBL();
+		ShipmentBL shipmentBL = new ShipmentBL();
+		List<String> idList = po.getList();
+		List<EntryPO> entryPOList = new ArrayList<EntryPO>();
+		List<ShipmentPO> shipmentPOList = new ArrayList<ShipmentPO>();
+		entryPOList = entryBL.getEntryList(po.getInstitutionID());
+		shipmentPOList = shipmentBL.getShipmentList(po.getInstitutionID());
+		for (EntryPO temp : entryPOList) {
 			entryBL.delete(new EntryVO(temp));
 		}
-		for(ShipmentPO temp: shipmentPOList){
+		for (ShipmentPO temp : shipmentPOList) {
 			shipmentBL.delete(new ShipmentVO(temp));
 		}
-		
+
 	}
+
 	public String modify(TransferVO vo) throws RemoteException {
-		TransferPO transferPO=vo.transToPO();
-		for(TransferPO temp: transferList){
-			if(temp.equals(transferPO)){
-				transferList.set(transferList.indexOf(temp),transferPO);
+		TransferPO transferPO = vo.transToPO();
+		for (TransferPO temp : transferList) {
+			if (temp.equals(transferPO)) {
+				transferList.set(transferList.indexOf(temp), transferPO);
 				transferDS.modify(transferPO);
 				return null;
 			}
 		}
-		
+
 		return "未找到中转单";
-		
+
 	}
 
 	public String delete(TransferVO vo) throws RemoteException {
@@ -101,7 +102,7 @@ public class TransferBL {
 		List<String> result = new ArrayList<String>();
 		List<ShipmentPO> shipmentList = shipmentBL.getShipmentList();
 		for (ShipmentPO temp : shipmentList) {
-			if (temp.getTransferID() == transferID) {
+			if (temp.getTransferID().equals(transferID)) {
 				result.add(temp.getId());
 			}
 		}
@@ -118,9 +119,9 @@ public class TransferBL {
 			throws RemoteException {
 		List<InstitutionVO> result = new ArrayList<InstitutionVO>();
 		InstitutionBL insBL = new InstitutionBL();
-		StaffBL staffBL=new StaffBL();
-		String institutionID=(staffBL.getUser(userID).getInstitutionID());
-		InstitutionPO institutionPO=insBL.searchInstitution(institutionID);
+		StaffBL staffBL = new StaffBL();
+		String institutionID = (staffBL.getUser(userID).getInstitutionID());
+		InstitutionPO institutionPO = insBL.searchInstitution(institutionID);
 		List<InstitutionPO> insList = insBL.getInsList();
 		// for(InstitutionPO temp: insList){
 		// if(temp.getCity()==po.getCity()){
@@ -130,7 +131,7 @@ public class TransferBL {
 		// }
 		// }
 		for (InstitutionPO temp : insList) {
-			if ((temp.getName() != institutionPO.getName())
+			if ((!temp.getName().equals(institutionPO.getName()))
 					&& (temp.getType() == InsType.intermediate)) {
 				result.add(new InstitutionVO(temp));
 			}
@@ -138,40 +139,44 @@ public class TransferBL {
 
 		return result;
 	}
-	public InstitutionVO getCurrentInstitution(String userID) throws RemoteException{
-		StaffBL staffBL=new StaffBL();
-		InstitutionBL institutionBL=new InstitutionBL();
-		return new InstitutionVO(institutionBL.searchInstitution(staffBL.getUser(userID).getInstitutionID()));
+
+	public InstitutionVO getCurrentInstitution(String userID)
+			throws RemoteException {
+		StaffBL staffBL = new StaffBL();
+		InstitutionBL institutionBL = new InstitutionBL();
+		return new InstitutionVO(institutionBL.searchInstitution(staffBL
+				.getUser(userID).getInstitutionID()));
 	}
 
 	public double getFare(TransferPO transferPO) throws RemoteException {
-		List<String> sendList=new ArrayList<String>();
+		List<String> sendList = new ArrayList<String>();
 		StrategyBL strategyBL = new StrategyBL();
 		PriceConstVO priceVO = strategyBL.getVO();
 		double fare = 0;
 		double tCoeff = 0;
 		double weight = 0;
-		double distance =0;
+		double distance = 0;
 		SendBL sendBL = new SendBL();
-//		List<SendVO> sendVOList = new ArrayList<SendVO>();
+		// List<SendVO> sendVOList = new ArrayList<SendVO>();
 		for (String temp : sendList) {
 			if (sendBL.getSend(temp) != null) {
 				weight = weight + sendBL.getSend(temp).weight;
 			}
 		}
 
-		if (transferPO.getType()==TransportType.PLANE) {
+		if (transferPO.getType() == TransportType.PLANE) {
 			tCoeff = priceVO.getPlaneCost();
 		} else {
-			if (transferPO.getType()==TransportType.TRAIN) {
+			if (transferPO.getType() == TransportType.TRAIN) {
 				tCoeff = priceVO.getTrainCost();
 			} else {
 				tCoeff = priceVO.getCarCost();
 			}
 		}
-		
-		distance=strategyBL.getDistance(transferPO.getDeparture(), transferPO.getDestination());
-		fare = distance * tCoeff * weight/1000;
+
+		distance = strategyBL.getDistance(transferPO.getDeparture(),
+				transferPO.getDestination());
+		fare = distance * tCoeff * weight / 1000;
 		return fare;
 	}
 
@@ -193,5 +198,4 @@ public class TransferBL {
 		return result;
 	}
 
-	
 }

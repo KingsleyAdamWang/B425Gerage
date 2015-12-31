@@ -13,7 +13,7 @@ import vo.LogVo.LogVO;
 import businessLogic.logBL.LogBL;
 import businessLogicService.financeBLService.PaymentBLService;
 
-public class PaymentController implements PaymentBLService{
+public class PaymentController implements PaymentBLService {
 	private PaymentBL paymentBL;
 	private LogBL logBL;
 
@@ -43,12 +43,12 @@ public class PaymentController implements PaymentBLService{
 				MainFrame.getUser().getIdentityID(), "查找时间段之间的付款单")));
 		return paymentBL.betweenDate(start, end);
 	}
-	
-	public double getSalaryTotal() throws RemoteException{
+
+	public double getSalaryTotal() throws RemoteException {
 		return paymentBL.getSalaryTotal();
 	}
-	
-	public double getAmmount(List<PaymentVO> paymentList){
+
+	public double getAmmount(List<PaymentVO> paymentList) {
 		return paymentBL.getAmmount(paymentList);
 	}
 }

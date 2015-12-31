@@ -1,7 +1,9 @@
 package presentation.BusinessHallUI;
 
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -24,10 +26,6 @@ import client.Main;
 import enumSet.Sex;
 
 public class DriverAddUI extends JPanel {
-	// 一会儿删↓
-	static MainFrame f;
-	// 一会儿删↑
-
 	private static final long serialVersionUID = 1L;
 	private DriverController dc;
 	private final String[] labelName = { "机构编号", "司机编号", "司机姓名", "出生日期",
@@ -44,6 +42,10 @@ public class DriverAddUI extends JPanel {
 		dc = new DriverController();
 		this.initComponents();
 		this.validate();
+	}
+
+	protected void paintComponent(Graphics g) {
+		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
 	}
 
 	private void initComponents() {
@@ -92,13 +94,18 @@ public class DriverAddUI extends JPanel {
 
 		submitBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String result = dc.addDriver(getVO());
-				if (result != null) {
-					JOptionPane.showMessageDialog(null, result, "",
-							JOptionPane.ERROR_MESSAGE);
-				} else {
-					JOptionPane.showMessageDialog(null, "提交成功", "",
-							JOptionPane.INFORMATION_MESSAGE);
+				String result;
+				try {
+					result = dc.addDriver(getVO());
+					if (result != null) {
+						JOptionPane.showMessageDialog(null, result, "",
+								JOptionPane.ERROR_MESSAGE);
+					} else {
+						JOptionPane.showMessageDialog(null, "提交成功", "",
+								JOptionPane.INFORMATION_MESSAGE);
+					}
+				} catch (RemoteException e1) {
+					e1.printStackTrace();
 				}
 			}
 		});
@@ -121,11 +128,5 @@ public class DriverAddUI extends JPanel {
 		Date driveLicence = DateUtil.stringToDate(field[7].getText());
 		return new DriverVO(id, name, IDnumber, birth, sex, telNumber,
 				institutionID, driveLicence);
-	}
-
-	public static void main(String[] args) {
-		f = new MainFrame();
-		DriverAddUI view = new DriverAddUI();
-		f.setView(view);
 	}
 }

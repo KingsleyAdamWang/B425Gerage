@@ -1,5 +1,6 @@
 package presentation.LogUI;
 
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
@@ -20,7 +21,6 @@ import presentation.ManageUI.ManagerUI;
 import util.DateUtil;
 import vo.LogVo.LogVO;
 import businessLogic.logBL.LogController;
-import client.ClientInitException;
 import client.Main;
 
 public class LogUI extends JPanel {
@@ -41,6 +41,10 @@ public class LogUI extends JPanel {
 		this.initList();
 		this.initComponents();
 		this.validate();
+	}
+	
+	protected void paintComponent(Graphics g) {
+		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
 	}
 
 	private void initComponents() {

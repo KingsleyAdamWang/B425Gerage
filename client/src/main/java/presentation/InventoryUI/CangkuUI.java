@@ -1,5 +1,6 @@
 package presentation.InventoryUI;
 
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
@@ -13,9 +14,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import presentation.MainFrame;
-import presentation.FinanceUI.AccountUI;
 import vo.AdminVo.UserVO;
-import client.ClientInitException;
 import client.Main;
 
 public class CangkuUI extends JPanel {
@@ -28,6 +27,10 @@ public class CangkuUI extends JPanel {
 	public CangkuUI() {
 		this.initComponents();
 		this.validate();
+	}
+	
+	protected void paintComponent(Graphics g) {
+		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
 	}
 
 	private void initComponents() {
@@ -93,7 +96,6 @@ public class CangkuUI extends JPanel {
 						try {
 							Main.frame.setView(new ShipmentUI(), "填写出库单");
 						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}

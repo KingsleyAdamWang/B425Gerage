@@ -1,28 +1,27 @@
 package presentation.DeliverymanUI;
 
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import presentation.MainFrame;
 import util.DateUtil;
 import vo.DeliverymanVo.ReceiveVO;
-import businessLogic.deliveryBL.ReceiveController;
+import businessLogic.manageBL.ApproveController;
+import client.Main;
 import enumSet.ReceiptsState;
 
 public class ReceiveModifyUI extends JPanel {
-	// 一会儿删↓
-	static MainFrame f;
-	// 一会儿删↑
-
 	private static final long serialVersionUID = 1L;
 
-	private ReceiveController rc;
+	// private ReceiveController rc;
 	private final String[] labelName = { "快递单号", "收件人姓名", "收件人电话", "收件日期" };
 	private JLabel[] label;
 	private JTextField[] field;
@@ -32,9 +31,13 @@ public class ReceiveModifyUI extends JPanel {
 
 	public ReceiveModifyUI(ReceiveVO vo) throws RemoteException {
 		this.vo = vo;
-		rc = new ReceiveController();
+		// rc = new ReceiveController();
 		this.initComponents();
 		this.validate();
+	}
+
+	protected void paintComponent(Graphics g) {
+		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
 	}
 
 	private void initComponents() {
@@ -61,11 +64,28 @@ public class ReceiveModifyUI extends JPanel {
 
 		submitBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if (hasEmpty()) {
+					JOptionPane.showMessageDialog(null, "信息未填写完整", "",
+							JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+				try {
+					new ApproveController().modifyReceive(getVO());
+					JOptionPane.showMessageDialog(null, "修改成功", "",
+							JOptionPane.INFORMATION_MESSAGE);
+				} catch (RemoteException e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 
 		returnBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				try {
+					Main.frame.setView(new ReceiveApproveUI());
+				} catch (RemoteException e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 
@@ -83,15 +103,9 @@ public class ReceiveModifyUI extends JPanel {
 		return false;
 	}
 
-	private ReceiveVO getReceiveVO() {
+	private ReceiveVO getVO() {
 		return new ReceiveVO(ReceiptsState.getReceiptsState("未审批"), MainFrame
 				.getUser().getIdentityID(), field[0].getText(),
 				field[1].getText(), field[2].getText(), field[3].getText());
-	}
-
-	public static void main(String[] args) throws RemoteException {
-		f = new MainFrame();
-		ReceiveUI view = new ReceiveUI();
-		f.setView(view);
 	}
 }

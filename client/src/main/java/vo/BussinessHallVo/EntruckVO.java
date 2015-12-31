@@ -13,32 +13,32 @@ public class EntruckVO extends ReceiptsVO {
 	/**
 	 * 装车时间
 	 */
-	 public String d;
+	public String d;
 
 	/**
 	 * 汽运编号
 	 */
-	public  String qyID;
+	public String qyID;
 
 	/**
 	 * 到达地
 	 */
-	public  String destination;
+	public String destination;
 
 	/**
 	 * 车辆代号
 	 */
-	public  String truckID;
+	public String truckID;
 
 	/**
 	 * 检装员
 	 */
-	public  String checkName;
+	public String checkName;
 
 	/**
 	 * 押运员
 	 */
-	public  String deliverMan;
+	public String deliverMan;
 
 	/**
 	 * 本次装车的所有ID 所有货物的订单条形码号
@@ -80,13 +80,16 @@ public class EntruckVO extends ReceiptsVO {
 	}
 
 	public EntruckVO(EntruckPO po) {
-		super(po.getState(), po.getUserID());
+		// super(po.getState(), po.getUserID());
+		this(po.getState(), po.getUserID(), DateUtil.dateToString(po.getD()),
+				po.getQyID(), po.getDestination(), po.getTruckID(), po
+						.getCheckName(), po.getDeliverMan(), po.getIDlist(), po
+						.getFare());
 	}
 
 	public EntruckPO transToPO() {
-		return new EntruckPO(state, userID, DateUtil.stringToDate(d), qyID, destination, truckID,
-				checkName, deliverMan, IDlist, fare);
+		return new EntruckPO(state, userID, DateUtil.stringToDate(d), qyID,
+				destination, truckID, checkName, deliverMan, IDlist, fare);
 	}
-
 
 }

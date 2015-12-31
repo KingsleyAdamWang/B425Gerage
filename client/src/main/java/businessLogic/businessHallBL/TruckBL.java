@@ -61,7 +61,7 @@ public class TruckBL {
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
-		return  "未找到对应车辆";
+		return "未找到对应车辆";
 
 	}
 

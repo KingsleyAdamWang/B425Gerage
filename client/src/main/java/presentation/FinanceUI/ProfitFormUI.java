@@ -1,18 +1,18 @@
 package presentation.FinanceUI;
 
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import client.Main;
+import presentation.MainFrame;
 import businessLogic.financeBL.FormController;
+import client.Main;
 
 public class ProfitFormUI extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -27,6 +27,10 @@ public class ProfitFormUI extends JPanel {
 		fc = new FormController();
 		this.initComponents();
 		this.validate();
+	}
+	
+	protected void paintComponent(Graphics g) {
+		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
 	}
 
 	private void initComponents() {
@@ -44,10 +48,10 @@ public class ProfitFormUI extends JPanel {
 		}
 
 		exportBtn = new JButton("导出报表");
-		exportBtn.setBounds(150, 930, 100, 30);
+		exportBtn.setBounds(200, 400, 100, 30);
 		this.add(exportBtn);
 		returnBtn = new JButton("返回");
-		returnBtn.setBounds(550, 930, 100, 30);
+		returnBtn.setBounds(500, 400, 100, 30);
 		this.add(returnBtn);
 		exportBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

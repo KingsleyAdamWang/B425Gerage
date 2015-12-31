@@ -1,7 +1,9 @@
 package presentation.ManageUI;
 
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.Vector;
 
@@ -12,7 +14,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import presentation.MainFrame;
-import vo.ManageVo.InstitutionVO;
 import businessLogic.manageBL.ApproveController;
 import client.Main;
 
@@ -30,6 +31,10 @@ public class ApproveUI extends JPanel {
 
 	public ApproveUI() {
 
+	}
+	
+	protected void paintComponent(Graphics g) {
+		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
 	}
 
 	private void initComponents() {
@@ -89,7 +94,8 @@ public class ApproveUI extends JPanel {
 						try {
 							Main.frame.setView(new InstManageUI(), "人员机构管理");
 						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (IOException e1) {
 							e1.printStackTrace();
 						}
 					}

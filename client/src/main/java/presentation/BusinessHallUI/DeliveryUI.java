@@ -1,5 +1,6 @@
 package presentation.BusinessHallUI;
 
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -23,10 +24,6 @@ import client.Main;
 import enumSet.ReceiptsState;
 
 public class DeliveryUI extends JPanel {
-	// 一会儿删↓
-	static MainFrame f;
-	// 一会儿删↑
-
 	private static final long serialVersionUID = 1L;
 
 	private DeliveryController dc;
@@ -41,6 +38,10 @@ public class DeliveryUI extends JPanel {
 		dc = new DeliveryController();
 		this.initComponents();
 		this.validate();
+	}
+
+	protected void paintComponent(Graphics g) {
+		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
 	}
 
 	private void initComponents() {
@@ -75,7 +76,6 @@ public class DeliveryUI extends JPanel {
 				try {
 					setArea(field[0].getText());
 				} catch (RemoteException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -107,7 +107,6 @@ public class DeliveryUI extends JPanel {
 								JOptionPane.INFORMATION_MESSAGE);
 					}
 				} catch (RemoteException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -139,23 +138,17 @@ public class DeliveryUI extends JPanel {
 		if (vo != null) {
 			CustomerVO r = vo.receiver;
 			String s = "";
-			s += "货物名称：\t";
+			s += "货物名称： ";
 			s += vo.name;
-			s += "\n收件人姓名：\t";
+			s += "\n收件人姓名：";
 			s += r.name;
-			s += "\n收件人地址：\t";
+			s += "\n收件人地址：";
 			s += r.address;
-			s += "\n收件人单位：\t";
+			s += "\n收件人单位：";
 			s += r.company;
-			s += "\n收件人电话：\t";
+			s += "\n收件人电话：";
 			s += r.telephone;
 			area.setText(s);
 		}
-	}
-
-	public static void main(String[] args) throws RemoteException {
-		f = new MainFrame();
-		DeliveryUI view = new DeliveryUI();
-		f.setView(view);
 	}
 }

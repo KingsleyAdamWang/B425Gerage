@@ -1,14 +1,17 @@
 package presentation.ManageUI;
 
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import presentation.MainFrame;
 import presentation.BusinessHallUI.ArrivalApproveUI;
+import presentation.BusinessHallUI.CashApproveUI;
 import presentation.BusinessHallUI.EntruckApproveUI;
 import presentation.DeliverymanUI.ReceiveApproveUI;
 import presentation.DeliverymanUI.SendApproveUI;
@@ -20,10 +23,6 @@ import businessLogic.manageBL.ApproveController;
 import client.Main;
 
 public class ApproveChooseUI extends JPanel {
-	// 一会儿删↓
-	static MainFrame f;
-	// 一会儿删↑
-
 	private static final long serialVersionUID = 1L;
 
 	private final String[] title = { "审批寄件单", "审批装车单", "审批到达单", "审批中转单",
@@ -33,6 +32,10 @@ public class ApproveChooseUI extends JPanel {
 	public ApproveChooseUI() {
 		this.initComponents();
 		this.validate();
+	}
+
+	protected void paintComponent(Graphics g) {
+		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
 	}
 
 	private void initComponents() {
@@ -50,7 +53,6 @@ public class ApproveChooseUI extends JPanel {
 						try {
 							Main.frame.setView(new SendApproveUI());
 						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}
@@ -62,7 +64,6 @@ public class ApproveChooseUI extends JPanel {
 						try {
 							Main.frame.setView(new EntruckApproveUI());
 						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}
@@ -81,7 +82,6 @@ public class ApproveChooseUI extends JPanel {
 						try {
 							Main.frame.setView(new TransferApproveUI());
 						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}
@@ -93,7 +93,6 @@ public class ApproveChooseUI extends JPanel {
 						try {
 							Main.frame.setView(new EntryApproveUI());
 						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}
@@ -105,7 +104,6 @@ public class ApproveChooseUI extends JPanel {
 						try {
 							Main.frame.setView(new ShipmentApproveUI());
 						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}
@@ -117,7 +115,6 @@ public class ApproveChooseUI extends JPanel {
 						try {
 							Main.frame.setView(new TransferApproveUI());
 						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}
@@ -129,7 +126,6 @@ public class ApproveChooseUI extends JPanel {
 						try {
 							Main.frame.setView(new ReceiveApproveUI());
 						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}
@@ -138,12 +134,7 @@ public class ApproveChooseUI extends JPanel {
 			case 8:
 				button[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						try {
-							Main.frame.setView(new CashApproveUI());
-						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
+						Main.frame.setView(new CashApproveUI());
 					}
 				});
 				break;
@@ -153,7 +144,6 @@ public class ApproveChooseUI extends JPanel {
 						try {
 							Main.frame.setView(new PaymentApproveUI());
 						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}
@@ -162,11 +152,24 @@ public class ApproveChooseUI extends JPanel {
 			case 10:
 				button[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						try {
-							ApproveController ac = new ApproveController();
-						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
+						int n = JOptionPane.showConfirmDialog(null,
+								"确定通过所有单据的审批?", "", JOptionPane.YES_NO_OPTION);
+						if (n == 0) {
+							try {
+								ApproveController ac = new ApproveController();
+								ac.setAllApprovedArrival();
+								ac.setAllApprovedDelivery();
+								ac.setAllApprovedEntruck();
+								ac.setAllApprovedEntry();
+								ac.setAllApprovedIncome();
+								ac.setAllApprovedPayment();
+								ac.setAllApprovedReceive();
+								ac.setAllApprovedSend();
+								ac.setAllApprovedShipment();
+								ac.setAllApprovedTransfer();
+							} catch (RemoteException e1) {
+								e1.printStackTrace();
+							}
 						}
 					}
 				});
@@ -174,11 +177,5 @@ public class ApproveChooseUI extends JPanel {
 			}
 			this.add(button[i]);
 		}
-	}
-
-	public static void main(String[] args) {
-		f = new MainFrame();
-		ApproveChooseUI view = new ApproveChooseUI();
-		f.setView(view);
 	}
 }

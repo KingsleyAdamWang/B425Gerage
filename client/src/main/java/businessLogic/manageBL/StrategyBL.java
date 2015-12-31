@@ -83,7 +83,7 @@ public class StrategyBL {
 	}
 
 	public String modify(PriceConstVO vo) throws RemoteException {
-		pcPO= vo.transToPO();
+		pcPO = vo.transToPO();
 		pcDS.update(pcPO);
 		return null;
 	}

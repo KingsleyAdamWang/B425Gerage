@@ -1,5 +1,6 @@
 package presentation.ManageUI;
 
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
@@ -21,10 +22,6 @@ import client.Main;
 import enumSet.Position;
 
 public class SalaryUI extends JPanel {
-	// 一会儿删↓
-	static MainFrame f;
-	// 一会儿删↑
-
 	private static final long serialVersionUID = 1L;
 
 	private SalaryController sc;
@@ -40,6 +37,10 @@ public class SalaryUI extends JPanel {
 		sc = new SalaryController();
 		this.initComponents();
 		this.validate();
+	}
+
+	protected void paintComponent(Graphics g) {
+		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
 	}
 
 	private void initComponents() {
@@ -62,7 +63,6 @@ public class SalaryUI extends JPanel {
 		try {
 			this.setInfo();
 		} catch (RemoteException e2) {
-			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
 
@@ -85,7 +85,6 @@ public class SalaryUI extends JPanel {
 								JOptionPane.ERROR_MESSAGE);
 					}
 				} catch (RemoteException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -120,12 +119,5 @@ public class SalaryUI extends JPanel {
 			}
 		}
 		return new SalaryVO(list);
-	}
-
-	public static void main(String[] args) throws RemoteException,
-			ClientInitException {
-		f = new MainFrame();
-		SalaryUI view = new SalaryUI();
-		f.setView(view);
 	}
 }

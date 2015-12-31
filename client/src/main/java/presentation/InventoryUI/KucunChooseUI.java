@@ -1,5 +1,6 @@
 package presentation.InventoryUI;
 
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
@@ -8,14 +9,9 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import presentation.MainFrame;
-import presentation.DeliverymanUI.SendApproveUI;
 import client.Main;
 
 public class KucunChooseUI extends JPanel {
-	// 一会儿删↓
-	static MainFrame f;
-	// 一会儿删↑
-
 	private static final long serialVersionUID = 1L;
 
 	private final String[] title = { "飞机分区", "火车分区", "汽车分区", "自动分区" };
@@ -24,6 +20,10 @@ public class KucunChooseUI extends JPanel {
 	public KucunChooseUI() {
 		this.initComponents();
 		this.validate();
+	}
+	
+	protected void paintComponent(Graphics g) {
+		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
 	}
 
 	private void initComponents() {
@@ -40,7 +40,6 @@ public class KucunChooseUI extends JPanel {
 						try {
 							Main.frame.setView(new KucunguanliUI("飞机分区"));
 						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}
@@ -52,7 +51,6 @@ public class KucunChooseUI extends JPanel {
 						try {
 							Main.frame.setView(new KucunguanliUI("火车分区"));
 						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}
@@ -64,7 +62,6 @@ public class KucunChooseUI extends JPanel {
 						try {
 							Main.frame.setView(new KucunguanliUI("汽车分区"));
 						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}
@@ -76,7 +73,6 @@ public class KucunChooseUI extends JPanel {
 						try {
 							Main.frame.setView(new KucunguanliUI("自动分区"));
 						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}

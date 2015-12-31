@@ -1,5 +1,6 @@
 package presentation.IntermediateUI;
 
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -23,16 +24,12 @@ import presentation.MainFrame;
 import util.DateUtil;
 import vo.IntermediateVo.TransferVO;
 import businessLogic.intermediateBL.TransferController;
-import client.ClientInitException;
+import businessLogic.manageBL.ApproveController;
 import client.Main;
 import enumSet.ReceiptsState;
 import enumSet.TransportType;
 
 public class TransferModifyUI extends JPanel {
-	// 一会儿删↓
-	static MainFrame f;
-	// 一会儿删↑
-
 	private static final long serialVersionUID = 1L;
 
 	private TransferController tc;
@@ -51,12 +48,17 @@ public class TransferModifyUI extends JPanel {
 	private Vector<String> vData;
 	private List<String> list;
 	private TransferVO vo;
+	private String[] cities;
 
 	public TransferModifyUI(TransferVO vo) throws RemoteException {
 		this.vo = vo;
 		tc = new TransferController();
 		this.initComponents();
 		this.validate();
+	}
+
+	protected void paintComponent(Graphics g) {
+		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
 	}
 
 	private void initComponents() throws RemoteException {
@@ -66,7 +68,7 @@ public class TransferModifyUI extends JPanel {
 		field = new JTextField[8];
 		box = new JComboBox<String>(typeName);
 		List<String> cityList = tc.getCities();
-		String[] cities = new String[cityList.size()];
+		cities = new String[cityList.size()];
 		for (int i = 0; i < cityList.size(); i++) {
 			cities[i] = cityList.get(i);
 		}
@@ -138,22 +140,15 @@ public class TransferModifyUI extends JPanel {
 		submitBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (hasEmpty()) {
-					JOptionPane.showMessageDialog(null, "尚未填写完整", "",
+					JOptionPane.showMessageDialog(null, "信息未填写完整", "",
 							JOptionPane.ERROR_MESSAGE);
 					return;
 				}
-				String result;
 				try {
-					result = tc.add(getVO());
-					if (result != null) {
-						JOptionPane.showMessageDialog(null, result, "",
-								JOptionPane.ERROR_MESSAGE);
-					} else {
-						JOptionPane.showMessageDialog(null, "提交成功", "",
-								JOptionPane.INFORMATION_MESSAGE);
-					}
+					new ApproveController().modifyTransfer(getVO());
+					JOptionPane.showMessageDialog(null, "修改成功", "",
+							JOptionPane.INFORMATION_MESSAGE);
 				} catch (RemoteException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -161,7 +156,11 @@ public class TransferModifyUI extends JPanel {
 
 		returnBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Main.frame.returnToTop();
+				try {
+					Main.frame.setView(new TransferApproveUI());
+				} catch (RemoteException e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 
@@ -170,6 +169,24 @@ public class TransferModifyUI extends JPanel {
 		field[5].setText(vo.fare + "");
 		field[6].setText(vo.name);
 		field[7].setText(vo.temp);
+		for (int i = 0; i < typeName.length; i++) {
+			if (typeName[i].equals(vo.type.getTransportTypeString())) {
+				box.setSelectedIndex(i);
+				break;
+			}
+		}
+		for (int i = 0; i < cities.length; i++) {
+			if (cities[i].equals(vo.departure)) {
+				depBox.setSelectedIndex(i);
+				break;
+			}
+		}
+		for (int i = 0; i < cities.length; i++) {
+			if (cities[i].equals(vo.destination)) {
+				desBox.setSelectedIndex(i);
+				break;
+			}
+		}
 	}
 
 	private void setVData(String id) {
@@ -178,7 +195,6 @@ public class TransferModifyUI extends JPanel {
 		try {
 			l = tc.getList(id);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (NullPointerException ex) {
 			return;
@@ -224,12 +240,5 @@ public class TransferModifyUI extends JPanel {
 		jl.repaint();
 		sp.repaint();
 		this.repaint();
-	}
-
-	public static void main(String[] args) throws RemoteException,
-			ClientInitException {
-		f = new MainFrame();
-		TransferUI view = new TransferUI();
-		f.setView(view);
 	}
 }

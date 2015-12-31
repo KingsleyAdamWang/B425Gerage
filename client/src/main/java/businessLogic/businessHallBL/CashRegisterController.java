@@ -17,39 +17,40 @@ import businessLogicService.businessHallBLService.CashRegisterBLService;
 public class CashRegisterController implements CashRegisterBLService {
 	private CashRegisterBL crBL;
 	private LogBL logBL;
-	
-	
-	public CashRegisterController() throws RemoteException{
-		crBL=new CashRegisterBL();
-		logBL=new LogBL();
+
+	public CashRegisterController() throws RemoteException {
+		crBL = new CashRegisterBL();
+		logBL = new LogBL();
 	}
 
 	public String add(IncomeVO incomeVO) throws RemoteException {
-		logBL.add(new LogVO(new Date(), MainFrame.getUser().getIdentityID(), "新增收款单"));
+		logBL.add(new LogVO(new Date(), MainFrame.getUser().getIdentityID(),
+				"新增收款单"));
 		return crBL.add(incomeVO);
 	}
-	
-	public List<SendVO> getSendByStaffID(Date d,String staffID) throws RemoteException{
+
+	public List<SendVO> getSendByStaffID(Date d, String staffID)
+			throws RemoteException {
 		return crBL.getSendByStaffID(d, staffID);
 	}
-	
-	public double getAmmounts(List<SendVO> sendList) throws RemoteException{
+
+	public double getAmmounts(List<SendVO> sendList) throws RemoteException {
 		return crBL.getSendAmmounts(sendList);
 	}
-	
-	public List<IncomeVO> getIncomeBetweemDate(Date start ,Date end){
+
+	public List<IncomeVO> getIncomeBetweemDate(Date start, Date end) {
 		return crBL.getIncomeBetweenDate(start, end);
 	}
-	
-	public double getIncomeAmmount(List<IncomeVO> incomeList){
+
+	public double getIncomeAmmount(List<IncomeVO> incomeList) {
 		return crBL.getIncomeAmmount(incomeList);
 	}
-	
-	public List<IncomeVO> getIncomeByIns(String institutionID){
+
+	public List<IncomeVO> getIncomeByIns(String institutionID) {
 		return crBL.getIncomeByIns(institutionID);
 	}
-	
-	public List<IncomeVO> getIncomeList(){
+
+	public List<IncomeVO> getIncomeList() {
 		return crBL.getIncomeVOList();
 	}
 
@@ -64,6 +65,5 @@ public class CashRegisterController implements CashRegisterBLService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 
 }

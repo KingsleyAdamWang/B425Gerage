@@ -1,5 +1,6 @@
 package presentation.BusinessHallUI;
 
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
@@ -15,9 +16,8 @@ import javax.swing.JTable;
 
 import presentation.MainFrame;
 import vo.BussinessHallVo.DriverVO;
-import vo.ManageVo.InstitutionVO;
-import client.Main;
 import businessLogic.businessHallBL.DriverController;
+import client.Main;
 
 public class DriverUI extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -35,6 +35,10 @@ public class DriverUI extends JPanel {
 		this.initComponents();
 		this.initList();
 		this.validate();
+	}
+	
+	protected void paintComponent(Graphics g) {
+		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
 	}
 
 	private void initComponents() {
@@ -86,7 +90,11 @@ public class DriverUI extends JPanel {
 									JOptionPane.ERROR_MESSAGE);
 							return;
 						}
-						dc.delete(list.get(index));
+						try {
+							dc.delete(list.get(index));
+						} catch (RemoteException e1) {
+							e1.printStackTrace();
+						}
 						initList();
 					}
 				});

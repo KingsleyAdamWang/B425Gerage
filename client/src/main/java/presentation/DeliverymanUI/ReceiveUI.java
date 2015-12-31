@@ -1,5 +1,6 @@
 package presentation.DeliverymanUI;
 
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
@@ -18,10 +19,6 @@ import vo.DeliverymanVo.ReceiveVO;
 import businessLogic.deliveryBL.ReceiveController;
 
 public class ReceiveUI extends JPanel {
-	// 一会儿删↓
-	static MainFrame f;
-	// 一会儿删↑
-
 	private static final long serialVersionUID = 1L;
 
 	private ReceiveController rc;
@@ -35,6 +32,10 @@ public class ReceiveUI extends JPanel {
 		rc = new ReceiveController();
 		this.initComponents();
 		this.validate();
+	}
+	
+	protected void paintComponent(Graphics g) {
+		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
 	}
 
 	private void initComponents() {
@@ -62,7 +63,7 @@ public class ReceiveUI extends JPanel {
 		submitBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (hasEmpty()) {
-					JOptionPane.showMessageDialog(null, "尚未填写完整", "",
+					JOptionPane.showMessageDialog(null, "信息未填写完整", "",
 							JOptionPane.ERROR_MESSAGE);
 					return;
 				}
@@ -76,7 +77,6 @@ public class ReceiveUI extends JPanel {
 								JOptionPane.INFORMATION_MESSAGE);
 					}
 				} catch (RemoteException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (NumberFormatException e1) {
 					JOptionPane.showMessageDialog(null, "输入数字格式有误", "",
@@ -104,11 +104,5 @@ public class ReceiveUI extends JPanel {
 		return new ReceiveVO(ReceiptsState.getReceiptsState("未审批"), MainFrame
 				.getUser().getIdentityID(), field[0].getText(),
 				field[1].getText(), field[2].getText(), field[3].getText());
-	}
-
-	public static void main(String[] args) throws RemoteException {
-		f = new MainFrame();
-		ReceiveUI view = new ReceiveUI();
-		f.setView(view);
 	}
 }

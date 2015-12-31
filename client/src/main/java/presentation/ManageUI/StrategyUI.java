@@ -3,6 +3,7 @@ package presentation.ManageUI;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
@@ -14,7 +15,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -25,19 +25,15 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
 import presentation.MainFrame;
-import client.Main;
 import util.Distance;
 import util.PackPrice;
 import vo.ManageVo.PriceConstVO;
 import businessLogic.manageBL.StrategyController;
+import client.Main;
 import enumSet.PackType;
 
 public class StrategyUI extends JPanel implements TableModelListener {
 	private static final long serialVersionUID = 1L;
-
-	// 一会儿删↓
-	static MainFrame f;
-	// 一会儿删↑
 
 	private StrategyController sc;
 	private PriceConstVO vo;
@@ -57,6 +53,10 @@ public class StrategyUI extends JPanel implements TableModelListener {
 		this.vo = sc.getVO();
 		this.initComponents();
 		this.validate();
+	}
+	
+	protected void paintComponent(Graphics g) {
+		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
 	}
 
 	private void initComponents() {
@@ -213,7 +213,6 @@ public class StrategyUI extends JPanel implements TableModelListener {
 						JOptionPane.showMessageDialog(null, "保存成功", "",
 								JOptionPane.INFORMATION_MESSAGE);
 					} catch (RemoteException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}
@@ -313,7 +312,11 @@ public class StrategyUI extends JPanel implements TableModelListener {
 	}
 
 	private void setShowData() {
-		vo = sc.getVO();
+		try {
+			vo = sc.getVO();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		field[0].setText(vo.getCarCost() + "");
 		field[1].setText(vo.getTrainCost() + "");
 		field[2].setText(vo.getPlaneCost() + "");
@@ -325,12 +328,6 @@ public class StrategyUI extends JPanel implements TableModelListener {
 		field[8].setText(vo.getPackPrice().get(1).getFare() + "");
 		field[9].setText(vo.getPackPrice().get(2).getFare() + "");
 		field[10].setText(vo.getPackPrice().get(3).getFare() + "");
-	}
-
-	public static void main(String[] args) throws RemoteException {
-		f = new MainFrame();
-		StrategyUI view = new StrategyUI();
-		f.setView(view);
 	}
 
 	public void tableChanged(TableModelEvent e) {

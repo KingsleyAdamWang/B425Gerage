@@ -1,5 +1,6 @@
 package presentation.InventoryUI;
 
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
@@ -19,7 +20,6 @@ import javax.swing.JTextField;
 import presentation.MainFrame;
 import util.DateUtil;
 import vo.InventoryVo.EntryVO;
-import vo.InventoryVo.InventoryVO;
 import businessLogic.inventoryBL.InventoryController;
 import client.Main;
 import enumSet.InventoryArea;
@@ -41,6 +41,10 @@ public class KucunguanliUI extends JPanel {
 		this.initComponents();
 		this.initList();
 		this.validate();
+	}
+	
+	protected void paintComponent(Graphics g) {
+		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
 	}
 
 	private void initComponents() {
@@ -186,7 +190,6 @@ class InvenDialog extends JDialog {
 								JOptionPane.INFORMATION_MESSAGE);
 					}
 				} catch (RemoteException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
