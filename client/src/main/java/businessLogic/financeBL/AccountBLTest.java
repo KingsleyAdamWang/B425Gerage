@@ -12,9 +12,10 @@ import businessLogicService.financeBLService.AccountBLService;
 
 public class AccountBLTest{
 	AccountPO accountPO;
+	AccountBL accountBL;
 	
-	public AccountBLTest(){
-		
+	public AccountBLTest() throws RemoteException{
+		accountBL=new AccountBL();
 	}
 	@Test
 	public void testAddAccount() throws RemoteException {
@@ -34,8 +35,8 @@ public class AccountBLTest{
 		assertEquals("账户名重复！修改失败！", bl.modifyAccount(vo));
 	}
 	
-	public void testDeleteAccount(DeleteAccount){
-		
+	public void testDeleteAccount(AccountVO vo){
+		AccountBL
 	}
 
 }

@@ -46,8 +46,12 @@ public class AccountBL {
 	}
 
 	public boolean deleteAccount(AccountPO po) throws RemoteException {
-		accounts.remove(po);
-		accountDS.delete(po);
+		for(AccountPO temp:accounts){
+			if(temp.equals(po)){
+				accounts.remove(po);
+				accountDS.delete(po);
+			}
+		}
 		return false;
 	}
 

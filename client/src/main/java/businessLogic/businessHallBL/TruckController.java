@@ -2,6 +2,7 @@ package businessLogic.businessHallBL;
 
 import java.rmi.RemoteException;
 import java.util.Date;
+import java.util.List;
 
 import presentation.MainFrame;
 import vo.BussinessHallVo.TruckVO;
@@ -46,7 +47,10 @@ public class TruckController implements TruckBLService {
 				"修改车辆信息"));
 		return truckBL.modify(vo.transToPO());
 	}
-
+	
+	public List<TruckVO> getAllTruckVOList(){
+		return truckBL.getAllTruckVOList();
+	}
 	public TruckVO check(String message) {
 		return null;
 	}

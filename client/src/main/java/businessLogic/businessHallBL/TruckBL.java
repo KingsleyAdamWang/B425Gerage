@@ -1,10 +1,11 @@
 package businessLogic.businessHallBL;
 
 import java.rmi.RemoteException;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import po.businessPO.TruckPO;
+import vo.BussinessHallVo.TruckVO;
 import client.ClientInitException;
 import client.RMIHelper;
 import dataService.businessHallDataService.TruckDataService;
@@ -21,6 +22,14 @@ public class TruckBL {
 		} catch (ClientInitException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public List<TruckVO> getAllTruckVOList(){
+		List<TruckVO> result=new ArrayList<TruckVO>();
+		for(TruckPO temp:truckList){
+			result.add(new TruckVO(temp));
+		}
+		return result;
 	}
 
 	public TruckPO find(String id) {

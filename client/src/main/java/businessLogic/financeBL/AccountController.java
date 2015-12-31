@@ -47,6 +47,10 @@ public class AccountController implements AccountBLService {
 				"查询账户"));
 		return accountBL.searchAccount(key);
 	}
+	
+	public String changeDefaultCard(AccountVO vo) throws RemoteException{
+		return accountBL.changeDefaultCard(vo);
+	}
 
 	public List<AccountVO> getAccounts() {
 
