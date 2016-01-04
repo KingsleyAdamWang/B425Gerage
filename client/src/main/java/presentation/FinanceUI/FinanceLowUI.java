@@ -8,6 +8,7 @@ import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -15,6 +16,7 @@ import javax.swing.table.DefaultTableModel;
 
 import presentation.MainFrame;
 import presentation.LogUI.LogUI;
+import presentation.LoginUI.LoginFrame;
 import vo.AdminVo.UserVO;
 import client.Main;
 
@@ -29,7 +31,7 @@ public class FinanceLowUI extends JPanel {
 		this.initComponents();
 		this.validate();
 	}
-	
+
 	protected void paintComponent(Graphics g) {
 		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
 	}
@@ -71,9 +73,10 @@ public class FinanceLowUI extends JPanel {
 		this.add(scrollPane);
 		// this.add(table);
 
-		funcButton = new JButton[5];
-		final String[] title = { "查看收款单", "填写付款单", "经营情况表", "成本收益表", "日志查询" };
-		for (int i = 0; i < 5; i++) {
+		funcButton = new JButton[6];
+		final String[] title = { "查看收款单", "填写付款单", "经营情况表", "成本收益表", "日志查询",
+				"退出登录" };
+		for (int i = 0; i < 6; i++) {
 			funcButton[i] = new JButton(title[i]);
 			funcButton[i].setBounds(150 + (i % 2) * 300, 200 + 100 * (i / 2),
 					200, 50);
@@ -122,6 +125,18 @@ public class FinanceLowUI extends JPanel {
 							Main.frame.setView(new LogUI(), "日志查询");
 						} catch (RemoteException e1) {
 							e1.printStackTrace();
+						}
+					}
+				});
+				break;
+			case 5:
+				funcButton[i].addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						int n = JOptionPane.showConfirmDialog(null, "确定要退出登录?",
+								"", JOptionPane.YES_NO_OPTION);
+						if (n == 0) {
+							Main.frame.setVisible(false);
+							LoginFrame frame = new LoginFrame();
 						}
 					}
 				});

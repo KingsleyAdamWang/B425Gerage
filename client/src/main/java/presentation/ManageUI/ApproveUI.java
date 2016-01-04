@@ -20,10 +20,6 @@ import client.Main;
 public class ApproveUI extends JPanel {
 	private static final long serialVersionUID = 1L;
 
-	// 一会儿删↓
-	static MainFrame f;
-	// 一会儿删↑
-
 	private ApproveController ac;
 	private JButton[] funcButton;
 	private JTable table;

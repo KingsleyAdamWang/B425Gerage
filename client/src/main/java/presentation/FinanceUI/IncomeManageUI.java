@@ -111,8 +111,8 @@ public class IncomeManageUI extends JPanel {
 				String str = MainFrame.getUser().getWork().getPositionString();
 				if (str.equals("财务人员（高）")) {
 					Main.frame.setView(new FinanceHighUI());
-				} else if (str.equals("财务人员（高）")) {
-					Main.frame.setView(new FinanceHighUI());
+				} else if (str.equals("财务人员（低）")) {
+					Main.frame.setView(new FinanceLowUI());
 				} else if (str.equals("总经理")) {
 					Main.frame.setView(new ManagerUI());
 				}
@@ -241,7 +241,7 @@ class IncomeDateDialog extends JDialog {
 				dispose();
 			}
 		});
-		
+
 		this.addWindowFocusListener(new WindowFocusListener() {
 			public void windowGainedFocus(WindowEvent e) {
 			}

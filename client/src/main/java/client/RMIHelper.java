@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.rmi.Naming;
 
 import dataService.businessHallDataService.ArrivalDataService;
@@ -31,26 +33,35 @@ import dataService.manageDataService.UserDataService;
 public class RMIHelper {
 
 	private static File config;
-	private static String IP ;
+	private static String IP;
 	private static String PORT;
-	private static String urlPrefix ;
+	private static String urlPrefix;
 
 	static {
-		config = new File("src/main/java/client/config.txt");
-	    try {
+		// InputStream is = RMIHelper.class
+		// .getResourceAsStream("/client/config.txt");
+		config = new File(RMIHelper.class.getResource("/client/config.txt")
+				.getFile());
+
+		// config = new File(Runtime.getRuntime().getClass()
+		// .getResource("/client/config.txt").getFile());
+		// config = new File("src/main/java/client/config.txt");
+		try {
 			BufferedReader br = new BufferedReader(new FileReader(config));
+			// BufferedReader br = new BufferedReader(new
+			// InputStreamReader(is));
 			IP = br.readLine();
-			PORT = br.readLine() ;
-			urlPrefix = "rmi://" + IP + ":"+PORT+ "/";
+			PORT = br.readLine();
+			urlPrefix = "rmi://" + IP + ":" + PORT + "/";
 			br.close();
 
 		} catch (IOException e) {
-			 IP = "localhost";
-			 PORT = "1099";
-			 urlPrefix = "rmi://" + IP + ":" +PORT+ "/";
+			IP = "localhost";
+			PORT = "1099";
+			urlPrefix = "rmi://" + IP + ":" + PORT + "/";
 			e.printStackTrace();
 		}
-	    
+
 	}
 	// 定义各种 dataService 的引用 根据不同的人员以及执行的操作进行不同的初始化
 
@@ -122,7 +133,7 @@ public class RMIHelper {
 			throw new ClientInitException(e);
 		}
 	}
-	
+
 	public static void initDriverDataService() throws ClientInitException {
 		try {
 			driverDataService = (DriverDataService) Naming.lookup(urlPrefix
@@ -132,6 +143,7 @@ public class RMIHelper {
 			throw new ClientInitException(e);
 		}
 	}
+
 	public static void initEntruckDataService() throws ClientInitException {
 		try {
 			entruckDataService = (EntruckDataService) Naming.lookup(urlPrefix
@@ -324,7 +336,7 @@ public class RMIHelper {
 	public static DeliveryDataService getDeliveryDataService() {
 		return deliveryDataService;
 	}
-	
+
 	public static DriverDataService getDriverDataService() {
 		return driverDataService;
 	}
@@ -398,8 +410,6 @@ public class RMIHelper {
 
 	}
 
-
-	
 	public static String getIP() {
 		return IP;
 	}
@@ -408,21 +418,21 @@ public class RMIHelper {
 		return PORT;
 	}
 
-	public static void applyConfig(String ip , String port){
-		IP= ip;
+	public static void applyConfig(String ip, String port) {
+		IP = ip;
 		PORT = port;
-		urlPrefix = "rmi://" + IP + ":"+PORT+ "/";
+		urlPrefix = "rmi://" + IP + ":" + PORT + "/";
 		try {
 			FileWriter fw = new FileWriter(config);
 			fw.write("");
-			fw.append(ip+"\n");
+			fw.append(ip + "\n");
 			fw.append(port);
 			fw.flush();
 			fw.close();
 		} catch (IOException e) {
-			
+
 			e.printStackTrace();
 		}
-		
+
 	}
 }

@@ -78,7 +78,7 @@ public class DefaultAccountUI extends JPanel {
 		final String[] title = { "设为默认账户", "返回" };
 		for (int i = 0; i < 2; i++) {
 			funcButton[i] = new JButton(title[i]);
-			funcButton[i].setBounds(250 + 200 * i, 450, 100, 25);
+			funcButton[i].setBounds(250 + 200 * i, 450, 110, 25);
 			switch (i) {
 			case 0:
 				funcButton[i].addActionListener(new ActionListener() {
@@ -110,12 +110,7 @@ public class DefaultAccountUI extends JPanel {
 			case 1:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						int index = table.getSelectedRow();
-						if (index == -1 || (vData.isEmpty() && index == 0)) {
-							JOptionPane.showMessageDialog(null, "请选择一个单据", "",
-									JOptionPane.ERROR_MESSAGE);
-							return;
-						}
+						Main.frame.returnToTop();
 					}
 				});
 				break;

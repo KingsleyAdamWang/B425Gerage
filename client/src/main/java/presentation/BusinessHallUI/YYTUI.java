@@ -8,12 +8,14 @@ import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import presentation.MainFrame;
+import presentation.LoginUI.LoginFrame;
 import vo.AdminVo.UserVO;
 import client.ClientInitException;
 import client.Main;
@@ -29,7 +31,7 @@ public class YYTUI extends JPanel {
 		this.initComponents();
 		this.validate();
 	}
-	
+
 	protected void paintComponent(Graphics g) {
 		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
 	}
@@ -65,12 +67,12 @@ public class YYTUI extends JPanel {
 		table.setFillsViewportHeight(true);
 		this.add(scrollPane);
 
-		funcButton = new JButton[6];
+		funcButton = new JButton[7];
 		final String[] title = { "填写到达单", "填写派件单", "填写装车单", "填写收款单", "车辆信息管理",
-				"司机信息管理" };
-		for (int i = 0; i < 6; i++) {
+				"司机信息管理", "退出登录" };
+		for (int i = 0; i < 7; i++) {
 			funcButton[i] = new JButton(title[i]);
-			funcButton[i].setBounds(150 + (i % 2) * 300, 200 + 100 * (i / 2),
+			funcButton[i].setBounds(150 + (i % 2) * 300, 180 + 90 * (i / 2),
 					200, 50);
 			switch (i) {
 			case 0:
@@ -132,6 +134,18 @@ public class YYTUI extends JPanel {
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						Main.frame.setView(new DriverUI(), "司机信息管理");
+					}
+				});
+				break;
+			case 6:
+				funcButton[i].addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						int n = JOptionPane.showConfirmDialog(null, "确定要退出登录?",
+								"", JOptionPane.YES_NO_OPTION);
+						if (n == 0) {
+							Main.frame.setVisible(false);
+							LoginFrame frame = new LoginFrame();
+						}
 					}
 				});
 				break;

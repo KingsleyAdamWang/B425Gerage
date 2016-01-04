@@ -36,7 +36,7 @@ public class LogisticsUI extends JPanel {
 		this.initComponents();
 		this.validate();
 	}
-	
+
 	protected void paintComponent(Graphics g) {
 		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
 	}
@@ -68,9 +68,16 @@ public class LogisticsUI extends JPanel {
 					String temp = "快递单号:" + vo.id + "\t" + "快递名称:" + vo.name;
 					area.setText(temp);
 					List<String> msg = vo.getMessages();
-					for (String tmp : msg) {
-						String[] x = tmp.split("_");
-						area.setText(area.getText() + "\n" + x[0] + "\t" + x[1]);
+					if (!vo.name.equals("未知")) {
+						for (String tmp : msg) {
+							String[] x = tmp.split("_");
+							area.setText(area.getText() + "\n" + x[0] + "\t"
+									+ x[1]);
+						}
+					} else {
+						for (String tmp : msg) {
+							area.setText(area.getText() + "\n" + tmp);
+						}
 					}
 				}
 			}

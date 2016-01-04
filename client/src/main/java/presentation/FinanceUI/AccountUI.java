@@ -165,7 +165,8 @@ public class AccountUI extends JPanel {
 				JOptionPane.YES_NO_OPTION);
 		if (n != 0)
 			return;
-		ac.deleteAccount(vData.get(index));
+		AccountVO vo = vData.get(index);
+		ac.deleteAccount(vo);
 		initList();
 		return;
 	}

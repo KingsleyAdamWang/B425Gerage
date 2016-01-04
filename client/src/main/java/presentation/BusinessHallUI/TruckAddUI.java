@@ -56,7 +56,7 @@ public class TruckAddUI extends JPanel {
 		field[0].setText(MainFrame.getUser().getIdentityID());
 		field[0].setEditable(false);
 		field[3].setText(DateUtil.dateToString());
-		field[4].setEditable(false);
+		// field[4].setEditable(false);
 
 		submitBtn = new JButton("添加");
 		submitBtn.setBounds(200, 350, 100, 30);

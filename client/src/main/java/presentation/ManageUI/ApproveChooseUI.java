@@ -26,7 +26,7 @@ public class ApproveChooseUI extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	private final String[] title = { "审批寄件单", "审批装车单", "审批到达单", "审批中转单",
-			"审批入库单", "审批出库单", "审批派件单", "审批收件单", "审批收款单", "审批付款单", "一键审批 " };
+			"审批入库单", "审批出库单", "审批派件单", "审批收件单", "审批收款单", "审批付款单", "一键审批 ", "返回" };
 	private JButton[] button;
 
 	public ApproveChooseUI() {
@@ -41,8 +41,8 @@ public class ApproveChooseUI extends JPanel {
 	private void initComponents() {
 		this.setLayout(null);
 
-		button = new JButton[11];
-		for (int i = 0; i < 11; i++) {
+		button = new JButton[12];
+		for (int i = 0; i < 12; i++) {
 			button[i] = new JButton(title[i]);
 			button[i]
 					.setBounds(150 + (i % 2) * 300, 70 + 70 * (i / 2), 200, 50);
@@ -173,6 +173,13 @@ public class ApproveChooseUI extends JPanel {
 								e1.printStackTrace();
 							}
 						}
+					}
+				});
+				break;
+			case 11:
+				button[i].addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						Main.frame.returnToTop();
 					}
 				});
 				break;

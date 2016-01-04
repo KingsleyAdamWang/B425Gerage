@@ -8,12 +8,14 @@ import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import presentation.MainFrame;
+import presentation.LoginUI.LoginFrame;
 import vo.AdminVo.UserVO;
 import client.Main;
 
@@ -28,7 +30,7 @@ public class CangkuUI extends JPanel {
 		this.initComponents();
 		this.validate();
 	}
-	
+
 	protected void paintComponent(Graphics g) {
 		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
 	}
@@ -70,11 +72,11 @@ public class CangkuUI extends JPanel {
 		this.add(scrollPane);
 		// this.add(table);
 
-		funcButton = new JButton[3];
-		final String[] title = { "库存管理", "填写入库单", "填写出库单" };
-		for (int i = 0; i < 3; i++) {
+		funcButton = new JButton[4];
+		final String[] title = { "库存管理", "填写入库单", "填写出库单", "退出登录" };
+		for (int i = 0; i < 4; i++) {
 			funcButton[i] = new JButton(title[i]);
-			funcButton[i].setBounds(300, 200 + 100 * i, 200, 50);
+			funcButton[i].setBounds(300, 180 + 90 * i, 200, 50);
 			switch (i) {
 			case 0:
 				funcButton[i].addActionListener(new ActionListener() {
@@ -97,6 +99,18 @@ public class CangkuUI extends JPanel {
 							Main.frame.setView(new ShipmentUI(), "填写出库单");
 						} catch (RemoteException e1) {
 							e1.printStackTrace();
+						}
+					}
+				});
+				break;
+			case 3:
+				funcButton[i].addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						int n = JOptionPane.showConfirmDialog(null, "确定要退出登录?",
+								"", JOptionPane.YES_NO_OPTION);
+						if (n == 0) {
+							Main.frame.setVisible(false);
+							LoginFrame frame = new LoginFrame();
 						}
 					}
 				});
