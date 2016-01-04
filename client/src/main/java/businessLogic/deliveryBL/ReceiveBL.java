@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
+import businessLogic.logisticsBL.LogisticsBL;
 import po.deliveryPO.ReceivePO;
 import util.DateUtil;
 import vo.DeliverymanVo.ReceiveVO;
@@ -44,6 +45,9 @@ public class ReceiveBL {
 
 		receiveList.add(receivePO);
 		receiveDS.add(receivePO);
+		
+		LogisticsBL logisticsBL = new LogisticsBL();
+		logisticsBL.update(receivePO.getId(), "已签收，签收人是"+receivePO.getName());
 		return null;
 	}
 
