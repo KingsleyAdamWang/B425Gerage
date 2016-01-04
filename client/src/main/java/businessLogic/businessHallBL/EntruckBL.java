@@ -12,6 +12,7 @@ import vo.DeliverymanVo.SendVO;
 import vo.ManageVo.InstitutionVO;
 import vo.ManageVo.PriceConstVO;
 import businessLogic.deliveryBL.SendBL;
+import businessLogic.logisticsBL.LogisticsBL;
 import businessLogic.manageBL.InstitutionBL;
 import businessLogic.manageBL.StrategyBL;
 import client.ClientInitException;
@@ -57,6 +58,11 @@ public class EntruckBL {
 
 		entruckList.add(po);
 		entruckDS.add(po);
+		LogisticsBL logisticsBL=new LogisticsBL();
+		for(String temp:po.getIDlist()){
+			logisticsBL.update(temp, "已装车，下一站是"+po.getDestination());
+		}
+		
 		return null;
 	}
 

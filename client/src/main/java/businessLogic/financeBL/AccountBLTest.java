@@ -32,11 +32,16 @@ public class AccountBLTest{
 		bl.accounts.add(po1);
 		bl.accounts.add(po2);
 		AccountVO vo = new AccountVO(po2);
-		assertEquals("账户名重复！修改失败！", bl.modifyAccount(vo));
+		assertEquals("账户名已存在！添加失败！", bl.modifyAccount(vo));
 	}
 	
-	public void testDeleteAccount(AccountVO vo){
-		AccountBL
+	public void testDeleteAccount(AccountVO testVO) throws RemoteException{
+		AccountPO po1 = new AccountPO("王栋", "141250133", 0);
+		AccountPO po2 = new AccountPO("王傻栋", "141250133", 0);
+		accountBL.accounts.add(po1);
+		accountBL.accounts.add(po2);
+		AccountVO vo = new AccountVO(po2);
+		assertEquals(false, accountBL.deleteAccount( po2));
 	}
 
 }

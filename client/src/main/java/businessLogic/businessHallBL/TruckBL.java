@@ -88,4 +88,8 @@ public class TruckBL {
 		}
 		return "未找到对应车辆";
 	}
+	
+	public String timePastYear(){
+		return null;
+	}
 }

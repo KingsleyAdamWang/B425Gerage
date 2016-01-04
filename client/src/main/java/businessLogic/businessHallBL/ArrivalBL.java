@@ -66,7 +66,7 @@ public class ArrivalBL {
 		businessLogic.manageBL.InstitutionBL insBL = new businessLogic.manageBL.InstitutionBL();
 		String insName = insBL.getInstitutionVO(po.getInstitutionID())
 				.getName();
-		updateLogistics(goodsID, insName);
+		updateLogistics(goodsID, "已到达"+insName);
 		return null;
 	}
 
