@@ -31,7 +31,6 @@ public class ShipmentPO extends ReceiptsPO implements Serializable {
 	 * @param user
 	 */
 
-
 	public ShipmentPO(String data) {
 		String[] temp = data.split(" ");
 		this.state = ReceiptsState.getReceiptsState(temp[0]);
@@ -59,8 +58,9 @@ public class ShipmentPO extends ReceiptsPO implements Serializable {
 
 	public String toString() {
 		return state.getReceiptsStateString() + " " + userID + " "
-				+ institutionID + " " + id + " " + date + " " + destination
-				+ " " + transferID + " " + type.getTransportTypeString() + "\n";
+				+ institutionID + " " + id + " " + DateUtil.dateToString(date)
+				+ " " + destination + " " + transferID + " "
+				+ type.getTransportTypeString() + "\n";
 	}
 
 	public String getInstitutionID() {
@@ -71,7 +71,6 @@ public class ShipmentPO extends ReceiptsPO implements Serializable {
 		return id;
 	}
 
-
 	public Date getDate() {
 		return date;
 	}
@@ -80,13 +79,9 @@ public class ShipmentPO extends ReceiptsPO implements Serializable {
 		return destination;
 	}
 
-	
-
 	public String getTransferID() {
 		return transferID;
 	}
-
-	
 
 	public TransportType getType() {
 		return type;
@@ -117,5 +112,4 @@ public class ShipmentPO extends ReceiptsPO implements Serializable {
 		return true;
 	}
 
-	
 }

@@ -12,9 +12,9 @@ public class PaymentPO extends ReceiptsPO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	//付款单id
+	// 付款单id
 	private String payID;
-	
+
 	// 时间日期
 	private Date d;
 
@@ -51,7 +51,7 @@ public class PaymentPO extends ReceiptsPO implements Serializable {
 	/*
 	 * 付款单的构造方法
 	 */
-	public PaymentPO(ReceiptsState state, String userID,String payID, Date d,
+	public PaymentPO(ReceiptsState state, String userID, String payID, Date d,
 			double ammounts, String name, String bankID, String type,
 			String comment, int times) {
 		super(state, userID);
@@ -74,7 +74,7 @@ public class PaymentPO extends ReceiptsPO implements Serializable {
 		d = DateUtil.stringToDate(temp[3]);
 		ammounts = Double.parseDouble(temp[4]);
 		name = temp[5];
-	    bankID = temp[6];
+		bankID = temp[6];
 		type = temp[7];
 		comment = temp[8];
 		times = Integer.parseInt(temp[9]);
@@ -82,16 +82,18 @@ public class PaymentPO extends ReceiptsPO implements Serializable {
 
 	public String toString() {
 		StringBuilder str = new StringBuilder();
-		str.append(state.getReceiptsStateString() + " " + userID + " "
-				+payID+ DateUtil.dateToString(d) + " " + ammounts + " " + name + " "
-				+ bankID + " " + type + " " + comment + " " + times + "\n");
+		str.append(state.getReceiptsStateString() + " " + userID + " " + payID
+				+ " " + DateUtil.dateToString(d) + " " + ammounts + " " + name
+				+ " " + bankID + " " + type + " " + comment + " " + times
+				+ "\n");
 		return str.toString();
 	}
 
 	public Date getD() {
 		return d;
 	}
-	public String getPayID(){
+
+	public String getPayID() {
 		return payID;
 	}
 
@@ -118,9 +120,9 @@ public class PaymentPO extends ReceiptsPO implements Serializable {
 	public int getTimes() {
 		return times;
 	}
-	
-	public void setComment(String comment){
-		this.comment=comment;
+
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 
 	@Override
@@ -147,5 +149,5 @@ public class PaymentPO extends ReceiptsPO implements Serializable {
 			return false;
 		return true;
 	}
-	
+
 }

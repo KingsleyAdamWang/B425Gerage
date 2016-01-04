@@ -66,7 +66,7 @@ public class EntryPO extends ReceiptsPO implements Serializable {
 	public String toString() {
 		return state.getReceiptsStateString() + " " + userID + " " + id + " "
 				+ institutionID + " " + DateUtil.dateToString(date) + " "
-				+ destination + " " + row + " " + shelf + "　" + place + " "
+				+ destination + " " + row + " " + shelf + " " + place + " "
 				+ area.getAreaString() + "\n";
 	}
 
