@@ -69,7 +69,7 @@ public class DriverAddUI extends JPanel {
 				this.add(field[i]);
 			}
 		}
-		field[0].setText(MainFrame.getUser().getIdentityID());
+		field[0].setText(MainFrame.getUser().getInstitutionID());
 		field[0].setEditable(false);
 		field[3].setText("1970-01-01");
 		field[7].setText("2020-01-01");
@@ -103,6 +103,7 @@ public class DriverAddUI extends JPanel {
 					} else {
 						JOptionPane.showMessageDialog(null, "提交成功", "",
 								JOptionPane.INFORMATION_MESSAGE);
+						Main.frame.setView(new DriverAddUI());
 					}
 				} catch (RemoteException e1) {
 					e1.printStackTrace();

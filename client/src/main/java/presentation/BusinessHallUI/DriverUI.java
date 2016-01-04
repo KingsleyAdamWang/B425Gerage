@@ -36,7 +36,7 @@ public class DriverUI extends JPanel {
 		this.initList();
 		this.validate();
 	}
-	
+
 	protected void paintComponent(Graphics g) {
 		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
 	}
@@ -89,11 +89,23 @@ public class DriverUI extends JPanel {
 							JOptionPane.showMessageDialog(null, "请选择一个司机", "",
 									JOptionPane.ERROR_MESSAGE);
 							return;
-						}
-						try {
-							dc.delete(list.get(index));
-						} catch (RemoteException e1) {
-							e1.printStackTrace();
+						} else {
+							int n = JOptionPane
+									.showConfirmDialog(null, "确定删除该司机信息?", "",
+											JOptionPane.YES_NO_OPTION);
+							if (n == 0) {
+								try {
+									dc.delete(list.get(index));
+									JOptionPane
+											.showMessageDialog(
+													null,
+													"删除成功",
+													"",
+													JOptionPane.INFORMATION_MESSAGE);
+								} catch (RemoteException e1) {
+									e1.printStackTrace();
+								}
+							}
 						}
 						initList();
 					}

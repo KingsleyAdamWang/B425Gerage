@@ -167,6 +167,8 @@ public class ApproveChooseUI extends JPanel {
 								ac.setAllApprovedSend();
 								ac.setAllApprovedShipment();
 								ac.setAllApprovedTransfer();
+								JOptionPane.showMessageDialog(null, "审批完成", "",
+										JOptionPane.INFORMATION_MESSAGE);
 							} catch (RemoteException e1) {
 								e1.printStackTrace();
 							}

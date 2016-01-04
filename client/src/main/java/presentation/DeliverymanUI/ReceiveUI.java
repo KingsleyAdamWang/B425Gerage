@@ -75,6 +75,7 @@ public class ReceiveUI extends JPanel {
 					} else {
 						JOptionPane.showMessageDialog(null, "提交成功", "",
 								JOptionPane.INFORMATION_MESSAGE);
+						Main.frame.setView(new ReceiveUI(), "填写收件单");
 					}
 				} catch (RemoteException e1) {
 					e1.printStackTrace();

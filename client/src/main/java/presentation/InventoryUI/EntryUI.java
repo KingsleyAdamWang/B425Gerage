@@ -38,7 +38,7 @@ public class EntryUI extends JPanel {
 		this.initComponents();
 		this.validate();
 	}
-	
+
 	protected void paintComponent(Graphics g) {
 		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
 	}
@@ -87,6 +87,7 @@ public class EntryUI extends JPanel {
 					} else {
 						JOptionPane.showMessageDialog(null, "提交成功", "",
 								JOptionPane.INFORMATION_MESSAGE);
+						Main.frame.setView(new EntryUI(), "填写入库单");
 					}
 				} catch (RemoteException e1) {
 					e1.printStackTrace();

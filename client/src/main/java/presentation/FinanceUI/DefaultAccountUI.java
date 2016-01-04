@@ -1,4 +1,4 @@
-package presentation.BusinessHallUI;
+package presentation.FinanceUI;
 
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
@@ -15,26 +15,27 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import presentation.MainFrame;
-import presentation.ManageUI.ApproveChooseUI;
-import util.DateUtil;
-import vo.FinanceVo.IncomeVO;
-import businessLogic.manageBL.ApproveController;
+import vo.FinanceVo.AccountVO;
+import businessLogic.financeBL.AccountController;
+import client.ClientInitException;
 import client.Main;
 
-public class CashApproveUI extends JPanel {
+public class DefaultAccountUI extends JPanel {
 	private static final long serialVersionUID = 1L;
 
-	private ApproveController ac;
+	private AccountController ac;
 	private JButton[] funcButton;
 	private JTable table;
 	private Vector<Vector<String>> vData;
 	private JScrollPane scrollPane;
-	private List<IncomeVO> list;
+	private List<AccountVO> list;
 
-	public CashApproveUI() {
+	public DefaultAccountUI() {
 		try {
-			ac = new ApproveController();
+			ac = new AccountController();
 		} catch (RemoteException e) {
+			e.printStackTrace();
+		} catch (ClientInitException e) {
 			e.printStackTrace();
 		}
 		this.initComponents();
@@ -49,7 +50,7 @@ public class CashApproveUI extends JPanel {
 	private void initComponents() {
 		this.setLayout(null);
 
-		String[] info = { "快递员编号", "收款金额", "收款日期" };
+		String[] info = { "用户名", "账号", "余额" };
 		Vector<String> vColumns = new Vector<String>();
 		for (int i = 0; i < 3; i++) {
 			vColumns.add(info[i]);
@@ -74,22 +75,32 @@ public class CashApproveUI extends JPanel {
 		this.add(scrollPane);
 
 		funcButton = new JButton[4];
-		final String[] title = { "查看信息", "通过审批", "一键审批", "返回" };
-		for (int i = 0; i < 4; i++) {
+		final String[] title = { "设为默认账户", "返回" };
+		for (int i = 0; i < 2; i++) {
 			funcButton[i] = new JButton(title[i]);
-			funcButton[i].setBounds(50 + 200 * i, 450, 100, 25);
+			funcButton[i].setBounds(250 + 200 * i, 450, 100, 25);
 			switch (i) {
 			case 0:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						int index = table.getSelectedRow();
 						if (index == -1 || (vData.isEmpty() && index == 0)) {
-							JOptionPane.showMessageDialog(null, "请选择一个单据", "",
+							JOptionPane.showMessageDialog(null, "请选择一个账户", "",
 									JOptionPane.ERROR_MESSAGE);
 							return;
 						}
 						try {
-							Main.frame.setView(new CashModifyUI(list.get(index)));
+							String result = ac.changeDefaultCard(list
+									.get(index));
+							if (result != null) {
+								JOptionPane.showMessageDialog(null, result, "",
+										JOptionPane.ERROR_MESSAGE);
+							} else {
+								JOptionPane.showMessageDialog(null, "设置成功", "",
+										JOptionPane.INFORMATION_MESSAGE);
+								Main.frame.setView(new DefaultAccountUI(),
+										"设置默认账户");
+							}
 						} catch (RemoteException e1) {
 							e1.printStackTrace();
 						}
@@ -105,40 +116,6 @@ public class CashApproveUI extends JPanel {
 									JOptionPane.ERROR_MESSAGE);
 							return;
 						}
-						try {
-							ac.setApprovedIncome(list.get(index));
-							JOptionPane.showMessageDialog(null, "审批完成", "",
-									JOptionPane.INFORMATION_MESSAGE);
-							Main.frame.setView(new CashApproveUI());
-						} catch (RemoteException e1) {
-							e1.printStackTrace();
-						}
-					}
-				});
-				break;
-			case 2:
-				funcButton[i].addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						int n = JOptionPane.showConfirmDialog(null,
-								"确定通过所有单据的审批?", "", JOptionPane.YES_NO_OPTION);
-						if (n == 0) {
-							try {
-								ApproveController ac = new ApproveController();
-								ac.setAllApprovedIncome();
-								JOptionPane.showMessageDialog(null, "审批完成", "",
-										JOptionPane.INFORMATION_MESSAGE);
-								Main.frame.setView(new CashApproveUI());
-							} catch (RemoteException e1) {
-								e1.printStackTrace();
-							}
-						}
-					}
-				});
-				break;
-			case 3:
-				funcButton[i].addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						Main.frame.setView(new ApproveChooseUI(), "审批单据");
 					}
 				});
 				break;
@@ -147,19 +124,19 @@ public class CashApproveUI extends JPanel {
 		}
 	}
 
-	private Vector<String> toVector(IncomeVO vo) {
+	private Vector<String> toVector(AccountVO vo) {
 		Vector<String> str = new Vector<String>();
-		str.add(vo.kdyID);
-		str.add(vo.income + "");
-		str.add(DateUtil.dateToString(vo.date));
+		str.add(vo.getName());
+		str.add(vo.getAccountID());
+		str.add(vo.getBalance() + "");
 		return str;
 	}
 
 	private void initList() {
 		vData.clear();
-		list = ac.getUnapprovedIncome();
+		list = ac.getAccounts();
 
-		for (IncomeVO vo : list) {
+		for (AccountVO vo : list) {
 			vData.add(toVector(vo));
 		}
 		scrollPane.getViewport().removeAll();

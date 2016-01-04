@@ -31,7 +31,7 @@ public class FinanceHighUI extends JPanel {
 		this.initComponents();
 		this.validate();
 	}
-	
+
 	protected void paintComponent(Graphics g) {
 		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
 	}
@@ -74,7 +74,7 @@ public class FinanceHighUI extends JPanel {
 		// this.add(table);
 
 		funcButton = new JButton[7];
-		final String[] title = { "期初建账", "账户管理", "查看收款单", "填写付款单", "经营情况表",
+		final String[] title = { "设置默认账户", "账户管理", "查看收款单", "填写付款单", "经营情况表",
 				"成本收益表", "日志查询" };
 		for (int i = 0; i < 7; i++) {
 			funcButton[i] = new JButton(title[i]);
@@ -84,8 +84,7 @@ public class FinanceHighUI extends JPanel {
 			case 0:
 				funcButton[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						JOptionPane.showMessageDialog(null, "施工中...", "",
-								JOptionPane.ERROR_MESSAGE);
+						Main.frame.setView(new DefaultAccountUI(), "设置默认账户");
 					}
 				});
 				break;

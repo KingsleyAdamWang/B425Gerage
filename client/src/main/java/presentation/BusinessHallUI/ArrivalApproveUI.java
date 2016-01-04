@@ -15,10 +15,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import presentation.MainFrame;
-import presentation.DeliverymanUI.SendApproveUI;
 import presentation.ManageUI.ApproveChooseUI;
 import vo.BussinessHallVo.ArrivalVO;
-import businessLogic.manageBL.ApproveBL;
 import businessLogic.manageBL.ApproveController;
 import client.ClientInitException;
 import client.Main;
@@ -26,7 +24,7 @@ import client.Main;
 public class ArrivalApproveUI extends JPanel {
 	private static final long serialVersionUID = 1L;
 
-	private ApproveBL ac;
+	private ApproveController ac;
 	private JButton[] funcButton;
 	private JTable table;
 	private Vector<Vector<String>> vData;
@@ -35,7 +33,7 @@ public class ArrivalApproveUI extends JPanel {
 
 	public ArrivalApproveUI() {
 		try {
-			ac = new ApproveBL();
+			ac = new ApproveController();
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}

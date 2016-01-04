@@ -4,39 +4,39 @@ import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
+import java.util.List;
+import java.util.Vector;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 import presentation.MainFrame;
-import util.DateUtil;
 import vo.BussinessHallVo.TruckVO;
 import businessLogic.businessHallBL.TruckController;
 import client.Main;
 
 public class TruckUI extends JPanel {
-	// 一会儿删↓
-	static MainFrame f;
-	// 一会儿删↑
-
 	private static final long serialVersionUID = 1L;
+
 	private TruckController tc;
-	private final String[] labelName = { "机构编号", "车辆编号", "车牌号", "开始服役时间",
-			"服役年限" };
-	private JLabel[] label;
-	private JTextField[] field;
-	private JButton submitBtn;
-	private JButton returnBtn;
+	private JButton[] funcButton;
+	private JTable table;
+	private Vector<Vector<String>> vData;
+	private JScrollPane scrollPane;
+	private List<TruckVO> list;
 
 	public TruckUI() {
 		tc = new TruckController();
+		vData = new Vector<Vector<String>>();
 		this.initComponents();
+		this.initList();
 		this.validate();
 	}
-	
+
 	protected void paintComponent(Graphics g) {
 		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
 	}
@@ -44,59 +44,130 @@ public class TruckUI extends JPanel {
 	private void initComponents() {
 		this.setLayout(null);
 
-		label = new JLabel[5];
-		field = new JTextField[5];
-		for (int i = 0; i < 5; i++) {
-			label[i] = new JLabel(labelName[i] + ":");
-			label[i].setBounds(220, 70 + 50 * i, 100, 20);
-			this.add(label[i]);
-			field[i] = new JTextField();
-			field[i].setBounds(305, 70 + 50 * i, 250, 30);
-			this.add(field[i]);
+		String[] info = { "车辆编号", "车牌号", "服役年限" };
+		Vector<String> vColumns = new Vector<String>();
+		for (int i = 0; i < 3; i++) {
+			vColumns.add(info[i]);
 		}
-		field[0].setText(MainFrame.getUser().getIdentityID());
-		field[0].setEditable(false);
 
-		submitBtn = new JButton("添加");
-		submitBtn.setBounds(200, 350, 100, 30);
-		this.add(submitBtn);
-		returnBtn = new JButton("返回");
-		returnBtn.setBounds(500, 350, 100, 30);
-		this.add(returnBtn);
+		table = new JTable(vData, vColumns) {
+			private static final long serialVersionUID = 1L;
 
-		submitBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String result;
-				try {
-					result = tc.add(getVO());
-					if (result != null) {
-						JOptionPane.showMessageDialog(null, result, "",
-								JOptionPane.ERROR_MESSAGE);
-					} else {
-						JOptionPane.showMessageDialog(null, "添加成功", "",
-								JOptionPane.INFORMATION_MESSAGE);
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
+		table.setBorder(BorderFactory.createEtchedBorder());
+		table.setRowHeight(35);
+		table.setRowSelectionAllowed(true);
+
+		scrollPane = new JScrollPane();
+		scrollPane.getViewport().add(table);
+		scrollPane.setAutoscrolls(false);
+		scrollPane.setBounds(50, 50, 700, 385);
+		table.setFillsViewportHeight(true);
+		this.add(scrollPane);
+
+		funcButton = new JButton[5];
+		final String[] title = { "新增车辆", "删除车辆", "查看信息", "修改信息", "返回" };
+		for (int i = 0; i < 5; i++) {
+			funcButton[i] = new JButton(title[i]);
+			funcButton[i].setBounds(50 + 150 * i, 450, 100, 25);
+			switch (i) {
+			case 0:
+				funcButton[i].addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						Main.frame.setView(new TruckAddUI(), "新增车辆");
 					}
-				} catch (RemoteException e1) {
-					e1.printStackTrace();
-				}
+				});
+				break;
+			case 1:
+				funcButton[i].addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						int index = table.getSelectedRow();
+						if (index == -1 || (vData.isEmpty() && index == 0)) {
+							JOptionPane.showMessageDialog(null, "请选择一个车辆", "",
+									JOptionPane.ERROR_MESSAGE);
+							return;
+						} else {
+							int n = JOptionPane.showConfirmDialog(null,
+									"确定删除该车辆信息?", "",
+									JOptionPane.YES_NO_OPTION);
+							if (n == 0) {
+								try {
+									tc.delete(list.get(index));
+									JOptionPane
+											.showMessageDialog(
+													null,
+													"删除成功",
+													"",
+													JOptionPane.INFORMATION_MESSAGE);
+								} catch (RemoteException e1) {
+									e1.printStackTrace();
+								}
+							}
+						}
+						initList();
+					}
+				});
+				break;
+			case 2:
+				funcButton[i].addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						int index = table.getSelectedRow();
+						if (index == -1 || (vData.isEmpty() && index == 0)) {
+							JOptionPane.showMessageDialog(null, "请选择一个车辆", "",
+									JOptionPane.ERROR_MESSAGE);
+							return;
+						}
+						Main.frame.setView(new TruckCheckUI(list.get(index)),
+								"查看车辆信息");
+					}
+				});
+				break;
+			case 3:
+				funcButton[i].addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						int index = table.getSelectedRow();
+						if (index == -1 || (vData.isEmpty() && index == 0)) {
+							JOptionPane.showMessageDialog(null, "请选择一个车辆", "",
+									JOptionPane.ERROR_MESSAGE);
+							return;
+						}
+						Main.frame.setView(new TruckModifyUI(list.get(index)),
+								"修改车辆信息");
+					}
+				});
+				break;
+			case 4:
+				funcButton[i].addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						Main.frame.returnToTop();
+					}
+				});
+				break;
 			}
-		});
-
-		returnBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Main.frame.returnToTop();
-			}
-		});
+			this.add(funcButton[i]);
+		}
 	}
 
-	private TruckVO getVO() {
-		return new TruckVO(field[0].getText(), field[1].getText(),
-				field[2].getText(), DateUtil.stringToDate(field[3].getText()));
+	private Vector<String> toVector(TruckVO vo) {
+		Vector<String> str = new Vector<String>();
+		str.add(vo.truckID);
+		str.add(vo.truckNumber);
+		str.add(vo.years + "");
+		return str;
 	}
 
-	public static void main(String[] args) {
-		f = new MainFrame();
-		TruckUI view = new TruckUI();
-		f.setView(view);
+	private void initList() {
+		vData.clear();
+		list = tc.getAllTruckVOList();
+
+		for (TruckVO vo : list) {
+			vData.add(toVector(vo));
+		}
+		scrollPane.getViewport().removeAll();
+		scrollPane.getViewport().add(table);
+		this.repaint();
 	}
 }

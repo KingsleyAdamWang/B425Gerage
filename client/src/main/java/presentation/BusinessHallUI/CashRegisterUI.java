@@ -124,6 +124,7 @@ public class CashRegisterUI extends JPanel {
 					} else {
 						JOptionPane.showMessageDialog(null, "提交成功", "",
 								JOptionPane.INFORMATION_MESSAGE);
+						Main.frame.setView(new CashRegisterUI(), "填写收款单");
 					}
 				} catch (RemoteException e1) {
 					e1.printStackTrace();

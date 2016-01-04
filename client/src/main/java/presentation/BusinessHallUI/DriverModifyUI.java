@@ -81,7 +81,7 @@ public class DriverModifyUI extends JPanel {
 		field[5].setText(vo.telNumber);
 		field[7].setText(DateUtil.dateToString(vo.driveLicence));
 
-		submitBtn = new JButton("提交");
+		submitBtn = new JButton("修改");
 		submitBtn.setBounds(200, 450, 100, 30);
 		this.add(submitBtn);
 		returnBtn = new JButton("返回");
@@ -122,7 +122,7 @@ public class DriverModifyUI extends JPanel {
 
 		returnBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Main.frame.setView(new DriverAddUI(), "司机信息管理");
+				Main.frame.setView(new DriverUI(), "司机信息管理");
 			}
 		});
 	}

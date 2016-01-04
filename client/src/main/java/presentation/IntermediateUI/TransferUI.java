@@ -53,7 +53,7 @@ public class TransferUI extends JPanel {
 		this.initComponents();
 		this.validate();
 	}
-	
+
 	protected void paintComponent(Graphics g) {
 		g.drawImage(MainFrame.background.getImage(), 0, 0, this);
 	}
@@ -64,8 +64,9 @@ public class TransferUI extends JPanel {
 		label = new JLabel[9];
 		field = new JTextField[8];
 		box = new JComboBox<String>(typeName);
-		List<InstitutionVO> cityList = tc.getInstitutionList(MainFrame.getUser().getIdentityID());
-//		List<InstitutionVO> cityList = tc.getInstitutionList("020012");
+		List<InstitutionVO> cityList = tc.getInstitutionList(MainFrame
+				.getUser().getIdentityID());
+		// List<InstitutionVO> cityList = tc.getInstitutionList("020012");
 		String[] cities = new String[cityList.size()];
 		for (int i = 0; i < cityList.size(); i++) {
 			cities[i] = cityList.get(i).getName();
@@ -152,6 +153,7 @@ public class TransferUI extends JPanel {
 					} else {
 						JOptionPane.showMessageDialog(null, "提交成功", "",
 								JOptionPane.INFORMATION_MESSAGE);
+						Main.frame.setView(new TransferUI(), "填写中转单");
 					}
 				} catch (RemoteException e1) {
 					e1.printStackTrace();

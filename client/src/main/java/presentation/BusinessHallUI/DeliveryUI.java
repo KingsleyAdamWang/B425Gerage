@@ -105,6 +105,7 @@ public class DeliveryUI extends JPanel {
 					} else {
 						JOptionPane.showMessageDialog(null, "提交成功", "",
 								JOptionPane.INFORMATION_MESSAGE);
+						Main.frame.setView(new DeliveryUI(), "填写派件单");
 					}
 				} catch (RemoteException e1) {
 					e1.printStackTrace();

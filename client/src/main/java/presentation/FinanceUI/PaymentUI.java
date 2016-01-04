@@ -82,6 +82,7 @@ public class PaymentUI extends JPanel {
 					pc.addPayment(getVO());
 					JOptionPane.showMessageDialog(null, "提交成功", "",
 							JOptionPane.INFORMATION_MESSAGE);
+					Main.frame.setView(new PaymentUI(), "填写付款单");
 				} catch (RemoteException e1) {
 					e1.printStackTrace();
 				}
