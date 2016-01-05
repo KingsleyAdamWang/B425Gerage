@@ -121,7 +121,9 @@ public class FormBL {
 	public void getIncomes(Date start, Date end) {
 		try {
 			CashRegisterBL cashBL = new CashRegisterBL();
-			incomes = cashBL.getIncomeBetweenDate(start, end);
+			incomes = new ArrayList<IncomePO>();
+			for(IncomeVO temp:cashBL.getIncomeBetweenDate(start, end))
+				incomes.add(temp.transToPO());
 
 		} catch (RemoteException e) {
 
