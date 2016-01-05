@@ -4,8 +4,6 @@ import java.rmi.RemoteException;
 import java.util.Date;
 import java.util.List;
 
-import po.financePO.IncomePO;
-import po.logPO.LogPO;
 import presentation.MainFrame;
 import vo.BussinessHallVo.CashRegisterVO;
 import vo.DeliverymanVo.SendVO;

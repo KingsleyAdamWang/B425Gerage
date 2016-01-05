@@ -3,8 +3,8 @@ package businessLogic.loginBL;
 import java.util.ArrayList;
 import java.util.List;
 
-import enumSet.Position;
 import po.adminPO.UserPO;
+import enumSet.Position;
 
 public class StubLoginBL {
 	List<UserPO> userList;

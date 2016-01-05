@@ -37,4 +37,10 @@ public class InitBillController implements AccountBLService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public String modifyAccount(AccountVO vo) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

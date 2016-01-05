@@ -1,5 +1,4 @@
-﻿package vo.FinanceVo;
-
+package vo.FinanceVo;
 import java.util.Vector;
 
 import po.financePO.AccountPO;
@@ -7,16 +6,16 @@ import po.financePO.AccountPO;
 public class AccountVO extends Vector<String> {
 
 	private static final long serialVersionUID = 1L;
-
-	public AccountVO(AccountPO po){
-		this(po.getName(),po.getAccountID(),po.getBalance());
+	public AccountVO(AccountPO po) {
+		this(po.getName(), po.getAccountID(), po.getBalance());
 	}
+
 	/**
 	 * 构造方法
 	 * 
 	 * @param name
 	 * @param accountID
-//	 * @param balance
+	 * @param balance
 	 */
 	public AccountVO(String name, String accountID, double balance) {
 		this.add(name);
@@ -59,7 +58,5 @@ public class AccountVO extends Vector<String> {
 			return false;
 		return true;
 	}
-	
-
 
 }

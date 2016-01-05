@@ -87,7 +87,10 @@ public class SendApproveUI extends JPanel {
 						}
 						try {
 							Main.frame.setView(new SendModifyUI(list.get(index)));
-						} catch (RemoteException | ClientInitException e1) {
+						} catch ( ClientInitException e1) {
+							e1.printStackTrace();
+						} catch (RemoteException e1) {
+							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}

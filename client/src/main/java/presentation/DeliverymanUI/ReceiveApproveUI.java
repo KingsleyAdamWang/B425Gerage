@@ -15,7 +15,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import presentation.MainFrame;
-import presentation.BusinessHallUI.EntruckApproveUI;
 import presentation.ManageUI.ApproveChooseUI;
 import vo.DeliverymanVo.ReceiveVO;
 import businessLogic.manageBL.ApproveController;

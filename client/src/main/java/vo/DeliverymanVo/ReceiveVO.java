@@ -1,7 +1,5 @@
 package vo.DeliverymanVo;
 
-import java.util.Date;
-
 import po.deliveryPO.ReceivePO;
 import util.DateUtil;
 import vo.ReceiptsVO;

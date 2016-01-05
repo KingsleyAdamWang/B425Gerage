@@ -14,13 +14,13 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import client.Main;
-import enumSet.ReceiptsState;
 import presentation.MainFrame;
 import util.DateUtil;
 import vo.InventoryVo.ShipmentVO;
 import vo.ManageVo.InstitutionVO;
 import businessLogic.inventoryBL.ShipmentController;
+import client.Main;
+import enumSet.ReceiptsState;
 
 public class ShipmentUI extends JPanel {
 	private static final long serialVersionUID = 1L;

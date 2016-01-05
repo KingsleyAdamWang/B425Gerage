@@ -6,9 +6,7 @@ import java.util.List;
 
 import po.adminPO.UserPO;
 import po.managePO.InstitutionPO;
-import presentation.MainFrame;
 import vo.AdminVo.UserVO;
-import vo.LogVo.LogVO;
 import vo.ManageVo.InstitutionVO;
 import client.ClientInitException;
 import client.RMIHelper;

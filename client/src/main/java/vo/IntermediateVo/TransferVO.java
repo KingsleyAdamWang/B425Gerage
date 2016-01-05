@@ -3,10 +3,10 @@ package vo.IntermediateVo;
 import java.util.Date;
 import java.util.List;
 
-import enumSet.ReceiptsState;
-import enumSet.TransportType;
 import po.intermidatePO.TransferPO;
 import vo.ReceiptsVO;
+import enumSet.ReceiptsState;
+import enumSet.TransportType;
 
 public class TransferVO extends ReceiptsVO {
 	// 时间

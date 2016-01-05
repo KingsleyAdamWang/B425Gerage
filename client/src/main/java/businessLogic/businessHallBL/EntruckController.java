@@ -7,12 +7,10 @@ import java.util.List;
 import po.logPO.LogPO;
 import presentation.MainFrame;
 import vo.BussinessHallVo.EntruckVO;
-import vo.DeliverymanVo.SendVO;
 import businessLogicService.businessHallBLService.EntruckBLService;
 import client.ClientInitException;
 import client.RMIHelper;
 import dataService.logDataService.LogDataService;
-import enumSet.TransportType;
 
 public class EntruckController implements EntruckBLService {
 

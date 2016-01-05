@@ -94,7 +94,10 @@ public class FinanceHighUI extends JPanel {
 					public void actionPerformed(ActionEvent e) {
 						try {
 							Main.frame.setView(new AccountUI(), "账户管理");
-						} catch (RemoteException | ClientInitException e1) {
+						} catch (ClientInitException e1) {
+							e1.printStackTrace();
+						} catch (RemoteException e1) {
+							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}

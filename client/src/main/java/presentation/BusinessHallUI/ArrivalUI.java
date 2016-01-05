@@ -121,7 +121,10 @@ public class ArrivalUI extends JPanel {
 								JOptionPane.INFORMATION_MESSAGE);
 						Main.frame.setView(new ArrivalUI(), "填写到达单");
 					}
-				} catch (RemoteException | ClientInitException e1) {
+				} catch (RemoteException  e1) {
+					e1.printStackTrace();
+				} catch (ClientInitException e1) {
+					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}

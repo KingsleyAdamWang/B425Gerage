@@ -17,7 +17,6 @@ import presentation.MainFrame;
 import util.Salary;
 import vo.ManageVo.SalaryVO;
 import businessLogic.manageBL.SalaryController;
-import client.ClientInitException;
 import client.Main;
 import enumSet.Position;
 

@@ -176,7 +176,10 @@ public class SendUI extends JPanel {
 				setDays();
 				try {
 					setFare();
-				} catch (RemoteException | ClientInitException e1) {
+				} catch ( ClientInitException e1) {
+					e1.printStackTrace();
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -187,7 +190,10 @@ public class SendUI extends JPanel {
 				setDays();
 				try {
 					setFare();
-				} catch (RemoteException | ClientInitException e1) {
+				} catch (ClientInitException e1) {
+					e1.printStackTrace();
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -200,7 +206,10 @@ public class SendUI extends JPanel {
 			public void focusLost(FocusEvent e) {
 				try {
 					setFare();
-				} catch (RemoteException | ClientInitException e1) {
+				} catch ( ClientInitException e1) {
+					e1.printStackTrace();
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -213,7 +222,10 @@ public class SendUI extends JPanel {
 			public void focusLost(FocusEvent e) {
 				try {
 					setFare();
-				} catch (RemoteException | ClientInitException e1) {
+				} catch (ClientInitException e1) {
+					e1.printStackTrace();
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}

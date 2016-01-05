@@ -14,7 +14,6 @@ import client.ClientInitException;
 import client.RMIHelper;
 import dataService.inventoryDataService.ShipmentDataService;
 import enumSet.InsType;
-import enumSet.InventoryArea;
 import enumSet.ReceiptsState;
 
 public class ShipmentBL {

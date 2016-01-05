@@ -11,12 +11,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import client.Main;
 import presentation.MainFrame;
-import enumSet.ReceiptsState;
 import util.DateUtil;
 import vo.DeliverymanVo.ReceiveVO;
 import businessLogic.deliveryBL.ReceiveController;
+import client.Main;
+import enumSet.ReceiptsState;
 
 public class ReceiveUI extends JPanel {
 	private static final long serialVersionUID = 1L;

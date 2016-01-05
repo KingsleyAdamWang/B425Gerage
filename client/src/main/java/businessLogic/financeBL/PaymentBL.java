@@ -7,7 +7,6 @@ import java.util.List;
 
 //import po.PaymentPO;
 import po.financePO.PaymentPO;
-import po.inventoryPO.EntryPO;
 import po.managePO.SalaryPO;
 import util.DateUtil;
 import vo.AdminVo.UserVO;
@@ -106,26 +105,26 @@ public class PaymentBL {
 		for (UserVO temp : userList) {
 			Position position = temp.getWork();
 
-			switch (position.getPositionString()) {
-			case ("快递员"):
+			switch (position) {
+			case JOB_1:
 				delivery++;
 				break;
-			case ("营业厅业务人员"):
+			case JOB_2:
 				businessHall++;
 				break;
-			case ("中转中心业务人员"):
+			case JOB_3:
 				intermidate++;
 				break;
-			case ("中转中心仓库管理员"):
+			case JOB_4:
 				inventory++;
 				break;
-			case ("财务人员（高）"):
+			case JOB_5:
 				financeH++;
 				break;
-			case ("财务人员（低）"):
+			case JOB_6:
 				financeL++;
 				break;
-			case ("总经理"):
+			case JOB_7:
 				mananger++;
 				break;
 			}

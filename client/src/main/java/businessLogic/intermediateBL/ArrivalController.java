@@ -1,15 +1,14 @@
 package businessLogic.intermediateBL;
 
+import java.rmi.RemoteException;
+import java.util.Date;
+
+import presentation.MainFrame;
 import vo.BussinessHallVo.ArrivalVO;
 import vo.LogVo.LogVO;
 import businessLogic.logBL.LogBL;
 import businessLogicService.businessHallBLService.ArrivalBLService;
-
-import java.rmi.RemoteException;
-import java.util.Date;
-
 import client.ClientInitException;
-import presentation.MainFrame;
 
 public class ArrivalController implements ArrivalBLService {
 	private ArrivalBL arrivalBL;

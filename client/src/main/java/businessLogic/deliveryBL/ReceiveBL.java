@@ -4,11 +4,10 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
-import businessLogic.logisticsBL.LogisticsBL;
 import po.deliveryPO.ReceivePO;
-import util.DateUtil;
 import vo.DeliverymanVo.ReceiveVO;
 import vo.DeliverymanVo.SendVO;
+import businessLogic.logisticsBL.LogisticsBL;
 import client.ClientInitException;
 import client.RMIHelper;
 import dataService.deliveryDataService.ReceiveDataService;

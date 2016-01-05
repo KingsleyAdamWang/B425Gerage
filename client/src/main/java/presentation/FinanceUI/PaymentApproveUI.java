@@ -15,7 +15,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import presentation.MainFrame;
-import presentation.DeliverymanUI.ReceiveApproveUI;
 import presentation.ManageUI.ApproveChooseUI;
 import util.DateUtil;
 import vo.FinanceVo.PaymentVO;

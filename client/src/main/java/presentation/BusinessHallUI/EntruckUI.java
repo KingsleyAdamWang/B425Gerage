@@ -18,11 +18,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import presentation.MainFrame;
+import util.DateUtil;
+import vo.BussinessHallVo.EntruckVO;
 import businessLogic.businessHallBL.EntruckController;
 import client.ClientInitException;
 import client.Main;
-import util.DateUtil;
-import vo.BussinessHallVo.EntruckVO;
 import enumSet.ReceiptsState;
 
 public class EntruckUI extends JPanel {
@@ -180,7 +180,10 @@ public class EntruckUI extends JPanel {
 								JOptionPane.INFORMATION_MESSAGE);
 						Main.frame.setView(new EntruckUI(), "填写装车单");
 					}
-				} catch (RemoteException | ClientInitException e1) {
+				} catch (ClientInitException e1) {
+					e1.printStackTrace();
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}

@@ -1,7 +1,6 @@
 package businessLogicService.inventoryBLService;
 
 import java.rmi.RemoteException;
-import java.util.List;
 
 import vo.InventoryVo.ShipmentVO;
 

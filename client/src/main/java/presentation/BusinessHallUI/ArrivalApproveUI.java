@@ -91,7 +91,10 @@ public class ArrivalApproveUI extends JPanel {
 						try {
 							Main.frame.setView(new ArrivalModifyUI(list
 									.get(index)));
-						} catch (RemoteException | ClientInitException e1) {
+						} catch (RemoteException e1) {
+							e1.printStackTrace();
+						} catch (ClientInitException e1) {
+							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}

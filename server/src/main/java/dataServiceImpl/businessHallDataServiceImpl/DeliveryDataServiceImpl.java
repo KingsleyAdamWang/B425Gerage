@@ -66,7 +66,6 @@ public class DeliveryDataServiceImpl extends UnicastRemoteObject implements
 		}
 	}
 
-	@Override
 	public void add(DeliveryPO po) throws RemoteException {
 		if (deliveryList.contains(po))
 			return;
@@ -74,7 +73,6 @@ public class DeliveryDataServiceImpl extends UnicastRemoteObject implements
 		update();
 	}
 
-	@Override
 	public void delete(DeliveryPO po) throws RemoteException {
 		if (deliveryList.contains(po)) {
 			deliveryList.remove(po);

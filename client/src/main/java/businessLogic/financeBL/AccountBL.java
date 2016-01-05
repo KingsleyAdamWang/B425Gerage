@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import po.financePO.AccountPO;
-import po.financePO.PaymentPO;
 import presentation.MainFrame;
 import vo.FinanceVo.AccountVO;
 import client.ClientInitException;

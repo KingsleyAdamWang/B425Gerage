@@ -4,13 +4,11 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
-import client.ClientInitException;
-import client.RMIHelper;
-import dataService.businessHallDataService.EntruckDataService;
-import dataService.logisticsDataService.LogisticsDataService;
-import po.businessPO.EntruckPO;
 import po.logisticsPO.LogisticsPO;
 import vo.LogisticsVo.LogisticsVO;
+import client.ClientInitException;
+import client.RMIHelper;
+import dataService.logisticsDataService.LogisticsDataService;
 
 public class LogisticsBL {
 	private LogisticsDataService logisticsDS;

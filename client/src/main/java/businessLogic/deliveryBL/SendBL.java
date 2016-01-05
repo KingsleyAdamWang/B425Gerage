@@ -7,14 +7,12 @@ import java.util.Date;
 import java.util.List;
 
 import po.deliveryPO.SendPO;
-import po.inventoryPO.EntryPO;
 import po.logisticsPO.LogisticsPO;
 import po.managePO.PriceConstPO;
 import util.CheckUtil;
 import util.DateUtil;
 import util.PackPrice;
 import vo.DeliverymanVo.SendVO;
-import vo.InventoryVo.EntryVO;
 import businessLogic.logisticsBL.LogisticsBL;
 import businessLogic.manageBL.StrategyBL;
 import client.ClientInitException;
